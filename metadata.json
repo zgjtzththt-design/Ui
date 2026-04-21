@@ -1,0 +1,5 @@
+{
+  "name": "Remix: OriginOS Web Clone",
+  "description": "A web-based UI clone of OriginOS, embedded and running locally.",
+  "requestFramePermissions": []
+}
