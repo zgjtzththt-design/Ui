@@ -26,6 +26,10 @@ const aod_option = document.getElementById("app4aod");
 const aod_btn = document.getElementById("aod-btn");
 const back5 = document.getElementById("back_to_setting5");
 
+const live_wallpaper_btn = document.getElementById("live-wallpaper-btn");
+const videoInput = document.getElementById("videoInput");
+let selectedVideoFile = null;
+
 const lock_btn = document.getElementById("lock-btn");
 const back6 = document.getElementById("back_to_setting6");
 target.innerText += " ga";
@@ -110,6 +114,46 @@ function hidePopup_open_close(target, mode = "none", className = "open") {
 }
 
 //about option
+// Cloud Sync logic
+const cloudSyncBtn = document.getElementById("cloud_sync_setting");
+const cloudStatus = document.getElementById("cloud_status");
+
+if (cloudSyncBtn) {
+  cloudSyncBtn.addEventListener("click", async () => {
+    if (!window.signInWithGoogle) {
+      if (typeof tb_system === "function") tb_system("Firebase is initializing...");
+      return;
+    }
+
+    try {
+      if (!window.firebaseAuth.currentUser) {
+        const user = await window.signInWithGoogle();
+        if (user && cloudStatus) {
+            cloudStatus.textContent = `Logged in as ${user.email}`;
+            if (typeof tb_system === "function") tb_system("Logged in successfully");
+            window.syncEverything();
+        }
+      } else {
+        // Already logged in, trigger manual sync
+        window.syncEverything();
+        if (typeof tb_system === "function") tb_system("Syncing data...");
+      }
+    } catch (e) {
+      console.error(e);
+      if (typeof tb_system === "function") tb_system("Authentication failed");
+    }
+  });
+}
+
+// Update UI if already logged in
+window.setInterval(() => {
+    if (window.firebaseAuth && window.firebaseAuth.currentUser && cloudStatus) {
+        if (!cloudStatus.textContent.includes(window.firebaseAuth.currentUser.email)) {
+             cloudStatus.textContent = `Synced. Logged in as ${window.firebaseAuth.currentUser.email}`;
+        }
+    }
+}, 5000);
+
 AboutInSetting.addEventListener("click", () => {
   showPopup_open_close(app4);
 
@@ -477,14 +521,20 @@ function onVolumeSliderInput() {
 }
 
 function onVolumeSliderRelease() {
-  playmusic("originos_data/ui/Effect_Tick.ogg", volume_click_volume);
+  playmusic(
+    "https://cropgif.net/audio/1776965686907-f4ab76ce-4428-40c0-afb5-a6a3f6935865.ogg",
+    volume_click_volume
+  );
 }
 
 function onClickToggle() {
   const isActive = toggle_click_volume.classList.toggle("active");
   if (isActive) {
     volume_click_volume = volume_all_volume;
-    playmusic("originos_data/ui/Effect_Tick.ogg", volume_click_volume);
+    playmusic(
+      "https://cropgif.net/audio/1776965686907-f4ab76ce-4428-40c0-afb5-a6a3f6935865.ogg",
+      volume_click_volume
+    );
     phone.addEventListener("click", clickSound);
   } else {
     volume_click_volume = 0;
@@ -604,6 +654,29 @@ theme_option.addEventListener("click", () => {
   wallpaper_btn2.addEventListener("click", handleOpenWallpaperPopup);
   back4.addEventListener("click", handleCloseWallpaperPopup);
 
+  if (live_wallpaper_btn) {
+    live_wallpaper_btn.addEventListener("click", () => {
+      videoInput.click();
+    });
+  }
+
+  const addLiveWallpaperBtn = document.getElementById("addLiveWallpaperBtn");
+  if (addLiveWallpaperBtn) {
+    addLiveWallpaperBtn.addEventListener("click", () => {
+      videoInput.click();
+    });
+  }
+
+  if (videoInput) {
+    videoInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith("video/")) {
+        selectedVideoFile = file;
+        showWallpaperPopup("", null, true);
+      }
+    });
+  }
+
   aod_btn.addEventListener("click", handleOpenAODOption);
   back5.addEventListener("click", handleCloseAODOption);
 
@@ -678,6 +751,9 @@ let selectedButton = null;
 function setLockWallpaper(imageUrl, btn) {
   lock_wallpaper = imageUrl;
   setData("lock_wallpaper", imageUrl);
+  removeData("lock_video_wallpaper");
+  const lockVideo = document.getElementById("lockVideoWallpaper");
+  if (lockVideo) lockVideo.style.display = "none";
 
   wallPaper2.style.backgroundImage = `url(${imageUrl})`;
   wallpaper_preview2.style.backgroundImage = `url(${imageUrl})`;
@@ -688,6 +764,9 @@ function setLockWallpaper(imageUrl, btn) {
 function setHomeWallpaper(imageUrl, btn) {
   home_wallpaper = imageUrl;
   setData("home_wallpaper", home_wallpaper);
+  removeData("home_video_wallpaper");
+  const homeVideo = document.getElementById("homeVideoWallpaper");
+  if (homeVideo) homeVideo.style.display = "none";
 
   // Đổi sang màu xanh lá
   document.documentElement.style.setProperty(
@@ -697,14 +776,46 @@ function setHomeWallpaper(imageUrl, btn) {
   wallpaper.style.backgroundImage = `url(${imageUrl})`;
 }
 
+function setLockVideoWallpaper(file) {
+  setData("lock_video_wallpaper", file);
+  removeData("lock_wallpaper");
+  const lockVideo = document.getElementById("lockVideoWallpaper");
+  if (lockVideo) {
+    const url = URL.createObjectURL(file);
+    lockVideo.src = url;
+    lockVideo.style.display = "block";
+    lockVideo.play();
+  }
+  const wallPaper2 = document.querySelector(".wallpaper2");
+  if (wallPaper2) wallPaper2.style.backgroundImage = "none";
+  const wallpaper_preview2 = document.querySelector(".wallpaper-preview2");
+  if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = "none";
+}
+
+function setHomeVideoWallpaper(file) {
+  setData("home_video_wallpaper", file);
+  removeData("home_wallpaper");
+  const homeVideo = document.getElementById("homeVideoWallpaper");
+  if (homeVideo) {
+    const url = URL.createObjectURL(file);
+    homeVideo.src = url;
+    homeVideo.style.display = "block";
+    homeVideo.play();
+  }
+  document.documentElement.style.setProperty("--bg--wallpaper", "none");
+  const wallpaper = document.getElementById("wallpaper");
+  if (wallpaper) wallpaper.style.backgroundImage = "none";
+}
+
 function setBothWallpapers(imageUrl) {
   setHomeWallpaper(imageUrl);
   setLockWallpaper(imageUrl);
 }
 
-function showWallpaperPopup(imageUrl, button) {
+function showWallpaperPopup(imageUrl, button, isVideo = false) {
   selectedImageUrl = imageUrl;
   selectedButton = button;
+  if (!isVideo) selectedVideoFile = null;
   showPopup_open_close(popup_overlay_wallpaper);
   showPopup_open_close("popup_wallpaperid", "block");
 }
@@ -749,18 +860,31 @@ function handleFileInputChange(event) {
 
 // Popup button actions
 btn_set_lock_wallpaper.addEventListener("click", () => {
-  setLockWallpaper(selectedImageUrl, selectedButton);
+  if (selectedVideoFile) {
+    setLockVideoWallpaper(selectedVideoFile);
+  } else {
+    setLockWallpaper(selectedImageUrl, selectedButton);
+  }
   hideWallpaperPopup();
 });
 
 btn_set_home_wallpaper.addEventListener("click", () => {
-  setHomeWallpaper(selectedImageUrl, selectedButton);
+  if (selectedVideoFile) {
+    setHomeVideoWallpaper(selectedVideoFile);
+  } else {
+    setHomeWallpaper(selectedImageUrl, selectedButton);
+  }
   hideWallpaperPopup();
 });
 
 btn_set_both_wallpaper.addEventListener("click", () => {
-  setLockWallpaper(selectedImageUrl, selectedButton);
-  setHomeWallpaper(selectedImageUrl, selectedButton);
+  if (selectedVideoFile) {
+    setLockVideoWallpaper(selectedVideoFile);
+    setHomeVideoWallpaper(selectedVideoFile);
+  } else {
+    setLockWallpaper(selectedImageUrl, selectedButton);
+    setHomeWallpaper(selectedImageUrl, selectedButton);
+  }
   hideWallpaperPopup();
 });
 
@@ -2125,16 +2249,17 @@ function icon_originos() {
   updateIconBorder("originos_icon");
   document.documentElement.style.setProperty("--bg-size_img", "105%");
 
-  setIconAndBackgroundGradient("box1", "originos_data/system_calculator.png");
-  setIconAndBackgroundGradient("box2", "originos_data/system_filemanager.png");
-  setIconAndBackgroundGradient("box3", "originos_data/system_music.png");
-  setIconAndBackgroundGradient("box4", "originos_data/system_settings.png");
-  setIconAndBackgroundGradient("box5", "originos_data/system_messages.png");
-  setIconAndBackgroundGradient("box6", "originos_data/system_photos.png");
-  setIconAndBackgroundGradient("box7", "originos_data/system_calendar.png");
-  setIconAndBackgroundGradient("box8", "originos_data/system_dialer.png");
-  setIconAndBackgroundGradient("box9", "originos_data/system_clock.png");
-  setIconAndBackgroundGradient("box10", "originos_data/system_compass.png");
+  setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
+  setIconAndBackgroundGradient("box2", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png");
+  setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
+  setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
+  setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
+  setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
+  setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
+  setIconAndBackgroundGradient("box8", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png");
+  setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
+  setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
+  setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
   slider.value = 20;
   value = slider.value;
   preview.style.borderRadius = `${value}px`;
@@ -2187,6 +2312,30 @@ function icon_hyperos() {
     "box10",
     "originos_data/iconPacks/hype_icon/system_compass.png"
   );
+  slider.value = 20;
+  value = slider.value;
+  preview.style.borderRadius = `${value}px`;
+  root.style.setProperty("--bg-border_radius", slider.value + "px");
+  slider.disabled = false;
+}
+
+function icon_hyperos3() {
+  localStorage.setItem("selected_icon_pack", "hyperos3");
+  updateIconBorder("hyperos3_icon");
+  document.documentElement.style.setProperty("--bg-size_img", "100%");
+
+  setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
+  setIconAndBackgroundGradient("box2", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png");
+  setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
+  setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
+  setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
+  setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
+  setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
+  setIconAndBackgroundGradient("box8", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png");
+  setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
+  setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
+  setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
+  
   slider.value = 20;
   value = slider.value;
   preview.style.borderRadius = `${value}px`;
@@ -2932,6 +3081,7 @@ function restoreIconPack() {
   pack = localStorage.getItem("selected_icon_pack");
   if (pack === "originos") icon_originos();
   else if (pack === "hyperos") icon_hyperos();
+  else if (pack === "hyperos3") icon_hyperos3();
   else if (pack === "ios") icon_ios();
   else if (pack === "coloros") icon_coloros();
   else if (pack === "oneui") icon_oneui();

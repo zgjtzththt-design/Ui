@@ -4,6 +4,10 @@ setTimeout(() => {
     loading.style.opacity = "0";
     setTimeout(() => {
         removeWithFade(loading);
+        
+        if (typeof powerbtn !== 'undefined') {
+            powerbtn.addEventListener('click', powerbtnEvent);
+        }
 
         loading.style.display = "none";
         finger_print.play();
@@ -21,15 +25,15 @@ setTimeout(() => {
         sessionStorage.clear();
         location.reload();
     }
-}, 0); // 5 giây
+}, 6000); // 6 giây
 
-const box0_setup = document.getElementById("box0_setup");
-const box1_setup = document.getElementById("box1_setup");
+// Removed setup logic
+// const box1_setup = null;
 const box2_setup = document.getElementById("box2_setup");
-const clicke_setup = document.getElementById("click_setup");
+// const clicke_setup = null;
 const logo_setup = document.getElementById("originos_logo_setup");
-const notes_setup = document.getElementById("screen_notes_setup");
-const disagreeBtn_setup = document.getElementById("btn_disagree_setup");
+// const notes_setup = null;
+// const disagreeBtn_setup = null;
 
 function startAnimation_setup() {
     box0_setup.classList.add("anim");
@@ -56,8 +60,8 @@ function resetAnimation_setup() {
 }
 
 // Gắn sự kiện mặc định khi trang tải
-clicke_setup.addEventListener("click", startAnimation_setup);
-disagreeBtn_setup.addEventListener("click", resetAnimation_setup);
+// clicke_setup.addEventListener("click", startAnimation_setup);
+// disagreeBtn_setup.addEventListener("click", resetAnimation_setup);
 
 // Hàm gỡ bỏ event listener
 function removeEventListener_setup() {

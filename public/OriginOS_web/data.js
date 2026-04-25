@@ -1,10 +1,24 @@
 let db = null;
 
 // ✅ Ghi dữ liệu
-function setData(id, content) {
+function setData(id, content, callback) {
   const tx = db.transaction("user_data", "readwrite");
   const store = tx.objectStore("user_data");
-  store.put({ id, content });
+  const req = store.put({ id, content });
+  
+  req.onsuccess = () => {
+    if (callback) callback();
+    
+    // Auto-sync to Firebase if logged in AND not currently syncing from cloud
+    if (window.syncEverything && !window.isSyncingFromCloud) {
+        window.syncEverything();
+    }
+  };
+  
+  req.onerror = () => {
+    console.error("Error saving data to IndexedDB:", req.error);
+    if (callback) callback(req.error);
+  };
 }
 
 function getData(id, callback) {

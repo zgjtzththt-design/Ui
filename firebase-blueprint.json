@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "Customizable system settings, wallpapers, and icons for each user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The UID of the user." },
+        "home_wallpaper": { "type": "string", "description": "Base64 or URL of the home wallpaper." },
+        "lock_wallpaper": { "type": "string", "description": "Base64 or URL of the lock wallpaper." },
+        "custom_icons": { "type": "object", "description": "Map of boxId to Base64 icon." },
+        "custom_icons_keywords": { "type": "object", "description": "Map of boxId to search keyword." },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/user_settings/{userId}": {
+      "schema": "UserSettings",
+      "description": "Stores individual user preferences."
+    }
+  }
+}

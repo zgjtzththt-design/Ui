@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} { allow read, write: if false; }
+
+    // 3. Path Variable Hardening & Globals
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // 2. Validation Blueprints
+    function isValidUserSettings(data) {
+      return data.keys().hasAll(['userId', 'updatedAt'])
+             && data.userId == request.auth.uid
+             && data.updatedAt == request.time
+             && (data.get('home_wallpaper', null) == null || (data.home_wallpaper is string && data.home_wallpaper.size() <= 1048576))
+             && (data.get('lock_wallpaper', null) == null || (data.lock_wallpaper is string && data.lock_wallpaper.size() <= 1048576))
+             && (data.get('custom_icons', null) == null || (data.custom_icons is map && data.custom_icons.size() <= 50))
+             && (data.get('custom_icons_keywords', null) == null || (data.custom_icons_keywords is map && data.custom_icons_keywords.size() <= 50));
+    }
+
+    // 4. Tiered Identity & 10. Temporal Integrity
+    match /user_settings/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUserSettings(incoming());
+      allow update: if isOwner(userId) 
+                    && isValidUserSettings(incoming())
+                    && incoming().userId == existing().userId
+                    && (
+                      // Action: Sync Settings
+                      incoming().diff(existing()).affectedKeys().hasAny(['home_wallpaper', 'lock_wallpaper', 'custom_icons', 'custom_icons_keywords', 'updatedAt'])
+                    );
+      allow delete: if false;
+    }
+  }
+}

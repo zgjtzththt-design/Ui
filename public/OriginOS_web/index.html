@@ -57,13 +57,7 @@
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div id="loading-screen">
-      <div class="spinner"></div>
-      <p>Loading OriginOS V1.5.00</p>
-      <p>by: Quandz24</p>
-      <p id="lolhaha">tiktok: @sungsamtech - @._naq.</p>
-    </div>
+  <body class="preload">
 
     <div class="area-thanh">
       <div class="camera"></div>
@@ -123,6 +117,10 @@
         />
       </div>
       <div class="island" id="island">
+        <div class="island_charging" id="island_charging" style="display: flex; opacity: 0; pointer-events: none; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; color: #26bd44; font-family: 'Noto Sans', sans-serif; font-weight: bold; font-size: 14px; position: absolute; top: 0; left: 0; transition: opacity 0.3s;">
+           <span id="island_charging_percent">100%</span>
+           <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#26bd44"><path d="M540-840v80h80v80H500v560q0 33-23.5 56.5T420-40q-33 0-56.5-23.5T340-120v-560q0-33 23.5-56.5T420-760h80v-80h40Z"/></svg>
+        </div>
         <div class="time_island" id="display_island">00:00</div>
 
         <div class="buttons_island">
@@ -172,77 +170,12 @@
       ></div>
     </div>
     <div class="phone">
-      <!-- Custom Icon Modal Integrated into Phone -->
-      <div id="customIconModal" class="app4app" style="z-index: 2000000; display: none; background: var(--bg--background2); color: var(--bg--color); flex-direction: column; opacity: 0;">
-        <div class="back-button" onclick="closeCustomIconModal()">تخصيص الأيقونات</div>
-        <div class="modal_body_custom_icons" id="customIconList" style="padding: 15px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; align-items: center;">
-          <!-- App items will be injected here -->
-        </div>
-        <div class="modal_footer_custom_icons" style="padding: 20px; display: flex; justify-content: center; gap: 10px; background: var(--bg--background); border-top: 1px solid rgba(0,0,0,0.1);">
-          <button class="khaysetting1-1" style="width: 150px; height: 50px; position: static;" onclick="applyCustomIcons()">تطبيق الكل</button>
-          <button class="khaysetting1-1" style="width: 150px; height: 50px; position: static;" onclick="document.getElementById('iconFolderInput').click()">استخراج أيقونات</button>
-          <input type="file" id="iconFolderInput" accept="image/*" multiple webkitdirectory style="display: none" onchange="handleIconFolderUpload(this.files)" />
-        </div>
+      <div id="loading-screen" style="z-index: 9999999;">
+        <img src="originos_data/Origin_os_logo.png" style="width: 100%; height: 100%; object-fit: contain; background: black;" alt="Boot Animation">
+        <p id="lolhaha" style="display: none;">tiktok: @sungsamtech - @._naq.</p>
       </div>
-      <div class="setup_screen_setup open" id="setup_screenid_setup">
-        <div id="originos_logo_setup"></div>
-        <div id="box1_setup"></div>
-        <div id="box0_setup">
-          <div id="box2_setup"></div>
-        </div>
-        <div id="click_setup">
-          <span class="text">Get started with OriginWEB</span>
-          <svg
-            class="icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -15 65 30"
-            width="40"
-            height="40"
-            fill="rgba(0, 0, 255, 0.65)"
-          >
-            <path d="M 61 0 C 65 3 65 8 60 8 L 0 8 L 0 0 L 43 0 L 43 -15 Z" />
-          </svg>
-        </div>
-
-        <div
-          class="setup_screen_setup"
-          id="screen_notes_setup"
-          style="opacity: 0; touch-action: none; background: none"
-        >
-          <div id="top_text_setup">Notes</div>
-          <div
-            id="top_text_setup"
-            style="font-size: 15px; top: calc(33% + 50px); width: 80%"
-          >
-            This interface is a simulation of OriginOS. It is not a real
-            operating system and is not officially released by vivo.
-          </div>
-          <div id="originos_buttons_setup">
-            <button id="btn_disagree_setup">Disagree</button>
-            <button
-              id="btn_goto_setup"
-              onclick="
-            removeEventListener_setup();
-            removeWithFade('setup_screenid_setup');
-            document.getElementById('allApp').style.display = 'flex';
-            powerbtn.addEventListener('click', powerbtnEvent);"
-            >
-              Go to OriginWEB
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div id="systemToast" class="system-toast"></div>
       
-      <!-- App Context Menu -->
-      <div id="appContextMenu" class="app-context-menu" style="display: none;">
-        <div class="menu-item" id="changeIconBtn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M480-480ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0-33-23.5-56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Z"/></svg>
-          <span>تبديل الصورة</span>
-        </div>
-      </div>
-
       <div class="lpControlCenterControlsCenter">
         <div
           class="control-centerControlsCenter"
@@ -524,7 +457,7 @@
       <div class="status-time" id="lockclock2">
         <div class="date-display2" id="dateText2"></div>
       </div>
-      <div class="allApp" id="allApp" style="display: none">
+      <div class="allApp" id="allApp" style="display: flex">
         <div class="lp" id="lp"></div>
         <div class="khayapp" id="khayapp"></div>
         <div class="box" id="box1">
@@ -693,19 +626,14 @@
               Settings
             </div>
             <div class="khaysetting1" id="about_setting">
-              <div class="circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="21px"
-                  viewBox="0 -960 960 960"
-                  width="21px"
-                  fill="white"
-                >
-                  <path
-                    d="M479.79-665.22q-35.44 0-60.12-24.88Q395-714.99 395-750.43t24.89-60.11q24.88-24.68 60.32-24.68t60.12 24.89Q565-785.45 565-750.01t-24.89 60.12q-24.88 24.67-60.32 24.67ZM407-124.78v-444.44h146v444.44H407Z"
-                  />
-                </svg>
-              </div>
+              <div
+                class="circle"
+                style="
+                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777050017/qb6hxbtmzhy9gasvhahv.png')
+                    no-repeat center center;
+                  background-size: 100%;
+                "
+              ></div>
               <div class="left-text" id="about_name_setting" style="left: 60px">
                 About
               </div>
@@ -717,36 +645,13 @@
                 OS &middot; Information
               </div>
             </div>
-            <div class="khaysetting3" id="animation_setting">
+            
+            <div class="khaysetting3" id="theme_setting">
               <div
                 class="circle"
                 style="
-                  background: url('originos_data/icon_animation.png') no-repeat
-                    center center fixed;
-                  background-size: 100%;
-                "
-              ></div>
-              <div
-                class="left-text"
-                id="animation_name_setting"
-                style="left: 60px"
-              >
-                Animation
-              </div>
-              <div
-                class="left-text-small"
-                id="animation_name_small_setting"
-                style="left: 60px"
-              >
-                Animation Speed
-              </div>
-            </div>
-            <div class="khaysetting4" id="theme_setting">
-              <div
-                class="circle"
-                style="
-                  background: url('originos_data/theme_icon.png') no-repeat
-                    center center fixed;
+                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777051509/cygkudqviuehf72elpw6.png')
+                    no-repeat center center;
                   background-size: 100%;
                 "
               ></div>
@@ -761,6 +666,24 @@
                 Wallpaper &middot; Finger Print
               </div>
             </div>
+
+            <div class="khaysetting4" id="display_setting">
+              <div
+                class="circle"
+                style="
+                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777053523/v8fbib0iprwwupn2iqrm.png')
+                    no-repeat center center;
+                  background-size: 130%;
+                "
+              ></div>
+              <div class="left-text" style="left: 60px">
+                Display
+              </div>
+              <div class="left-text-small" style="left: 60px">
+                Phone Frame &middot; Full Screen
+              </div>
+            </div>
+            
             <div class="khaysetting5" id="audio_setting">
               <div
                 class="circle"
@@ -785,8 +708,8 @@
                 Sound system
               </div>
             </div>
-
-            <div class="khaysetting1" id="lock_style" style="top: 390px">
+            
+            <div class="khaysetting3" id="lock_style" style="top: 389px">
               <div class="circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -812,186 +735,133 @@
               </div>
             </div>
 
-            <div class="khaysetting1" id="display_setting" style="top: 463px">
-              <div class="circle" style="background: #4CAF50;">
+            <div class="khaysetting4" id="cloud_sync_setting" style="top: 437px; z-index: 10;">
+              <div class="circle" style="background: #2196F3;">
                 <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="white">
-                  <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/>
+                  <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q100 0 170 70t70 170q0 11-1 21t-4 22q70 12 117.5 65.5T880-380q0 75-52.5 127.5T700-200H260Zm0-80h440q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-67-46.5-113.5T480-720q-67 0-113.5 46.5T320-560h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h60v-80Z"/>
                 </svg>
               </div>
               <div class="left-text" style="left: 60px">
-                Display
+                Cloud Sync
               </div>
-              <div class="left-text-small" style="left: 60px">
-                Phone Frame &middot; Full Screen
+              <div class="left-text-small" style="left: 60px" id="cloud_status">
+                Login with Google to back up data
               </div>
             </div>
 
-            <div class="app4app" id="app4" style="z-index: 5020">
-              <div class="back-button" id="back_to_setting">About</div>
-
-              <div class="originos" id="clickBox_beta"></div>
-
+            <div class="khaysetting5" id="animation_setting" style="top: 485px">
               <div
-                class="aboutI4Item"
-                onclick='
-                showPopupInput({
-                  message: "Enter your device name",
-                  placeholder: document.getElementById("phoneName").textContent.trim(),
-                  defaultText: document.getElementById("phoneName").textContent.trim(),
-                  maxLength: 30,
-                  buttonText: "Rename",
-                  onSubmit: (resultText) => {
-                    document.getElementById("phoneName").textContent = resultText;
-                    localStorage.setItem("phoneName", resultText);
-                  },
-                });'
-              >
-                <div class="aboutI4ItemText" id="phoneName">Your Phone</div>
-                <div class="aboutI4ItemTextSmall">Phone name</div>
-
-                <div class="icon_element_cheos">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="aboutI4Item" id="khaysetting1-1">
-                <div class="aboutI4ItemText" id="Vesion">V1.5.00</div>
-                <div class="aboutI4ItemTextSmall">Version</div>
-                <div class="icon_element_red"></div>
-              </div>
-
-              <div class="aboutI4Item" id="khaysetting1-2">
-                <div class="aboutI4ItemText" id="name_dev">
-                  TikTok: @sungsamtech - galaxyA15
-                </div>
-                <div class="aboutI4ItemTextSmall" id="Develop">Developer</div>
-
-                <div class="icon_element_red"></div>
-              </div>
-
-              <div class="aboutI4Item">
-                <div class="aboutI4ItemText" id="storageUsed">--MB</div>
-                <div class="aboutI4ItemTextSmall">used</div>
-                <div class="icon_element_red"></div>
-
-                <div class="aboutI4ItemText" id="storage">--MB</div>
-                <div class="aboutI4ItemTextSmall">Storage</div>
-                <div class="icon_element_red"></div>
-              </div>
-
+                class="circle"
+                style="
+                  background: url('originos_data/icon_animation.png') no-repeat
+                    center center fixed;
+                  background-size: 100%;
+                "
+              ></div>
               <div
-                class="aboutI4Item"
-                onclick='
-                    showPopup2_alert(
-      `Are you sure you want go to lite version?`,
-      `Yes`,
-      `No`,
-      () => { window.open("https://quandz24-ui.github.io/OriginOS_web", "_blank");},
-      () =>{})'
+                class="left-text"
+                id="animation_name_setting"
+                style="left: 60px"
               >
-                <div class="aboutI4ItemText">Stable version</div>
-                <div class="aboutI4ItemTextSmall">Official version</div>
-
-                <div class="icon_element_cheos">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
-                </div>
+                Animation
               </div>
-
               <div
-                class="aboutI4Item"
-                onclick="showChangelog()"
+                class="left-text-small"
+                id="animation_name_small_setting"
+                style="left: 60px"
               >
-                <div class="aboutI4ItemText">Changelog</div>
-                <div class="aboutI4ItemTextSmall">View latest changes</div>
-
-                <div class="icon_element_cheos">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
-                </div>
+                Animation Speed
               </div>
+            </div>
 
-              <div
-                class="aboutI4Item"
-                onclick='
-                    showPopup2_alert(
-      `Found some bugs or want to join our group chat?`,
-      `join`,
-      `No`,
-      () => { window.open("https://t.me/OriginWEB", "_blank");},
-      () =>{})'
-              >
-                <div class="aboutI4ItemText">report bug</div>
-                <div class="aboutI4ItemTextSmall">join group</div>
+              <div class="app4app" id="app4" style="z-index: 5020">
+              <div class="back-button" id="back_to_setting">رجوع ‹</div>
+              
+              <div class="phone-container">
+                
+                <div class="header-title">Xiaomi HyperOS</div>
+                <div class="version-subtitle">3.0.18.0</div>
 
-                <div class="icon_element_cheos">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
+                <div class="card-group">
+                    <div class="list-item" onclick='
+                      showPopupInput({
+                        message: "أدخل اسم الهاتف الجديد",
+                        placeholder: document.getElementById("phoneName").textContent.trim(),
+                        defaultText: document.getElementById("phoneName").textContent.trim(),
+                        maxLength: 30,
+                        buttonText: "إعادة تسمية",
+                        onSubmit: (resultText) => {
+                          document.getElementById("phoneName").textContent = resultText;
+                          localStorage.setItem("phoneName", resultText);
+                        },
+                      });'>
+                        <span class="label">اسم الجهاز</span>
+                        <div class="left-content">
+                            <svg class="icon-settings" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 12-5 5-5-5h3V3h4v9h3Zm-7 7.09c1.68 0 3.29-.65 4.56-1.84L21.37 12c-1.27-1.19-2.88-1.84-4.56-1.84H17v2h-.19c1.01 0 1.94.4 2.75 1.16L12 21.09l-7.56-7.77c.81-.76 1.74-1.16 2.75-1.16H7v-2h-.19c-1.68 0-3.29.65-4.56 1.84l4.81 5.25c1.27 1.19 2.88 1.84 4.56 1.84H12ZM19 12V3h-4v9h-3l5 5 5-5h-3Z"/></svg>
+                            <span class="value" id="phoneName">Xiaomi REDMI 14C Édition</span>
+                            <span class="arrow">‹</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
 
-              <div
-                class="aboutI4Item"
-                onclick="
-                    showPopup2_alert(
-      'هل أنت متأكد أنك تريد مسح كافة البيانات والإعدادات؟',
-      'إعادة ضبط',
-      'إلغاء',
-      () => { 
-        localStorage.clear();
-        sessionStorage.clear();
-        location.reload();
-      },
-      () =>{})"
-              >
-                <div class="aboutI4ItemText" style="color: red;">إعادة ضبط المصنع</div>
-                <div class="aboutI4ItemTextSmall">مسح كافة البيانات والإعدادات</div>
+                <div class="card-group">
+                    <div class="list-item">
+                        <span class="label">التخزين</span>
+                        <div class="left-content">
+                            <span class="value"><span id="storageUsed">--MB</span>/<span id="storage">--MB</span></span>
+                            <span class="arrow">‹</span>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="icon_element_cheos">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="red"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
+                <div class="card-group">
+                    <div class="list-item" id="khaysetting1-1">
+                        <span class="label">إصدار نظام التشغيل</span>
+                        <span class="value" id="Vesion">3.0.18.0.WGTMIXM</span>
+                    </div>
+                </div>
+                
+                <div class="card-group">
+                    <div class="list-item" id="khaysetting1-2" onclick='window.open("https://quandz24-ui.github.io/OriginOS_web", "_blank");'>
+                        <span class="label">إصدار Android</span>
+                        <span class="value">16 BP2A.250605.03</span>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="list-item">
+                        <span class="label">تحديث أمان نظام Android</span>
+                        <span class="value">2026-02-01</span>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="list-item" onclick="showChangelog()">
+                        <span class="label">المواصفات والمعلومات التفصيلية</span>
+                        <span class="arrow">‹</span>
+                    </div>
+                    <div class="list-item" onclick='window.open("https://t.me/OriginWEB", "_blank");'>
+                        <span class="label" id="name_dev">مجتمع المطورين</span>
+                        <span class="arrow">‹</span>
+                    </div>
+                </div>
+
+                <div class="card-group">
+                    <div class="list-item" onclick="
+                      showPopup2_alert(
+                        'هل أنت متأكد أنك تريد مسح كافة البيانات والإعدادات؟',
+                        'إعادة ضبط',
+                        'إلغاء',
+                        () => { 
+                          localStorage.clear();
+                          sessionStorage.clear();
+                          location.reload();
+                        },
+                        () =>{}
+                      )">
+                        <span class="label" style="color: #ff4d4f;">إعادة ضبط المصنع</span>
+                        <span class="arrow">‹</span>
+                    </div>
                 </div>
               </div>
 
@@ -2064,6 +1934,23 @@
                   />
                 </svg>
               </div>
+              <div class="setting-item" id="live-wallpaper-btn">
+                <div class="setting-title" id="live_wallpaper_title">
+                  Live Wallpaper | خلفية حية (فيديو)
+                </div>
+                <div class="toggle-switch" id="none" style="opacity: 0"></div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                >
+                  <path
+                    d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
+                  />
+                </svg>
+              </div>
+              <input type="file" accept="video/*" id="videoInput" style="display: none" />
               <div
                 class="app4app"
                 id="app4wallpaper"
@@ -2073,36 +1960,36 @@
                 <div class="button-row" id="button-row">
                   <div
                     class="img-button active"
-                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647898/shuwfur2kw2z8br6b0nh.jpg"
+                    data-img="originos_data/wallpaper_4.png"
                   >
                     <img
-                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647898/shuwfur2kw2z8br6b0nh.jpg"
+                      src="originos_data/wallpaper_4.png"
                       alt="1"
                     />
                   </div>
                   <div
                     class="img-button"
-                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647872/jrp4xer9gqyjzhbo5v0d.jpg"
+                    data-img="originos_data/wallpaper_2.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647872/jrp4xer9gqyjzhbo5v0d.jpg" alt="2" />
+                    <img src="originos_data/wallpaper_2.png" alt="2" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647844/rmwy9qcl35bddns84sfl.jpg"
+                    data-img="originos_data/wallpaper_3.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647844/rmwy9qcl35bddns84sfl.jpg" alt="3" />
+                    <img src="originos_data/wallpaper_3.png" alt="3" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647821/yo4wulfezty085isjomx.jpg"
+                    data-img="originos_data/wallpaper_5.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647821/yo4wulfezty085isjomx.jpg" alt="4" />
+                    <img src="originos_data/wallpaper_5.png" alt="4" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647796/tjaycpng51essymvawdt.jpg"
+                    data-img="originos_data/wallpaper_6.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1776647796/tjaycpng51essymvawdt.jpg" alt="5" />
+                    <img src="originos_data/wallpaper_6.png" alt="5" />
                   </div>
                   <div
                     class="img-button"
@@ -2118,7 +2005,9 @@
                   </div>
                 </div>
                 <div class="img-button add-button" id="addBtn">+</div>
+                <div class="img-button add-button" id="addLiveWallpaperBtn" style="font-size: 12px;">Vid</div>
                 <input type="file" accept="image/*" id="fileInput" />
+                <input type="file" accept="video/*" id="videoInput" style="display: none" />
                 <div
                   id="popup_overlay_wallpaper"
                   class="popup-overlay_wallpaper"
@@ -2955,8 +2844,28 @@
 
                 <div
                   class="setting-item"
+                  id="manageKeywordsBtn"
+                  style="top: calc(35% + 240px)"
+                  onclick="openCustomIconModal()"
+                >
+                  <div class="setting-title">تعديل مسارات استخراج الأيقونات</div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
+                    />
+                  </svg>
+                </div>
+
+                <div
+                  class="setting-item"
                   id="borderRadiusSystemBtn"
-                  style="top: calc(35% + 180px)"
+                  style="top: calc(35% + 300px)"
                 >
                   <div class="setting-title">Border radius system</div>
                   <div class="toggle-switch" style="opacity: 0"></div>
@@ -2977,495 +2886,35 @@
                     Icon packs
                   </div>
                   <div class="container_icon">
-                    <div class="icon_item" onclick="icon_originos()">
-                      <div class="box_icon" id="originos_icon">
+                    <div class="icon_item" onclick="icon_hyperos3()">
+                      <div class="box_icon" id="hyperos3_icon">
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('originos_data/system_settings.png');
+                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png');
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('originos_data/system_music.png');
+                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png');
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('originos_data/system_filemanager.png');
+                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png');
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('originos_data/system_calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">Default - OriginOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_hyperos()">
-                      <div class="box_icon" id="hyperos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/hype_icon/system_settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/hype_icon/system_music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/hype_icon/system_filemanager.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/hype_icon/system_calculator.png');
+                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png');
                           "
                         ></div>
                       </div>
-                      <div class="icon_label">HyperOS</div>
+                      <div class="icon_label">Hyper OS 3</div>
                     </div>
-
-                    <div class="icon_item" onclick="icon_ios()">
-                      <div class="box_icon" id="ios_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i_icon/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i_icon/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i_icon/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i_icon/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">IOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_coloros()">
-                      <div class="box_icon" id="coloros_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/o_icon/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/o_icon/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/o_icon/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/o_icon/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">ColorOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_oneui()">
-                      <div class="box_icon" id="oneui_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/oui_icon/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/oui_icon/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/oui_icon/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/oui_icon/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">One UI</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_harmonyos()">
-                      <div class="box_icon" id="harmonyos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/harmonyos_icon/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/harmonyos_icon/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/harmonyos_icon/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/harmonyos_icon/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">HarmonyOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_ios26_light1()">
-                      <div class="box_icon" id="i26Light1">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light1/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light1/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light1/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light1/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">IOS 26 light 1</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_ios26_light2()">
-                      <div class="box_icon" id="i26Light2">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light2/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light2/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light2/files.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/i26Light2/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">IOS 26 light 2</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_pixel()">
-                      <div class="box_icon" id="pix_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/pix_icon/settings.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/pix_icon/clock.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/pix_icon/files.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/pix_icon/calculator.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">Pixel</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_nothing()">
-                      <div class="box_icon" id="nothing_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/nothing_icon/settings.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/nothing_icon/clock.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/nothing_icon/files.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('originos_data/iconPacks/nothing_icon/calculator.png');
-                            border-radius: 50%;
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">Nothing</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_glassos()">
-                      <div class="box_icon" id="glassos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/glassmorphism/256/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/glassmorphism/256/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/glassmorphism/256/folder-invoices.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/glassmorphism/256/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">GlassOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_neonos()">
-                      <div class="box_icon" id="neonos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/neon/256/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/neon/256/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/neon/256/folder-invoices.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/neon/256/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">NeonOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_3dos()">
-                      <div class="box_icon" id="3dos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/3d-fluency/256/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/3d-fluency/256/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/3d-fluency/256/folder-invoices.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/3d-fluency/256/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">3D-OS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_minimalos()">
-                      <div class="box_icon" id="minimalos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios-filled/256/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios-filled/256/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios-filled/256/folder-invoices.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios-filled/256/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">MinimalOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_flymeos()">
-                      <div class="box_icon" id="flymeos_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/fluency/256/settings.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/fluency/256/music.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/fluency/256/folder-invoices.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/fluency/256/calculator.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">FlymeOS</div>
-                    </div>
-
-                    <div class="icon_item" onclick="icon_custom()">
-                      <div class="box_icon" id="custom_icon">
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios/256/edit.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios/256/edit.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios/256/edit.png');
-                          "
-                        ></div>
-                        <div
-                          class="mini_icon"
-                          style="
-                            --bg--mini-icon: url('https://img.icons8.com/ios/256/edit.png');
-                          "
-                        ></div>
-                      </div>
-                      <div class="icon_label">Custom</div>
-                    </div>
-
-                    <!--more-->
                   </div>
                   <div class="icon_item icon_setting_row">
                     <div
@@ -4029,9 +3478,6 @@
           </div>
         </div>
         <div class="box" id="box11">
-          <div class="status-time-widget" id="lockclock3">
-            <div class="date-display" id="dateText3"></div>
-          </div>
           <div class="app" id="app11">
             <div class="center_item">coming soon</div>
           </div>
@@ -4048,19 +3494,9 @@
       </div>
       <div class="nav"></div>
       <div class="wallpaper" id="wallpaper">
+        <video id="homeVideoWallpaper" autoplay muted loop playsinline style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
         <div class="text_lock">OriginWEB</div>
         <div class="text_lock" id="text_lock_cus"></div>
-        <div class="img_lock">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            class="img_lock_svg"
-          >
-            <path
-              d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Z"
-            />
-          </svg>
-        </div>
       </div>
       <div class="clicke" id="clicke1"></div>
       <div class="clicke" id="clicke2"></div>
@@ -4091,6 +3527,7 @@
         "
       ></div>
       <div class="lockscreen" id="lockscreen">
+        <video id="lockVideoWallpaper" autoplay muted loop playsinline style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
         <div
           class="hidden"
           id="wallpaper_aod2"
@@ -4182,6 +3619,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
 
     <script src="data.js"></script>
+    <script type="module" src="firebase-init.js"></script>
 
     <script src="all.js"></script>
     <script src="./controlsCenter/controlsCenterEvent_Animtion.js"></script>

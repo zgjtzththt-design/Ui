@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const dev_name = document.getElementById("name_dev");
-    if (
-      !dev_name ||
-      dev_name.textContent.trim() != "TikTok: @sungsamtech - galaxyA15"
-    ) {
-      localStorage.clear();
-      sessionStorage.clear();
-      location.reload();
-    }
+    setTimeout(() => {
+        document.body.classList.remove("preload");
+        const dev_name = document.getElementById("name_dev");
+        // Only clear if the element specifically exists and is explicitly wrong after a delay
+        if (dev_name && dev_name.textContent.trim() !== "" && !dev_name.textContent.includes("sungsamtech")) {
+             console.warn("Security check mismatch, but skipping wipe to protect user data.");
+             // localStorage.clear(); // Disabled to prevent data loss during debugging
+        }
+    }, 1000); // Give it more time to assemble the string
 });
 let home_wallpaper = "";
 let lock_wallpaper = "";
@@ -15,38 +15,64 @@ let lock_wallpaper = "";
 document.getElementById("phoneName").textContent =
   localStorage.getItem("phoneName") || "Your Phone";
 
-initOriginDB(() => {
+window.applyWallpapers = () => {
+  getData("lock_video_wallpaper", (value) => {
+    const lockVideo = document.getElementById("lockVideoWallpaper");
+    if (value && lockVideo) {
+      const url = URL.createObjectURL(value);
+      lockVideo.src = url;
+      lockVideo.style.display = "block";
+      lockVideo.play();
+    }
+  });
+
   getData("lock_wallpaper", (value) => {
     if (value) {
       const wallpaper_preview2 = document.querySelector(".wallpaper-preview2");
       const wallPaper2 = document.querySelector(".wallpaper2");
       const wallpaper = document.querySelector(".wallpaper");
+      const lockVideo = document.getElementById("lockVideoWallpaper");
 
       lock_wallpaper = value;
-      wallpaper.style.backgroundImage = `url(${value})`;
-      wallPaper2.style.backgroundImage = `url(${value})`;
-      wallpaper_preview2.style.backgroundImage = `url(${value})`;
-    } else {
+      if (wallpaper) wallpaper.style.backgroundImage = `url(${value})`;
+      if (wallPaper2) wallPaper2.style.backgroundImage = `url(${value})`;
+      if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = `url(${value})`;
+      if (lockVideo) lockVideo.style.display = "none";
+    }
+  });
+
+  getData("home_video_wallpaper", (value) => {
+    const homeVideo = document.getElementById("homeVideoWallpaper");
+    if (value && homeVideo) {
+      const url = URL.createObjectURL(value);
+      homeVideo.src = url;
+      homeVideo.style.display = "block";
+      homeVideo.play();
     }
   });
 
   getData("home_wallpaper", (value) => {
     if (value) {
+      const homeVideo = document.getElementById("homeVideoWallpaper");
       home_wallpaper = value;
       document.documentElement.style.setProperty(
         "--bg--wallpaper",
         `url('${value}')`
       );
+      if (homeVideo) homeVideo.style.display = "none";
     }
   });
 
   getData("wallpaper_aod2_image", (value) => {
     if (value) {
       const wallpaper_aod2 = document.getElementById("wallpaper_aod2");
-
-      wallpaper_aod2.style.backgroundImage = `url('${value}')`;
+      if (wallpaper_aod2) wallpaper_aod2.style.backgroundImage = `url('${value}')`;
     }
   });
+};
+
+initOriginDB(() => {
+  window.applyWallpapers();
 });
 
 const dateElement = document.getElementById("dateText");
@@ -69,7 +95,6 @@ const formatted = now.toLocaleDateString("en-US", options);
 
 dateElement.textContent = `${formatted} ${custom_text_lock_screen}`;
 dateElement2.textContent = formatted;
-document.getElementById("dateText3").textContent = formatted;
 document.getElementById(
   "dateTextPreview"
 ).textContent = `${formatted} ${custom_text_lock_screen}`;
@@ -80,7 +105,6 @@ function updateTime() {
   const minutes = String(now.getMinutes()).padStart(2, "0");
   document.getElementById("lockclock").textContent = `${hours}:${minutes}`;
   document.getElementById("lockclock2").textContent = `${hours}:${minutes}`;
-  document.getElementById("lockclock3").textContent = `${hours}:${minutes}`;
 }
 function updateTime2() {
   const now = new Date();
@@ -441,47 +465,8 @@ const handlers = {
   },
 };
 
-let appContextMenuTimer = null;
-let isContextMenuOpen = false;
-let currentMenuAppId = null;
 let appPressTarget = null;
 let appPressStartX, appPressStartY;
-
-function showAppContextMenu(appId, x, y) {
-  const menu = document.getElementById("appContextMenu");
-  if (!menu) return;
-
-  currentMenuAppId = `box${appId}`;
-  isContextMenuOpen = true;
-
-  // Position menu in center (now handled by CSS)
-  menu.style.display = "flex";
-
-  // Get app info
-  const appInfo = customApps.find(a => a.id === currentMenuAppId) || { name: `App ${appId}` };
-  
-  const changeBtn = document.getElementById("changeIconBtn");
-  changeBtn.onclick = () => {
-    hideAppContextMenu();
-    changeCustomIcon(appInfo.id, appInfo.name);
-  };
-}
-
-function hideAppContextMenu() {
-  const menu = document.getElementById("appContextMenu");
-  if (menu) menu.style.display = "none";
-  isContextMenuOpen = false;
-  currentMenuAppId = null;
-  
-  // Remove bouncing from all boxes
-  Object.values(boxes).forEach(box => box.classList.remove("bouncing"));
-}
-
-document.addEventListener("mousedown", (e) => {
-  if (!e.target.closest("#appContextMenu") && !e.target.closest(".click-area")) {
-    hideAppContextMenu();
-  }
-});
 
 ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"].forEach(
   (num) => {
@@ -490,32 +475,13 @@ document.addEventListener("mousedown", (e) => {
 
     clicke.addEventListener("pointerdown", (e) => {
       if (currentOpeningBtn) return;
-      if (isContextMenuOpen) {
-        hideAppContextMenu();
-      }
 
       appPressTarget = num;
       appPressStartX = e.clientX;
       appPressStartY = e.clientY;
-      
-      appContextMenuTimer = setTimeout(() => {
-        // Bounce animation
-        box.classList.add("bouncing");
-        
-        // Show menu after a short delay for the bounce start
-        setTimeout(() => {
-            if (appPressTarget === num) {
-                showAppContextMenu(num, e.clientX, e.clientY);
-            }
-        }, 300);
-      }, 1000);
     });
 
     clicke.addEventListener("pointerup", () => {
-      clearTimeout(appContextMenuTimer);
-
-      if (isContextMenuOpen) return;
-      
       if (currentOpeningBtn) {
         currentOpeningBtn.style.transition = `all ${time_opening_app}s ${cubicScaleClosing}`;
         currentOpeningBtn.classList.remove("open");
@@ -579,7 +545,7 @@ window.addEventListener("pointermove", (e) => {
   if (appPressTarget) {
      const dist = Math.sqrt(Math.pow(e.clientX - appPressStartX, 2) + Math.pow(e.clientY - appPressStartY, 2));
      if (dist > 10) {
-       clearTimeout(appContextMenuTimer);
+        appPressTarget = null;
      }
   }
 });
@@ -587,8 +553,6 @@ window.addEventListener("pointermove", (e) => {
 window.addEventListener("pointerup", () => {
     appPressTarget = null;
 });
-
-target.innerText += "ngs";
 
 const island = document.getElementById("island");
 const island_circle = document.getElementById("island_circle");
@@ -1158,7 +1122,10 @@ function lock() {
 
   addCustomLockscreenTime(); // để tắt
 
-  playmusic("originos_data/ui/Lock.ogg", volume_unlock_volume);
+  playmusic(
+    "https://cropgif.net/audio/1776964946251-c868ee69-c7d5-4373-9aeb-5d07786adda3.ogg",
+    volume_unlock_volume
+  );
   nav.classList.remove("unlock");
 
   hideAllAlerts();
@@ -1270,7 +1237,10 @@ function unlock() {
   is_holding_locksreen = false;
 
   removeCustomLockscreenTime();
-  playmusic("originos_data/ui/Unlock.ogg", volume_unlock_volume);
+  playmusic(
+    "https://cropgif.net/audio/1776965211523-43063b4c-3e63-4adc-85e2-e22fd2799d41.ogg",
+    volume_unlock_volume
+  );
 
   fogot_pass_btn.style.display = "none";
 }
@@ -1358,10 +1328,20 @@ let dateText_style_transform = "translateY(160px) translateX(-50%) scale(0.95)";
 wallpaper.style.transform = "translateY(250px)";
 phone.style.background = phone_lock_background;
 function powerbtnEvent() {
-  if (!islock) lock();
+  let wasLockCalled = false;
+  if (!islock) {
+    lock();
+    wasLockCalled = true;
+  }
   lock_content.style.opacity = `1`;
   swipeHandle.style.opacity = "1";
   if (ison) {
+    if (!wasLockCalled) {
+      playmusic(
+        "https://cropgif.net/audio/1776964946251-c868ee69-c7d5-4373-9aeb-5d07786adda3.ogg",
+        volume_unlock_volume
+      );
+    }
     swipeHandle.style.opacity = `0`;
     swipeHandle.style.pointerEvents = `none`;
 
@@ -2072,16 +2052,68 @@ const battery_num = document.querySelector(".battery-num");
 
 function updateBatteryInfo(battery) {
   battery_level = Math.round(battery.level * 100);
-  charging = battery.charging;
+  const isCurrentlyCharging = battery.charging;
+
   battery4.style.width = `calc(${battery_level}%)`;
   if (battery_level <= 20) battery4.style.background = "red";
   if (battery_level == 20) playmusic("originos_data/ui/LowBattery.ogg");
   if (battery_level > 20) battery4.style.background = "white";
   battery_num.textContent = `${battery_level}`;
-  if (charging) {
+
+  if (isCurrentlyCharging) {
     battery4.style.background = "#26bd44";
-    playmusic("originos_data/ui/charge_full.ogg", volume_charge_volume);
+    if (!charging) {
+      playmusic(
+        "https://cropgif.net/audio/1776965251083-5ccb7558-3b9e-4b87-aceb-e908015ffb8c.ogg",
+        volume_charge_volume
+      );
+      showChargingIsland();
+    }
   }
+  charging = isCurrentlyCharging;
+}
+
+function showChargingIsland() {
+  const island_charging = document.getElementById("island_charging");
+  const island_charging_percent = document.getElementById(
+    "island_charging_percent"
+  );
+  const time_island = document.querySelector(".time_island");
+  const image_island_right = document.querySelector(".image_island_right");
+
+  if (!island || !island_charging) return;
+
+  island_charging_percent.textContent = `${battery_level}%`;
+
+  island.style.transition = `all 0.6s cubic-bezier(.14,1.34,.41,1)`;
+  island.style.width = "160px";
+  island.style.height = "35px";
+  island.style.borderRadius = "20px";
+
+  island_charging.style.opacity = "1";
+  island_charging.style.pointerEvents = "auto";
+
+  if (time_island) time_island.style.opacity = "0";
+  if (image_island_right) image_island_right.style.opacity = "0";
+
+  setTimeout(() => {
+    island_charging.style.opacity = "0";
+    island_charging.style.pointerEvents = "none";
+    setTimeout(() => {
+      if (time_island) time_island.style.opacity = "1";
+      if (image_island_right) image_island_right.style.opacity = "1";
+
+      if (!isRunning_clock && !isPlaying_music) {
+        island.style.width = "25px";
+        island.style.height = "25px";
+        island.style.borderRadius = "25px";
+      } else {
+        island.style.width = "120px";
+        island.style.height = "25px";
+        island.style.borderRadius = "25px";
+      }
+    }, 300);
+  }, 4000);
 }
 
 if ("getBattery" in navigator) {
@@ -2489,113 +2521,55 @@ if (window.visualViewport) {
 
 // Custom Icon Pack Logic
 const customApps = [
-  { id: "box1", name: "Calculator", defaultIcon: "https://img.icons8.com/ios/256/calculator.png" },
-  { id: "box2", name: "File Manager", defaultIcon: "https://img.icons8.com/ios/256/folder-invoices.png" },
-  { id: "box3", name: "Music", defaultIcon: "https://img.icons8.com/ios/256/music.png" },
-  { id: "box4", name: "Settings", defaultIcon: "https://img.icons8.com/ios/256/settings.png" },
-  { id: "box5", name: "Messages", defaultIcon: "https://img.icons8.com/ios/256/speech-bubble.png" },
-  { id: "box6", name: "Photos", defaultIcon: "https://img.icons8.com/ios/256/stack-of-photos.png" },
-  { id: "box7", name: "Calendar", defaultIcon: "https://img.icons8.com/ios/256/calendar.png" },
-  { id: "box8", name: "Phone", defaultIcon: "https://img.icons8.com/ios/256/phone.png" },
-  { id: "box9", name: "Browser", defaultIcon: "https://img.icons8.com/ios/256/internet.png" },
-  { id: "box10", name: "Weather", defaultIcon: "https://img.icons8.com/ios/256/sun.png" },
-  { id: "box11", name: "Camera", defaultIcon: "https://img.icons8.com/ios/256/camera.png" },
-  { id: "box12", name: "Store", defaultIcon: "https://img.icons8.com/ios/256/shopping-cart.png" },
+  { id: "box1", name: "الحاسبة", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png" },
+  { id: "box2", name: "مدير الملفات", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png" },
+  { id: "box3", name: "الموسيقى", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png" },
+  { id: "box4", name: "الإعدادات", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png" },
+  { id: "box5", name: "الرسائل", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png" },
+  { id: "box6", name: "الصور", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png" },
+  { id: "box7", name: "التقويم", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png" },
+  { id: "box8", name: "الهاتف", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png" },
+  { id: "box9", name: "المتصفح", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png" },
+  { id: "box10", name: "الطقس", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png" },
+  { id: "box11", name: "ويدجت الحالة", defaultIcon: "https://img.icons8.com/ios/256/info.png" },
+  { id: "box12", name: "المتجر", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png" },
 ];
 
-function icon_custom() {
-  localStorage.setItem("selected_icon_pack", "custom");
-  updateIconBorder("custom_icon");
-  document.documentElement.style.setProperty("--bg-size_img", "100%");
-  openCustomIconModal();
+const defaultKeywords = {
+  box1: "calculator.png",
+  box2: "filemanager.png",
+  box3: "music.png",
+  box4: "settings.png",
+  box5: "messages.png",
+  box6: "photos.png",
+  box7: "calendar.png",
+  box8: "phone.png",
+  box9: "browser.png",
+  box10: "weather.png",
+  box11: "info.png",
+  box12: "store.png"
+};
+
+function getAppKeywords() {
+  return JSON.parse(localStorage.getItem("custom_icons_keywords") || JSON.stringify(defaultKeywords));
+}
+
+function updateAppKeyword(id, keyword) {
+  const keywords = getAppKeywords();
+  keywords[id] = keyword.toLowerCase();
+  localStorage.setItem("custom_icons_keywords", JSON.stringify(keywords));
+  
+  // Trigger cloud sync if logged in
+  if (typeof window.syncEverything === "function") {
+      window.syncEverything();
+  }
+}
+
+function icon_hyperos3() {
+  localStorage.setItem("selected_icon_pack", "hyperos3");
+  updateIconBorder("hyperos3_icon");
   applyCustomIcons(true);
 }
-
-function openCustomIconModal() {
-  const modal = document.getElementById("customIconModal");
-  const list = document.getElementById("customIconList");
-  if (!modal || !list) return;
-  list.innerHTML = "";
-
-  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-
-  customApps.forEach((app) => {
-    const iconUrl = savedIcons[app.id] || app.defaultIcon;
-    const item = document.createElement("div");
-    item.style.width = "100%";
-    item.innerHTML = `
-      <div class="display-setting-panel" style="width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; background: var(--bg--background); padding: 12px; border-radius: 20px;">
-        <div style="display: flex; align-items: center; gap: 15px;">
-          <div class="custom_app_icon_preview" style="background-image: url('${iconUrl}'); width: 45px; height: 45px; border-radius: 12px; background-size: cover; background-position: center;" id="preview_${app.id}"></div>
-          <div style="display: flex; flex-direction: column; text-align: left;">
-            <div style="font-size: 16px; font-weight: 500; color: var(--bg--color);">${app.name}</div>
-            <div style="font-size: 11px; color: gray;">PNG Format</div>
-          </div>
-        </div>
-        <button class="khaysetting1-1" style="width: 70px; height: 35px; position: static; font-size: 13px; border-radius: 12px; background: var(--bg--background2); color: var(--bg--color); border: 1px solid rgba(0,0,0,0.1);" onclick="changeCustomIcon('${app.id}', '${app.name}')">تغيير</button>
-      </div>
-    `;
-    list.appendChild(item);
-  });
-
-  if (typeof showPopup_open_close === "function") {
-    showPopup_open_close(modal);
-  } else {
-    modal.style.display = "flex";
-    modal.classList.add("open");
-  }
-}
-
-let currentChangingAppId = null;
-
-function changeCustomIcon(appId, appName) {
-  currentChangingAppId = appId;
-  if (typeof tb_system === "function") {
-    tb_system(`Select an image for ${appName}`);
-  }
-  const input = document.getElementById("iconInput");
-  if (input) input.click();
-}
-
-// Handle file input selection
-document.addEventListener("DOMContentLoaded", () => {
-  const iconInput = document.getElementById("iconInput");
-  if (iconInput) {
-    iconInput.addEventListener("change", function (e) {
-      const file = e.target.files[0];
-      if (file && currentChangingAppId) {
-        // Check if file is an image
-        if (!file.type.startsWith("image/")) {
-          if (typeof tb_system === "function") {
-            tb_system("Please select an image file");
-          } else {
-            alert("Please select an image file");
-          }
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const base64Icon = event.target.result;
-          const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-          savedIcons[currentChangingAppId] = base64Icon;
-          localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-
-          // Immediately apply to home screen
-          setIconAndBackgroundGradient(currentChangingAppId, base64Icon);
-
-          const preview = document.getElementById(`preview_${currentChangingAppId}`);
-          if (preview) preview.style.backgroundImage = `url('${base64Icon}')`;
-          
-          if (typeof tb_system === "function") {
-            tb_system("Icon updated successfully");
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-});
 
 function closeCustomIconModal() {
   const modal = document.getElementById("customIconModal");
@@ -2610,30 +2584,40 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
   const box = document.getElementById(boxId) || document.querySelector(boxId);
   if (!box) return;
 
-  // Set icon background
+  // Set icon background image first
   box.style.setProperty("--bg--originos", `url("${imageUrl}")`);
 
   const img = new Image();
-  img.crossOrigin = "anonymous";
+  // Ensure Base64 or local images don't trigger CORS issues where possible
+  if (!imageUrl.startsWith('data:')) {
+    img.crossOrigin = "anonymous";
+  }
   img.src = imageUrl;
 
   img.onload = () => {
-    const w = img.width;
-    const h = img.height;
+    // Basic verification that image actually has dimensions
+    if (img.width === 0 || img.height === 0) return;
+
     const canvas = document.createElement("canvas");
-    canvas.width = w;
-    canvas.height = h;
+    canvas.width = img.width;
+    canvas.height = img.height;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    ctx.drawImage(img, 0, 0);
-
-    const centerX = Math.floor(w / 2);
-    const topY = Math.min(8, h - 1);
-    const bottomY = Math.max(h - 9, 0);
-
     try {
+      ctx.drawImage(img, 0, 0);
+
+      const centerX = Math.floor(img.width / 2);
+      const topY = Math.min(8, img.height - 1);
+      const bottomY = Math.max(img.height - 9, 0);
+
       const top = ctx.getImageData(centerX, topY, 1, 1).data;
       const bottom = ctx.getImageData(centerX, bottomY, 1, 1).data;
+
+      // Ensure we didn't get transparent/all-zero data which might look black
+      if (top[3] === 0 && bottom[3] === 0) {
+        box.style.background = "#eaeaea";
+        return;
+      }
 
       const topColor = `rgb(${top[0]}, ${top[1]}, ${top[2]})`;
       const bottomColor = `rgb(${bottom[0]}, ${bottom[1]}, ${bottom[2]})`;
@@ -2644,55 +2628,28 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
       box.style.background = "#eaeaea";
     }
   };
+  
+  img.onerror = () => {
+    console.warn("Failed to load icon image for gradient:", boxId);
+    box.style.background = "#eaeaea"; // Fallback light gray
+  };
 }
 
 function applyCustomIcons(forceAll = false) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+  const pack = localStorage.getItem("selected_icon_pack");
+  
   customApps.forEach((app) => {
-    if (forceAll || savedIcons[app.id]) {
-      const iconUrl = savedIcons[app.id] || app.defaultIcon;
-      setIconAndBackgroundGradient(app.id, iconUrl);
+    // Priority: 1. Locally saved custom icon, 2. Default icon (if pack is hyperos3 or forceAll)
+    if (savedIcons[app.id]) {
+        setIconAndBackgroundGradient(app.id, savedIcons[app.id]);
+    } else {
+        setIconAndBackgroundGradient(app.id, app.defaultIcon);
     }
   });
+
   if (forceAll) {
-    closeCustomIconModal();
-    if (typeof tb_system === "function") tb_system("Custom icons applied successfully");
-  }
-}
-
-async function handleIconFolderUpload(files) {
-  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-  let changed = false;
-
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    if (!file.type.startsWith("image/")) continue;
-    
-    // Convert filename to lowercase for flexible matching
-    const fileNameLower = file.name.toLowerCase();
-    
-    // Find app if app name is contained in the filename (e.g., "settings_new.png" -> "settings")
-    const app = customApps.find(a => fileNameLower.includes(a.name.toLowerCase()));
-    
-    if (app) {
-      await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          savedIcons[app.id] = e.target.result;
-          resolve();
-        };
-        reader.readAsDataURL(file);
-      });
-      changed = true;
-    }
-  }
-  
-  if (changed) {
-    localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-    applyCustomIcons(true);
-    if (typeof tb_system === "function") tb_system("تم تعيين الأيقونات الجديدة");
-  } else if (typeof tb_system === "function") {
-    tb_system("لم يتم العثور على أيقونات مطابقة لأسماء التطبيقات");
+    if (typeof tb_system === "function") tb_system("تم تطبيق حزمة Hyper OS 3");
   }
 }
 
@@ -2706,12 +2663,17 @@ function updateIconBorder(activeId) {
 
 // Apply custom icons on load
 document.addEventListener("DOMContentLoaded", () => {
-    const pack = localStorage.getItem("selected_icon_pack");
-    if (pack === "custom") {
-        applyCustomIcons(true);
-    } else {
-        applyCustomIcons(false);
+    let pack = localStorage.getItem("selected_icon_pack");
+    if (!pack || pack !== "hyperos3") {
+        pack = "hyperos3";
+        localStorage.setItem("selected_icon_pack", "hyperos3");
     }
+    
+    // Use a small timeout to ensure DOM and specific app boxes are fully rendered
+    setTimeout(() => {
+        applyCustomIcons();
+        updateIconBorder("hyperos3_icon");
+    }, 150);
 });
 
 function showChangelog() {

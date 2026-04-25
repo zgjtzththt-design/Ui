@@ -257,5 +257,8 @@ function playmusic(url, volume = 1.0) {
 
 phone.addEventListener("click", clickSound);
 function clickSound() {
-  playmusic("originos_data/ui/Effect_Tick.ogg", volume_click_volume);
+  playmusic(
+    "https://cropgif.net/audio/1776965686907-f4ab76ce-4428-40c0-afb5-a6a3f6935865.ogg",
+    volume_click_volume
+  );
 }
