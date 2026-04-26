@@ -65,6 +65,23 @@ const app4display = document.getElementById("app4display");
 const back_to_setting_display = document.getElementById("back_to_setting_display");
 const phoneEdgeRadius = document.getElementById("phoneEdgeRadius");
 const phoneEdgeRadiusVal = document.getElementById("phoneEdgeRadiusVal");
+const phoneEdgeColor = document.getElementById("phoneEdgeColor");
+const phoneBorderWidth = document.getElementById("phoneBorderWidth");
+const phoneBorderWidthVal = document.getElementById("phoneBorderWidthVal");
+const swipeBarWidth = document.getElementById("swipeBarWidth");
+const swipeBarWidthVal = document.getElementById("swipeBarWidthVal");
+const swipeBarHeight = document.getElementById("swipeBarHeight");
+const swipeBarHeightVal = document.getElementById("swipeBarHeightVal");
+const swipeBarColor = document.getElementById("swipeBarColor");
+const swipeBarBottom = document.getElementById("swipeBarBottom");
+const swipeBarBottomVal = document.getElementById("swipeBarBottomVal");
+const swipeBarOpacity = document.getElementById("swipeBarOpacity");
+const swipeBarOpacityVal = document.getElementById("swipeBarOpacityVal");
+const swipeBarRadius = document.getElementById("swipeBarRadius");
+const swipeBarRadiusVal = document.getElementById("swipeBarRadiusVal");
+const swipeBarDisplayToggle = document.getElementById("swipeBarDisplayToggle");
+const lockClockOpacity = document.getElementById("lockClockOpacity");
+const lockClockOpacityVal = document.getElementById("lockClockOpacityVal");
 const fullScreenToggle = document.getElementById("fullScreenToggle");
 
 const crea_pass = document.querySelector(".container_crea_pass");
@@ -275,7 +292,103 @@ phoneEdgeRadius.addEventListener("input", (e) => {
   const val = e.target.value;
   phoneEdgeRadiusVal.textContent = `${val}px`;
   document.documentElement.style.setProperty("--bg--border_radius_phone", `${val}px`);
+  localStorage.setItem("phoneEdgeRadius", val);
 });
+
+if (phoneEdgeColor) {
+  phoneEdgeColor.addEventListener("input", (e) => {
+    const val = e.target.value;
+    document.documentElement.style.setProperty("--bg--border_color_phone", val);
+    localStorage.setItem("phoneEdgeColor", val);
+    const preview = document.getElementById("phoneEdgeColorPreview");
+    const hex = document.getElementById("phoneEdgeColorHex");
+    if (preview) preview.style.background = val;
+    if (hex) hex.textContent = val.toUpperCase();
+  });
+}
+
+if (phoneBorderWidth) {
+  phoneBorderWidth.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (phoneBorderWidthVal) phoneBorderWidthVal.textContent = `${val}px`;
+    document.documentElement.style.setProperty("--bg--border_width_phone", `${val}px`);
+    localStorage.setItem("phoneBorderWidth", val);
+  });
+}
+
+if (swipeBarWidth) {
+  swipeBarWidth.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (swipeBarWidthVal) swipeBarWidthVal.textContent = `${val}px`;
+    document.documentElement.style.setProperty("--bg--swipe_width", `${val}px`);
+    localStorage.setItem("swipeBarWidth", val);
+  });
+}
+
+if (swipeBarHeight) {
+  swipeBarHeight.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (swipeBarHeightVal) swipeBarHeightVal.textContent = `${val}px`;
+    document.documentElement.style.setProperty("--bg--swipe_height", `${val}px`);
+    localStorage.setItem("swipeBarHeight", val);
+  });
+}
+
+if (swipeBarColor) {
+  swipeBarColor.addEventListener("input", (e) => {
+    const val = e.target.value;
+    document.documentElement.style.setProperty("--bg--swipe_color", val);
+    localStorage.setItem("swipeBarColor", val);
+    const preview = document.getElementById("swipeBarColorPreview");
+    const hex = document.getElementById("swipeBarColorHex");
+    if (preview) preview.style.background = val;
+    if (hex) hex.textContent = val.toUpperCase();
+  });
+}
+
+if (swipeBarBottom) {
+  swipeBarBottom.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (swipeBarBottomVal) swipeBarBottomVal.textContent = `${val}px`;
+    document.documentElement.style.setProperty("--bg--swipe_bottom", `${val}px`);
+    localStorage.setItem("swipeBarBottom", val);
+  });
+}
+
+if (swipeBarOpacity) {
+  swipeBarOpacity.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (swipeBarOpacityVal) swipeBarOpacityVal.textContent = val;
+    document.documentElement.style.setProperty("--bg--swipe_opacity", val);
+    localStorage.setItem("swipeBarOpacity", val);
+  });
+}
+
+if (swipeBarRadius) {
+  swipeBarRadius.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (swipeBarRadiusVal) swipeBarRadiusVal.textContent = `${val}px`;
+    document.documentElement.style.setProperty("--bg--swipe_radius", `${val}px`);
+    localStorage.setItem("swipeBarRadius", val);
+  });
+}
+
+if (swipeBarDisplayToggle) {
+  swipeBarDisplayToggle.addEventListener("change", (e) => {
+    const isChecked = e.target.checked;
+    document.documentElement.style.setProperty("--bg--swipe_display", isChecked ? "flex" : "none");
+    localStorage.setItem("swipeBarDisplay", isChecked ? "flex" : "none");
+  });
+}
+
+if (lockClockOpacity) {
+  lockClockOpacity.addEventListener("input", (e) => {
+    const val = e.target.value;
+    if (lockClockOpacityVal) lockClockOpacityVal.textContent = val;
+    document.documentElement.style.setProperty("--bg--lock_clock_opacity", val);
+    localStorage.setItem("lockClockOpacity", val);
+  });
+}
 
 function updateFullScreenUI(isFull) {
   if (isFull) {
@@ -624,6 +737,91 @@ if (saved_finger_local == 0) {
   finger_biometrics = box_pass2.classList.contains("off") ? 0 : 1;
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Restore display settings
+    const savedEdgeRadius = localStorage.getItem("phoneEdgeRadius");
+    if (savedEdgeRadius && phoneEdgeRadius) {
+        phoneEdgeRadius.value = savedEdgeRadius;
+        phoneEdgeRadiusVal.textContent = `${savedEdgeRadius}px`;
+        document.documentElement.style.setProperty("--bg--border_radius_phone", `${savedEdgeRadius}px`);
+    }
+
+    const savedEdgeColor = localStorage.getItem("phoneEdgeColor");
+    if (savedEdgeColor && phoneEdgeColor) {
+        phoneEdgeColor.value = savedEdgeColor;
+        document.documentElement.style.setProperty("--bg--border_color_phone", savedEdgeColor);
+        const preview = document.getElementById("phoneEdgeColorPreview");
+        const hex = document.getElementById("phoneEdgeColorHex");
+        if (preview) preview.style.background = savedEdgeColor;
+        if (hex) hex.textContent = savedEdgeColor.toUpperCase();
+    }
+
+    const savedBorderWidth = localStorage.getItem("phoneBorderWidth");
+    if (savedBorderWidth && phoneBorderWidth) {
+        phoneBorderWidth.value = savedBorderWidth;
+        if (phoneBorderWidthVal) phoneBorderWidthVal.textContent = `${savedBorderWidth}px`;
+        document.documentElement.style.setProperty("--bg--border_width_phone", `${savedBorderWidth}px`);
+    }
+
+    const savedSwipeWidth = localStorage.getItem("swipeBarWidth");
+    if (savedSwipeWidth && swipeBarWidth) {
+        swipeBarWidth.value = savedSwipeWidth;
+        if (swipeBarWidthVal) swipeBarWidthVal.textContent = `${savedSwipeWidth}px`;
+        document.documentElement.style.setProperty("--bg--swipe_width", `${savedSwipeWidth}px`);
+    }
+
+    const savedSwipeHeight = localStorage.getItem("swipeBarHeight");
+    if (savedSwipeHeight && swipeBarHeight) {
+        swipeBarHeight.value = savedSwipeHeight;
+        if (swipeBarHeightVal) swipeBarHeightVal.textContent = `${savedSwipeHeight}px`;
+        document.documentElement.style.setProperty("--bg--swipe_height", `${savedSwipeHeight}px`);
+    }
+
+    const savedSwipeColor = localStorage.getItem("swipeBarColor");
+    if (savedSwipeColor && swipeBarColor) {
+        swipeBarColor.value = savedSwipeColor;
+        document.documentElement.style.setProperty("--bg--swipe_color", savedSwipeColor);
+        const preview = document.getElementById("swipeBarColorPreview");
+        const hex = document.getElementById("swipeBarColorHex");
+        if (preview) preview.style.background = savedSwipeColor;
+        if (hex) hex.textContent = savedSwipeColor.toUpperCase();
+    }
+
+    const savedSwipeBottom = localStorage.getItem("swipeBarBottom");
+    if (savedSwipeBottom && swipeBarBottom) {
+        swipeBarBottom.value = savedSwipeBottom;
+        if (swipeBarBottomVal) swipeBarBottomVal.textContent = `${savedSwipeBottom}px`;
+        document.documentElement.style.setProperty("--bg--swipe_bottom", `${savedSwipeBottom}px`);
+    }
+
+    const savedSwipeOpacity = localStorage.getItem("swipeBarOpacity");
+    if (savedSwipeOpacity && swipeBarOpacity) {
+        swipeBarOpacity.value = savedSwipeOpacity;
+        if (swipeBarOpacityVal) swipeBarOpacityVal.textContent = savedSwipeOpacity;
+        document.documentElement.style.setProperty("--bg--swipe_opacity", savedSwipeOpacity);
+    }
+
+    const savedSwipeRadius = localStorage.getItem("swipeBarRadius");
+    if (savedSwipeRadius && swipeBarRadius) {
+        swipeBarRadius.value = savedSwipeRadius;
+        if (swipeBarRadiusVal) swipeBarRadiusVal.textContent = `${savedSwipeRadius}px`;
+        document.documentElement.style.setProperty("--bg--swipe_radius", `${savedSwipeRadius}px`);
+    }
+
+    const savedSwipeDisplay = localStorage.getItem("swipeBarDisplay");
+    if (savedSwipeDisplay && swipeBarDisplayToggle) {
+        swipeBarDisplayToggle.checked = savedSwipeDisplay === "flex";
+        document.documentElement.style.setProperty("--bg--swipe_display", savedSwipeDisplay);
+    }
+
+    const savedLockClockOpacity = localStorage.getItem("lockClockOpacity");
+    if (savedLockClockOpacity && lockClockOpacity) {
+        lockClockOpacity.value = savedLockClockOpacity;
+        if (lockClockOpacityVal) lockClockOpacityVal.textContent = savedLockClockOpacity;
+        document.documentElement.style.setProperty("--bg--lock_clock_opacity", savedLockClockOpacity);
+    }
+});
+
 let blur_app = 0;
 let blurCustomOpeing = localStorage.getItem("blurAllApp") || 20;
 
@@ -810,6 +1008,7 @@ function setHomeVideoWallpaper(file) {
 function setBothWallpapers(imageUrl) {
   setHomeWallpaper(imageUrl);
   setLockWallpaper(imageUrl);
+  hideWallpaperPopup();
 }
 
 function showWallpaperPopup(imageUrl, button, isVideo = false) {
@@ -2220,9 +2419,85 @@ function addLottiePreviewEvents() {
 
 // Tự động khởi động khi trang sẵn sàng
 
-function showIconPopup() {
-  showPopup_open_close(app4_icon);
-}
+window.showIconPopup = function showIconPopup(boxNum) {
+  // If boxNum is a string or number, it's called from a long press on an app icon
+  if ((typeof boxNum === "string" || typeof boxNum === "number") && boxNum !== "") {
+    const boxId = `box${boxNum}`;
+    const customIconPopup = document.getElementById("customIconPopup");
+    const customIconPopupCard = document.getElementById("customIconPopupCard");
+    const iconFileInput = document.getElementById("iconFileInput");
+
+    // Clear previous input
+    iconFileInput.value = "";
+
+    customIconPopup.style.display = "flex";
+    // Slight delay to allow CSS to apply display flex before transitioning
+    setTimeout(() => {
+        customIconPopup.classList.add("show_alert");
+        if (customIconPopupCard) {
+            customIconPopupCard.style.transform = "scale(1)";
+            customIconPopupCard.style.opacity = "1";
+        }
+    }, 10);
+
+    window.closeCustomIconPopup = function() {
+        customIconPopup.classList.remove("show_alert");
+        if (customIconPopupCard) {
+            customIconPopupCard.style.transform = "scale(0.9)";
+            customIconPopupCard.style.opacity = "0";
+        }
+        setTimeout(() => {
+            customIconPopup.style.display = "none";
+        }, 300); // Wait for transition
+    };
+
+    // Handle File selection
+    iconFileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const base64 = event.target.result;
+                
+                // Save to localStorage
+                const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                savedIcons[boxId] = base64;
+                localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                
+                // Apply immediately
+                if (typeof window.restoreIconPack === "function") {
+                    window.restoreIconPack();
+                } else if (typeof applyCustomIcons === "function") {
+                    applyCustomIcons();
+                }
+                
+                if (window.closeCustomIconPopup) window.closeCustomIconPopup();
+                if (typeof tb_system === "function") tb_system("تم تغيير الأيقونة بنجاح");
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+    const btnResetIcon = document.getElementById("btn_reset_icon");
+    if (btnResetIcon) {
+        btnResetIcon.onclick = () => {
+             const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+             delete savedIcons[boxId];
+             localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+             if (typeof window.restoreIconPack === "function") {
+                 window.restoreIconPack();
+             } else if (typeof applyCustomIcons === "function") {
+                 applyCustomIcons();
+             }
+             if (window.closeCustomIconPopup) window.closeCustomIconPopup();
+             if (typeof tb_system === "function") tb_system("تم الاستعادة بنجاح");
+        };
+    }
+
+  } else {
+    showPopup_open_close(app4_icon);
+  }
+};
 function hideIconPopup() {
   hidePopup_open_close(app4_icon);
 }
@@ -3118,6 +3393,11 @@ slider.addEventListener("input", () => {
 });
 
 function setIconAndBackgroundGradient2(boxSelector, imageUrl) {
+  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+  if (savedIcons[boxSelector]) {
+      imageUrl = savedIcons[boxSelector];
+  }
+
   const box = document.getElementById(boxSelector);
   if (!box) return;
 
@@ -3161,6 +3441,11 @@ function setIconAndBackgroundGradient2(boxSelector, imageUrl) {
 }
 
 function setIconAndBackgroundGradient(boxSelector, imageUrl) {
+  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+  if (savedIcons[boxSelector]) {
+      imageUrl = savedIcons[boxSelector];
+  }
+
   const box = document.getElementById(boxSelector);
   if (!box) return;
 
@@ -3889,3 +4174,88 @@ function preivewAnimationControlsCenter(e) {
 
   closeControlsCenter();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const iconFolderInput = document.getElementById("iconFolderInput");
+    if (iconFolderInput) {
+        iconFolderInput.addEventListener("change", (e) => {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+            let updated = false;
+
+            const promises = Array.from(files).map((file) => {
+                return new Promise((resolve) => {
+                    if (!file.type.startsWith("image/")) {
+                        resolve();
+                        return;
+                    }
+                    // Clean filename, e.g., "الحاسبة.png" -> "الحاسبة"
+                    const fileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                    const fileNameWithoutExtLower = fileName.toLowerCase().trim();
+                    const fullFileNameLower = file.name.toLowerCase().trim();
+                    
+                    const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
+                    
+                    // Find if there is a matching app name
+                    let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === fileNameWithoutExtLower) : null;
+                    
+                    if (!app && window.customApps) {
+                        // Check against keywords (like "calculator.png")
+                        app = window.customApps.find(a => {
+                            const kw = keywords[a.id];
+                            if (kw) {
+                                const kwClean = kw.substring(0, kw.lastIndexOf('.')).toLowerCase().trim() || kw.toLowerCase().trim();
+                                return kwClean === fileNameWithoutExtLower || kw === fullFileNameLower;
+                            }
+                            return false;
+                        });
+                    }
+
+                    if (app) {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            savedIcons[app.id] = ev.target.result;
+                            updated = true;
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        resolve();
+                    }
+                });
+            });
+
+            Promise.all(promises).then(() => {
+                if (updated) {
+                    localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                    if (typeof applyCustomIcons === "function") {
+                        applyCustomIcons();
+                    }
+                    if (typeof tb_system === "function") {
+                        tb_system("تم اختيار الأيقونات بنجاح");
+                    }
+                } else {
+                     if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة لأسماء التطبيقات");
+                }
+            });
+        });
+    }
+
+    const open3dPhoneBtn = document.getElementById("open_3d_phone_btn");
+    const phone3dPopup = document.getElementById("phone3dPopup");
+    
+    if (open3dPhoneBtn && phone3dPopup) {
+        open3dPhoneBtn.addEventListener("click", () => {
+            phone3dPopup.style.display = "block";
+        });
+    }
+});
+
+window.close3DPhonePopup = function() {
+    const phone3dPopup = document.getElementById("phone3dPopup");
+    if (phone3dPopup) {
+        phone3dPopup.style.display = "none";
+    }
+};

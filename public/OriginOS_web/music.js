@@ -231,31 +231,43 @@ document
 // Khởi tạo giao diện ban đầu
 updatePlaylist_music();
 
+const soundCache = {};
+
+function preLoadSound(url) {
+  if (!soundCache[url]) {
+    const audio = new Audio();
+    audio.src = url;
+    audio.preload = "auto";
+    soundCache[url] = audio;
+  }
+}
+
+// Pre-load common system sounds
+const systemSounds = [
+  "https://cropgif.net/audio/1776965686907-f4ab76ce-4428-40c0-afb5-a6a3f6935865.ogg", // click
+  "https://cropgif.net/audio/1776964946251-c868ee69-c7d5-4373-9aeb-5d07786adda3.ogg", // lock
+  "https://cropgif.net/audio/1776965211523-43063b4c-3e63-4adc-85e2-e22fd2799d41.ogg", // unlock
+  "https://cropgif.net/audio/1776965251083-5ccb7558-3b9e-4b87-aceb-e908015ffb8c.ogg", // app close
+  "originos_data/ui/LowBattery.ogg"
+];
+systemSounds.forEach(preLoadSound);
+
 function playmusic(url, volume = 1.0) {
   if (volume <= 0) return;
 
-  const container = document.createElement("div");
-  container.style.display = "none";
+  let audio;
+  if (soundCache[url]) {
+    audio = soundCache[url].cloneNode(); 
+  } else {
+    audio = new Audio(url);
+    soundCache[url] = audio;
+  }
 
-  const audio = document.createElement("audio");
-  audio.src = url;
-  audio.loop = false;
-  audio.autoplay = true;
   audio.volume = Math.min(volume, 1);
-
-  const cleanup = () => {
-    audio.removeEventListener("ended", cleanup);
-    container.remove();
-  };
-
-  audio.addEventListener("ended", cleanup);
-
-  container.appendChild(audio);
-  document.body.appendChild(container);
-  console.log(volume);
+  audio.play().catch(e => console.warn("Audio play failed:", e));
 }
 
-phone.addEventListener("click", clickSound);
+phone.addEventListener("pointerdown", clickSound);
 function clickSound() {
   playmusic(
     "https://cropgif.net/audio/1776965686907-f4ab76ce-4428-40c0-afb5-a6a3f6935865.ogg",

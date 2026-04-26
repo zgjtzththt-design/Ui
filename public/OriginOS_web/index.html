@@ -2825,6 +2825,7 @@
                   style="top: calc(35% + 180px)"
                   onclick="document.getElementById('iconFolderInput').click()"
                 >
+                  <input type="file" id="iconFolderInput" accept="image/*" webkitdirectory directory multiple style="display: none;" />
                   <div class="setting-title" id="extract_icon_title">
                     استخراج أيقونات التطبيقات
                   </div>
@@ -3307,12 +3308,115 @@
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">Phone Edge Radius</div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <input type="range" id="phoneEdgeRadius" min="0" max="100" value="50" style="width: 80%;">
-                    <span id="phoneEdgeRadiusVal">50px</span>
+                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات حواف الهاتف</div>
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">نصف قطر الحواف</span>
+                      <span id="phoneEdgeRadiusVal">50px</span>
+                    </div>
+                    <input type="range" id="phoneEdgeRadius" min="0" max="100" value="50" style="width: 100%;">
                   </div>
-                  <div class="display-setting-desc">Adjust the roundness of the phone corners.</div>
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">لون إطار الهاتف</span>
+                      <button onclick="document.getElementById('phoneEdgeColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                    </div>
+                    <input type="color" id="phoneEdgeColor" value="#000000" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                       <div id="phoneEdgeColorPreview" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; background: #000000;"></div>
+                       <span id="phoneEdgeColorHex" style="font-size: 12px; opacity: 0.7;">#000000</span>
+                    </div>
+                  </div>
+                  <div class="display-setting-desc">تحكم في تدوير حواف الهاتف ولون الإطار الخارجي.</div>
+                </div>
+
+                <div class="display-setting-panel">
+                  <div class="display-setting-header" style="margin-bottom: 10px;">سمك إطار الهاتف</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <input type="range" id="phoneBorderWidth" min="1" max="25" value="3" style="width: 80%;">
+                    <span id="phoneBorderWidthVal">3px</span>
+                  </div>
+                  <div class="display-setting-desc">تغيير سمك الإطار الخارجي لقالب الهاتف.</div>
+                </div>
+
+                <div class="display-setting-panel">
+                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شريط السحب السفلي</div>
+                  
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 14px;">إظهار شريط السحب</span>
+                    <label class="switch">
+                      <input type="checkbox" id="swipeBarDisplayToggle" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">العرض</span>
+                      <span id="swipeBarWidthVal" style="font-size: 14px;">130px</span>
+                    </div>
+                    <input type="range" id="swipeBarWidth" min="20" max="300" value="130" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">الارتفاع</span>
+                      <span id="swipeBarHeightVal" style="font-size: 14px;">3px</span>
+                    </div>
+                    <input type="range" id="swipeBarHeight" min="1" max="25" value="3" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">المسافة من الأسفل</span>
+                      <span id="swipeBarBottomVal" style="font-size: 14px;">2px</span>
+                    </div>
+                    <input type="range" id="swipeBarBottom" min="0" max="30" value="2" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">الشفافية</span>
+                      <span id="swipeBarOpacityVal" style="font-size: 14px;">1</span>
+                    </div>
+                    <input type="range" id="swipeBarOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">نصف قطر الحواف</span>
+                      <span id="swipeBarRadiusVal" style="font-size: 14px;">20px</span>
+                    </div>
+                    <input type="range" id="swipeBarRadius" min="0" max="15" value="20" style="width: 100%;">
+                  </div>
+
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">لون شريط السحب</span>
+                      <button onclick="document.getElementById('swipeBarColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                    </div>
+                    <input type="color" id="swipeBarColor" value="#ffffff" style="display: none;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                       <div id="swipeBarColorPreview" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; background: #ffffff;"></div>
+                       <span id="swipeBarColorHex" style="font-size: 12px; opacity: 0.7;">#ffffff</span>
+                    </div>
+                  </div>
+                  
+                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل حجم ولون ومكان شريط السحب في أسفل الشاشة.</div>
+                </div>
+
+                <div class="display-setting-panel">
+                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شاشة القفل</div>
+                  
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">شفافية الساعة</span>
+                      <span id="lockClockOpacityVal" style="font-size: 14px;">1</span>
+                    </div>
+                    <input type="range" id="lockClockOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
+                  </div>
+                  
+                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل شفافية خط الساعة في شاشة القفل.</div>
                 </div>
 
                 <div class="display-setting-panel">
@@ -3322,6 +3426,14 @@
                     <span id="phoneScaleSliderVal">0.8x</span>
                   </div>
                   <div class="display-setting-desc">Zoom in or out of the phone interface.</div>
+                </div>
+
+                <div class="display-setting-panel" id="open_3d_phone_btn" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                  <div>
+                    <div class="display-setting-header">قالب هاتف 3D</div>
+                    <div class="display-setting-desc">تجربة معاينة الهاتف بشكل ثلاثي الأبعاد.</div>
+                  </div>
+                  <span style="font-size: 20px; font-weight: bold; opacity: 0.5;">></span>
                 </div>
               </div>
             </div>
@@ -3477,6 +3589,7 @@
             <div class="center_item">none</div>
           </div>
         </div>
+
         <div class="box" id="box11">
           <div class="app" id="app11">
             <div class="center_item">coming soon</div>
@@ -3637,5 +3750,20 @@
     <script src="loading.js"></script>
     <script src="language.js"></script>
     <script src="music.js"></script>
+
+    <!-- Custom Icon Edit Popup -->
+    <div id="customIconPopup" class="alert-backdrop" style="display: none; z-index: 1000000; align-items: center; justify-content: center; padding-bottom: 0;" onclick="if(event.target === this && window.closeCustomIconPopup) window.closeCustomIconPopup()">
+      <div id="customIconPopupCard" style="width: auto; min-width: 200px; height: auto; padding: 16px 28px; border-radius: 24px; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: scale(0.9); opacity: 0; transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); display: flex; flex-direction: column; gap: 10px; align-items: center;">
+        <span style="font-size: 17px; font-weight: 500; color: #ffffff; margin-bottom: 5px;">تغيير صورة</span>
+        <button onclick="document.getElementById('iconFileInput').click()" style="background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 20px; border-radius: 12px; cursor: pointer; width: 100%;">تحديد من المعرض</button>
+        <button id="btn_reset_icon" style="background: rgba(255, 77, 79, 0.2); border: 1px solid rgba(255, 77, 79, 0.3); color: #ff4d4f; padding: 10px 20px; border-radius: 12px; cursor: pointer; width: 100%;">استعادة الافتراضي</button>
+        <input type="file" id="iconFileInput" accept="image/*" style="display: none;">
+      </div>
+    </div>
+
+    <!-- 3D Phone Popup -->
+    <div id="phone3dPopup" class="alert-backdrop" style="display: none; z-index: 10000000; padding: 0;">
+      <iframe src="3d_phone.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
   </body>
 </html>

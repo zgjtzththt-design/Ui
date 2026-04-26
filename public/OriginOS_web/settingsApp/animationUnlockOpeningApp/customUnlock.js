@@ -47,8 +47,8 @@ const allAnimUnlock = {
     box8: "translateX(-190px) translateY(150px) scale(2.3)",
     box9: "translateX(-100px) translateY(60px) scale(2.3)",
     box10: "translateX(-110px) translateY(-40px) scale(2.3)",
-    box12: "translateX(100px) translateY(20px) scale(2.3)",
     box11: "translateX(0px) translateY(-250px) scale(2.5)",
+    box12: "translateX(100px) translateY(20px) scale(2.3)",
   },
   anim2: {
     box1: "translateX(0px) translateY(0px) scale(0.2)",
@@ -75,8 +75,8 @@ const allAnimUnlock = {
     box8: "translateX(62px) translateY(-102px) scale(0.38)",
     box9: "translateX(42px) translateY(-60px) scale(0.38)",
     box10: "translateX(42px) translateY(-15px) scale(0.38)",
-    box12: "translateX(-42px) translateY(-35px) scale(0.38)",
     box11: "translateX(0px) translateY(150px) scale(0.38)",
+    box12: "translateX(-42px) translateY(-35px) scale(0.38)",
   },
   anim4: {
     box1: "scale(1)",

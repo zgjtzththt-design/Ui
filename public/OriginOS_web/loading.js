@@ -6,7 +6,7 @@ setTimeout(() => {
         removeWithFade(loading);
         
         if (typeof powerbtn !== 'undefined') {
-            powerbtn.addEventListener('click', powerbtnEvent);
+            powerbtn.addEventListener('pointerdown', powerbtnEvent);
         }
 
         loading.style.display = "none";

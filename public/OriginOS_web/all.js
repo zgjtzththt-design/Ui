@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Load display settings from localStorage
+    const savedEdgeRadius = localStorage.getItem("phoneEdgeRadius");
+    if (savedEdgeRadius) {
+        document.documentElement.style.setProperty("--bg--border_radius_phone", `${savedEdgeRadius}px`);
+    }
+
+    const savedEdgeColor = localStorage.getItem("phoneEdgeColor");
+    if (savedEdgeColor) {
+        document.documentElement.style.setProperty("--bg--border_color_phone", savedEdgeColor);
+    }
+
+    const savedBorderWidth = localStorage.getItem("phoneBorderWidth");
+    if (savedBorderWidth) {
+        document.documentElement.style.setProperty("--bg--border_width_phone", `${savedBorderWidth}px`);
+    }
+
+    const savedSwipeWidth = localStorage.getItem("swipeBarWidth");
+    if (savedSwipeWidth) {
+        document.documentElement.style.setProperty("--bg--swipe_width", `${savedSwipeWidth}px`);
+    }
+
+    const savedSwipeHeight = localStorage.getItem("swipeBarHeight");
+    if (savedSwipeHeight) {
+        document.documentElement.style.setProperty("--bg--swipe_height", `${savedSwipeHeight}px`);
+    }
+
+    const savedSwipeColor = localStorage.getItem("swipeBarColor");
+    if (savedSwipeColor) {
+        document.documentElement.style.setProperty("--bg--swipe_color", savedSwipeColor);
+    }
+
     setTimeout(() => {
         document.body.classList.remove("preload");
         const dev_name = document.getElementById("name_dev");
@@ -72,6 +103,8 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
+  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777092550/ckbddbbdzqeybzmznbvt.jpg");
+  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777092550/ckbddbbdzqeybzmznbvt.jpg");
   window.applyWallpapers();
 });
 
@@ -466,6 +499,7 @@ const handlers = {
 };
 
 let appPressTarget = null;
+let appPressTimer = null;
 let appPressStartX, appPressStartY;
 
 ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"].forEach(
@@ -479,9 +513,29 @@ let appPressStartX, appPressStartY;
       appPressTarget = num;
       appPressStartX = e.clientX;
       appPressStartY = e.clientY;
+
+      // Prevent system context menu on long press on this element
+      clicke.oncontextmenu = (e) => e.preventDefault();
+
+      appPressTimer = setTimeout(() => {
+        if (appPressTarget && window.showIconPopup) {
+            // Apply bounce animation
+            if (box) {
+               box.classList.add("bouncing");
+               setTimeout(() => {
+                 box.classList.remove("bouncing");
+               }, 300); // Wait for animation to finish
+            }
+            window.showIconPopup(appPressTarget);
+            appPressTarget = null;
+        }
+      }, 700);
     });
 
     clicke.addEventListener("pointerup", () => {
+      clearTimeout(appPressTimer);
+      if(!appPressTarget) return;
+
       if (currentOpeningBtn) {
         currentOpeningBtn.style.transition = `all ${time_opening_app}s ${cubicScaleClosing}`;
         currentOpeningBtn.classList.remove("open");
@@ -532,6 +586,17 @@ let appPressStartX, appPressStartY;
           }
         }, multipleClickAppTime);
       }
+      appPressTarget = null;
+    });
+
+    clicke.addEventListener("pointercancel", () => {
+      clearTimeout(appPressTimer);
+      appPressTarget = null;
+    });
+
+    clicke.addEventListener("pointerleave", () => {
+      clearTimeout(appPressTimer);
+      appPressTarget = null;
     });
   }
 );
@@ -544,7 +609,7 @@ window.addEventListener("beforeunload", () => {
 window.addEventListener("pointermove", (e) => {
   if (appPressTarget) {
      const dist = Math.sqrt(Math.pow(e.clientX - appPressStartX, 2) + Math.pow(e.clientY - appPressStartY, 2));
-     if (dist > 10) {
+     if (dist > 30) {
         appPressTarget = null;
      }
   }
@@ -2520,7 +2585,7 @@ if (window.visualViewport) {
 }
 
 // Custom Icon Pack Logic
-const customApps = [
+window.customApps = [
   { id: "box1", name: "الحاسبة", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png" },
   { id: "box2", name: "مدير الملفات", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png" },
   { id: "box3", name: "الموسيقى", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png" },
@@ -2565,12 +2630,6 @@ function updateAppKeyword(id, keyword) {
   }
 }
 
-function icon_hyperos3() {
-  localStorage.setItem("selected_icon_pack", "hyperos3");
-  updateIconBorder("hyperos3_icon");
-  applyCustomIcons(true);
-}
-
 function closeCustomIconModal() {
   const modal = document.getElementById("customIconModal");
   if (typeof hidePopup_open_close === "function") {
@@ -2581,6 +2640,11 @@ function closeCustomIconModal() {
 }
 
 function setIconAndBackgroundGradient(boxId, imageUrl) {
+  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+  if (savedIcons[boxId]) {
+      imageUrl = savedIcons[boxId];
+  }
+
   const box = document.getElementById(boxId) || document.querySelector(boxId);
   if (!box) return;
 
@@ -2637,20 +2701,11 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
 
 function applyCustomIcons(forceAll = false) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-  const pack = localStorage.getItem("selected_icon_pack");
   
-  customApps.forEach((app) => {
-    // Priority: 1. Locally saved custom icon, 2. Default icon (if pack is hyperos3 or forceAll)
-    if (savedIcons[app.id]) {
-        setIconAndBackgroundGradient(app.id, savedIcons[app.id]);
-    } else {
-        setIconAndBackgroundGradient(app.id, app.defaultIcon);
-    }
+  // Apply saved custom icons
+  Object.keys(savedIcons).forEach((appId) => {
+      setIconAndBackgroundGradient(appId, savedIcons[appId]);
   });
-
-  if (forceAll) {
-    if (typeof tb_system === "function") tb_system("تم تطبيق حزمة Hyper OS 3");
-  }
 }
 
 function updateIconBorder(activeId) {
@@ -2664,15 +2719,18 @@ function updateIconBorder(activeId) {
 // Apply custom icons on load
 document.addEventListener("DOMContentLoaded", () => {
     let pack = localStorage.getItem("selected_icon_pack");
-    if (!pack || pack !== "hyperos3") {
+    if (!pack) {
         pack = "hyperos3";
         localStorage.setItem("selected_icon_pack", "hyperos3");
     }
     
     // Use a small timeout to ensure DOM and specific app boxes are fully rendered
     setTimeout(() => {
-        applyCustomIcons();
-        updateIconBorder("hyperos3_icon");
+        if (typeof window.restoreIconPack === "function") {
+            window.restoreIconPack();
+        }
+        applyCustomIcons(); // custom extracted icons go on top
+        updateIconBorder(`${pack}_icon`);
     }, 150);
 });
 
