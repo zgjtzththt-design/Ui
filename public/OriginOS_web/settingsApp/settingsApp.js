@@ -820,6 +820,72 @@ document.addEventListener("DOMContentLoaded", () => {
         if (lockClockOpacityVal) lockClockOpacityVal.textContent = savedLockClockOpacity;
         document.documentElement.style.setProperty("--bg--lock_clock_opacity", savedLockClockOpacity);
     }
+
+    // Notch settings restoration
+    const notchWidth = document.getElementById("notchWidth");
+    const notchWidthVal = document.getElementById("notchWidthVal");
+    const notchHeight = document.getElementById("notchHeight");
+    const notchHeightVal = document.getElementById("notchHeightVal");
+    const notchRadius = document.getElementById("notchRadius");
+    const notchRadiusVal = document.getElementById("notchRadiusVal");
+
+    const savedNotchWidth = localStorage.getItem("notchWidth");
+    if (savedNotchWidth && notchWidth) {
+        notchWidth.value = savedNotchWidth;
+        if (notchWidthVal) notchWidthVal.textContent = savedNotchWidth;
+        document.documentElement.style.setProperty("--bg--notch-width", `${savedNotchWidth}px`);
+    }
+
+    const savedNotchHeight = localStorage.getItem("notchHeight");
+    if (savedNotchHeight && notchHeight) {
+        notchHeight.value = savedNotchHeight;
+        if (notchHeightVal) notchHeightVal.textContent = savedNotchHeight;
+        document.documentElement.style.setProperty("--bg--notch-height", `${savedNotchHeight}px`);
+    }
+
+    const savedNotchRadius = localStorage.getItem("notchRadius");
+    if (savedNotchRadius && notchRadius) {
+        notchRadius.value = savedNotchRadius;
+        if (notchRadiusVal) notchRadiusVal.textContent = `${savedNotchRadius}px`;
+        document.documentElement.style.setProperty("--bg--notch-radius", `${savedNotchRadius}px`);
+    }
+});
+
+// Notch event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    const notchWidth = document.getElementById("notchWidth");
+    const notchWidthVal = document.getElementById("notchWidthVal");
+    const notchHeight = document.getElementById("notchHeight");
+    const notchHeightVal = document.getElementById("notchHeightVal");
+    const notchRadius = document.getElementById("notchRadius");
+    const notchRadiusVal = document.getElementById("notchRadiusVal");
+
+    if (notchWidth) {
+        notchWidth.addEventListener("input", (e) => {
+            const val = e.target.value;
+            document.documentElement.style.setProperty("--bg--notch-width", `${val}px`);
+            if (notchWidthVal) notchWidthVal.textContent = `${val}px`;
+            localStorage.setItem("notchWidth", val);
+        });
+    }
+
+    if (notchHeight) {
+        notchHeight.addEventListener("input", (e) => {
+            const val = e.target.value;
+            document.documentElement.style.setProperty("--bg--notch-height", `${val}px`);
+            if (notchHeightVal) notchHeightVal.textContent = `${val}px`;
+            localStorage.setItem("notchHeight", val);
+        });
+    }
+
+    if (notchRadius) {
+        notchRadius.addEventListener("input", (e) => {
+            const val = e.target.value;
+            document.documentElement.style.setProperty("--bg--notch-radius", `${val}px`);
+            if (notchRadiusVal) notchRadiusVal.textContent = `${val}px`;
+            localStorage.setItem("notchRadius", val);
+        });
+    }
 });
 
 let blur_app = 0;
@@ -1617,6 +1683,7 @@ close_controls_main.addEventListener("click", () => {
 
 const btnThin = document.getElementById("btn_main");
 const btnBold = document.getElementById("btn_font");
+const btnGlassClock = document.getElementById("btn_glass_clock");
 
 btnThin.addEventListener("click", () => {
   clock_preview.style.fontWeight = "300";
@@ -1632,14 +1699,40 @@ btnBold.addEventListener("click", () => {
   localStorage.setItem("font_weight_lock", "600");
 });
 
+btnGlassClock.addEventListener("click", () => {
+  clock_preview.classList.toggle("glassy-clock");
+  lockclock.classList.toggle("glassy-clock");
+  
+  if (clock_preview.classList.contains("glassy-clock")) {
+    localStorage.setItem("clock_glass_saved", "1");
+  } else {
+    localStorage.removeItem("clock_glass_saved");
+  }
+});
+
 document.querySelectorAll(".font-button").forEach((btn) => {
   btn.addEventListener("click", () => {
     const font = btn.getAttribute("data-font");
+    const style = btn.getAttribute("data-style") || "default";
     const min = parseInt(btn.getAttribute("data-min")) || 40;
     const max = parseInt(btn.getAttribute("data-max")) || 150;
 
     clock_preview.style.fontFamily = font;
     lockclock.style.fontFamily = font;
+
+    if (style === "hollow") {
+      clock_preview.classList.add("hollow-style");
+      lockclock.classList.add("hollow-style");
+      localStorage.setItem("clock_style_saved", "hollow");
+    } else {
+      clock_preview.classList.remove("hollow-style");
+      lockclock.classList.remove("hollow-style");
+      localStorage.setItem("clock_style_saved", "default");
+    }
+    
+    // Trigger update immediately
+    if (typeof updateTime === "function") updateTime();
+    if (typeof updateTime2 === "function") updateTime2();
 
     sizeSlider.min = min;
     sizeSlider.max = max;
@@ -2157,6 +2250,11 @@ function showHomeApp() {
     .getElementById("dock-bar")
     .addEventListener("click", handleDockBarToggle);
 
+  // Dock Glass Toggle
+  document
+    .getElementById("dock-glass")
+    .addEventListener("click", handleDockGlassToggle);
+
   // Dark Mode Toggle
   document
     .getElementById("dark-mode")
@@ -2178,6 +2276,11 @@ function hideHomeApp() {
   document
     .getElementById("dock-bar")
     .removeEventListener("click", handleDockBarToggle);
+
+  document
+    .getElementById("dock-glass")
+    .removeEventListener("click", handleDockGlassToggle);
+
   document
     .getElementById("dark-mode")
     .removeEventListener("click", handleDarkModeToggle);
@@ -2225,6 +2328,20 @@ function handleDockBarToggle() {
   } else {
     document.querySelector(".khayapp").style.display = "none";
     localStorage.setItem("dock_bar_saved", 1);
+  }
+}
+
+function handleDockGlassToggle() {
+  this.classList.toggle("active");
+  const isGlass = this.classList.contains("active");
+  const khayapp = document.querySelector(".khayapp");
+
+  if (isGlass) {
+    khayapp.classList.add("glassy");
+    localStorage.setItem("dock_glass_saved", 1);
+  } else {
+    khayapp.classList.remove("glassy");
+    localStorage.removeItem("dock_glass_saved");
   }
 }
 

@@ -131,6 +131,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const savedSize1 = localStorage.getItem("fontSize");
+    if (localStorage.getItem("clock_glass_saved")) {
+        if (typeof clock_preview !== "undefined" && clock_preview) clock_preview.classList.add("glassy-clock");
+        if (typeof lockclock !== "undefined" && lockclock) lockclock.classList.add("glassy-clock");
+        const btnGlassClock = document.getElementById("btn_glass_clock");
+        if (btnGlassClock) btnGlassClock.classList.add("active");
+    }
     if (savedSize1) {
         clock_preview.style.fontSize = `${savedSize1}px`;
         lockclock.style.fontSize = `${savedSize1}px`;
@@ -237,9 +243,16 @@ window.addEventListener("DOMContentLoaded", () => {
         btnBlue.style.border = "4px solid #f65268";
     }
 
-    if (localStorage.getItem("dock_bar_saved")) {
+    if (localStorage.getItem("dock_bar_saved")) { // init
         document.getElementById("dock-bar").classList.remove("active");
         document.querySelector(".khayapp").style.display = "none";
+    }
+
+    if (localStorage.getItem("dock_glass_saved")) {
+        const glassToggle = document.getElementById("dock-glass");
+        if (glassToggle) glassToggle.classList.add("active");
+        const khayapp = document.querySelector(".khayapp");
+        if (khayapp) khayapp.classList.add("glassy");
     }
 
     if (localStorage.getItem("blur_App_saved")) {

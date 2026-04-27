@@ -103,8 +103,8 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
-  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777092550/ckbddbbdzqeybzmznbvt.jpg");
-  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777092550/ckbddbbdzqeybzmznbvt.jpg");
+  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg");
+  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg");
   window.applyWallpapers();
 });
 
@@ -136,21 +136,50 @@ function updateTime() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
-  document.getElementById("lockclock").textContent = `${hours}:${minutes}`;
-  document.getElementById("lockclock2").textContent = `${hours}:${minutes}`;
+
+  const isHollow = localStorage.getItem("clock_style_saved") === "hollow";
+
+  const render = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (isHollow && id === "lockclock") {
+      el.classList.add("hollow-style");
+      el.innerHTML = `<span class="hours">${hours}</span><span class="minutes">${minutes}</span>`;
+    } else {
+      if (id === "lockclock") el.classList.remove("hollow-style");
+      el.textContent = `${hours}:${minutes}`;
+    }
+  };
+
+  render("lockclock");
+  render("lockclock2");
 }
 function updateTime2() {
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
-  document.getElementById(
-    "lock-screen-preview"
-  ).textContent = `${hours}:${minutes}`;
-  document.getElementById("clock_preview").textContent = `${hours}:${minutes}`;
+
+  const isHollow = localStorage.getItem("clock_style_saved") === "hollow";
+  const clockPreview = document.getElementById("clock_preview");
+  const lockScreenPreview = document.getElementById("lock-screen-preview");
+
+  if (clockPreview) {
+    if (isHollow) {
+      clockPreview.classList.add("hollow-style");
+      clockPreview.innerHTML = `<span class="hours">${hours}</span><span class="minutes">${minutes}</span>`;
+    } else {
+      clockPreview.classList.remove("hollow-style");
+      clockPreview.textContent = `${hours}:${minutes}`;
+    }
+  }
+
+  if (lockScreenPreview) {
+    lockScreenPreview.textContent = `${hours}:${minutes}`;
+  }
 }
 
 updateTime();
-setInterval(updateTime, 10000);
+setInterval(updateTime, 1000);
 
 const boxes = {
   box1: document.getElementById("box1"),

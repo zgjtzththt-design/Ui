@@ -171,7 +171,10 @@
     </div>
     <div class="phone">
       <div id="loading-screen" style="z-index: 9999999;">
-        <img src="originos_data/Origin_os_logo.png" style="width: 100%; height: 100%; object-fit: contain; background: black;" alt="Boot Animation">
+        <div class="glow-effect"></div>
+        <div class="image-container">
+          <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777243249/b3x4yrgkedfzdp6j1ty0.png" alt="Boot Animation">
+        </div>
         <p id="lolhaha" style="display: none;">tiktok: @sungsamtech - @._naq.</p>
       </div>
       <div id="systemToast" class="system-toast"></div>
@@ -1960,10 +1963,10 @@
                 <div class="button-row" id="button-row">
                   <div
                     class="img-button active"
-                    data-img="originos_data/wallpaper_4.png"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg"
                   >
                     <img
-                      src="originos_data/wallpaper_4.png"
+                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg"
                       alt="1"
                     />
                   </div>
@@ -2439,6 +2442,7 @@
                     >
                       <button id="btn_main">Thin</button>
                       <button id="btn_font">Bold</button>
+                      <button id="btn_glass_clock">Glassy</button>
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -2549,6 +2553,10 @@
                         <div class="font-button" style="font-family: 'Lato'" data-font="'Lato'" data-min="70" data-max="110">12</div>
                         <div class="font-button" style="font-family: 'Rubik'" data-font="'Rubik'" data-min="70" data-max="110">12</div>
                         <div class="font-button" style="font-family: 'Oswald'" data-font="'Oswald'" data-min="70" data-max="110">12</div>
+                        <div class="font-button hollow-style-btn" style="font-family: 'Oswald'; display: flex; align-items: center; justify-content: center;" data-font="'Oswald'" data-style="hollow" data-min="70" data-max="110">
+                          <span style="color: transparent; -webkit-text-stroke: 1px currentColor; margin-right: 2px;">01</span>
+                          <span style="color: currentColor;">28</span>
+                        </div>
                         <div class="font-button" style="font-family: 'Raleway'" data-font="'Raleway'" data-min="70" data-max="110">12</div>
                         <div class="font-button" style="font-family: 'Montserrat'" data-font="'Montserrat'" data-min="70" data-max="110">12</div>
                         <div class="font-button" style="font-family: 'Playfair Display'" data-font="'Playfair Display'" data-min="70" data-max="110">12</div>
@@ -2789,6 +2797,19 @@
                 <div
                   class="setting-item"
                   style="top: calc(35% + 60px)"
+                  id="setting-item-aod"
+                >
+                  <div class="setting-title" id="dock_glass_title">Glassy Dock Bar</div>
+                  <div
+                    class="toggle-switch"
+                    id="dock-glass"
+                    data-key="dock-glass"
+                  ></div>
+                </div>
+
+                <div
+                  class="setting-item"
+                  style="top: calc(35% + 120px)"
                   id="setting-item-aod"
                 >
                   <div class="setting-title" id="dark_mode_title">
@@ -3417,6 +3438,36 @@
                   </div>
                   
                    <div class="display-setting-desc" style="margin-top: 10px;">تعديل شفافية خط الساعة في شاشة القفل.</div>
+                </div>
+
+                <div class="display-setting-panel">
+                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات نوتش الكاميرا</div>
+                  
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">العرض (Width)</span>
+                      <span id="notchWidthVal" style="font-size: 14px;">25.5px</span>
+                    </div>
+                    <input type="range" id="notchWidth" min="10" max="300" step="0.5" value="25.5" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">الارتفاع (Height)</span>
+                      <span id="notchHeightVal" style="font-size: 14px;">25px</span>
+                    </div>
+                    <input type="range" id="notchHeight" min="10" max="100" step="0.5" value="25" style="width: 100%;">
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">نصف قطر الحواف (Radius)</span>
+                      <span id="notchRadiusVal" style="font-size: 14px;">50px</span>
+                    </div>
+                    <input type="range" id="notchRadius" min="0" max="150" value="50" style="width: 100%;">
+                  </div>
+
+                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل حجم وعرض وطول وحواف نوتش الكاميرا.</div>
                 </div>
 
                 <div class="display-setting-panel">
