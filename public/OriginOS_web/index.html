@@ -432,6 +432,11 @@
       <div class="left-text-tb" id="left-text-tb">Hide Wallpaper</div>
       <div class="thanh-status2" id="thanh-status2"></div>
       <div class="thanh-status" id="thanh-status"></div>
+      <div class="status-wifi" id="status-wifi">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/>
+        </svg>
+      </div>
       <div class="status-battery">
         <div class="battery-small"></div>
         <div class="container-battery"><div class="battery-small2"></div></div>
@@ -2714,6 +2719,17 @@
                         value="100"
                       />
                     </div>
+                    <div class="style-section" style="margin-top: 15px; margin-bottom: 15px;">
+                      <div style="color: white; margin-bottom: 8px; font-size: 14px; opacity: 0.8; text-align: center;">Position / موقع الساعة</div>
+                      <div style="display: flex; gap: 8px; justify-content: center;">
+                        <button id="btn_clock_pos_top" class="active" style="width: 100px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 12px; color: white; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.3s; font-size: 13px;">
+                          Top / أعلى
+                        </button>
+                        <button id="btn_clock_pos_center" style="width: 100px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 12px; color: white; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.3s; font-size: 13px;">
+                          Center / وسط
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <div class="bottom-buttons">
                     <button class="wallpaper-btn-2" id="wallpaper_btn_2">
@@ -2812,6 +2828,19 @@
                   style="top: calc(35% + 120px)"
                   id="setting-item-aod"
                 >
+                  <div class="setting-title" id="glassy_control_center_title">Glassy CC / مركز التحكم الزجاجي</div>
+                  <div
+                    class="toggle-switch"
+                    id="glassy-control-center-toggle"
+                    data-key="glassy-control-center"
+                  ></div>
+                </div>
+
+                <div
+                  class="setting-item"
+                  style="top: calc(35% + 180px)"
+                  id="setting-item-aod"
+                >
                   <div class="setting-title" id="dark_mode_title">
                     Dark Mode
                   </div>
@@ -2823,7 +2852,7 @@
                 </div>                <div
                   class="setting-item"
                   id="icon_btn"
-                  style="top: calc(35% + 120px)"
+                  style="top: calc(35% + 240px)"
                 >
                   <div class="setting-title" id="icon_packs_title">
                     Icon Packs
@@ -2843,7 +2872,7 @@
                 <div
                   class="setting-item"
                   id="extract_icon_folder_btn"
-                  style="top: calc(35% + 180px)"
+                  style="top: calc(35% + 300px)"
                   onclick="document.getElementById('iconFolderInput').click()"
                 >
                   <input type="file" id="iconFolderInput" accept="image/*" webkitdirectory directory multiple style="display: none;" />
@@ -2867,7 +2896,7 @@
                 <div
                   class="setting-item"
                   id="manageKeywordsBtn"
-                  style="top: calc(35% + 240px)"
+                  style="top: calc(35% + 360px)"
                   onclick="openCustomIconModal()"
                 >
                   <div class="setting-title">تعديل مسارات استخراج الأيقونات</div>
@@ -2887,7 +2916,7 @@
                 <div
                   class="setting-item"
                   id="borderRadiusSystemBtn"
-                  style="top: calc(35% + 300px)"
+                  style="top: calc(35% + 420px)"
                 >
                   <div class="setting-title">Border radius system</div>
                   <div class="toggle-switch" style="opacity: 0"></div>

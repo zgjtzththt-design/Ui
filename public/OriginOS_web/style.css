@@ -798,6 +798,21 @@ body.full-screen .app4app.open {
   font-weight: 600;
   top: 0px;
 }
+.style-section button.active {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.lock-clock.centered, .clock-display.centered {
+  top: 50% !important;
+  transform: scale(1) translateY(-50%) !important;
+}
+
+.date-display.clock-centered {
+  top: calc(50% - 70px) !important; /* Position date above centered clock */
+  transform: translateY(-50%) !important;
+}
+
 .lock-clock {
   position: absolute;
   font-size: 100px;
@@ -1131,6 +1146,30 @@ body.full-screen .app4app.open {
 #editControlsCenterBtn svg:active {
   background: rgba(255, 255, 255, 0.3);
 }
+.status-wifi {
+  position: absolute;
+  top: 14.5px;
+  right: 68px;
+  z-index: 10010;
+  color: white;
+  transition: all 0.3s, opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scale: 1.1;
+  opacity: 1;
+}
+
+.status-wifi.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.status-wifi svg {
+  width: 16px;
+  height: 16px;
+}
+
 .status-battery {
   position: absolute;
   top: 15px;
@@ -4907,9 +4946,48 @@ input[type="color"] {
   grid-column: span 1;
   grid-row: span 2;
 }
-.volumeControlsCenter svg {
-  fill: rgba(0, 102, 255, 1);
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter {
+  background: rgba(255, 255, 255, 0.0) !important;
+  backdrop-filter: blur(3px) saturate(1.67) !important;
+  border-radius: 64px !important;
+  border: 2px solid rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+  position: relative;
+  overflow: hidden;
 }
+
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(346deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.02)) !important;
+  border-radius: 64px !important;
+  z-index: 0;
+}
+
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter * {
+  z-index: 1;
+}
+
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.activeControlsCenter {
+  background: rgba(0, 102, 255, 0.4) !important;
+}
+
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter::before {
+  border-radius: 35px !important;
+}
+
+.lpControlCenterControlsCenter.glassy-mode {
+  background: rgba(255, 255, 255, 0.0) !important; 
+  backdrop-filter: none !important;
+}
+
+.lpControlCenterControlsCenter.glassy-mode.open {
+  backdrop-filter: blur(20px) saturate(1.67) !important;
+}
+
 .brightnessControlsCenter svg {
   fill: orange;
 }

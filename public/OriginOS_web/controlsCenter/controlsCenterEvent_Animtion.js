@@ -77,7 +77,16 @@ function lpControlCenterControlsCenterEvent(eControlsCenter) {
 const allItemControlsCenter = document.querySelectorAll(".itemControlsCenter");
 
 function toggleItemControlsCenter(event) {
+  const isWiFi = event.currentTarget.classList.contains("wifiControlsCenter");
   event.currentTarget.classList.toggle("activeControlsCenter");
+
+  if (isWiFi && typeof statusWifi !== "undefined" && statusWifi) {
+    if (event.currentTarget.classList.contains("activeControlsCenter")) {
+      statusWifi.classList.remove("hidden");
+    } else {
+      statusWifi.classList.add("hidden");
+    }
+  }
 }
 
 function openEditControlsCenterSettingEvent() {
@@ -235,8 +244,8 @@ function closeControlsCenter() {
   isOpenControlsCenterTmp = false;
 
   lpControlCenterControlsCenter.style.backdropFilter = `blur(0px)`;
-  battery1.style.transition = `all ${currentSpeed4}s`;
-  battery1.style.transform = ``;
+  battery1.style.transition = statusWifi.style.transition = `all ${currentSpeed4}s`;
+  battery1.style.transform = statusWifi.style.transform = ``;
 
   hidePopup_open_close("editControlsCenterBtn");
   clearTimeout(hideTimeouts_open_close["editControlsCenterBtn"]);
@@ -289,8 +298,8 @@ function openControlsCenter() {
     .addEventListener("click", openSettingsApp);
 
   lpControlCenterControlsCenter.style.backdropFilter = `blur(20px)`;
-  battery1.style.transition = `all ${currentSpeed6}s`;
-  battery1.style.transform = `translateX(-16px) translateY(40px)`;
+  battery1.style.transition = statusWifi.style.transition = `all ${currentSpeed6}s`;
+  battery1.style.transform = statusWifi.style.transform = `translateX(-16px) translateY(40px)`;
 
   document.getElementById(
     "editControlsCenterBtn"
@@ -322,8 +331,8 @@ function updateTransformS2(y) {
   if (y > 0) y = 0;
 
   controlsCenterAll.style.transition =
-    battery1.style.transition = `all ${currentSpeed3}s`;
-  battery1.style.transform = `translateX(${y2 / 5}px) translateY(${
+    battery1.style.transition = statusWifi.style.transition = `all ${currentSpeed3}s`;
+  battery1.style.transform = statusWifi.style.transform = `translateX(${y2 / 5}px) translateY(${
     -y2 / 1.2
   }px)`;
 
@@ -385,7 +394,7 @@ thanhS2.addEventListener("touchend", () => {
     isOpenControlsCenterTmp = true;
   } else {
     closeControlsCenter();
-    battery1.style.transform = ``;
+    battery1.style.transform = statusWifi.style.transform = ``;
   }
 
   deltaYS2 = 0;
@@ -438,7 +447,7 @@ window.addEventListener("mouseup", () => {
     isOpenControlsCenterTmp = true;
   } else {
     closeControlsCenter();
-    battery1.style.transform = ``;
+    battery1.style.transform = statusWifi.style.transform = ``;
   }
 
   draggingS2 = false;

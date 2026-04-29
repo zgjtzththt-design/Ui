@@ -2260,6 +2260,15 @@ function showHomeApp() {
     .getElementById("dark-mode")
     .addEventListener("click", handleDarkModeToggle);
 
+  // Glassy Control Center Toggle
+  const glassyCCToggle = document.getElementById("glassy-control-center-toggle");
+  if (glassyCCToggle) {
+    glassyCCToggle.addEventListener("click", handleGlassyControlCenterToggle);
+    if (localStorage.getItem("glassy_control_center_saved") == 1) {
+      glassyCCToggle.classList.add("active");
+    }
+  }
+
   icon_btn.addEventListener("click", showIconPopup);
   back12.addEventListener("click", hideIconPopup);
 
@@ -2284,6 +2293,12 @@ function hideHomeApp() {
   document
     .getElementById("dark-mode")
     .removeEventListener("click", handleDarkModeToggle);
+
+  // Glassy Control Center Toggle
+  const glassyCCToggle = document.getElementById("glassy-control-center-toggle");
+  if (glassyCCToggle) {
+    glassyCCToggle.removeEventListener("click", handleGlassyControlCenterToggle);
+  }
 
   icon_btn.removeEventListener("click", showIconPopup);
   back12.removeEventListener("click", hideIconPopup);
@@ -2342,6 +2357,23 @@ function handleDockGlassToggle() {
   } else {
     khayapp.classList.remove("glassy");
     localStorage.removeItem("dock_glass_saved");
+  }
+}
+
+function handleGlassyControlCenterToggle() {
+  this.classList.toggle("active");
+  const isGlass = this.classList.contains("active");
+  const controlCenter = document.querySelector(".control-centerControlsCenter");
+  const lpControlCenter = document.querySelector(".lpControlCenterControlsCenter");
+
+  if (isGlass) {
+    if (controlCenter) controlCenter.classList.add("glassy-controls-center");
+    if (lpControlCenter) lpControlCenter.classList.add("glassy-mode");
+    localStorage.setItem("glassy_control_center_saved", 1);
+  } else {
+    if (controlCenter) controlCenter.classList.remove("glassy-controls-center");
+    if (lpControlCenter) lpControlCenter.classList.remove("glassy-mode");
+    localStorage.removeItem("glassy_control_center_saved");
   }
 }
 
@@ -4367,6 +4399,42 @@ document.addEventListener("DOMContentLoaded", () => {
         open3dPhoneBtn.addEventListener("click", () => {
             phone3dPopup.style.display = "block";
         });
+    }
+
+    // Clock Position Toggle Logic
+    const btnClockTop = document.getElementById("btn_clock_pos_top");
+    const btnClockCenter = document.getElementById("btn_clock_pos_center");
+    const clockMain = document.getElementById("lockclock");
+    const clockPreview = document.getElementById("clock_preview");
+    const dateMain = document.getElementById("dateText");
+    const datePreview = document.getElementById("dateTextPreview");
+
+    function applyClockPosition(position) {
+        if (position === "center") {
+            if (clockMain) clockMain.classList.add("centered");
+            if (clockPreview) clockPreview.classList.add("centered");
+            if (dateMain) dateMain.classList.add("clock-centered");
+            if (datePreview) datePreview.classList.add("clock-centered");
+            if (btnClockCenter) btnClockCenter.classList.add("active");
+            if (btnClockTop) btnClockTop.classList.remove("active");
+        } else {
+            if (clockMain) clockMain.classList.remove("centered");
+            if (clockPreview) clockPreview.classList.remove("centered");
+            if (dateMain) dateMain.classList.remove("clock-centered");
+            if (datePreview) datePreview.classList.remove("clock-centered");
+            if (btnClockTop) btnClockTop.classList.add("active");
+            if (btnClockCenter) btnClockCenter.classList.remove("active");
+        }
+        localStorage.setItem("lock_clock_position", position);
+    }
+
+    if (btnClockTop && btnClockCenter) {
+        btnClockTop.addEventListener("click", () => applyClockPosition("top"));
+        btnClockCenter.addEventListener("click", () => applyClockPosition("center"));
+        
+        // Initial load
+        const savedPos = localStorage.getItem("lock_clock_position") || "top";
+        applyClockPosition(savedPos);
     }
 });
 

@@ -30,6 +30,29 @@ document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.style.setProperty("--bg--swipe_color", savedSwipeColor);
     }
 
+    // Initial Clock Position
+    const savedPos = localStorage.getItem("lock_clock_position") || "top";
+    if (savedPos === "center") {
+        const clockMain = document.getElementById("lockclock");
+        const clockPreview = document.getElementById("clock_preview");
+        const dateMain = document.getElementById("dateText");
+        const datePreview = document.getElementById("dateTextPreview");
+        
+        if (clockMain) clockMain.classList.add("centered");
+        if (clockPreview) clockPreview.classList.add("centered");
+        if (dateMain) dateMain.classList.add("clock-centered");
+        if (datePreview) datePreview.classList.add("clock-centered");
+    }
+
+    // Glassy Control Center init
+    const savedGlassCC = localStorage.getItem("glassy_control_center_saved");
+    if (savedGlassCC == 1) {
+        const controlCenter = document.querySelector(".control-centerControlsCenter");
+        const lpControlCenter = document.querySelector(".lpControlCenterControlsCenter");
+        if (controlCenter) controlCenter.classList.add("glassy-controls-center");
+        if (lpControlCenter) lpControlCenter.classList.add("glassy-mode");
+    }
+
     setTimeout(() => {
         document.body.classList.remove("preload");
         const dev_name = document.getElementById("name_dev");
@@ -667,8 +690,8 @@ island.addEventListener("click", () => {
     time_island.classList.add("show");
     image_island_right.classList.remove("show");
 
-    battery1.style.transition = `transform 0.3s`;
-    battery1.style.transform = "translateX(100px)";
+    battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
+    battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
     clock.style.transition = `transform 0.3s`;
     clock.style.transform = "translateX(-100px)";
 
@@ -690,8 +713,8 @@ document.addEventListener("pointerdown", function (e) {
     time_island.classList.remove("show");
     image_island_right.classList.add("show");
 
-    battery1.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
-    battery1.style.transform = "translateX(0px)";
+    battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+    battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
     clock.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
     clock.style.transform = "translateX(0px)";
 
@@ -786,8 +809,8 @@ function closePopupToIsland() {
     clickables["box3"].style.pointerEvents = "none";
   }
 
-  battery1.style.transition = `transform 0.3s`;
-  battery1.style.transform = "translateX(-7px)";
+  battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
+  battery1.style.transform = statusWifi.style.transform = "translateX(-7px)";
   clock.style.transition = `transform 0.3s`;
   clock.style.transform = "translateX(7px)";
 
@@ -829,7 +852,7 @@ function closePopupToIsland() {
       clock.style.left = "25px";
     }
     image_island_right.classList.add("show");
-    battery1.style.transform = "translateX(0px)";
+    battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
     clock.style.transform = "translateX(0px)";
   }, 300 * currentSpeed);
 }
@@ -868,8 +891,8 @@ island_circle.addEventListener("click", () => {
     popupTitle_music2.classList.add("show");
     progressBar_music2.classList.add("show");
 
-    battery1.style.transition = `transform 0.3s`;
-    battery1.style.transform = "translateX(100px)";
+    battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
+    battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
     clock.style.transition = `transform 0.3s`;
     clock.style.transform = "translateX(-100px)";
   }, 200);
@@ -889,8 +912,8 @@ island2.addEventListener("click", () => {
     popupTitle_music2.classList.add("show");
     progressBar_music2.classList.add("show");
 
-    battery1.style.transition = `transform 0.3s`;
-    battery1.style.transform = "translateX(100px)";
+    battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
+    battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
     clock.style.transition = `transform 0.3s`;
     clock.style.transform = "translateX(-100px)";
   }
@@ -923,8 +946,8 @@ document.addEventListener("pointerdown", function (e) {
         progressBar_music2.classList.remove("show");
       }
 
-      battery1.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
-      battery1.style.transform = "translateX(0px)";
+      battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+      battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
       clock.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
       clock.style.transform = "translateX(0px)";
     } else {
@@ -937,7 +960,7 @@ document.addEventListener("pointerdown", function (e) {
       popupTitle_music2.classList.remove("show");
       progressBar_music2.classList.remove("show");
 
-      battery1.style.transform = "translateX(0px)";
+      battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
       clock.style.transform = "translateX(0px)";
       setTimeout(() => {
         island.style.transform = "translateX(-50%) translateY(0) scale(1)";
@@ -1023,8 +1046,8 @@ function closePopupToIsland3() {
     island2.style.width = "120px";
   }
 
-  battery1.style.transition = `transform 0.3s`;
-  battery1.style.transform = "translateX(-7px)";
+  battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
+  battery1.style.transform = statusWifi.style.transform = "translateX(-7px)";
   clock.style.transition = `transform 0.3s`;
   clock.style.transform = "translateX(7px)";
 
@@ -1060,7 +1083,7 @@ function closePopupToIsland3() {
       island2.style.width = "120px";
       island2.style.transform = "translateX(-50%) translateY(0) scale(1)";
     }
-    battery1.style.transform = "translateX(0px)";
+    battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
     clock.style.transform = "translateX(0px)";
     if (isRunning_clock) {
       island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
@@ -1137,6 +1160,7 @@ const clock = document.getElementById("lockclock2");
 const battery3 = document.querySelector(".battery-num");
 const battery2 = document.querySelector(".battery-small");
 const battery1 = document.querySelector(".status-battery");
+const statusWifi = document.getElementById("status-wifi");
 const phone = document.querySelector(".phone");
 const footerText = document.querySelector(".footer-text2");
 
@@ -1273,7 +1297,9 @@ function unlock() {
 
   battery1.classList.remove("close");
   battery3.classList.remove("close");
+  if (statusWifi) statusWifi.classList.remove("close");
   battery3.style.opacity = battery2.style.opacity = battery1.style.opacity = 1;
+  if (statusWifi) statusWifi.style.opacity = 1;
 
   clock.classList.add("hien");
 
@@ -1442,6 +1468,7 @@ function powerbtnEvent() {
     battery3.style.transition =
       battery2.style.transition =
       battery1.style.transition =
+      statusWifi.style.transition =
       lock_clock_date.style.transition =
       wallpaper.style.transition =
         `all calc(0.5s * ${currentSpeed}) cubic-bezier(0.23, 0.55, 0.54, 0.97)`;
@@ -1449,6 +1476,7 @@ function powerbtnEvent() {
     battery3.style.opacity =
       battery2.style.opacity =
       battery1.style.opacity =
+      statusWifi.style.opacity =
       lockscreen.style.opacity =
         lockscreen_style_opacity;
 
@@ -1488,6 +1516,7 @@ function powerbtnEvent() {
 
     battery1.classList.add("close");
     battery3.classList.add("close");
+    if (statusWifi) statusWifi.classList.add("close");
     thanhS1.style.pointerEvents = "none";
     closePopup_noanim();
     if (!always_on_displays) close_all_island();
@@ -1506,6 +1535,7 @@ function powerbtnEvent() {
     battery3.style.opacity =
       battery2.style.opacity =
       battery1.style.opacity =
+      statusWifi.style.opacity =
       lockscreen.style.opacity =
         1;
 
@@ -1530,6 +1560,7 @@ function powerbtnEvent() {
 
     battery1.classList.remove("close");
     battery3.classList.remove("close");
+    if (statusWifi) statusWifi.classList.remove("close");
     thanhS1.style.pointerEvents = "auto";
 
     island.style.pointerEvents = "auto";
@@ -1553,10 +1584,12 @@ lockscreen.addEventListener("click", () => {
     battery3.style.opacity =
       battery2.style.opacity =
       battery1.style.opacity =
+      statusWifi.style.opacity =
       lockscreen.style.opacity =
         1;
     battery1.classList.remove("close");
     battery3.classList.remove("close");
+    if (statusWifi) statusWifi.classList.remove("close");
 
     wallpaper.style.display = "flex";
     wallpaper.style.height = `${wallpaper_lock_height}%`;
@@ -1658,7 +1691,9 @@ function unlock_noanim() {
 
   battery1.classList.remove("close");
   battery3.classList.remove("close");
+  if (statusWifi) statusWifi.classList.remove("close");
   battery1.style.opacity = battery2.style.opacity = battery3.style.opacity = 1;
+  if (statusWifi) statusWifi.style.opacity = 1;
 
   clock.classList.add("hien");
 
