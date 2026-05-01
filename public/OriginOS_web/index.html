@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="color-scheme" content="light" />
-    <title>OriginOS</title>
+    <title>Xiaomi HyperOS</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400&display=swap"
       rel="stylesheet"
@@ -56,6 +56,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="welcome_screen.css" />
   </head>
   <body class="preload">
 
@@ -176,6 +177,39 @@
           <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777243249/b3x4yrgkedfzdp6j1ty0.png" alt="Boot Animation">
         </div>
         <p id="lolhaha" style="display: none;">tiktok: @sungsamtech - @._naq.</p>
+      </div>
+      <!-- Welcome Screen -->
+      <div id="welcome-screen">
+          <div class="welcome-container" id="welcome-container">
+              <div class="dark-fluid-bg"></div>
+              <div class="mesh-layer"></div>
+              <div class="water-ripple-bg"></div>
+
+              <div class="welcome-screen-content" id="welcome-splash-screen">
+                  <h1 class="welcome-title entry-anim">Xiaomi HyperOS</h1>
+                  <div class="welcome-nav-btn entry-anim" onclick="nextSetupStep()">
+                      <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                  </div>
+              </div>
+
+              <div id="welcome-setup-screen">
+                  <h2 style="color:white; margin-bottom:30px; text-align: center; width: 100%;">إعدادات الأذونات</h2>
+                  
+                  <div class="language-selector">
+                      <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+                      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
+                      <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
+                  </div>
+
+                  <div class="perm-card">Allow connect to Internet ✓</div>
+                  <div class="perm-card">Allow operations as Root</div>
+                  <div class="perm-card">Allow reading installed app list</div>
+                  
+                  <button class="finish-btn" onclick="finishSetup()">إنهاء الإعداد</button>
+              </div>
+          </div>
       </div>
       <div id="systemToast" class="system-toast"></div>
       
@@ -442,6 +476,15 @@
         <div class="container-battery"><div class="battery-small2"></div></div>
         <div class="battery-num" id="batery-num">100</div>
         <div id="editControlsCenterBtn">
+          <!-- Reorder Button -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            id="reorderCCBtn"
+            style="width: 20px; height: 20px; padding: 5px; fill: white;"
+          >
+            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/>
+          </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
@@ -630,6 +673,7 @@
               class="left-text"
               id="name_setting"
               style="left: 7%; top: 120px; font-size: 30px"
+              data-i18n="settings"
             >
               Settings
             </div>
@@ -642,7 +686,7 @@
                   background-size: 100%;
                 "
               ></div>
-              <div class="left-text" id="about_name_setting" style="left: 60px">
+              <div class="left-text" id="about_name_setting" style="left: 60px" data-i18n="about">
                 About
               </div>
               <div
@@ -684,7 +728,7 @@
                   background-size: 130%;
                 "
               ></div>
-              <div class="left-text" style="left: 60px">
+              <div class="left-text" style="left: 60px" data-i18n="display">
                 Display
               </div>
               <div class="left-text-small" style="left: 60px">
@@ -705,6 +749,7 @@
                 class="left-text"
                 id="language_name_setting"
                 style="left: 60px"
+                data-i18n="sound"
               >
                 Sound
               </div>
@@ -2150,7 +2195,7 @@
                       style="color: #ffffff; transition: all 0.2s"
                     ></div>
                     <div class="wallpaper2" id="wallpaper2">
-                      <div class="text_lock_2">OriginWEB</div>
+                      <div class="text_lock_2">Xiaomi HyperOS</div>
                       <div class="text_lock_2" id="text_lock_cus_2"></div>
                       <div class="img_lock_2">
                         <svg
@@ -2895,28 +2940,8 @@
 
                 <div
                   class="setting-item"
-                  id="manageKeywordsBtn"
-                  style="top: calc(35% + 360px)"
-                  onclick="openCustomIconModal()"
-                >
-                  <div class="setting-title">تعديل مسارات استخراج الأيقونات</div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
-                </div>
-
-                <div
-                  class="setting-item"
                   id="borderRadiusSystemBtn"
-                  style="top: calc(35% + 420px)"
+                  style="top: calc(35% + 360px)"
                 >
                   <div class="setting-title">Border radius system</div>
                   <div class="toggle-switch" style="opacity: 0"></div>
@@ -3508,6 +3533,17 @@
                   <div class="display-setting-desc">Zoom in or out of the phone interface.</div>
                 </div>
 
+                <div class="display-setting-panel" style="border: 1px solid rgba(255, 0, 0, 0.3);">
+                  <div class="display-setting-header">
+                    <span style="color: #ff4d4f; font-weight: bold;" data-i18n="sharp_phone">قالب حاد للزر الأحمر</span>
+                    <label class="switch">
+                      <input type="checkbox" id="sharpPhoneTemplateToggle">
+                      <span class="slider" id="sharpPhoneSlider" style="background-color: #555;"></span>
+                    </label>
+                  </div>
+                  <div class="display-setting-desc" data-i18n="sharp_phone_desc">يجعل زر إغلاق الشاشة (الزر الأحمر) حاد الحواف ومستطيلاً بشكل كامل.</div>
+                </div>
+
                 <div class="display-setting-panel" id="open_3d_phone_btn" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
                   <div>
                     <div class="display-setting-header">قالب هاتف 3D</div>
@@ -3687,8 +3723,8 @@
       </div>
       <div class="nav"></div>
       <div class="wallpaper" id="wallpaper">
-        <video id="homeVideoWallpaper" autoplay muted loop playsinline style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
-        <div class="text_lock">OriginWEB</div>
+        <video id="homeVideoWallpaper" autoplay muted loop playsinline style="border-radius: inherit; display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
+        <div class="text_lock">Xiaomi HyperOS</div>
         <div class="text_lock" id="text_lock_cus"></div>
       </div>
       <div class="clicke" id="clicke1"></div>
@@ -3720,7 +3756,7 @@
         "
       ></div>
       <div class="lockscreen" id="lockscreen">
-        <video id="lockVideoWallpaper" autoplay muted loop playsinline style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
+        <video id="lockVideoWallpaper" autoplay muted loop playsinline style="border-radius: inherit; display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
         <div
           class="hidden"
           id="wallpaper_aod2"
@@ -3814,7 +3850,9 @@
     <script src="data.js"></script>
     <script type="module" src="firebase-init.js"></script>
 
+    <script src="phone_sysToast.js"></script>
     <script src="all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="./controlsCenter/controlsCenterEvent_Animtion.js"></script>
 
     <script src="settingsApp/animationUnlockOpeningApp/customClosingScale.js"></script>
@@ -3824,7 +3862,6 @@
     <script src="settingsApp/settingsApp.js"></script>
 
     <script src="calc.js"></script>
-    <script src="phone_sysToast.js"></script>
     <script src="watchstop.js"></script>
     <script src="pass.js"></script>
     <script src="loading.js"></script>
@@ -3845,5 +3882,6 @@
     <div id="phone3dPopup" class="alert-backdrop" style="display: none; z-index: 10000000; padding: 0;">
       <iframe src="3d_phone.html" style="width: 100%; height: 100%; border: none;"></iframe>
     </div>
+    <script src="welcome_screen.js"></script>
   </body>
 </html>

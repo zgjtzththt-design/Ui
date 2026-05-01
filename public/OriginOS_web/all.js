@@ -682,13 +682,19 @@ island.addEventListener("click", () => {
   if (island.offsetWidth >= 120) {
     hideAllClickables();
     if (timeHideIsland) clearTimeout(timeHideIsland);
-    island.style.transition = `all 0.56s cubic-bezier(.14,1.34,.41,1)`;
-    island.style.width = "calc(var(--bg--size_width_phone) - 6%)";
-    island.style.height = "75px";
-    island.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
-    buttons_island.classList.add("show");
-    time_island.classList.add("show");
-    image_island_right.classList.remove("show");
+    island.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+    island.style.transform = `translateX(-50%) translateY(20px)`;
+    
+    setTimeout(() => {
+      island.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island.style.width = "calc(var(--bg--size_width_phone) - 6%)";
+      island.style.height = "75px";
+      island.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
+      island.style.transform = `translateX(-50%) translateY(25px)`;
+      buttons_island.classList.add("show");
+      time_island.classList.add("show");
+      image_island_right.classList.remove("show");
+    }, 100);
 
     battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
     battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
@@ -704,14 +710,21 @@ island.addEventListener("click", () => {
 
 document.addEventListener("pointerdown", function (e) {
   if (!island.contains(e.target) && island.offsetWidth >= 290) {
-    island.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(.14,1.34,.41,1)`;
-
+    island.style.transition = `all 0.3s cubic-bezier(0.4, 0, 1, 1)`;
+    island.style.transform = `translateX(-50%) translateY(0) scaleX(0.9)`;
     island.style.height = "25px";
     island.style.borderRadius = "25px";
     island.style.width = "120px";
     buttons_island.classList.remove("show");
     time_island.classList.remove("show");
     image_island_right.classList.add("show");
+    
+    setTimeout(() => {
+      if (island.offsetWidth <= 120) {
+        island.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+        island.style.transform = `translateX(-50%) scaleX(1)`;
+      }
+    }, 300);
 
     battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
     battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
@@ -881,15 +894,21 @@ island_circle.addEventListener("click", () => {
 
   setTimeout(() => {
     if (timeHideIsland) clearTimeout(timeHideIsland);
-    island2.style.transition = `all 0.56s cubic-bezier(.14,1.34,.41,1)`;
-    island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
-    island2.style.height = "150px";
-    island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
+    island2.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+    island2.style.transform = `translateX(-50%) translateY(20px)`;
+    
+    setTimeout(() => {
+      island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
+      island2.style.height = "150px";
+      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
+      island2.style.transform = `translateX(-50%) translateY(25px)`;
 
-    image_island_right2.classList.add("show");
-    controls_music2.classList.add("show");
-    popupTitle_music2.classList.add("show");
-    progressBar_music2.classList.add("show");
+      image_island_right2.classList.add("show");
+      controls_music2.classList.add("show");
+      popupTitle_music2.classList.add("show");
+      progressBar_music2.classList.add("show");
+    }, 100);
 
     battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
     battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
@@ -902,15 +921,21 @@ island2.addEventListener("click", () => {
   if (island2.offsetWidth >= 120) {
     hideAllClickables();
     if (timeHideIsland) clearTimeout(timeHideIsland);
-    island2.style.transition = `all 0.56s cubic-bezier(.14,1.34,.41,1)`;
-    island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
-    island2.style.height = "150px";
-    island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
+    island2.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+    island2.style.transform = `translateX(-50%) translateY(20px)`;
+    
+    setTimeout(() => {
+      island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
+      island2.style.height = "150px";
+      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
+      island2.style.transform = `translateX(-50%) translateY(25px)`;
 
-    image_island_right2.classList.add("show");
-    controls_music2.classList.add("show");
-    popupTitle_music2.classList.add("show");
-    progressBar_music2.classList.add("show");
+      image_island_right2.classList.add("show");
+      controls_music2.classList.add("show");
+      popupTitle_music2.classList.add("show");
+      progressBar_music2.classList.add("show");
+    }, 100);
 
     battery1.style.transition = statusWifi.style.transition = `transform 0.3s`;
     battery1.style.transform = statusWifi.style.transform = "translateX(100px)";
@@ -931,19 +956,35 @@ document.addEventListener("pointerdown", function (e) {
       island2.style.borderRadius = "25px";
 
       if (!isPlaying_music) {
-        island2.style.transition = `all 0.3s, width 0.4s`;
+        island2.style.transition = `all 0.3s cubic-bezier(0.4, 0, 1, 1)`;
+        island2.style.transform = `translateX(-50%) translateY(0) scaleX(0.9)`;
         island2.style.width = "25px";
         image_island_right2.classList.remove("show");
         controls_music2.classList.remove("show");
         popupTitle_music2.classList.remove("show");
         progressBar_music2.classList.remove("show");
+        
+        setTimeout(() => {
+          if (island2.offsetWidth <= 120) {
+            island2.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+            island2.style.transform = `translateX(-50%) scaleX(1)`;
+          }
+        }, 300);
       } else {
-        island2.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(.14,1.34,.41,1)`;
+        island2.style.transition = `all 0.3s cubic-bezier(0.4, 0, 1, 1)`;
+        island2.style.transform = `translateX(-50%) translateY(0) scaleX(0.9)`;
         island2.style.width = "120px";
         image_island_right2.classList.remove("show");
         controls_music2.classList.remove("show");
         popupTitle_music2.classList.remove("show");
         progressBar_music2.classList.remove("show");
+        
+        setTimeout(() => {
+          if (island2.offsetWidth <= 120) {
+            island2.style.transition = `transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)`;
+            island2.style.transform = `translateX(-50%) scaleX(1)`;
+          }
+        }, 300);
       }
 
       battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
@@ -1184,11 +1225,11 @@ let wallpaper_lock_off_borderRadius = 0; //px
 let wallpaper_lock_off_opacity = 1;
 let wallpaper_lock_off_transform = "translateY(0px)";
 
-let wallpaper_lock_height = 70; //%
-let wallpaper_lock_scale = 80; //%
-let wallpaper_lock_borderRadius = 15; //px
+let wallpaper_lock_height = 100; //%
+let wallpaper_lock_scale = 100; //%
+let wallpaper_lock_borderRadius = 50; //px
 let wallpaper_lock_opacity = 1;
-let wallpaper_lock_transform = "translateY(250px)";
+let wallpaper_lock_transform = "translateY(0px)";
 
 let current_wallpaper_lock = 1;
 
@@ -1215,7 +1256,7 @@ function lock() {
   allApp.classList.add("lock");
 
   if (lock_wallpaper) {
-    wallpaper.style.transition = `all ${currentSpeed3}s, height ${currentSpeed5}s, width ${currentSpeed5}s, scale ${currentSpeed5}s, borderRadius ${currentSpeed5}s, transform ${currentSpeed5}s, opacity ${currentSpeed5}s`;
+    wallpaper.style.transition = `all ${currentSpeed3}s, height ${currentSpeed5}s, width ${currentSpeed5}s, scale ${currentSpeed5}s, border-radius ${currentSpeed5}s, transform ${currentSpeed5}s, opacity ${currentSpeed5}s`;
     wallpaper.style.backgroundImage = `url("${lock_wallpaper}")`;
   }
 
@@ -1279,13 +1320,13 @@ function unlock() {
   wallpaper.style.height = "100%";
   wallpaper.style.width = `100%`;
   wallpaper.style.scale = "100%";
-  wallpaper.style.borderRadius = border_radius_phone;
+  wallpaper.style.borderRadius = "var(--bg--border_radius_phone)";
   wallpaper.style.opacity = 1;
   wallpaper.style.transform = "translateY(0px)";
   wallpaper.classList.add("unlock");
 
   if (home_wallpaper) {
-    wallpaper.style.transition = `all 0.2s, height ${currentSpeed5}s, width ${currentSpeed5}s, scale ${currentSpeed5}s, borderRadius ${currentSpeed5}s, transform ${currentSpeed5}s, opacity ${currentSpeed5}s`;
+    wallpaper.style.transition = `all 0.2s, height ${currentSpeed5}s, width ${currentSpeed5}s, scale ${currentSpeed5}s, border-radius ${currentSpeed5}s, transform ${currentSpeed5}s, opacity ${currentSpeed5}s`;
     wallpaper.style.backgroundImage = `url("${home_wallpaper}")`;
   }
 
@@ -1439,7 +1480,7 @@ let phone_lock_background =
   "linear-gradient(to bottom, rgba(47, 11, 34, 255), rgba(147, 111, 134, 255))";
 wallpaper.style.height = `${wallpaper_lock_height}%`;
 wallpaper.style.scale = `${wallpaper_lock_scale}%`;
-wallpaper.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;
 wallpaper.style.opacity = 1;
 
 let lockclock_style_transform = "scale(0.75) translateY(250px)";
@@ -1489,7 +1530,7 @@ function powerbtnEvent() {
       wallpaper.style.height = `${wallpaper_lock_off_height}%`;
       wallpaper.style.width = `100%`;
       wallpaper.style.scale = `${wallpaper_lock_off_scale}%`;
-      wallpaper.style.borderRadius = `${wallpaper_lock_off_borderRadius}px`;
+      wallpaper.style.borderRadius = wallpaper_lock_off_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_off_borderRadius}px`;
       wallpaper.style.opacity = `${wallpaper_lock_off_opacity}`;
       wallpaper.style.transform = wallpaper_lock_off_transform;
       phone.style.background = phone_lock_off_background;
@@ -1498,7 +1539,7 @@ function powerbtnEvent() {
       wallpaper.style.transition = `all ${currentSpeed5}s cubic-bezier(0.23, 0.55, 0.54, 0.97)`;
       wallpaper.style.height = `${wallpaper_lock_height}%`;
       wallpaper.style.scale = `calc(${wallpaper_lock_scale}% + 5%)`;
-      wallpaper.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+      wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;
       wallpaper.style.opacity = `calc(${wallpaper_lock_opacity} * 0.5)`;
       wallpaper.style.transform = wallpaper_lock_transform;
 
@@ -1544,7 +1585,7 @@ function powerbtnEvent() {
     wallpaper.style.height = `${wallpaper_lock_height}%`;
     wallpaper.style.width = `100%`;
     wallpaper.style.scale = `${wallpaper_lock_scale}%`;
-    wallpaper.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+    wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;
     wallpaper.style.opacity = 1;
 
     document.getElementById("wallpaper_aod2").classList.add("hidden");
@@ -1594,7 +1635,7 @@ lockscreen.addEventListener("click", () => {
     wallpaper.style.display = "flex";
     wallpaper.style.height = `${wallpaper_lock_height}%`;
     wallpaper.style.scale = `${wallpaper_lock_scale}%`;
-    wallpaper.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+    wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;
     wallpaper.style.width = `100%`;
     wallpaper.style.opacity = 1;
 
@@ -1673,7 +1714,7 @@ function unlock_noanim() {
   wallpaper.style.height = "100%";
   wallpaper.style.width = `100%`;
   wallpaper.style.scale = "100%";
-  wallpaper.style.borderRadius = border_radius_phone;
+  wallpaper.style.borderRadius = "var(--bg--border_radius_phone)";
   wallpaper.style.opacity = 1;
   wallpaper.style.transform = "translateY(0px)";
   wallpaper.classList.add("unlock");
@@ -2663,45 +2704,6 @@ window.customApps = [
   { id: "box11", name: "ويدجت الحالة", defaultIcon: "https://img.icons8.com/ios/256/info.png" },
   { id: "box12", name: "المتجر", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png" },
 ];
-
-const defaultKeywords = {
-  box1: "calculator.png",
-  box2: "filemanager.png",
-  box3: "music.png",
-  box4: "settings.png",
-  box5: "messages.png",
-  box6: "photos.png",
-  box7: "calendar.png",
-  box8: "phone.png",
-  box9: "browser.png",
-  box10: "weather.png",
-  box11: "info.png",
-  box12: "store.png"
-};
-
-function getAppKeywords() {
-  return JSON.parse(localStorage.getItem("custom_icons_keywords") || JSON.stringify(defaultKeywords));
-}
-
-function updateAppKeyword(id, keyword) {
-  const keywords = getAppKeywords();
-  keywords[id] = keyword.toLowerCase();
-  localStorage.setItem("custom_icons_keywords", JSON.stringify(keywords));
-  
-  // Trigger cloud sync if logged in
-  if (typeof window.syncEverything === "function") {
-      window.syncEverything();
-  }
-}
-
-function closeCustomIconModal() {
-  const modal = document.getElementById("customIconModal");
-  if (typeof hidePopup_open_close === "function") {
-    hidePopup_open_close(modal);
-  } else {
-    modal.classList.remove("open");
-  }
-}
 
 function setIconAndBackgroundGradient(boxId, imageUrl) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");

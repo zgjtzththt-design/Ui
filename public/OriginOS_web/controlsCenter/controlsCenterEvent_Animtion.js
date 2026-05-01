@@ -253,7 +253,162 @@ function closeControlsCenter() {
   open_all_island();
   isOpenControlsCenterTmp = false;
   removeDragVolumeAndBrightnessEvents();
+  
+  // Disable sortable if active
+  if (isReorderingCC) {
+    toggleReorderCC();
+  }
 }
+
+let isReorderingCC = false;
+let sortableCC = null;
+
+function toggleReorderCC() {
+  const container = document.querySelector(".control-centerControlsCenter");
+  const reorderBtn = document.getElementById("reorderCCBtn");
+  
+  isReorderingCC = !isReorderingCC;
+  
+  if (isReorderingCC) {
+    reorderBtn.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+    reorderBtn.style.borderRadius = "10px";
+    
+    // Enable Sortable
+    sortableCC = new Sortable(container, {
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      onEnd: function() {
+        saveCCOrder();
+      }
+    });
+
+    // Add Share/Import labels or tooltips if needed
+    tb_system("Reorder Mode Active. Drag buttons to move them.");
+    
+    // Create Share and Import buttons if they don't exist
+    if (!document.getElementById("shareCCBtn")) {
+        const editBox = document.getElementById("editControlsCenterBtn");
+        
+        const shareBtn = document.createElement("div");
+        shareBtn.id = "shareCCBtn";
+        shareBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>`;
+        shareBtn.style.cssText = "width: 20px; height: 20px; padding: 5px; cursor: pointer;";
+        shareBtn.onclick = exportCCOrder;
+        editBox.appendChild(shareBtn);
+        
+        const importBtn = document.createElement("div");
+        importBtn.id = "importCCBtn";
+        importBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/><polyline points="16 16 12 12 8 16"/></svg>`;
+        importBtn.style.cssText = "width: 20px; height: 20px; padding: 5px; cursor: pointer;";
+        importBtn.onclick = importCCOrder;
+        editBox.appendChild(importBtn);
+    }
+  } else {
+    reorderBtn.style.backgroundColor = "";
+    if (sortableCC) {
+      sortableCC.destroy();
+      sortableCC = null;
+    }
+    const shareBtn = document.getElementById("shareCCBtn");
+    const importBtn = document.getElementById("importCCBtn");
+    if (shareBtn) shareBtn.remove();
+    if (importBtn) importBtn.remove();
+    
+    tb_system("Reorder Mode Disabled");
+  }
+}
+
+function saveCCOrder() {
+  const container = document.querySelector(".control-centerControlsCenter");
+  const items = container.querySelectorAll(".itemControlsCenter");
+  const order = Array.from(items).map(item => item.id.replace("controlCenterID", "").replace("ControlsCenter", ""));
+  localStorage.setItem("cc_order", order.join("-"));
+}
+
+function loadCCOrder() {
+  let orderStr = localStorage.getItem("cc_order");
+  if (!orderStr) {
+    orderStr = "2-7-6-5-1-8-12-3-11-10-4-9-15-14-13";
+  }
+  
+  const order = orderStr.split("-");
+  const container = document.querySelector(".control-centerControlsCenter");
+  
+  order.forEach(id => {
+    const item = document.getElementById(`controlCenterID${id}ControlsCenter`);
+    if (item) {
+      container.appendChild(item);
+    }
+  });
+}
+
+function exportCCOrder() {
+  const orderStr = localStorage.getItem("cc_order");
+  if (!orderStr) {
+      // If not saved yet, get current order
+      saveCCOrder();
+  }
+  const code = localStorage.getItem("cc_order");
+  
+  // Copy to clipboard
+  navigator.clipboard.writeText(code).then(() => {
+    tb_system("Arrangement code copied: " + code);
+  }).catch(err => {
+    console.error('Could not copy text: ', err);
+    tb_system("Code: " + code);
+  });
+}
+
+function importCCOrder() {
+  if (typeof showPopupInput === "function") {
+    showPopupInput({
+      message: "كود تعديل مركز التحكم\nقم بلصق الكود هنا لتغيير ترتيب الأزرار",
+      placeholder: "مثال: 2-1-4-3-...",
+      buttonText: "تطبيق",
+      cancelText: "إلغاء",
+      onSubmit: (code) => {
+        if (code) applyCCOrder(code.trim());
+      }
+    });
+  } else {
+    const code = prompt("Enter the Arrangement Code:");
+    if (code) {
+      applyCCOrder(code.trim());
+    }
+  }
+}
+
+function applyCCOrder(code) {
+  const order = code.split("-");
+  const container = document.querySelector(".control-centerControlsCenter");
+  
+  let valid = true;
+  order.forEach(id => {
+    if (!document.getElementById(`controlCenterID${id}ControlsCenter`)) {
+        valid = false;
+    }
+  });
+  
+  if (valid) {
+    order.forEach(id => {
+      const item = document.getElementById(`controlCenterID${id}ControlsCenter`);
+      container.appendChild(item);
+    });
+    localStorage.setItem("cc_order", code);
+    tb_system("Custom arrangement applied!");
+  } else {
+    tb_system("Invalid arrangement code.");
+  }
+}
+
+// Add event listener for the reorder button
+document.getElementById("reorderCCBtn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleReorderCC();
+});
+
+// Load order on script load
+loadCCOrder();
 
 function openControlsCenter() {
   clearTimeout(idTimeOutLpControlsCenterEvent);

@@ -77,9 +77,6 @@ window.syncEverything = async () => {
     const customIcons = localStorage.getItem("custom_icons");
     if (customIcons) settings.custom_icons = JSON.parse(customIcons);
     
-    const customKeywords = localStorage.getItem("custom_icons_keywords");
-    if (customKeywords) settings.custom_icons_keywords = JSON.parse(customKeywords);
-    
     // 2. Get Wallpapers from IndexedDB (OriginDB)
     if (typeof window.getData === "function") {
         await new Promise((resolve) => {
@@ -124,11 +121,6 @@ window.applyCloudSettings = (settings) => {
         const localIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
         const mergedIcons = { ...localIcons, ...settings.custom_icons };
         localStorage.setItem("custom_icons", JSON.stringify(mergedIcons));
-    }
-    if (settings.custom_icons_keywords) {
-        const localKeywords = JSON.parse(localStorage.getItem("custom_icons_keywords") || "{}");
-        const mergedKeywords = { ...localKeywords, ...settings.custom_icons_keywords };
-        localStorage.setItem("custom_icons_keywords", JSON.stringify(mergedKeywords));
     }
     
     const promises = [];

@@ -229,6 +229,7 @@ body.full-screen .app4app.open {
   border-radius: var(--bg--border_radius_phone);
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 }
 .wallpaper.open {
   scale: 110%;
@@ -241,7 +242,7 @@ body.full-screen .app4app.open {
   height: 100%;
   width: 100%;
   display: none;
-  border-radius: 50px;
+  border-radius: var(--bg--border_radius_phone);
 }
 .wallpaper.lock {
   height: 50%;
@@ -779,13 +780,15 @@ body.full-screen .app4app.open {
   scale: 1;
   opacity: 1;
   pointer-events: auto;
+  border-radius: var(--bg--border_radius_phone);
+  overflow: hidden;
 }
 .lock-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(173, 216, 230, 0);
-  border-radius: 53px;
+  border-radius: var(--bg--border_radius_phone);
 }
 .lock-content {
   position: absolute;
@@ -914,15 +917,16 @@ body.full-screen .app4app.open {
   height: 80px;
   background-color: #ff1313;
   border-top-left-radius: 0;
-  border-top-right-radius: 5px;
+  border-top-right-radius: var(--bg--power_button_radius, 5px);
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: var(--bg--power_button_radius, 5px);
   z-index: 633426;
   pointer-events: auto;
   scale: var(--bg--scale_phone);
   transition: scale 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97),
     translate 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97),
-    top 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
+    top 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97),
+    border-radius 0.3s ease;
 }
 .power-button.hidden {
   pointer-events: none;
@@ -1122,18 +1126,30 @@ body.full-screen .app4app.open {
 .status-time.open {
   color: rgb(255, 255, 255);
 }
+.sortable-ghost {
+  opacity: 0.4;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px dashed white;
+}
+
 #editControlsCenterBtn {
   position: absolute;
-  display: none;
-  top: calc(100% + 15px);
-  right: 0;
+  display: flex;
+  visibility: hidden;
   opacity: 0;
-  gap: 5px;
-  translate: 15px;
+  top: 15px;
+  right: 15px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 10001;
+  gap: 12px;
+  transition: all 0.3s;
 }
 #editControlsCenterBtn.open {
   opacity: 1;
-  translate: 0;
+  visibility: visible;
 }
 #editControlsCenterBtn svg {
   height: 20px;
@@ -1711,7 +1727,7 @@ p {
   width: 90%;
   background: var(--bg--wallpaper);
   background-size: 100%;
-  border-radius: 18px;
+  border-radius: calc(var(--bg--border_radius_phone) * 0.4);
   background-size: cover;
 }
 .wallpaper-preview {
@@ -1724,7 +1740,7 @@ p {
   width: 100%;
   height: 100%;
   background: var(--bg--wallpaper) no-repeat center center;
-  border-radius: 18px;
+  border-radius: calc(var(--bg--border_radius_phone) * 0.4);
   background-size: cover;
 }
 .button-row {
@@ -2505,12 +2521,13 @@ input[type="color"] {
   top: 0;
   scale: 80%;
   transition: all 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
-  border-radius: 20px;
+  border-radius: var(--bg--border_radius_phone);
   z-index: -1;
   background-size: cover;
   background-position: center;
   transform: translateY(250px);
   text-align: left;
+  overflow: hidden;
 }
 .wallpaper2::before,
 .wallpaper::before {
@@ -2525,6 +2542,7 @@ input[type="color"] {
   border: 10px solid #22161e;
   border-bottom: 60px solid #22161e;
   transition: none;
+  border-radius: var(--bg--border_radius_phone);
 }
 .text_lock_2,
 .text_lock {
@@ -4858,7 +4876,7 @@ input[type="color"] {
 .phone-frameControlsCenter {
   width: 330px;
   height: 700px;
-  border-radius: 50px;
+  border-radius: var(--bg--border_radius_phone);
   background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg") center/cover no-repeat;
   display: flex;
   flex-direction: column;

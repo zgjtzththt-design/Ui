@@ -143,7 +143,8 @@ window.addEventListener("DOMContentLoaded", () => {
         sizeSlider.value = savedSize1;
     }
 
-    const saved_btn = localStorage.getItem("btn1_2_saved");
+    let saved_btn = localStorage.getItem("btn1_2_saved");
+    if (saved_btn == null) saved_btn = "0";
     if (saved_btn != null) {
         if (saved_btn == 1) {
             handleBtn1Click();
@@ -161,7 +162,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             wallpaper2.style.height = `${wallpaper_lock_height}%`;
             wallpaper2.style.scale = `${wallpaper_lock_scale}%`;
-            wallpaper2.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+            wallpaper2.style.borderRadius = wallpaper_lock_borderRadius == 50 ? 'var(--bg--border_radius_phone)' : `${wallpaper_lock_borderRadius}px`;
             wallpaper2.style.opacity = 1;
             wallpaper2.style.transform = wallpaper_lock_transform;
 
@@ -188,7 +189,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             wallpaper2.style.height = `${wallpaper_lock_height}%`;
             wallpaper2.style.scale = `${wallpaper_lock_scale}%`;
-            wallpaper2.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+            wallpaper2.style.borderRadius = wallpaper_lock_borderRadius == 50 ? 'var(--bg--border_radius_phone)' : `${wallpaper_lock_borderRadius}px`;
             wallpaper2.style.opacity = 1;
             wallpaper2.style.transform = wallpaper_lock_transform;
 
@@ -203,7 +204,7 @@ window.addEventListener("DOMContentLoaded", () => {
             wallpaper.style.transition = "all 0.4s cubic-bezier(0.23, 0.55, 0.54, 0.97)";
             wallpaper.style.height = `${wallpaper_lock_height}%`;
             wallpaper.style.scale = `${wallpaper_lock_scale}%`;
-            wallpaper.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+            wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? 'var(--bg--border_radius_phone)' : `${wallpaper_lock_borderRadius}px`;
             wallpaper.style.opacity = 1;
 
             wallpaper.style.transform = wallpaper_lock_transform;

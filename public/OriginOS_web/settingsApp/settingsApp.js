@@ -288,6 +288,27 @@ if (phoneScaleSlider) {
   });
 }
 
+const sharpPhoneTemplateToggle = document.getElementById("sharpPhoneTemplateToggle");
+if (sharpPhoneTemplateToggle) {
+  sharpPhoneTemplateToggle.addEventListener("change", (e) => {
+    const isChecked = e.target.checked;
+    localStorage.setItem("sharpPhoneTemplate", isChecked);
+    applySharpPhoneTemplate(isChecked);
+  });
+}
+
+function applySharpPhoneTemplate(isSharp) {
+  const sharpSlider = document.getElementById("sharpPhoneSlider");
+  if (sharpSlider) {
+      sharpSlider.style.backgroundColor = isSharp ? "#ff4d4f" : "#555";
+  }
+  if (isSharp) {
+    document.documentElement.style.setProperty("--bg--power_button_radius", "0px");
+  } else {
+    document.documentElement.style.setProperty("--bg--power_button_radius", "5px");
+  }
+}
+
 phoneEdgeRadius.addEventListener("input", (e) => {
   const val = e.target.value;
   phoneEdgeRadiusVal.textContent = `${val}px`;
@@ -738,6 +759,14 @@ if (saved_finger_local == 0) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Restore sharp phone template Setting
+    const savedSharpPhoneTemplate = localStorage.getItem("sharpPhoneTemplate");
+    if (savedSharpPhoneTemplate === "true" && typeof applySharpPhoneTemplate === 'function') {
+        const sharpToggle = document.getElementById("sharpPhoneTemplateToggle");
+        if (sharpToggle) sharpToggle.checked = true;
+        applySharpPhoneTemplate(true);
+    }
+
     // Restore display settings
     const savedEdgeRadius = localStorage.getItem("phoneEdgeRadius");
     if (savedEdgeRadius && phoneEdgeRadius) {
@@ -2013,7 +2042,7 @@ function handleBtn1Click() {
 
   wallpaper2.style.height = `${wallpaper_lock_height}%`;
   wallpaper2.style.scale = `${wallpaper_lock_scale}%`;
-  wallpaper2.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+  wallpaper2.style.borderRadius = wallpaper_lock_borderRadius == 50 ? 'var(--bg--border_radius_phone)' : `${wallpaper_lock_borderRadius}px`;
   wallpaper2.style.opacity = 1;
   wallpaper2.style.transform = wallpaper_lock_transform;
 
@@ -2072,7 +2101,7 @@ function handleBtn2Click() {
 
   wallpaper2.style.height = `${wallpaper_lock_height}%`;
   wallpaper2.style.scale = `${wallpaper_lock_scale}%`;
-  wallpaper2.style.borderRadius = `${wallpaper_lock_borderRadius}px`;
+  wallpaper2.style.borderRadius = wallpaper_lock_borderRadius == 50 ? 'var(--bg--border_radius_phone)' : `${wallpaper_lock_borderRadius}px`;
   wallpaper2.style.opacity = 1;
   wallpaper2.style.transform = wallpaper_lock_transform;
 
@@ -3431,11 +3460,6 @@ function icon_custom() {
   localStorage.setItem("selected_icon_pack", "custom");
   updateIconBorder("custom_icon");
   document.documentElement.style.setProperty("--bg-size_img", "100%");
-  if (typeof openCustomIconModal === "function") {
-    openCustomIconModal();
-  } else if (window.parent && typeof window.parent.openCustomIconModal === "function") {
-    window.parent.openCustomIconModal();
-  }
 }
 
 function icon_flymeos() {

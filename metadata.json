@@ -1,5 +1,5 @@
 {
-  "name": "Remix: OriginOS Web Clone",
-  "description": "A web-based UI clone of OriginOS, embedded and running locally.",
+  "name": "Xiaomi HyperOS Web Clone",
+  "description": "A web-based UI clone of Xiaomi HyperOS, embedded and running locally.",
   "requestFramePermissions": []
 }
