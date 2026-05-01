@@ -1137,19 +1137,21 @@ body.full-screen .app4app.open {
   display: flex;
   visibility: hidden;
   opacity: 0;
-  top: 15px;
-  right: 15px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  padding: 8px 15px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
   z-index: 10001;
-  gap: 12px;
-  transition: all 0.3s;
+  gap: 15px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 2);
 }
 #editControlsCenterBtn.open {
   opacity: 1;
   visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 #editControlsCenterBtn svg {
   height: 20px;
@@ -4917,7 +4919,7 @@ input[type="color"] {
 
 .itemControlsCenter {
   background: rgba(255, 255, 255, 0.35);
-  border-radius: var(--bg--border_radius_system);
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4928,6 +4930,15 @@ input[type="color"] {
   color: #ccc;
   font-family: "Noto sans", sans-serif;
   font-size: 12px;
+}
+
+.wifiControlsCenter,
+.musicControlsCenter,
+.focusControlsCenter,
+.connectControlsCenter,
+.volumeControlsCenter,
+.brightnessControlsCenter {
+  border-radius: 20px !important;
 }
 .itemControlsCenter svg {
   font-size: 22px;
@@ -4967,7 +4978,7 @@ input[type="color"] {
 .control-centerControlsCenter.glassy-controls-center .itemControlsCenter {
   background: rgba(255, 255, 255, 0.0) !important;
   backdrop-filter: blur(3px) saturate(1.67) !important;
-  border-radius: 64px !important;
+  border-radius: 50% !important;
   border: 2px solid rgba(255, 255, 255, 0.35) !important;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
   position: relative;
@@ -4980,7 +4991,7 @@ input[type="color"] {
   position: absolute;
   inset: 0;
   background: linear-gradient(346deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.02)) !important;
-  border-radius: 64px !important;
+  border-radius: 50% !important;
   z-index: 0;
 }
 
@@ -4992,9 +5003,19 @@ input[type="color"] {
   background: rgba(0, 102, 255, 0.4) !important;
 }
 
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.wifiControlsCenter,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.focusControlsCenter,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.connectControlsCenter,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.volumeControlsCenter,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.brightnessControlsCenter,
 .control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter::before {
-  border-radius: 35px !important;
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter::before,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.wifiControlsCenter::before,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.focusControlsCenter::before,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.connectControlsCenter::before,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.volumeControlsCenter::before,
+.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.brightnessControlsCenter::before {
+  border-radius: 30px !important;
 }
 
 .lpControlCenterControlsCenter.glassy-mode {
