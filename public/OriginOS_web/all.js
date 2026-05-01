@@ -126,8 +126,8 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
-  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg");
-  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg");
+  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png");
+  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png");
   window.applyWallpapers();
 });
 
