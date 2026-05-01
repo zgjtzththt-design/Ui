@@ -1877,7 +1877,6 @@ p {
   }
 }
 .add-button {
-  margin-top: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1886,10 +1885,10 @@ p {
   background: var(--bg--background2);
   height: 50px;
   width: 90%;
-  bottom: 140px;
   border-radius: calc(
     var(--bg--border_radius_system) - var(--bg--border_radius_system) / 3
   );
+  flex-shrink: 0;
 }
 input[type="file"] {
   display: none;
