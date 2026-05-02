@@ -2237,7 +2237,7 @@ function updateBatteryInfo(battery) {
         "https://cropgif.net/audio/1776965251083-5ccb7558-3b9e-4b87-aceb-e908015ffb8c.ogg",
         volume_charge_volume
       );
-      showChargingIsland();
+      // showChargingIsland();
     }
   }
   charging = isCurrentlyCharging;
