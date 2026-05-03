@@ -81,6 +81,10 @@ window.applyWallpapers = () => {
   });
 
   getData("lock_wallpaper", (value) => {
+    if (value && typeof value === 'string' && value.includes("res.cloudinary.com")) {
+      value = "originos_data/wallpapers/wallpaper_1.webp";
+      setData("lock_wallpaper", value);
+    }
     if (value) {
       const wallpaper_preview2 = document.querySelector(".wallpaper-preview2");
       const wallPaper2 = document.querySelector(".wallpaper2");
@@ -88,9 +92,9 @@ window.applyWallpapers = () => {
       const lockVideo = document.getElementById("lockVideoWallpaper");
 
       lock_wallpaper = value;
-      if (wallpaper) wallpaper.style.backgroundImage = `url(${value})`;
-      if (wallPaper2) wallPaper2.style.backgroundImage = `url(${value})`;
-      if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = `url(${value})`;
+      if (wallpaper) wallpaper.style.backgroundImage = `url('${value}')`;
+      if (wallPaper2) wallPaper2.style.backgroundImage = `url('${value}')`;
+      if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = `url('${value}')`;
       if (lockVideo) lockVideo.style.display = "none";
     }
   });
@@ -106,6 +110,10 @@ window.applyWallpapers = () => {
   });
 
   getData("home_wallpaper", (value) => {
+    if (value && typeof value === 'string' && value.includes("res.cloudinary.com")) {
+      value = "originos_data/wallpapers/wallpaper_1.webp";
+      setData("home_wallpaper", value);
+    }
     if (value) {
       const homeVideo = document.getElementById("homeVideoWallpaper");
       home_wallpaper = value;
@@ -126,8 +134,8 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
-  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png");
-  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png");
+  localStorage.setItem("home_wallpaper", "originos_data/wallpapers/wallpaper_1.webp");
+  localStorage.setItem("lock_wallpaper", "originos_data/wallpapers/wallpaper_1.webp");
   window.applyWallpapers();
 });
 
@@ -1201,7 +1209,7 @@ const clock = document.getElementById("lockclock2");
 const battery3 = document.querySelector(".battery-num");
 const battery2 = document.querySelector(".battery-small");
 const battery1 = document.querySelector(".status-battery");
-const statusWifi = document.getElementById("status-wifi");
+const statusWifi = { style: {}, classList: { add: ()=>{}, remove: ()=>{} } };
 const phone = document.querySelector(".phone");
 const footerText = document.querySelector(".footer-text2");
 
@@ -1404,6 +1412,23 @@ function unlock() {
   );
 
   fogot_pass_btn.style.display = "none";
+
+  setTimeout(() => {
+    if (!localStorage.getItem("xhyper_update_shown2")) {
+      showPopup2_alert(
+        "تحديث جديد يخص OriginOS\nتم تحديث أصدار جديد مع تحسينات و أصلاح أخطاء تم صنعه بواسطة XHyper \nللأنظمام كا مطور \nhttps://t.me/+KABuuONjRtBkMWY0",
+        "تطبيق",
+        "إلغاء",
+        () => {
+          localStorage.setItem("xhyper_update_shown2", "true");
+          window.open("https://t.me/+KABuuONjRtBkMWY0", "_blank");
+        },
+        () => {
+          localStorage.setItem("xhyper_update_shown2", "true");
+        }
+      );
+    }
+  }, 1000);
 }
 
 target.innerText += "ech";
@@ -1773,6 +1798,23 @@ function unlock_noanim() {
   document.querySelector(".khayapp").classList.remove("lock");
 
   fogot_pass_btn.style.display = "none";
+
+  setTimeout(() => {
+    if (!localStorage.getItem("xhyper_update_shown2")) {
+      showPopup2_alert(
+        "تحديث جديد يخص OriginOS\nتم تحديث أصدار جديد مع تحسينات و أصلاح أخطاء تم صنعه بواسطة XHyper \nللأنظمام كا مطور \nhttps://t.me/+KABuuONjRtBkMWY0",
+        "تطبيق",
+        "إلغاء",
+        () => {
+          localStorage.setItem("xhyper_update_shown2", "true");
+          window.open("https://t.me/+KABuuONjRtBkMWY0", "_blank");
+        },
+        () => {
+          localStorage.setItem("xhyper_update_shown2", "true");
+        }
+      );
+    }
+  }, 1000);
 }
 
 function hidePopup_open_close_noanim(target) {
@@ -2225,13 +2267,19 @@ function updateBatteryInfo(battery) {
   const isCurrentlyCharging = battery.charging;
 
   battery4.style.width = `calc(${battery_level}%)`;
-  if (battery_level <= 20) battery4.style.background = "red";
+  if (battery_level <= 20) {
+    battery4.style.background = "#e53935";
+    battery4.style.mixBlendMode = "normal";
+  } else {
+    battery4.style.background = "white";
+    battery4.style.mixBlendMode = "difference";
+  }
   if (battery_level == 20) playmusic("originos_data/ui/LowBattery.ogg");
-  if (battery_level > 20) battery4.style.background = "white";
-  battery_num.textContent = `${battery_level}`;
+  battery_num.textContent = `${battery_level}%`;
 
   if (isCurrentlyCharging) {
     battery4.style.background = "#26bd44";
+    battery4.style.mixBlendMode = "normal";
     if (!charging) {
       playmusic(
         "https://cropgif.net/audio/1776965251083-5ccb7558-3b9e-4b87-aceb-e908015ffb8c.ogg",
@@ -2691,19 +2739,36 @@ if (window.visualViewport) {
 
 // Custom Icon Pack Logic
 window.customApps = [
-  { id: "box1", name: "الحاسبة", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png" },
-  { id: "box2", name: "مدير الملفات", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png" },
-  { id: "box3", name: "الموسيقى", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png" },
-  { id: "box4", name: "الإعدادات", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png" },
-  { id: "box5", name: "الرسائل", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png" },
-  { id: "box6", name: "الصور", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png" },
-  { id: "box7", name: "التقويم", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png" },
-  { id: "box8", name: "الهاتف", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png" },
-  { id: "box9", name: "المتصفح", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png" },
-  { id: "box10", name: "الطقس", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png" },
+  { id: "box1", name: "الحاسبة", defaultIcon: "originos_data/iconPacks/hype_icon/system_calculator.png" },
+  { id: "box2", name: "مدير الملفات", defaultIcon: "originos_data/iconPacks/hype_icon/system_filemanager.png" },
+  { id: "box3", name: "الموسيقى", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
+  { id: "box4", name: "الإعدادات", defaultIcon: "originos_data/iconPacks/hype_icon/system_settings.png" },
+  { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
+  { id: "box6", name: "الصور", defaultIcon: "originos_data/iconPacks/hype_icon/system_photos.png" },
+  { id: "box7", name: "التقويم", defaultIcon: "originos_data/iconPacks/hype_icon/system_calendar.png" },
+  { id: "box8", name: "الهاتف", defaultIcon: "originos_data/iconPacks/hype_icon/system_dialer.png" },
+  { id: "box9", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
+  { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
   { id: "box11", name: "ويدجت الحالة", defaultIcon: "https://img.icons8.com/ios/256/info.png" },
-  { id: "box12", name: "المتجر", defaultIcon: "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png" },
+  { id: "box12", name: "المتجر", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
 ];
+
+window.getAppKeywords = function() {
+  return {
+    "box1": "calculator",
+    "box2": "files",
+    "box3": "music",
+    "box4": "settings",
+    "box5": "messages",
+    "box6": "gallery",
+    "box7": "calendar",
+    "box8": "phone",
+    "box9": "browser",
+    "box10": "weather",
+    "box11": "widget",
+    "box12": "store"
+  };
+};
 
 function setIconAndBackgroundGradient(boxId, imageUrl) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");

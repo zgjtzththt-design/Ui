@@ -1048,8 +1048,8 @@ function setLockWallpaper(imageUrl, btn) {
   const lockVideo = document.getElementById("lockVideoWallpaper");
   if (lockVideo) lockVideo.style.display = "none";
 
-  wallPaper2.style.backgroundImage = `url(${imageUrl})`;
-  wallpaper_preview2.style.backgroundImage = `url(${imageUrl})`;
+  wallPaper2.style.backgroundImage = `url('${imageUrl}')`;
+  wallpaper_preview2.style.backgroundImage = `url('${imageUrl}')`;
 
   select_color_from_img(imageUrl);
 }
@@ -1066,7 +1066,7 @@ function setHomeWallpaper(imageUrl, btn) {
     "--bg--wallpaper",
     `url('${imageUrl}')`
   );
-  wallpaper.style.backgroundImage = `url(${imageUrl})`;
+  wallpaper.style.backgroundImage = `url('${imageUrl}')`;
 }
 
 function setLockVideoWallpaper(file) {
@@ -1122,7 +1122,8 @@ function hideWallpaperPopup() {
 }
 
 function setActive(btn) {
-  buttons.forEach((b) => b.classList.remove("active"));
+  const allButtons = document.querySelectorAll(".img-button");
+  allButtons.forEach((b) => b.classList.remove("active"));
   btn.classList.add("active");
   select_color_from_img(selectedImageUrl);
 }
@@ -1188,8 +1189,9 @@ btn_cancel_wallpaper.addEventListener("click", () => {
 
 // Init listeners
 function addWallpaperImageListeners() {
-  buttons.forEach((btn) => {
-    if (btn !== addBtn) {
+  const allButtons = document.querySelectorAll(".img-button");
+  allButtons.forEach((btn) => {
+    if (btn !== addBtn && btn !== document.getElementById("addLiveWallpaperBtn")) {
       btn.addEventListener("click", handleImageButtonClick);
     }
   });
@@ -1199,8 +1201,9 @@ function addWallpaperImageListeners() {
 }
 
 function removeWallpaperImageListeners() {
-  buttons.forEach((btn) => {
-    if (btn !== addBtn) {
+  const allButtons = document.querySelectorAll(".img-button");
+  allButtons.forEach((btn) => {
+    if (btn !== addBtn && btn !== document.getElementById("addLiveWallpaperBtn")) {
       btn.removeEventListener("click", handleImageButtonClick);
     }
   });

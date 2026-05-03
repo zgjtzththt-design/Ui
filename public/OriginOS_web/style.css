@@ -25,7 +25,7 @@
   --bg--background: #eaeaea;
   --bg--background2: #ffffff;
   --bg--color: #101010;
-  --bg--wallpaper: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
+  --bg--wallpaper: url("originos_data/wallpapers/wallpaper_1.webp")
     no-repeat center center;
 
   --bg--timeHidingIcon: 0.21s;
@@ -221,7 +221,7 @@ body.full-screen .app4app.open {
 .wallpaper {
   width: 100%;
   height: 100%;
-  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
+  background: url("originos_data/wallpapers/wallpaper_1.webp")
     no-repeat center center fixed;
   background-size: 100%;
   scale: 100%;
@@ -1192,61 +1192,53 @@ body.full-screen .app4app.open {
   position: absolute;
   top: 15px;
   right: 30px;
-  width: 27px;
-  height: 14px;
-  background: rgba(78, 78, 78, 0.5);
-  border-radius: 3px;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  position: absolute;
-  z-index: 100;
-  color: rgb(42, 42, 42);
+  gap: 5px;
   z-index: 10010;
   transition: all 0.3s;
-  scale: 0.9;
+  scale: 0.95;
 }
 .status-battery.close {
   right: 35px;
 }
 .battery-small {
-  position: absolute;
-  left: 102%;
   width: 2px;
-  height: 8px;
-  border-radius: 3px;
-  display: flex;
-  background: rgba(78, 78, 78, 0.5);
-  transition: all 0.3s;
+  height: 5px;
+  background: currentColor;
+  opacity: 0.7;
+  border-radius: 0 2px 2px 0;
+  margin-left: 1px;
+  transition: opacity 0.3s, background-color 0.3s;
 }
 .battery-small2 {
-  left: 0%;
-  width: calc(100%);
   height: 100%;
-  border-radius: 4px;
-  display: flex;
-  background: rgb(255, 255, 255);
+  border-radius: 2px;
+  background: currentColor;
+  transition: width 0.3s ease, background-color 0.3s;
 }
 .container-battery {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 3px;
+  width: 26px;
+  height: 13px;
+  border: 1.5px solid currentColor;
+  opacity: 0.85;
+  border-radius: 5px;
+  padding: 1.5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 .battery-num {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  font-family: "Fredoka";
-  transition: all 0.3s;
-  font-weight: bold;
-  font-size: 12px;
-  color: rgb(49, 49, 49);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  margin-right: 2px;
+  transition: opacity 0.3s, color 0.3s;
 }
 .battery-num.close {
-  color: rgba(255, 255, 255, 0);
+  opacity: 0;
 }
 .camera {
   transform: translateX(-50%);
@@ -2516,7 +2508,7 @@ input[type="color"] {
   position: absolute;
   width: 100%;
   height: 70%;
-  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
+  background: url("originos_data/wallpapers/wallpaper_1.webp")
     no-repeat center center fixed;
   background-size: 100%;
   top: 0;
@@ -2671,7 +2663,7 @@ input[type="color"] {
 .wallpaper_aod_preview_screen {
   height: 140px;
   width: 140px;
-  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
+  background: url("originos_data/wallpapers/wallpaper_1.webp")
     no-repeat center center fixed;
   background-size: 100%;
 }
@@ -2991,7 +2983,7 @@ input[type="color"] {
 
 .widgetPreviewWallpaper {
   position: absolute;
-  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
+  background: url("originos_data/wallpapers/wallpaper_1.webp")
     no-repeat center center;
   background-size: 100%;
   top: 10%;
@@ -4878,7 +4870,7 @@ input[type="color"] {
   width: 330px;
   height: 700px;
   border-radius: var(--bg--border_radius_phone);
-  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png") center/cover no-repeat;
+  background: url("originos_data/wallpapers/wallpaper_1.webp") center/cover no-repeat;
   display: flex;
   flex-direction: column;
   overflow: hidden;
