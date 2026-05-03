@@ -195,19 +195,19 @@
               </div>
 
               <div id="welcome-setup-screen">
-                  <h2 data-i18n="setup_title" style="color:white; margin-bottom:30px; text-align: center; width: 100%;">Language & Permissions</h2>
+                  <h2 style="color:white; margin-bottom:30px; text-align: center; width: 100%;">إعدادات الأذونات</h2>
                   
                   <div class="language-selector">
                       <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
                       <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
                       <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
-                      <button class="lang-btn" data-lang="zh-CN" onclick="setLanguage('zh-CN')">中文</button>
                   </div>
 
-                  <div class="perm-card" data-i18n="root_perm">Allow operations as Root</div>
-                  <div class="perm-card" data-i18n="apps_perm">Allow reading installed app list</div>
+                  <div class="perm-card">Allow connect to Internet ✓</div>
+                  <div class="perm-card">Allow operations as Root</div>
+                  <div class="perm-card">Allow reading installed app list</div>
                   
-                  <button class="finish-btn" data-i18n="finish" onclick="finishSetup()">Finish Setup</button>
+                  <button class="finish-btn" onclick="finishSetup()">إنهاء الإعداد</button>
               </div>
           </div>
       </div>
@@ -227,7 +227,7 @@
                 d="M479.89-61.28q-42.89 0-72.27-29.5-29.38-29.49-29.38-72.14 0-42.88 29.49-72.26 29.5-29.39 72.38-29.39 42.89 0 72.27 29.5 29.38 29.49 29.38 72.38 0 42.65-29.49 72.03-29.5 29.38-72.38 29.38ZM255.5-297.39 142.78-410.11q64.05-64.28 150.73-103.3Q380.2-552.43 480-552.43q99.8 0 186.49 38.9 86.68 38.9 150.73 103.18L704.5-297.39q-44.55-43.98-101.36-68.68-56.81-24.69-123.14-24.69t-123.14 24.69q-56.81 24.7-101.36 68.68ZM36.11-516.02-76.85-628.98Q29.76-735.59 171.53-798.03 313.3-860.48 480-860.48q166.7 0 308.47 62.83 141.77 62.82 248.38 169.43L923.89-515.26q-85.56-84.61-198.76-134.2-113.2-49.58-245.13-49.58t-245.13 49.2q-113.2 49.21-198.76 133.82Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="wifi">@sungsamtech</div>
+            <div class="bottom_textControlsCenter">@sungsamtech</div>
           </div>
           <div
             class="itemControlsCenter musicControlsCenter"
@@ -266,11 +266,7 @@
                 />
               </svg>
             </div>
-            <div
-              class="left-text"
-              id="music_textControlsCenter"
-              data-i18n="music_not_playing"
-            >Not playing</div>
+            <div id="music_textControlsCenter">Not playing</div>
             <div class="controls_music3">
               <div onclick="event.stopPropagation(); prevTrack_music()">
                 <svg
@@ -320,7 +316,7 @@
                 d="M24.65-124.65v-368.94h153.18v368.94H24.65Zm252.76 0v-475.94h153.18v475.94H277.41Zm252 0v-582.7h153.18v582.7H529.41Zm252.76 0v-710.7h153.18v710.7H782.17Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_data">Data</div>
+            <div class="bottom_textControlsCenter">Data</div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID3ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -328,7 +324,7 @@
                 d="M255.41-44.65v-131.46l127-87.76v-122.35L44.65-252.46v-154.17l337.76-234.52v-176.61q0-40.44 28.58-69.01 28.58-28.58 69.01-28.58 40.43 0 69.51 28.58 29.08 28.57 29.08 69.01v176.61l336.76 234.52v154.17L578.59-386.22v122.35l126.52 87.76v131.46L480-111.61 255.41-44.65Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="airplane_mode">Airplane</div>
+            <div class="bottom_textControlsCenter">Airplane</div>
           </div>
           <div
             class="itemControlsCenter connectControlsCenter"
@@ -390,7 +386,7 @@
                 d="M44.65-151.3v-273.63q0-33.2 11-57.16 11-23.95 29-44.13v-122.55q0-61.97 45.08-106.16 45.07-44.2 106.75-44.2h151.67q23.28 0 47.29 8.14 24.01 8.14 44.56 22.19 20.55-14.05 44.56-22.19t47.29-8.14h151.67q61.68 0 106.75 44.2 45.08 44.19 45.08 106.16v122.55q18 20.18 29 44.13 11 23.96 11 57.16v273.63H802.17v-81.77H157.83v81.77H44.65Zm487.2-415.77h230.32v-81.49q0-16.12-11.43-26.76-11.44-10.64-27.22-10.64H568.98q-15.78 0-26.46 10.66-10.67 10.65-10.67 26.39v81.84Zm-334.02 0h230.32v-81.49q0-16.12-10.67-26.76-10.68-10.64-26.46-10.64H236.48q-15.78 0-27.22 10.66-11.43 10.65-11.43 26.39v81.84Zm-40 220.83h644.34v-80q0-15.8-10.67-27.23-10.68-11.42-26.46-11.42H195.25q-16.07 0-26.75 11.43-10.67 11.44-10.67 27.22v80Zm644.34 0H157.83h644.34Z"
               />
             </svg>
-            <span data-i18n="ui_focus">Focus</span>
+            Focus
           </div>
           <div class="itemControlsCenter" id="controlCenterID12ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -398,7 +394,7 @@
                 d="M427.76-55.96v-296.52L252.48-178.72l-73.76-73.76L406-480 178.72-707.52l73.76-73.76 175.28 173.76v-296.52h53l248.52 248.52L554-480l175.28 175.52L480.76-55.96h-53Zm106-551.56 47.76-48-47.76-44v92Zm0 347.04 47.76-44-47.76-48v92Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="bluetooth">Bluetooth</div>
+            <div class="bottom_textControlsCenter">Bluetooth</div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID11ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -406,7 +402,7 @@
                 d="M158.52-204.65q-67.68 0-114.9-47.21-47.21-47.22-47.21-114.9v-226.72q0-67.68 47.21-114.78 47.22-47.09 114.9-47.09h501.7q67.44 0 114.65 47.09 47.22 47.1 47.22 114.78v226.72q0 67.68-47.22 114.9-47.21 47.21-114.65 47.21h-501.7Zm1-113.18h499.46q21.04 0 35.48-14.45 14.45-14.44 14.45-35.48v-224.72q0-21.04-14.45-35.36-14.44-14.33-35.48-14.33H159.52q-21.04 0-35.48 14.33-14.45 14.32-14.45 35.36v224.72q0 21.04 14.45 35.48 14.44 14.45 35.48 14.45Zm702.57-42.74V-600.2H907q23.67 0 40.13 16.46t16.46 40.13v126.46q0 23.43-16.46 40.01-16.46 16.57-40.13 16.57h-44.91Zm-712.5 11.31v-252.91h415.04v252.91H149.59Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_battery_save">Battery save</div>
+            <div class="bottom_textControlsCenter">Battery save</div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID10ControlsCenter">
             <svg
@@ -420,7 +416,7 @@
                 d="M479.91-469.04q37.57 0 64.31-26.65 26.74-26.65 26.74-64.22t-26.65-64.31q-26.65-26.74-64.22-26.74t-64.31 26.65q-26.74 26.65-26.74 64.22t26.65 64.31q26.65 26.74 64.22 26.74ZM480-43.65Q298.8-193.37 211.73-316.63q-87.08-123.26-87.08-238.85 0-152.52 104.5-256.69Q333.64-916.35 480-916.35t250.85 104.18Q835.35-708 835.35-555.48q0 115.59-87.08 238.85Q661.2-193.37 480-43.65Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_location">Location</div>
+            <div class="bottom_textControlsCenter">Location</div>
           </div>
           <div
             class="itemControlsCenter"
@@ -433,7 +429,7 @@
                 d="M239.35-35.04q-47.63 0-80.4-32.78-32.78-32.77-32.78-80.4v-401.06q0-47.96 32.78-80.57 32.77-32.61 80.4-32.61h13.13v-73.06q0-96 66.57-163t160.95-67q94.38 0 160.95 67t66.57 163v73.06h13.13q47.63 0 80.4 32.61 32.78 32.61 32.78 80.57v401.06q0 47.63-32.78 80.4-32.77 32.78-80.4 32.78h-481.3Zm240.81-219.98q38.12 0 64.91-27.06 26.78-27.07 26.78-65.07 0-38-26.94-64.9-26.95-26.91-65.07-26.91-38.12 0-64.91 27.03-26.78 27.03-26.78 64.98 0 38.05 26.94 64.99 26.95 26.94 65.07 26.94ZM365.65-662.46h228.7v-73.06q0-48.21-33.35-82.52-33.34-34.31-81.12-34.31-47.77 0-81 34.31t-33.23 82.52v73.06Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_lock">Lock</div>
+            <div class="bottom_textControlsCenter">Lock</div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID15ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -441,7 +437,7 @@
                 d="M416.24-338.24q23.88 24 62.7 24.38 38.82.38 58.82-28.38l245.59-359.35L422.24-456q-28.76 20-29.38 56.94-.62 36.94 23.38 60.82Zm63.55-490.3q64.14 0 126.26 18.97 62.11 18.98 112.02 53.98l-104.94 71.02q-33-16.52-65.18-23.66-32.19-7.14-67.57-7.14-129.95 0-223.73 92.54t-93.78 224.59q0 43.76 10.88 80.92 10.88 37.17 30.38 72.69h551.72q20.12-36.23 30.7-74.54 10.58-38.31 10.58-83.07 0-32.04-7.52-66.71-7.52-34.66-24.04-66.42l71.78-102.7q33.95 50.72 53.45 110.92 19.5 60.19 19.5 123.03 0 60.12-14.74 115.91-14.74 55.8-43.97 106.12-13.2 24.44-38.11 37.54-24.91 13.09-52.44 13.09H198.96q-27.49 0-52.78-13.33-25.29-13.34-37.77-37.3-27.24-47.24-42.98-101.98Q49.7-338.81 49.7-398.5q0-88.46 33.85-166.57 33.86-78.12 92.26-136.9 58.39-58.79 136.81-92.68 78.42-33.89 167.17-33.89Zm20.32 328.43Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_boost">BOOST</div>
+            <div class="bottom_textControlsCenter">BOOST</div>
           </div>
           <div
             class="itemControlsCenter"
@@ -453,7 +449,7 @@
                 d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_timer">Timer</div>
+            <div class="bottom_textControlsCenter">Timer</div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID13ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -461,7 +457,7 @@
                 d="M206.17-772.5v-142.85h547.66v142.85H206.17Zm273.91 444.67q28.77 0 48.83-20.14 20.07-20.14 20.07-48.91 0-28.77-20.14-48.96-20.14-20.18-48.92-20.18-28.77 0-48.83 20.3-20.07 20.3-20.07 49.08 0 28.77 20.14 48.79t48.92 20.02ZM287.93-44.65v-464.81l-81.76-121.52v-39.35h547.66v39.35l-81.76 121.52v464.81H287.93Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_flashlight">Flash</div>
+            <div class="bottom_textControlsCenter">Flash</div>
           </div>
         </div>
         <div id="editControlsCenterBtn">
@@ -496,7 +492,7 @@
       </div>
 
       <div class="lp2" id="lp2"></div>
-              <div class="left-text-tb" id="left-text-tb" data-i18n="ui_hide_wallpaper">Hide Wallpaper</div>
+      <div class="left-text-tb" id="left-text-tb">Hide Wallpaper</div>
       <div class="thanh-status2" id="thanh-status2"></div>
       <div class="thanh-status" id="thanh-status"></div>
       <div class="status-battery">
@@ -715,14 +711,13 @@
                   background-size: 100%;
                 "
               ></div>
-              <div class="left-text" id="theme_name_setting" style="left: 60px" data-i18n="ui_themes">
+              <div class="left-text" id="theme_name_setting" style="left: 60px">
                 Themes
               </div>
               <div
                 class="left-text-small"
                 id="theme_name_small_setting"
                 style="left: 60px"
-                data-i18n="ui_themes_desc"
               >
                 Wallpaper &middot; Finger Print
               </div>
@@ -740,7 +735,7 @@
               <div class="left-text" style="left: 60px" data-i18n="display">
                 Display
               </div>
-              <div class="left-text-small" style="left: 60px" data-i18n="ui_display_desc">
+              <div class="left-text-small" style="left: 60px">
                 Phone Frame &middot; Full Screen
               </div>
             </div>
@@ -766,7 +761,6 @@
                 class="left-text-small"
                 id="animation_name_small_setting"
                 style="left: 60px"
-                data-i18n="ui_sound_desc"
               >
                 Sound system
               </div>
@@ -786,7 +780,7 @@
                   />
                 </svg>
               </div>
-              <div class="left-text" id="lock_name_style" style="left: 60px" data-i18n="ui_lock">
+              <div class="left-text" id="lock_name_style" style="left: 60px">
                 Lock style
               </div>
               <div
@@ -804,10 +798,10 @@
                   <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q100 0 170 70t70 170q0 11-1 21t-4 22q70 12 117.5 65.5T880-380q0 75-52.5 127.5T700-200H260Zm0-80h440q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-67-46.5-113.5T480-720q-67 0-113.5 46.5T320-560h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h60v-80Z"/>
                 </svg>
               </div>
-              <div class="left-text" style="left: 60px" data-i18n="ui_cloud_sync">
+              <div class="left-text" style="left: 60px">
                 Cloud Sync
               </div>
-              <div class="left-text-small" style="left: 60px" id="cloud_status" data-i18n="ui_cloud_sync_desc">
+              <div class="left-text-small" style="left: 60px" id="cloud_status">
                 Login with Google to back up data
               </div>
             </div>
@@ -825,7 +819,6 @@
                 class="left-text"
                 id="animation_name_setting"
                 style="left: 60px"
-                data-i18n="ui_animation"
               >
                 Animation
               </div>
@@ -833,7 +826,6 @@
                 class="left-text-small"
                 id="animation_name_small_setting"
                 style="left: 60px"
-                data-i18n="ui_animation_speed"
               >
                 Animation Speed
               </div>
@@ -850,17 +842,17 @@
                 <div class="card-group">
                     <div class="list-item" onclick='
                       showPopupInput({
-                        message: translations[localStorage.getItem("language") || "en"].ui_enter_name,
+                        message: "أدخل اسم الهاتف الجديد",
                         placeholder: document.getElementById("phoneName").textContent.trim(),
                         defaultText: document.getElementById("phoneName").textContent.trim(),
                         maxLength: 30,
-                        buttonText: translations[localStorage.getItem("language") || "en"].ui_rename,
+                        buttonText: "إعادة تسمية",
                         onSubmit: (resultText) => {
                           document.getElementById("phoneName").textContent = resultText;
                           localStorage.setItem("phoneName", resultText);
                         },
                       });'>
-                        <span class="label" data-i18n="ui_device_name">اسم الجهاز</span>
+                        <span class="label">اسم الجهاز</span>
                         <div class="left-content">
                             <svg class="icon-settings" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 12-5 5-5-5h3V3h4v9h3Zm-7 7.09c1.68 0 3.29-.65 4.56-1.84L21.37 12c-1.27-1.19-2.88-1.84-4.56-1.84H17v2h-.19c1.01 0 1.94.4 2.75 1.16L12 21.09l-7.56-7.77c.81-.76 1.74-1.16 2.75-1.16H7v-2h-.19c-1.68 0-3.29.65-4.56 1.84l4.81 5.25c1.27 1.19 2.88 1.84 4.56 1.84H12ZM19 12V3h-4v9h-3l5 5 5-5h-3Z"/></svg>
                             <span class="value" id="phoneName">Xiaomi REDMI 14C Édition</span>
@@ -871,7 +863,7 @@
 
                 <div class="card-group">
                     <div class="list-item">
-                        <span class="label" data-i18n="ui_storage">التخزين</span>
+                        <span class="label">التخزين</span>
                         <div class="left-content">
                             <span class="value"><span id="storageUsed">--MB</span>/<span id="storage">--MB</span></span>
                             <span class="arrow">‹</span>
@@ -881,43 +873,42 @@
 
                 <div class="card-group">
                     <div class="list-item" id="khaysetting1-1">
-                        <span class="label" data-i18n="ui_system_version">إصدار نظام التشغيل</span>
+                        <span class="label">إصدار نظام التشغيل</span>
                         <span class="value" id="Vesion">3.0.18.0.WGTMIXM</span>
                     </div>
                 </div>
                 
                 <div class="card-group">
                     <div class="list-item" id="khaysetting1-2" onclick='window.open("https://quandz24-ui.github.io/OriginOS_web", "_blank");'>
-                        <span class="label" data-i18n="ui_android_version">إصدار Android</span>
+                        <span class="label">إصدار Android</span>
                         <span class="value">16 BP2A.250605.03</span>
                     </div>
                 </div>
 
                 <div class="card-group">
                     <div class="list-item">
-                        <span class="label" data-i18n="ui_android_security">تحديث أمان نظام Android</span>
+                        <span class="label">تحديث أمان نظام Android</span>
                         <span class="value">2026-02-01</span>
                     </div>
                 </div>
 
                 <div class="card-group">
                     <div class="list-item" onclick="showChangelog()">
-                        <span class="label" data-i18n="ui_specs">المواصفات والمعلومات التفصيلية</span>
+                        <span class="label">المواصفات والمعلومات التفصيلية</span>
                         <span class="arrow">‹</span>
                     </div>
                     <div class="list-item" onclick='window.open("https://t.me/OriginWEB", "_blank");'>
-                        <span class="label" id="name_dev" data-i18n="ui_dev_comm">مجتمع المطورين</span>
+                        <span class="label" id="name_dev">مجتمع المطورين</span>
                         <span class="arrow">‹</span>
                     </div>
                 </div>
 
                 <div class="card-group">
                     <div class="list-item" onclick="
-                      const t = translations[localStorage.getItem('language') || 'en'];
                       showPopup2_alert(
-                        t.ui_reset_warning,
-                        t.ui_reset_btn,
-                        t.ui_cancel,
+                        'هل أنت متأكد أنك تريد مسح كافة البيانات والإعدادات؟',
+                        'إعادة ضبط',
+                        'إلغاء',
                         () => { 
                           localStorage.clear();
                           sessionStorage.clear();
@@ -925,7 +916,7 @@
                         },
                         () =>{}
                       )">
-                        <span class="label" style="color: #ff4d4f;" data-i18n="ui_factory_reset">إعادة ضبط المصنع</span>
+                        <span class="label" style="color: #ff4d4f;">إعادة ضبط المصنع</span>
                         <span class="arrow">‹</span>
                     </div>
                 </div>
@@ -2026,204 +2017,78 @@
                 <div class="button-row" id="button-row">
                   <div
                     class="img-button active"
-                    data-img="originos_data/wallpapers/wallpaper_1.webp"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg"
                   >
                     <img
-                      src="originos_data/wallpapers/wallpaper_1.webp"
+                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777230291/crf78p0yruery2yurgae.jpg"
                       alt="1"
                     />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_2.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710927/ddppbvq9pcl3chdhzngv.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_2.jpg" alt="2" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710927/ddppbvq9pcl3chdhzngv.jpg" alt="2" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_3.png"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710899/bi3avfi1mgwrbinsfim5.webp"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_3.png" alt="3" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710899/bi3avfi1mgwrbinsfim5.webp" alt="3" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_4.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710892/crcetooolaut8w3tngmi.png"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_4.jpg" alt="4" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710892/crcetooolaut8w3tngmi.png" alt="4" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_5.webp"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710882/d1cetgjnbjo7kszjjepq.png"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_5.webp" alt="5" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710882/d1cetgjnbjo7kszjjepq.png" alt="5" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_6.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_6.jpg" alt="6" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg" alt="6" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_7.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_7.jpg" alt="7" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg" alt="7" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_8.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710411/cz4gxw9qo7y7t1nmx3tr.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_8.jpg" alt="8" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710411/cz4gxw9qo7y7t1nmx3tr.jpg" alt="8" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_9.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710389/g3pyxts0ohkf5pjojgx8.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_9.jpg" alt="9" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710389/g3pyxts0ohkf5pjojgx8.jpg" alt="9" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/wallpapers/wallpaper_10.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710365/e7simcpvt35vaavqivhp.png"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_10.jpg" alt="10" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710365/e7simcpvt35vaavqivhp.png" alt="10" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_1.webp"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710346/mt09qapvg96ycywlsuqq.png"
                   >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_1.webp" alt="H1" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710346/mt09qapvg96ycywlsuqq.png" alt="11" />
                   </div>
                   <div
                     class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_2.jpg"
+                    data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg"
                   >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_2.jpg" alt="H2" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_3.png"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_3.png" alt="H3" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_4.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_4.jpg" alt="H4" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_5.webp"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_5.webp" alt="H5" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_6.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_6.jpg" alt="H6" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_7.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_7.jpg" alt="H7" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_8.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_8.jpg" alt="H8" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_9.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_9.jpg" alt="H9" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_10.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_10.jpg" alt="H10" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_11.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_11.jpg" alt="H11" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_12.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_12.jpg" alt="H12" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_13.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_13.jpg" alt="H13" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_14.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_14.jpg" alt="H14" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_15.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_15.jpg" alt="H15" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_16.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_16.jpg" alt="H16" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_17.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_17.jpg" alt="H17" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_18.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_18.jpg" alt="H18" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_19.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_19.jpg" alt="H19" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_20.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_20.jpg" alt="H20" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_21.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_21.jpg" alt="H21" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_22.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_22.jpg" alt="H22" />
-                  </div>
-                  <div
-                    class="img-button"
-                    data-img="originos_data/hyperos_wallpapers/hyperos_23.jpg"
-                  >
-                    <img src="originos_data/hyperos_wallpapers/hyperos_23.jpg" alt="H23" />
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777710437/vllnwltipab0xbs80cj4.jpg" alt="12" />
                   </div>
                   <div class="img-button add-button" id="addBtn">+</div>
                   <div class="img-button add-button" id="addLiveWallpaperBtn" style="font-size: 12px; display: flex; align-items: center; justify-content: center;">Vid</div>
@@ -3859,13 +3724,13 @@
               </div>
 
               <!-- Nút cam ở giữa -->
-              <button class="btn-main_clock" id="mainBtn_clock" data-i18n="ui_timer">Start</button>
+              <button class="btn-main_clock" id="mainBtn_clock">Start</button>
 
               <!-- Hai nút sau khi nhân đôi -->
-              <button class="btn-start_clock" id="startStopBtn_clock" data-i18n="do_not_disturb">
+              <button class="btn-start_clock" id="startStopBtn_clock">
                 Stop
               </button>
-              <button class="btn-reset_clock" id="resetBtn_clock" data-i18n="ui_cancel">Reset</button>
+              <button class="btn-reset_clock" id="resetBtn_clock">Reset</button>
             </div>
           </div>
         </div>
@@ -3936,7 +3801,7 @@
           "
         ></div>
 
-        <div class="footer-text2" id="longer_finger" data-i18n="unlock_hint">Keep holding...</div>
+        <div class="footer-text2" id="longer_finger">Keep holding...</div>
         <div class="lock-content" id="lock_content">
           <div class="date-display" id="dateText" style="z-index: -2"></div>
           <div class="lock-clock" id="lockclock"></div>
@@ -3958,7 +3823,6 @@
               color: white;
               display: none;
             "
-            data-i18n="ui_factory_reset"
           >
             Forgot password?
           </div>
@@ -4052,7 +3916,6 @@
     <div id="phone3dPopup" class="alert-backdrop" style="display: none; z-index: 10000000; padding: 0;">
       <iframe src="3d_phone.html" style="width: 100%; height: 100%; border: none;"></iframe>
     </div>
-
     <script src="welcome_screen.js"></script>
   </body>
 </html>

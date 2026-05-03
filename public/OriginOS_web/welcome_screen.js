@@ -46,6 +46,7 @@ function updateTextsLocally(lang) {
         'ar': {
             'welcome': 'Xiaomi HyperOS',
             'setup_title': 'إعدادات اللغة والأذونات',
+            'internet_perm': 'السماح بالاتصال بالإنترنت ✓',
             'root_perm': 'السماح بعمليات الروت',
             'apps_perm': 'السماح بقراءة قائمة التطبيقات',
             'finish': 'إنهاء الإعداد'
@@ -53,6 +54,7 @@ function updateTextsLocally(lang) {
         'fr': {
             'welcome': 'Xiaomi HyperOS',
             'setup_title': 'Langue et Autorisations',
+            'internet_perm': 'Autoriser connexion Internet ✓',
             'root_perm': 'Autoriser les opérations Root',
             'apps_perm': 'Autoriser la lecture des apps',
             'finish': 'Terminer la configuration'
@@ -60,16 +62,10 @@ function updateTextsLocally(lang) {
         'en': {
             'welcome': 'Xiaomi HyperOS',
             'setup_title': 'Language & Permissions',
+            'internet_perm': 'Allow Internet connection ✓',
             'root_perm': 'Allow Root operations',
             'apps_perm': 'Allow reading apps list',
             'finish': 'Finish Setup'
-        },
-        'zh-CN': {
-            'welcome': '小米澎湃OS',
-            'setup_title': '语言与权限设置',
-            'root_perm': '允许Root操作',
-            'apps_perm': '允许读取已安装应用列表',
-            'finish': '完成设置'
         }
     };
 
@@ -79,8 +75,9 @@ function updateTextsLocally(lang) {
     if (setupTitle) setupTitle.textContent = t.setup_title;
     
     const perms = document.querySelectorAll('.perm-card');
-    if (perms[0]) perms[0].textContent = t.root_perm;
-    if (perms[1]) perms[1].textContent = t.apps_perm;
+    if (perms[0]) perms[0].textContent = t.internet_perm;
+    if (perms[1]) perms[1].textContent = t.root_perm;
+    if (perms[2]) perms[2].textContent = t.apps_perm;
     
     const finishBtn = document.querySelector('.finish-btn');
     if (finishBtn) finishBtn.textContent = t.finish;

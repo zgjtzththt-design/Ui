@@ -42,7 +42,6 @@ function updatePasswordTexts() {
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem("language", lang);
-
   updatePasswordTexts();
 }
 

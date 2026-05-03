@@ -25,7 +25,7 @@
   --bg--background: #eaeaea;
   --bg--background2: #ffffff;
   --bg--color: #101010;
-  --bg--wallpaper: url("originos_data/wallpapers/wallpaper_1.webp")
+  --bg--wallpaper: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
     no-repeat center center;
 
   --bg--timeHidingIcon: 0.21s;
@@ -221,7 +221,7 @@ body.full-screen .app4app.open {
 .wallpaper {
   width: 100%;
   height: 100%;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
+  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
     no-repeat center center fixed;
   background-size: 100%;
   scale: 100%;
@@ -2508,7 +2508,7 @@ input[type="color"] {
   position: absolute;
   width: 100%;
   height: 70%;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
+  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
     no-repeat center center fixed;
   background-size: 100%;
   top: 0;
@@ -2663,7 +2663,7 @@ input[type="color"] {
 .wallpaper_aod_preview_screen {
   height: 140px;
   width: 140px;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
+  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
     no-repeat center center fixed;
   background-size: 100%;
 }
@@ -2983,7 +2983,7 @@ input[type="color"] {
 
 .widgetPreviewWallpaper {
   position: absolute;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
+  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png")
     no-repeat center center;
   background-size: 100%;
   top: 10%;
@@ -4870,7 +4870,7 @@ input[type="color"] {
   width: 330px;
   height: 700px;
   border-radius: var(--bg--border_radius_phone);
-  background: url("originos_data/wallpapers/wallpaper_1.webp") center/cover no-repeat;
+  background: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777676635/xpjyqrnfqvfsngkdysgl.png") center/cover no-repeat;
   display: flex;
   flex-direction: column;
   overflow: hidden;
