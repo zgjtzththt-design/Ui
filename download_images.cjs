@@ -27,14 +27,15 @@ const urls = [
   'https://res.cloudinary.com/dhlxcif1m/image/upload/v1777836757/giyfh4tdeqfh5hrcrfnc.jpg'
 ];
 
-const destDir = 'public/OriginOS_web/originos_data/wallpapers';
+const destDir = 'public/OriginOS_web/originos_data/hyperos_wallpapers';
 if (!fs.existsSync(destDir)){
     fs.mkdirSync(destDir, { recursive: true });
 }
 
 Promise.all(urls.map((url, i) => {
   return new Promise((resolve, reject) => {
-    const fileName = `wallpaper_${i + 1}${url.slice(url.lastIndexOf('.'))}`;
+    const ext = url.split('.').pop().split('?')[0] || 'jpg';
+    const fileName = `hyperos_${i + 1}.${ext}`;
     const dest = `${destDir}/${fileName}`;
     const file = fs.createWriteStream(dest);
     https.get(url, function(response) {
