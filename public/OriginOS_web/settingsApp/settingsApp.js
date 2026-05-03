@@ -1048,8 +1048,8 @@ function setLockWallpaper(imageUrl, btn) {
   const lockVideo = document.getElementById("lockVideoWallpaper");
   if (lockVideo) lockVideo.style.display = "none";
 
-  wallPaper2.style.backgroundImage = `url(${imageUrl})`;
-  wallpaper_preview2.style.backgroundImage = `url(${imageUrl})`;
+  wallPaper2.style.backgroundImage = `url('${imageUrl}')`;
+  wallpaper_preview2.style.backgroundImage = `url('${imageUrl}')`;
 
   select_color_from_img(imageUrl);
 }
@@ -1066,7 +1066,7 @@ function setHomeWallpaper(imageUrl, btn) {
     "--bg--wallpaper",
     `url('${imageUrl}')`
   );
-  wallpaper.style.backgroundImage = `url(${imageUrl})`;
+  wallpaper.style.backgroundImage = `url('${imageUrl}')`;
 }
 
 function setLockVideoWallpaper(file) {
