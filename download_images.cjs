@@ -23,7 +23,8 @@ const urls = [
   'https://raw.githubusercontent.com/Zun-Htet/HyperOS-Wallpapers/main/HyperOS%20Wallpapers/HyperOS%20(14).jpg',
   'https://raw.githubusercontent.com/Zun-Htet/HyperOS-Wallpapers/main/HyperOS%20Wallpapers/HyperOS%20(15).jpg',
   'https://raw.githubusercontent.com/Zun-Htet/HyperOS-Wallpapers/main/HyperOS%20Wallpapers/HyperOS%20(16).jpg',
-  'https://raw.githubusercontent.com/Zun-Htet/HyperOS-Wallpapers/main/HyperOS%20Wallpapers/HyperOS%20(17).jpg'
+  'https://raw.githubusercontent.com/Zun-Htet/HyperOS-Wallpapers/main/HyperOS%20Wallpapers/HyperOS%20(17).jpg',
+  'https://res.cloudinary.com/dhlxcif1m/image/upload/v1777836757/giyfh4tdeqfh5hrcrfnc.jpg'
 ];
 
 const destDir = 'public/OriginOS_web/originos_data/wallpapers';
