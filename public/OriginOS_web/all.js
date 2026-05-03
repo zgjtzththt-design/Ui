@@ -697,8 +697,8 @@ island.addEventListener("click", () => {
       island.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
       island.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island.style.height = "75px";
-      island.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
-      island.style.transform = `translateX(-50%) translateY(25px)`;
+      island.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
+      island.style.transform = `translateX(-50%) translateY(40px)`;
       buttons_island.classList.add("show");
       time_island.classList.add("show");
       image_island_right.classList.remove("show");
@@ -909,8 +909,8 @@ island_circle.addEventListener("click", () => {
       island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
       island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island2.style.height = "150px";
-      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
-      island2.style.transform = `translateX(-50%) translateY(25px)`;
+      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
+      island2.style.transform = `translateX(-50%) translateY(40px)`;
 
       image_island_right2.classList.add("show");
       controls_music2.classList.add("show");
@@ -936,8 +936,8 @@ island2.addEventListener("click", () => {
       island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
       island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island2.style.height = "150px";
-      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 10px)";
-      island2.style.transform = `translateX(-50%) translateY(25px)`;
+      island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
+      island2.style.transform = `translateX(-50%) translateY(40px)`;
 
       image_island_right2.classList.add("show");
       controls_music2.classList.add("show");
