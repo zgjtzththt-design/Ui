@@ -81,10 +81,6 @@ window.applyWallpapers = () => {
   });
 
   getData("lock_wallpaper", (value) => {
-    if (value && typeof value === 'string' && value.includes("res.cloudinary.com")) {
-      value = "originos_data/wallpapers/wallpaper_1.webp";
-      setData("lock_wallpaper", value);
-    }
     if (value) {
       const wallpaper_preview2 = document.querySelector(".wallpaper-preview2");
       const wallPaper2 = document.querySelector(".wallpaper2");
@@ -110,10 +106,6 @@ window.applyWallpapers = () => {
   });
 
   getData("home_wallpaper", (value) => {
-    if (value && typeof value === 'string' && value.includes("res.cloudinary.com")) {
-      value = "originos_data/wallpapers/wallpaper_1.webp";
-      setData("home_wallpaper", value);
-    }
     if (value) {
       const homeVideo = document.getElementById("homeVideoWallpaper");
       home_wallpaper = value;
@@ -134,8 +126,8 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
-  localStorage.setItem("home_wallpaper", "originos_data/wallpapers/wallpaper_1.webp");
-  localStorage.setItem("lock_wallpaper", "originos_data/wallpapers/wallpaper_1.webp");
+  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777849635/ta5ppmokdiactygun7pk.png");
+  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777849635/ta5ppmokdiactygun7pk.png");
   window.applyWallpapers();
 });
 

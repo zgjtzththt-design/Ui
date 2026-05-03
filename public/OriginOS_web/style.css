@@ -25,9 +25,7 @@
   --bg--background: #eaeaea;
   --bg--background2: #ffffff;
   --bg--color: #101010;
-  --bg--wallpaper: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839406/oai8xzpqhhur0f6mzig6.jpg")
-    no-repeat center center;
-
+  --bg--wallpaper: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1777849635/ta5ppmokdiactygun7pk.png");
   --bg--timeHidingIcon: 0.21s;
   --bg--delayHidingIcon: 0s;
   --bg--timeShowingIcon: 0.21s;
@@ -221,9 +219,8 @@ body.full-screen .app4app.open {
 .wallpaper {
   width: 100%;
   height: 100%;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
-    no-repeat center center fixed;
-  background-size: 100%;
+  background: var(--bg--wallpaper);
+  background-size: cover;
   scale: 100%;
   transition: all 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
   border-radius: var(--bg--border_radius_phone);
@@ -804,16 +801,6 @@ body.full-screen .app4app.open {
 .style-section button.active {
   background: rgba(255, 255, 255, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
-}
-
-.lock-clock.centered, .clock-display.centered {
-  top: 50% !important;
-  transform: scale(1) translateY(-50%) !important;
-}
-
-.date-display.clock-centered {
-  top: calc(50% - 70px) !important; /* Position date above centered clock */
-  transform: translateY(-50%) !important;
 }
 
 .lock-clock {
@@ -2508,9 +2495,8 @@ input[type="color"] {
   position: absolute;
   width: 100%;
   height: 70%;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
-    no-repeat center center fixed;
-  background-size: 100%;
+  background: var(--bg--wallpaper);
+  background-size: cover;
   top: 0;
   scale: 80%;
   transition: all 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
@@ -2663,9 +2649,9 @@ input[type="color"] {
 .wallpaper_aod_preview_screen {
   height: 140px;
   width: 140px;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
-    no-repeat center center fixed;
-  background-size: 100%;
+  background: var(--bg--wallpaper)
+    no-repeat center center;
+  background-size: cover;
 }
 .wallpaper_aod_preview_screen.full {
   position: absolute;
@@ -2983,9 +2969,8 @@ input[type="color"] {
 
 .widgetPreviewWallpaper {
   position: absolute;
-  background: url("originos_data/wallpapers/wallpaper_1.webp")
-    no-repeat center center;
-  background-size: 100%;
+  background: var(--bg--wallpaper) no-repeat center center;
+  background-size: cover;
   top: 10%;
   height: 200px;
   width: 280px;
@@ -4870,7 +4855,7 @@ input[type="color"] {
   width: 330px;
   height: 700px;
   border-radius: var(--bg--border_radius_phone);
-  background: url("originos_data/wallpapers/wallpaper_1.webp") center/cover no-repeat;
+  background: var(--bg--wallpaper) center/cover no-repeat;
   display: flex;
   flex-direction: column;
   overflow: hidden;
