@@ -74,7 +74,8 @@ const translations = {
         'ui_blur': 'Blur',
         'ui_animation_tuning': 'Animation tuning',
         'ui_rename': 'Rename',
-        'ui_enter_name': 'Enter new device name'
+        'ui_enter_name': 'Enter new device name',
+        'extract_icons_zip': 'Extract icons from ZIP'
     },
     'ar': {
         'phone_name': 'Xiaomi HyperOS',
@@ -151,7 +152,8 @@ const translations = {
         'ui_blur': 'التمويه',
         'ui_animation_tuning': 'ضبط الرسوم المتحركة',
         'ui_rename': 'إعادة تسمية',
-        'ui_enter_name': 'أدخل اسم الهاتف الجديد'
+        'ui_enter_name': 'أدخل اسم الهاتف الجديد',
+        'extract_icons_zip': 'استخراج أيقونات من ملف ZIP'
     },
     'fr': {
         'phone_name': 'Xiaomi HyperOS',
@@ -228,7 +230,8 @@ const translations = {
         'ui_blur': 'Flou',
         'ui_animation_tuning': 'Réglage d\'animation',
         'ui_rename': 'Renommer',
-        'ui_enter_name': 'Entrez le nouveau nom'
+        'ui_enter_name': 'Entrez le nouveau nom',
+        'extract_icons_zip': 'Extraire les icônes du ZIP'
     },
     'zh-CN': {
         'phone_name': '小米澎湃OS',
@@ -305,7 +308,8 @@ const translations = {
         'ui_blur': '模糊效果',
         'ui_animation_tuning': '动画微调',
         'ui_rename': '更名',
-        'ui_enter_name': '输入新设备名称'
+        'ui_enter_name': '输入新设备名称',
+        'extract_icons_zip': '从 ZIP 提取图标'
     }
 };
 

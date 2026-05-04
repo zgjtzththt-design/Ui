@@ -934,6 +934,99 @@ body.full-screen .app4app.open {
   z-index: 633427;
 }
 
+/* Gemini Assistant Styles */
+.gemini-assistant {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: inherit;
+}
+
+.gemini-assistant.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gemini-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 20px 5px transparent;
+  border: 4px solid transparent;
+  border-radius: inherit;
+  animation: gemini-border-glow 3s linear infinite;
+}
+
+@keyframes gemini-border-glow {
+  0% { border-color: #f00; box-shadow: inset 0 0 15px #f00; }
+  16% { border-color: #ff0; box-shadow: inset 0 0 15px #ff0; }
+  33% { border-color: #0f0; box-shadow: inset 0 0 15px #0f0; }
+  50% { border-color: #0ff; box-shadow: inset 0 0 15px #0ff; }
+  66% { border-color: #00f; box-shadow: inset 0 0 15px #00f; }
+  83% { border-color: #f0f; box-shadow: inset 0 0 15px #f0f; }
+  100% { border-color: #f00; box-shadow: inset 0 0 15px #f00; }
+}
+
+.gemini-search-container {
+  position: absolute;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: auto;
+}
+
+.gemini-assistant.active .gemini-search-container {
+  bottom: 30px;
+}
+
+.gemini-search-bar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.gemini-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.gemini-search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 16px;
+  color: #333;
+}
+
+.gemini-mic {
+  color: #4285F4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
 .setting-item_volume {
   display: flex;
   justify-content: space-between;

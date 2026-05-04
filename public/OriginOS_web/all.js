@@ -1192,6 +1192,139 @@ const lockscreen = document.getElementById("lockscreen");
 const wallpaper = document.getElementById("wallpaper");
 const unlockBtn = document.getElementById("unlock-btn");
 const powerbtn = document.querySelector(".power-button");
+
+// Gemini Assistant Logic
+let geminiTimer;
+let isGeminiActive = false;
+let powerBtnStartTime = 0;
+
+function activateGemini() {
+  const geminiUI = document.getElementById("gemini-assistant");
+  if (geminiUI && !isGeminiActive) {
+    geminiUI.classList.add("active");
+    isGeminiActive = true;
+    
+    // Clear the input on show
+    const geminiInput = document.getElementById("gemini-input");
+    if (geminiInput) geminiInput.value = "";
+    
+    const speak = () => {
+      const msg = new SpeechSynthesisUtterance();
+      msg.text = "Hello, do you need help?";
+      msg.lang = "en-US";
+      msg.rate = 1.0;
+      msg.pitch = 1.0;
+      
+      const voices = window.speechSynthesis.getVoices();
+      let femaleVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Female') || v.name.includes('Google US English') || v.name.includes('Zira') || v.name.includes('Samantha')));
+      if (femaleVoice) msg.voice = femaleVoice;
+      
+      msg.onend = () => {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          if (geminiInput) geminiInput.placeholder = "Microphone not supported.";
+          return;
+        }
+        
+        navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+          if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+            if (geminiInput) geminiInput.placeholder = "Listening not supported...";
+            return;
+          }
+          
+          const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+          window.geminiRecognition = new SpeechRecognition();
+          window.geminiRecognition.lang = "en-US";
+          window.geminiRecognition.interimResults = true;
+          
+          if (geminiInput) geminiInput.placeholder = "Listening...";
+          
+          window.geminiRecognition.onresult = (event) => {
+              const transcript = Array.from(event.results)
+                  .map(result => result[0])
+                  .map(result => result.transcript)
+                  .join('');
+              
+              if (geminiInput) {
+                  geminiInput.value = transcript;
+              }
+          };
+          
+          window.geminiRecognition.onerror = (e) => {
+              if (geminiInput) geminiInput.placeholder = "Error listening...";
+          };
+          
+          window.geminiRecognition.onend = () => {
+              if (geminiInput && !geminiInput.value) geminiInput.placeholder = "Ask Gemini...";
+          };
+          
+          try {
+              window.geminiRecognition.start();
+          } catch (e) {}
+        }).catch((err) => {
+          if (geminiInput) geminiInput.placeholder = "Microphone access denied.";
+          console.error("Microphone error:", err);
+        });
+      };
+      
+      window.speechSynthesis.speak(msg);
+    };
+
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = speak;
+    } else {
+      speak();
+    }
+
+    const closeGemini = (e) => {
+      if (!e.target.closest(".gemini-search-bar") && isGeminiActive) {
+        geminiUI.classList.remove("active");
+        isGeminiActive = false;
+        
+        if (window.geminiRecognition) {
+          try { window.geminiRecognition.abort(); } catch(e) {}
+        }
+        
+        document.removeEventListener("pointerdown", closeGemini);
+      }
+    };
+    setTimeout(() => document.addEventListener("pointerdown", closeGemini), 100);
+  }
+}
+
+if (powerbtn) {
+  // Replace the listener from loading.js with this one if possible, 
+  // or handle it here and rely on event ordering.
+  // Actually, we'll use a more robust way:
+  powerbtn.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    powerBtnStartTime = Date.now();
+    geminiTimer = setTimeout(() => {
+      activateGemini();
+      geminiTimer = null; // Mark as activated
+    }, 3000);
+  });
+
+  const handlePowerRelease = (e) => {
+    if (geminiTimer) {
+      clearTimeout(geminiTimer);
+      geminiTimer = null;
+      // It was a short press
+      const duration = Date.now() - powerBtnStartTime;
+      if (duration > 50) { // arbitrary small delay to avoid noise
+        powerbtnEvent();
+      }
+    }
+  };
+
+  window.addEventListener("pointerup", handlePowerRelease);
+  window.addEventListener("pointercancel", () => {
+    if (geminiTimer) {
+      clearTimeout(geminiTimer);
+      geminiTimer = null;
+    }
+  });
+}
 const fingerprint = document.querySelector(".lock-fingerprint");
 const lockclock = document.querySelector(".lock-clock");
 const lock_clock_date = document.getElementById("lock_content");

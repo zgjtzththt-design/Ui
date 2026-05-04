@@ -4349,70 +4349,85 @@ function preivewAnimationControlsCenter(e) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const iconFolderInput = document.getElementById("iconFolderInput");
-    if (iconFolderInput) {
-        iconFolderInput.addEventListener("change", (e) => {
-            const files = e.target.files;
-            if (!files || files.length === 0) return;
+    const iconZipInput = document.getElementById("iconZipInput");
+    if (iconZipInput) {
+        iconZipInput.addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
 
-            const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-            let updated = false;
+            if (typeof JSZip === "undefined") {
+                if (typeof tb_system === "function") tb_system("JSZip library is not loaded");
+                return;
+            }
 
-            const promises = Array.from(files).map((file) => {
-                return new Promise((resolve) => {
-                    if (!file.type.startsWith("image/")) {
-                        resolve();
-                        return;
-                    }
-                    // Clean filename, e.g., "الحاسبة.png" -> "الحاسبة"
-                    const fileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-                    const fileNameWithoutExtLower = fileName.toLowerCase().trim();
-                    const fullFileNameLower = file.name.toLowerCase().trim();
-                    
-                    const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
-                    
-                    // Find if there is a matching app name
-                    let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === fileNameWithoutExtLower) : null;
-                    
-                    if (!app && window.customApps) {
-                        // Check against keywords (like "calculator.png")
-                        app = window.customApps.find(a => {
-                            const kw = keywords[a.id];
-                            if (kw) {
-                                const kwClean = kw.substring(0, kw.lastIndexOf('.')).toLowerCase().trim() || kw.toLowerCase().trim();
-                                return kwClean === fileNameWithoutExtLower || kw === fullFileNameLower;
-                            }
-                            return false;
-                        });
-                    }
+            try {
+                const zip = new JSZip();
+                const content = await zip.loadAsync(file);
+                const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                let updated = false;
 
-                    if (app) {
-                        const reader = new FileReader();
-                        reader.onload = (ev) => {
-                            savedIcons[app.id] = ev.target.result;
-                            updated = true;
+                const promises = [];
+
+                zip.forEach((relativePath, zipEntry) => {
+                    if (zipEntry.dir) return;
+                    
+                    const fileName = zipEntry.name.split('/').pop();
+                    const extension = fileName.split('.').pop().toLowerCase();
+                    const imageExtensions = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
+                    
+                    if (!imageExtensions.includes(extension)) return;
+
+                    promises.push(new Promise(async (resolve) => {
+                        const baseName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+                        const baseNameLower = baseName.toLowerCase().trim();
+                        const fullNameLower = fileName.toLowerCase().trim();
+                        
+                        const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
+                        let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === baseNameLower) : null;
+                        
+                        if (!app && window.customApps) {
+                            app = window.customApps.find(a => {
+                                const kw = keywords[a.id];
+                                if (kw) {
+                                    const kwClean = kw.substring(0, kw.lastIndexOf('.')).toLowerCase().trim() || kw.toLowerCase().trim();
+                                    return kwClean === baseNameLower || kw === fullNameLower;
+                                }
+                                return false;
+                            });
+                        }
+
+                        if (app) {
+                            const blob = await zipEntry.async("blob");
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                                savedIcons[app.id] = ev.target.result;
+                                updated = true;
+                                resolve();
+                            };
+                            reader.readAsDataURL(blob);
+                        } else {
                             resolve();
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        resolve();
-                    }
+                        }
+                    }));
                 });
-            });
 
-            Promise.all(promises).then(() => {
+                await Promise.all(promises);
+
                 if (updated) {
                     localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
                     if (typeof applyCustomIcons === "function") {
                         applyCustomIcons();
                     }
                     if (typeof tb_system === "function") {
-                        tb_system("تم اختيار الأيقونات بنجاح");
+                        tb_system("تم استخراج الأيقونات من ZIP بنجاح");
                     }
                 } else {
-                     if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة لأسماء التطبيقات");
+                    if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة في ملف ZIP");
                 }
-            });
+            } catch (err) {
+                console.error("Error processing ZIP:", err);
+                if (typeof tb_system === "function") tb_system("خطأ أثناء معالجة ملف ZIP");
+            }
         });
     }
 

@@ -6,7 +6,8 @@ setTimeout(() => {
         removeWithFade(loading);
         
         if (typeof powerbtn !== 'undefined') {
-            powerbtn.addEventListener('pointerdown', powerbtnEvent);
+            // Handled on pointerup in all.js for Gemini support
+            // powerbtn.addEventListener('pointerdown', powerbtnEvent);
         }
 
         loading.style.display = "none";
