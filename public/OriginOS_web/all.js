@@ -123,6 +123,13 @@ window.applyWallpapers = () => {
       if (wallpaper_aod2) wallpaper_aod2.style.backgroundImage = `url('${value}')`;
     }
   });
+
+  getData("boot_animation", (value) => {
+    if (value) {
+      const bootAnimationImg = document.getElementById("bootAnimationImg");
+      if (bootAnimationImg) bootAnimationImg.src = value;
+    }
+  });
 };
 
 initOriginDB(() => {
