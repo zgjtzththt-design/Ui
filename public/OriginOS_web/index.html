@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -59,7 +59,6 @@
     <link rel="stylesheet" href="welcome_screen.css" />
   </head>
   <body class="preload">
-
     <div class="area-thanh">
       <div class="camera"></div>
       <div class="island_circle" id="island_circle">
@@ -118,9 +117,40 @@
         />
       </div>
       <div class="island" id="island">
-        <div class="island_charging" id="island_charging" style="display: flex; opacity: 0; pointer-events: none; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 100%; color: #26bd44; font-family: 'Noto Sans', sans-serif; font-weight: bold; font-size: 14px; position: absolute; top: 0; left: 0; transition: opacity 0.3s;">
-           <span id="island_charging_percent">100%</span>
-           <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#26bd44"><path d="M540-840v80h80v80H500v560q0 33-23.5 56.5T420-40q-33 0-56.5-23.5T340-120v-560q0-33 23.5-56.5T420-760h80v-80h40Z"/></svg>
+        <div
+          class="island_charging"
+          id="island_charging"
+          style="
+            display: flex;
+            opacity: 0;
+            pointer-events: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            height: 100%;
+            color: #26bd44;
+            font-family: &quot;Noto Sans&quot;, sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s;
+          "
+        >
+          <span id="island_charging_percent">100%</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="20px"
+            viewBox="0 -960 960 960"
+            width="20px"
+            fill="#26bd44"
+          >
+            <path
+              d="M540-840v80h80v80H500v560q0 33-23.5 56.5T420-40q-33 0-56.5-23.5T340-120v-560q0-33 23.5-56.5T420-760h80v-80h40Z"
+            />
+          </svg>
         </div>
         <div class="time_island" id="display_island">00:00</div>
 
@@ -176,68 +206,151 @@
         <div class="gemini-glow"></div>
         <div class="gemini-search-container">
           <div class="gemini-search-bar">
-            <svg class="gemini-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z" fill="url(#gemini-grad)"/>
+            <svg
+              class="gemini-logo"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2L14.85 9.15L22 12L14.85 14.85L12 22L9.15 14.85L2 12L9.15 9.15L12 2Z"
+                fill="url(#gemini-grad)"
+              />
               <defs>
-                <linearGradient id="gemini-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stop-color="#4285F4"/>
-                  <stop offset="0.5" stop-color="#9162EB"/>
-                  <stop offset="1" stop-color="#FF5D5D"/>
+                <linearGradient
+                  id="gemini-grad"
+                  x1="2"
+                  y1="2"
+                  x2="22"
+                  y2="22"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0" stop-color="#4285F4" />
+                  <stop offset="0.5" stop-color="#9162EB" />
+                  <stop offset="1" stop-color="#FF5D5D" />
                 </linearGradient>
               </defs>
             </svg>
-            <input type="text" placeholder="Ask Gemini..." id="gemini-input" readonly />
+            <input
+              type="text"
+              placeholder="Ask Gemini..."
+              id="gemini-input"
+              readonly
+            />
             <div class="gemini-mic">
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
+                />
+                <path
+                  d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
+                />
               </svg>
             </div>
           </div>
         </div>
       </div>
-      <div id="loading-screen" style="z-index: 9999999;">
+      <div id="loading-screen" style="z-index: 9999999">
         <div class="glow-effect"></div>
         <div class="image-container">
-          <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777243249/b3x4yrgkedfzdp6j1ty0.png" alt="Boot Animation">
+          <img
+            src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777243249/b3x4yrgkedfzdp6j1ty0.png"
+            alt="Boot Animation"
+          />
         </div>
-        <p id="lolhaha" style="display: none;">tiktok: @sungsamtech - @._naq.</p>
+        <p id="lolhaha" style="display: none">tiktok: @sungsamtech - @._naq.</p>
       </div>
       <!-- Welcome Screen -->
       <div id="welcome-screen">
-          <div class="welcome-container" id="welcome-container">
-              <div class="dark-fluid-bg"></div>
-              <div class="mesh-layer"></div>
-              <div class="water-ripple-bg"></div>
+        <div class="welcome-container" id="welcome-container">
+          <div class="dark-fluid-bg"></div>
+          <div class="mesh-layer"></div>
+          <div class="water-ripple-bg"></div>
 
-              <div class="welcome-screen-content" id="welcome-splash-screen">
-                  <h1 class="welcome-title entry-anim">Xiaomi HyperOS</h1>
-                  <div class="welcome-nav-btn entry-anim" onclick="nextSetupStep()">
-                      <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                  </div>
-              </div>
-
-              <div id="welcome-setup-screen">
-                  <h2 data-i18n="setup_title" style="color:white; margin-bottom:30px; text-align: center; width: 100%;">Language & Permissions</h2>
-                  
-                  <div class="language-selector">
-                      <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
-                      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
-                      <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
-                      <button class="lang-btn" data-lang="zh-CN" onclick="setLanguage('zh-CN')">中文</button>
-                  </div>
-
-                  <div class="perm-card" data-i18n="root_perm">Allow operations as Root</div>
-                  <div class="perm-card" data-i18n="apps_perm">Allow reading installed app list</div>
-                  
-                  <button class="finish-btn" data-i18n="finish" onclick="finishSetup()">Finish Setup</button>
-              </div>
+          <div class="welcome-screen-content" id="welcome-splash-screen">
+            <h1 class="welcome-title entry-anim">Xiaomi HyperOS</h1>
+            <div class="welcome-nav-btn entry-anim" onclick="nextSetupStep()">
+              <svg
+                width="35"
+                height="35"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
           </div>
+
+          <div id="welcome-setup-screen">
+            <h2
+              data-i18n="setup_title"
+              style="
+                color: white;
+                margin-bottom: 30px;
+                text-align: center;
+                width: 100%;
+              "
+            >
+              Language & Permissions
+            </h2>
+
+            <div class="language-selector">
+              <button
+                class="lang-btn"
+                data-lang="ar"
+                onclick="setLanguage('ar')"
+              >
+                العربية
+              </button>
+              <button
+                class="lang-btn"
+                data-lang="en"
+                onclick="setLanguage('en')"
+              >
+                English
+              </button>
+              <button
+                class="lang-btn"
+                data-lang="fr"
+                onclick="setLanguage('fr')"
+              >
+                Français
+              </button>
+              <button
+                class="lang-btn"
+                data-lang="zh-CN"
+                onclick="setLanguage('zh-CN')"
+              >
+                中文
+              </button>
+            </div>
+
+            <div class="perm-card" data-i18n="root_perm">
+              Allow operations as Root
+            </div>
+            <div class="perm-card" data-i18n="apps_perm">
+              Allow reading installed app list
+            </div>
+
+            <button
+              class="finish-btn"
+              data-i18n="finish"
+              onclick="finishSetup()"
+            >
+              Finish Setup
+            </button>
+          </div>
+        </div>
       </div>
       <div id="systemToast" class="system-toast"></div>
-      
+
       <div class="lpControlCenterControlsCenter">
         <div
           class="control-centerControlsCenter"
@@ -252,13 +365,18 @@
                 d="M479.89-61.28q-42.89 0-72.27-29.5-29.38-29.49-29.38-72.14 0-42.88 29.49-72.26 29.5-29.39 72.38-29.39 42.89 0 72.27 29.5 29.38 29.49 29.38 72.38 0 42.65-29.49 72.03-29.5 29.38-72.38 29.38ZM255.5-297.39 142.78-410.11q64.05-64.28 150.73-103.3Q380.2-552.43 480-552.43q99.8 0 186.49 38.9 86.68 38.9 150.73 103.18L704.5-297.39q-44.55-43.98-101.36-68.68-56.81-24.69-123.14-24.69t-123.14 24.69q-56.81 24.7-101.36 68.68ZM36.11-516.02-76.85-628.98Q29.76-735.59 171.53-798.03 313.3-860.48 480-860.48q166.7 0 308.47 62.83 141.77 62.82 248.38 169.43L923.89-515.26q-85.56-84.61-198.76-134.2-113.2-49.58-245.13-49.58t-245.13 49.2q-113.2 49.21-198.76 133.82Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="wifi">@sungsamtech</div>
+            <div class="bottom_textControlsCenter" data-i18n="wifi">
+              @sungsamtech
+            </div>
           </div>
           <div
             class="itemControlsCenter musicControlsCenter"
             id="controlCenterID1ControlsCenter"
             data-nonclick="1"
-            onclick="openApp(3); closeControlsCenter()"
+            onclick="
+              openApp(3);
+              closeControlsCenter();
+            "
           >
             <div id="box_musicControlsCenter">
               <svg
@@ -295,9 +413,16 @@
               class="left-text"
               id="music_textControlsCenter"
               data-i18n="music_not_playing"
-            >Not playing</div>
+            >
+              Not playing
+            </div>
             <div class="controls_music3">
-              <div onclick="event.stopPropagation(); prevTrack_music()">
+              <div
+                onclick="
+                  event.stopPropagation();
+                  prevTrack_music();
+                "
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="30px"
@@ -311,7 +436,10 @@
                 </svg>
               </div>
               <div
-                onclick="event.stopPropagation(); togglePlay_music()"
+                onclick="
+                  event.stopPropagation();
+                  togglePlay_music();
+                "
                 id="playPauseIcon_music3"
               >
                 <svg
@@ -324,7 +452,12 @@
                   <path d="M300.78-165.52v-628.96L795.61-480 300.78-165.52Z" />
                 </svg>
               </div>
-              <div onclick="event.stopPropagation(); nextTrack_music()">
+              <div
+                onclick="
+                  event.stopPropagation();
+                  nextTrack_music();
+                "
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="30px"
@@ -345,7 +478,9 @@
                 d="M24.65-124.65v-368.94h153.18v368.94H24.65Zm252.76 0v-475.94h153.18v475.94H277.41Zm252 0v-582.7h153.18v582.7H529.41Zm252.76 0v-710.7h153.18v710.7H782.17Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_data">Data</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_data">
+              Data
+            </div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID3ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -353,7 +488,9 @@
                 d="M255.41-44.65v-131.46l127-87.76v-122.35L44.65-252.46v-154.17l337.76-234.52v-176.61q0-40.44 28.58-69.01 28.58-28.58 69.01-28.58 40.43 0 69.51 28.58 29.08 28.57 29.08 69.01v176.61l336.76 234.52v154.17L578.59-386.22v122.35l126.52 87.76v131.46L480-111.61 255.41-44.65Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="airplane_mode">Airplane</div>
+            <div class="bottom_textControlsCenter" data-i18n="airplane_mode">
+              Airplane
+            </div>
           </div>
           <div
             class="itemControlsCenter connectControlsCenter"
@@ -423,7 +560,9 @@
                 d="M427.76-55.96v-296.52L252.48-178.72l-73.76-73.76L406-480 178.72-707.52l73.76-73.76 175.28 173.76v-296.52h53l248.52 248.52L554-480l175.28 175.52L480.76-55.96h-53Zm106-551.56 47.76-48-47.76-44v92Zm0 347.04 47.76-44-47.76-48v92Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="bluetooth">Bluetooth</div>
+            <div class="bottom_textControlsCenter" data-i18n="bluetooth">
+              Bluetooth
+            </div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID11ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -431,7 +570,9 @@
                 d="M158.52-204.65q-67.68 0-114.9-47.21-47.21-47.22-47.21-114.9v-226.72q0-67.68 47.21-114.78 47.22-47.09 114.9-47.09h501.7q67.44 0 114.65 47.09 47.22 47.1 47.22 114.78v226.72q0 67.68-47.22 114.9-47.21 47.21-114.65 47.21h-501.7Zm1-113.18h499.46q21.04 0 35.48-14.45 14.45-14.44 14.45-35.48v-224.72q0-21.04-14.45-35.36-14.44-14.33-35.48-14.33H159.52q-21.04 0-35.48 14.33-14.45 14.32-14.45 35.36v224.72q0 21.04 14.45 35.48 14.44 14.45 35.48 14.45Zm702.57-42.74V-600.2H907q23.67 0 40.13 16.46t16.46 40.13v126.46q0 23.43-16.46 40.01-16.46 16.57-40.13 16.57h-44.91Zm-712.5 11.31v-252.91h415.04v252.91H149.59Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_battery_save">Battery save</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_battery_save">
+              Battery save
+            </div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID10ControlsCenter">
             <svg
@@ -445,7 +586,9 @@
                 d="M479.91-469.04q37.57 0 64.31-26.65 26.74-26.65 26.74-64.22t-26.65-64.31q-26.65-26.74-64.22-26.74t-64.31 26.65q-26.74 26.65-26.74 64.22t26.65 64.31q26.65 26.74 64.22 26.74ZM480-43.65Q298.8-193.37 211.73-316.63q-87.08-123.26-87.08-238.85 0-152.52 104.5-256.69Q333.64-916.35 480-916.35t250.85 104.18Q835.35-708 835.35-555.48q0 115.59-87.08 238.85Q661.2-193.37 480-43.65Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_location">Location</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_location">
+              Location
+            </div>
           </div>
           <div
             class="itemControlsCenter"
@@ -458,7 +601,9 @@
                 d="M239.35-35.04q-47.63 0-80.4-32.78-32.78-32.77-32.78-80.4v-401.06q0-47.96 32.78-80.57 32.77-32.61 80.4-32.61h13.13v-73.06q0-96 66.57-163t160.95-67q94.38 0 160.95 67t66.57 163v73.06h13.13q47.63 0 80.4 32.61 32.78 32.61 32.78 80.57v401.06q0 47.63-32.78 80.4-32.77 32.78-80.4 32.78h-481.3Zm240.81-219.98q38.12 0 64.91-27.06 26.78-27.07 26.78-65.07 0-38-26.94-64.9-26.95-26.91-65.07-26.91-38.12 0-64.91 27.03-26.78 27.03-26.78 64.98 0 38.05 26.94 64.99 26.95 26.94 65.07 26.94ZM365.65-662.46h228.7v-73.06q0-48.21-33.35-82.52-33.34-34.31-81.12-34.31-47.77 0-81 34.31t-33.23 82.52v73.06Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_lock">Lock</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_lock">
+              Lock
+            </div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID15ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -466,19 +611,26 @@
                 d="M416.24-338.24q23.88 24 62.7 24.38 38.82.38 58.82-28.38l245.59-359.35L422.24-456q-28.76 20-29.38 56.94-.62 36.94 23.38 60.82Zm63.55-490.3q64.14 0 126.26 18.97 62.11 18.98 112.02 53.98l-104.94 71.02q-33-16.52-65.18-23.66-32.19-7.14-67.57-7.14-129.95 0-223.73 92.54t-93.78 224.59q0 43.76 10.88 80.92 10.88 37.17 30.38 72.69h551.72q20.12-36.23 30.7-74.54 10.58-38.31 10.58-83.07 0-32.04-7.52-66.71-7.52-34.66-24.04-66.42l71.78-102.7q33.95 50.72 53.45 110.92 19.5 60.19 19.5 123.03 0 60.12-14.74 115.91-14.74 55.8-43.97 106.12-13.2 24.44-38.11 37.54-24.91 13.09-52.44 13.09H198.96q-27.49 0-52.78-13.33-25.29-13.34-37.77-37.3-27.24-47.24-42.98-101.98Q49.7-338.81 49.7-398.5q0-88.46 33.85-166.57 33.86-78.12 92.26-136.9 58.39-58.79 136.81-92.68 78.42-33.89 167.17-33.89Zm20.32 328.43Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_boost">BOOST</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_boost">
+              BOOST
+            </div>
           </div>
           <div
             class="itemControlsCenter"
             id="controlCenterID14ControlsCenter"
-            onclick="openApp(9); closeControlsCenter()"
+            onclick="
+              openApp(9);
+              closeControlsCenter();
+            "
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path
                 d="M360-840v-80h240v80H360Zm80 440h80v-240h-80v240Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_timer">Timer</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_timer">
+              Timer
+            </div>
           </div>
           <div class="itemControlsCenter" id="controlCenterID13ControlsCenter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -486,7 +638,9 @@
                 d="M206.17-772.5v-142.85h547.66v142.85H206.17Zm273.91 444.67q28.77 0 48.83-20.14 20.07-20.14 20.07-48.91 0-28.77-20.14-48.96-20.14-20.18-48.92-20.18-28.77 0-48.83 20.3-20.07 20.3-20.07 49.08 0 28.77 20.14 48.79t48.92 20.02ZM287.93-44.65v-464.81l-81.76-121.52v-39.35h547.66v39.35l-81.76 121.52v464.81H287.93Z"
               />
             </svg>
-            <div class="bottom_textControlsCenter" data-i18n="ui_flashlight">Flash</div>
+            <div class="bottom_textControlsCenter" data-i18n="ui_flashlight">
+              Flash
+            </div>
           </div>
         </div>
         <div id="editControlsCenterBtn">
@@ -495,9 +649,11 @@
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             id="reorderCCBtn"
-            style="width: 20px; height: 20px; padding: 5px; fill: white;"
+            style="width: 20px; height: 20px; padding: 5px; fill: white"
           >
-            <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"/>
+            <path
+              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+            />
           </svg>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -521,20 +677,60 @@
       </div>
 
       <div class="lp2" id="lp2"></div>
-              <div class="left-text-tb" id="left-text-tb" data-i18n="ui_hide_wallpaper">Hide Wallpaper</div>
+      <div class="left-text-tb" id="left-text-tb" data-i18n="ui_hide_wallpaper">
+        Hide Wallpaper
+      </div>
       <div class="thanh-status2" id="thanh-status2"></div>
       <div class="thanh-status" id="thanh-status"></div>
       <div class="status-battery">
-        <div class="battery-num" id="batery-num" style="mix-blend-mode: difference; color: white;">100</div>
-        <div style="position: relative; display: flex; align-items: center; width: 29px; height: 13px;">
+        <div
+          class="battery-num"
+          id="batery-num"
+          style="mix-blend-mode: difference; color: white"
+        >
+          100
+        </div>
+        <div
+          style="
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 29px;
+            height: 13px;
+          "
+        >
           <!-- Outline (Blended) -->
-          <div style="position: absolute; display: flex; align-items: center; mix-blend-mode: difference; color: gray; width: 100%; height: 100%;">
+          <div
+            style="
+              position: absolute;
+              display: flex;
+              align-items: center;
+              mix-blend-mode: difference;
+              color: gray;
+              width: 100%;
+              height: 100%;
+            "
+          >
             <div class="container-battery"></div>
             <div class="battery-small"></div>
           </div>
           <!-- Fill -->
-          <div style="position: absolute; left: 1.5px; top: 1.5px; bottom: 1.5px; width: 23px; display: flex; border-radius: 2px; overflow: hidden;">
-            <div class="battery-small2" style="width: 100%; mix-blend-mode: difference;"></div>
+          <div
+            style="
+              position: absolute;
+              left: 1.5px;
+              top: 1.5px;
+              bottom: 1.5px;
+              width: 23px;
+              display: flex;
+              border-radius: 2px;
+              overflow: hidden;
+            "
+          >
+            <div
+              class="battery-small2"
+              style="width: 100%; mix-blend-mode: difference"
+            ></div>
           </div>
         </div>
       </div>
@@ -714,12 +910,17 @@
               <div
                 class="circle"
                 style="
-                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777050017/qb6hxbtmzhy9gasvhahv.png')
+                  background: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1777050017/qb6hxbtmzhy9gasvhahv.png&quot;)
                     no-repeat center center;
                   background-size: 100%;
                 "
               ></div>
-              <div class="left-text" id="about_name_setting" style="left: 60px" data-i18n="about">
+              <div
+                class="left-text"
+                id="about_name_setting"
+                style="left: 60px"
+                data-i18n="about"
+              >
                 About
               </div>
               <div
@@ -730,17 +931,22 @@
                 OS &middot; Information
               </div>
             </div>
-            
+
             <div class="khaysetting3" id="theme_setting">
               <div
                 class="circle"
                 style="
-                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777051509/cygkudqviuehf72elpw6.png')
+                  background: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1777051509/cygkudqviuehf72elpw6.png&quot;)
                     no-repeat center center;
                   background-size: 100%;
                 "
               ></div>
-              <div class="left-text" id="theme_name_setting" style="left: 60px" data-i18n="ui_themes">
+              <div
+                class="left-text"
+                id="theme_name_setting"
+                style="left: 60px"
+                data-i18n="ui_themes"
+              >
                 Themes
               </div>
               <div
@@ -757,7 +963,7 @@
               <div
                 class="circle"
                 style="
-                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777053523/v8fbib0iprwwupn2iqrm.png')
+                  background: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1777053523/v8fbib0iprwwupn2iqrm.png&quot;)
                     no-repeat center center;
                   background-size: 130%;
                 "
@@ -765,17 +971,21 @@
               <div class="left-text" style="left: 60px" data-i18n="display">
                 Display
               </div>
-              <div class="left-text-small" style="left: 60px" data-i18n="ui_display_desc">
+              <div
+                class="left-text-small"
+                style="left: 60px"
+                data-i18n="ui_display_desc"
+              >
                 Phone Frame &middot; Full Screen
               </div>
             </div>
-            
+
             <div class="khaysetting5" id="audio_setting">
               <div
                 class="circle"
                 style="
-                  background: url('originos_data/language.png') no-repeat center
-                    center fixed;
+                  background: url(&quot;originos_data/language.png&quot;)
+                    no-repeat center center fixed;
                   background-size: 130%;
                 "
               ></div>
@@ -796,7 +1006,7 @@
                 Sound system
               </div>
             </div>
-            
+
             <div class="khaysetting3" id="lock_style" style="top: 389px">
               <div class="circle">
                 <svg
@@ -811,7 +1021,12 @@
                   />
                 </svg>
               </div>
-              <div class="left-text" id="lock_name_style" style="left: 60px" data-i18n="ui_lock">
+              <div
+                class="left-text"
+                id="lock_name_style"
+                style="left: 60px"
+                data-i18n="ui_lock"
+              >
                 Lock style
               </div>
               <div
@@ -823,16 +1038,37 @@
               </div>
             </div>
 
-            <div class="khaysetting4" id="cloud_sync_setting" style="top: 437px; z-index: 10;">
-              <div class="circle" style="background: #2196F3;">
-                <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="white">
-                  <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q100 0 170 70t70 170q0 11-1 21t-4 22q70 12 117.5 65.5T880-380q0 75-52.5 127.5T700-200H260Zm0-80h440q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-67-46.5-113.5T480-720q-67 0-113.5 46.5T320-560h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h60v-80Z"/>
+            <div
+              class="khaysetting4"
+              id="cloud_sync_setting"
+              style="top: 437px; z-index: 10"
+            >
+              <div class="circle" style="background: #2196f3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="21px"
+                  viewBox="0 -960 960 960"
+                  width="21px"
+                  fill="white"
+                >
+                  <path
+                    d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q100 0 170 70t70 170q0 11-1 21t-4 22q70 12 117.5 65.5T880-380q0 75-52.5 127.5T700-200H260Zm0-80h440q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-67-46.5-113.5T480-720q-67 0-113.5 46.5T320-560h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h60v-80Z"
+                  />
                 </svg>
               </div>
-              <div class="left-text" style="left: 60px" data-i18n="ui_cloud_sync">
+              <div
+                class="left-text"
+                style="left: 60px"
+                data-i18n="ui_cloud_sync"
+              >
                 Cloud Sync
               </div>
-              <div class="left-text-small" style="left: 60px" id="cloud_status" data-i18n="ui_cloud_sync_desc">
+              <div
+                class="left-text-small"
+                style="left: 60px"
+                id="cloud_status"
+                data-i18n="ui_cloud_sync_desc"
+              >
                 Login with Google to back up data
               </div>
             </div>
@@ -841,8 +1077,8 @@
               <div
                 class="circle"
                 style="
-                  background: url('originos_data/icon_animation.png') no-repeat
-                    center center fixed;
+                  background: url(&quot;originos_data/icon_animation.png&quot;)
+                    no-repeat center center fixed;
                   background-size: 100%;
                 "
               ></div>
@@ -864,95 +1100,155 @@
               </div>
             </div>
 
-              <div class="app4app" id="app4" style="z-index: 5020">
+            <div class="app4app" id="app4" style="z-index: 5020">
               <div class="back-button" id="back_to_setting">رجوع ‹</div>
-              
+
               <div class="phone-container">
-                
                 <div class="header-title">Xiaomi HyperOS</div>
                 <div class="version-subtitle">3.0.18.0</div>
 
                 <div class="card-group">
-                    <div class="list-item" onclick='
+                  <div
+                    class="list-item"
+                    onclick="
                       showPopupInput({
-                        message: translations[localStorage.getItem("language") || "en"].ui_enter_name,
-                        placeholder: document.getElementById("phoneName").textContent.trim(),
-                        defaultText: document.getElementById("phoneName").textContent.trim(),
+                        message:
+                          translations[localStorage.getItem('language') || 'en']
+                            .ui_enter_name,
+                        placeholder: document
+                          .getElementById('phoneName')
+                          .textContent.trim(),
+                        defaultText: document
+                          .getElementById('phoneName')
+                          .textContent.trim(),
                         maxLength: 30,
-                        buttonText: translations[localStorage.getItem("language") || "en"].ui_rename,
+                        buttonText:
+                          translations[localStorage.getItem('language') || 'en']
+                            .ui_rename,
                         onSubmit: (resultText) => {
-                          document.getElementById("phoneName").textContent = resultText;
-                          localStorage.setItem("phoneName", resultText);
+                          document.getElementById('phoneName').textContent =
+                            resultText;
+                          localStorage.setItem('phoneName', resultText);
                         },
-                      });'>
-                        <span class="label" data-i18n="ui_device_name">اسم الجهاز</span>
-                        <div class="left-content">
-                            <svg class="icon-settings" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 12-5 5-5-5h3V3h4v9h3Zm-7 7.09c1.68 0 3.29-.65 4.56-1.84L21.37 12c-1.27-1.19-2.88-1.84-4.56-1.84H17v2h-.19c1.01 0 1.94.4 2.75 1.16L12 21.09l-7.56-7.77c.81-.76 1.74-1.16 2.75-1.16H7v-2h-.19c-1.68 0-3.29.65-4.56 1.84l4.81 5.25c1.27 1.19 2.88 1.84 4.56 1.84H12ZM19 12V3h-4v9h-3l5 5 5-5h-3Z"/></svg>
-                            <span class="value" id="phoneName">Xiaomi REDMI 14C Édition</span>
-                            <span class="arrow">‹</span>
-                        </div>
+                      })
+                    "
+                  >
+                    <span class="label" data-i18n="ui_device_name"
+                      >اسم الجهاز</span
+                    >
+                    <div class="left-content">
+                      <svg
+                        class="icon-settings"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="m19 12-5 5-5-5h3V3h4v9h3Zm-7 7.09c1.68 0 3.29-.65 4.56-1.84L21.37 12c-1.27-1.19-2.88-1.84-4.56-1.84H17v2h-.19c1.01 0 1.94.4 2.75 1.16L12 21.09l-7.56-7.77c.81-.76 1.74-1.16 2.75-1.16H7v-2h-.19c-1.68 0-3.29.65-4.56 1.84l4.81 5.25c1.27 1.19 2.88 1.84 4.56 1.84H12ZM19 12V3h-4v9h-3l5 5 5-5h-3Z"
+                        />
+                      </svg>
+                      <span class="value" id="phoneName"
+                        >Xiaomi REDMI 14C Édition</span
+                      >
+                      <span class="arrow">‹</span>
                     </div>
+                  </div>
                 </div>
 
                 <div class="card-group">
-                    <div class="list-item">
-                        <span class="label" data-i18n="ui_storage">التخزين</span>
-                        <div class="left-content">
-                            <span class="value"><span id="storageUsed">--MB</span>/<span id="storage">--MB</span></span>
-                            <span class="arrow">‹</span>
-                        </div>
+                  <div class="list-item">
+                    <span class="label" data-i18n="ui_storage">التخزين</span>
+                    <div class="left-content">
+                      <span class="value"
+                        ><span id="storageUsed">--MB</span>/<span id="storage"
+                          >--MB</span
+                        ></span
+                      >
+                      <span class="arrow">‹</span>
                     </div>
+                  </div>
                 </div>
 
                 <div class="card-group">
-                    <div class="list-item" id="khaysetting1-1">
-                        <span class="label" data-i18n="ui_system_version">إصدار نظام التشغيل</span>
-                        <span class="value" id="Vesion">3.0.18.0.WGTMIXM</span>
-                    </div>
-                </div>
-                
-                <div class="card-group">
-                    <div class="list-item" id="khaysetting1-2" onclick='window.open("https://quandz24-ui.github.io/OriginOS_web", "_blank");'>
-                        <span class="label" data-i18n="ui_android_version">إصدار Android</span>
-                        <span class="value">16 BP2A.250605.03</span>
-                    </div>
+                  <div class="list-item" id="khaysetting1-1">
+                    <span class="label" data-i18n="ui_system_version"
+                      >إصدار نظام التشغيل</span
+                    >
+                    <span class="value" id="Vesion">3.0.18.0.WGTMIXM</span>
+                  </div>
                 </div>
 
                 <div class="card-group">
-                    <div class="list-item">
-                        <span class="label" data-i18n="ui_android_security">تحديث أمان نظام Android</span>
-                        <span class="value">2026-02-01</span>
-                    </div>
+                  <div
+                    class="list-item"
+                    id="khaysetting1-2"
+                    onclick="
+                      window.open(
+                        'https://quandz24-ui.github.io/OriginOS_web',
+                        '_blank',
+                      )
+                    "
+                  >
+                    <span class="label" data-i18n="ui_android_version"
+                      >إصدار Android</span
+                    >
+                    <span class="value">16 BP2A.250605.03</span>
+                  </div>
                 </div>
 
                 <div class="card-group">
-                    <div class="list-item" onclick="showChangelog()">
-                        <span class="label" data-i18n="ui_specs">المواصفات والمعلومات التفصيلية</span>
-                        <span class="arrow">‹</span>
-                    </div>
-                    <div class="list-item" onclick='window.open("https://t.me/OriginWEB", "_blank");'>
-                        <span class="label" id="name_dev" data-i18n="ui_dev_comm">مجتمع المطورين</span>
-                        <span class="arrow">‹</span>
-                    </div>
+                  <div class="list-item">
+                    <span class="label" data-i18n="ui_android_security"
+                      >تحديث أمان نظام Android</span
+                    >
+                    <span class="value">2026-02-01</span>
+                  </div>
                 </div>
 
                 <div class="card-group">
-                    <div class="list-item" onclick="
-                      const t = translations[localStorage.getItem('language') || 'en'];
+                  <div class="list-item" onclick="showChangelog()">
+                    <span class="label" data-i18n="ui_specs"
+                      >المواصفات والمعلومات التفصيلية</span
+                    >
+                    <span class="arrow">‹</span>
+                  </div>
+                  <div
+                    class="list-item"
+                    onclick="window.open('https://t.me/OriginWEB', '_blank')"
+                  >
+                    <span class="label" id="name_dev" data-i18n="ui_dev_comm"
+                      >مجتمع المطورين</span
+                    >
+                    <span class="arrow">‹</span>
+                  </div>
+                </div>
+
+                <div class="card-group">
+                  <div
+                    class="list-item"
+                    onclick="
+                      const t =
+                        translations[localStorage.getItem('language') || 'en'];
                       showPopup2_alert(
                         t.ui_reset_warning,
                         t.ui_reset_btn,
                         t.ui_cancel,
-                        () => { 
+                        () => {
                           localStorage.clear();
                           sessionStorage.clear();
                           location.reload();
                         },
-                        () =>{}
-                      )">
-                        <span class="label" style="color: #ff4d4f;" data-i18n="ui_factory_reset">إعادة ضبط المصنع</span>
-                        <span class="arrow">‹</span>
-                    </div>
+                        () => {},
+                      );
+                    "
+                  >
+                    <span
+                      class="label"
+                      style="color: #ff4d4f"
+                      data-i18n="ui_factory_reset"
+                      >إعادة ضبط المصنع</span
+                    >
+                    <span class="arrow">‹</span>
+                  </div>
                 </div>
               </div>
 
@@ -1150,14 +1446,17 @@
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;
                   "
-                  onclick='
+                  onclick="
                     showPopup2_alert(
                       `Join our group to find animation config file!`,
                       `Join`,
                       `No`,
-                      () => { window.open("https://t.me/OriginWEBChat", "_blank");},
-                      () =>{})
-                    '
+                      () => {
+                        window.open('https://t.me/OriginWEBChat', '_blank');
+                      },
+                      () => {},
+                    )
+                  "
                 >
                   <div class="setting-title">Get animation config file?</div>
                   <svg
@@ -1949,7 +2248,7 @@
                       color: #ffffff;
                       font-size: 35px;
                       font-weight: bold;
-                      font-family: 'Abril Fatface', serif;
+                      font-family: &quot;Abril Fatface&quot;, serif;
                     "
                     id="lock-screen-preview"
                   >
@@ -2041,7 +2340,12 @@
                   />
                 </svg>
               </div>
-              <input type="file" accept="video/*" id="videoInput" style="display: none" />
+              <input
+                type="file"
+                accept="video/*"
+                id="videoInput"
+                style="display: none"
+              />
               <div
                 class="app4app"
                 id="app4wallpaper"
@@ -2062,43 +2366,77 @@
                     class="img-button"
                     data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839394/fwrzwaiyawwm2g1fws0z.jpg"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839394/fwrzwaiyawwm2g1fws0z.jpg" alt="2" />
+                    <img
+                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839394/fwrzwaiyawwm2g1fws0z.jpg"
+                      alt="2"
+                    />
                   </div>
                   <div
                     class="img-button"
                     data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839376/paqstzqabfwu5hykg5um.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839376/paqstzqabfwu5hykg5um.png" alt="3" />
+                    <img
+                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839376/paqstzqabfwu5hykg5um.png"
+                      alt="3"
+                    />
                   </div>
                   <div
                     class="img-button"
                     data-img="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839360/c1c1fh6cocxzo13lqnrv.png"
                   >
-                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839360/c1c1fh6cocxzo13lqnrv.png" alt="4" />
+                    <img
+                      src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777839360/c1c1fh6cocxzo13lqnrv.png"
+                      alt="4"
+                    />
                   </div>
                   <div
                     class="img-button"
                     data-img="originos_data/wallpapers/wallpaper_1.webp"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_1.webp" alt="5" />
+                    <img
+                      src="originos_data/wallpapers/wallpaper_1.webp"
+                      alt="5"
+                    />
                   </div>
                   <div
                     class="img-button"
                     data-img="originos_data/wallpapers/wallpaper_2.jpg"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_2.jpg" alt="6" />
+                    <img
+                      src="originos_data/wallpapers/wallpaper_2.jpg"
+                      alt="6"
+                    />
                   </div>
                   <div
                     class="img-button"
                     data-img="originos_data/wallpapers/wallpaper_3.png"
                   >
-                    <img src="originos_data/wallpapers/wallpaper_3.png" alt="7" />
+                    <img
+                      src="originos_data/wallpapers/wallpaper_3.png"
+                      alt="7"
+                    />
                   </div>
                   <div class="img-button add-button" id="addBtn">+</div>
-                  <div class="img-button add-button" id="addLiveWallpaperBtn" style="font-size: 12px; display: flex; align-items: center; justify-content: center;">Vid</div>
+                  <div
+                    class="img-button add-button"
+                    id="addLiveWallpaperBtn"
+                    style="
+                      font-size: 12px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    Vid
+                  </div>
                 </div>
                 <input type="file" accept="image/*" id="fileInput" />
-                <input type="file" accept="video/*" id="videoInput" style="display: none" />
+                <input
+                  type="file"
+                  accept="video/*"
+                  id="videoInput"
+                  style="display: none"
+                />
                 <div
                   id="popup_overlay_wallpaper"
                   class="popup-overlay_wallpaper"
@@ -2290,7 +2628,11 @@
                           margin-left: 50%;
                           transform: translateX(-50%) scale(0.7);
                         "
-                        onclick="document.getElementById('controls_colorful_photos').classList.remove('open');"
+                        onclick="
+                          document
+                            .getElementById('controls_colorful_photos')
+                            .classList.remove('open')
+                        "
                       >
                         <label style="font-size: 18px; margin-top: 4px"
                           >Colorful photos</label
@@ -2323,39 +2665,63 @@
                         <a
                           class="active"
                           onclick="
-                            document.getElementById('tab_color_less_is_more').classList.remove('open');
-                            document.getElementById('tab_text_less_is_more').classList.remove('open');
-  
-                            Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
+                            document
+                              .getElementById('tab_color_less_is_more')
+                              .classList.remove('open');
+                            document
+                              .getElementById('tab_text_less_is_more')
+                              .classList.remove('open');
+
+                            Array.from(
+                              this.parentNode.querySelectorAll('a'),
+                            ).forEach((el) => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_style_less_is_more').classList.add('open');
+
+                            document
+                              .getElementById('tab_style_less_is_more')
+                              .classList.add('open');
                           "
                           >Style</a
                         >
 
                         <a
                           onclick="
-                            document.getElementById('tab_color_less_is_more').classList.remove('open');
-                            document.getElementById('tab_style_less_is_more').classList.remove('open');
-  
-                            Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
+                            document
+                              .getElementById('tab_color_less_is_more')
+                              .classList.remove('open');
+                            document
+                              .getElementById('tab_style_less_is_more')
+                              .classList.remove('open');
+
+                            Array.from(
+                              this.parentNode.querySelectorAll('a'),
+                            ).forEach((el) => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_text_less_is_more').classList.add('open');
+
+                            document
+                              .getElementById('tab_text_less_is_more')
+                              .classList.add('open');
                           "
                           >Text</a
                         >
 
                         <a
                           onclick="
-                            document.getElementById('tab_style_less_is_more').classList.remove('open');
-                            document.getElementById('tab_text_less_is_more').classList.remove('open');
-  
-                            Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
+                            document
+                              .getElementById('tab_style_less_is_more')
+                              .classList.remove('open');
+                            document
+                              .getElementById('tab_text_less_is_more')
+                              .classList.remove('open');
+
+                            Array.from(
+                              this.parentNode.querySelectorAll('a'),
+                            ).forEach((el) => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_color_less_is_more').classList.add('open');
+
+                            document
+                              .getElementById('tab_color_less_is_more')
+                              .classList.add('open');
                           "
                           >Color</a
                         >
@@ -2546,7 +2912,7 @@
                       <div class="font-bar">
                         <div
                           class="font-button"
-                          style="font-family: 'Abril Fatface'"
+                          style="font-family: &quot;Abril Fatface&quot;"
                           data-font="'Abril Fatface'"
                           data-min="75"
                           data-max="110"
@@ -2555,7 +2921,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Keania One'"
+                          style="font-family: &quot;Keania One&quot;"
                           data-font="'Keania One'"
                           data-min="70"
                           data-max="115"
@@ -2564,7 +2930,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Fredoka'"
+                          style="font-family: &quot;Fredoka&quot;"
                           data-font="'Fredoka'"
                           data-min="75"
                           data-max="110"
@@ -2573,7 +2939,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Monoton', sans-serif"
+                          style="font-family: &quot;Monoton&quot;, sans-serif"
                           data-font="'Monoton', sans-serif"
                           data-min="70"
                           data-max="90"
@@ -2582,7 +2948,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Silkscreen'"
+                          style="font-family: &quot;Silkscreen&quot;"
                           data-font="'Silkscreen'"
                           data-min="75"
                           data-max="90"
@@ -2593,7 +2959,7 @@
                         <!-- Các font đậm mới thêm -->
                         <div
                           class="font-button"
-                          style="font-family: 'Anton'"
+                          style="font-family: &quot;Anton&quot;"
                           data-font="'Anton'"
                           data-min="70"
                           data-max="90"
@@ -2602,7 +2968,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Paytone One'"
+                          style="font-family: &quot;Paytone One&quot;"
                           data-font="'Paytone One'"
                           data-min="70"
                           data-max="115"
@@ -2611,7 +2977,7 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Archivo Black'"
+                          style="font-family: &quot;Archivo Black&quot;"
                           data-font="'Archivo Black'"
                           data-min="70"
                           data-max="90"
@@ -2620,47 +2986,306 @@
                         </div>
                         <div
                           class="font-button"
-                          style="font-family: 'Righteous'"
+                          style="font-family: &quot;Righteous&quot;"
                           data-font="'Righteous'"
                           data-min="60"
                           data-max="110"
                         >
                           12
                         </div>
-                        <div class="font-button" style="font-family: 'Bebas Neue'" data-font="'Bebas Neue'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Black Han Sans'" data-font="'Black Han Sans'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Chakra Petch'" data-font="'Chakra Petch'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Comfortaa'" data-font="'Comfortaa'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Indie Flower'" data-font="'Indie Flower'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Merriweather'" data-font="'Merriweather'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Orbitron'" data-font="'Orbitron'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Pacifico'" data-font="'Pacifico'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Roboto'" data-font="'Roboto'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'VT323'" data-font="'VT323'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Atkinson Hyperlegible'" data-font="'Atkinson Hyperlegible'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Lato'" data-font="'Lato'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Rubik'" data-font="'Rubik'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Oswald'" data-font="'Oswald'" data-min="70" data-max="110">12</div>
-                        <div class="font-button hollow-style-btn" style="font-family: 'Oswald'; display: flex; align-items: center; justify-content: center;" data-font="'Oswald'" data-style="hollow" data-min="70" data-max="110">
-                          <span style="color: transparent; -webkit-text-stroke: 1px currentColor; margin-right: 2px;">01</span>
-                          <span style="color: currentColor;">28</span>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Bebas Neue&quot;"
+                          data-font="'Bebas Neue'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
                         </div>
-                        <div class="font-button" style="font-family: 'Raleway'" data-font="'Raleway'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Montserrat'" data-font="'Montserrat'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Playfair Display'" data-font="'Playfair Display'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Poppins'" data-font="'Poppins'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Ubuntu'" data-font="'Ubuntu'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Dancing Script'" data-font="'Dancing Script'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Lobster'" data-font="'Lobster'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Caveat'" data-font="'Caveat'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Josefin Sans'" data-font="'Josefin Sans'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Bungee'" data-font="'Bungee'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Press Start 2P'" data-font="'Press Start 2P'" data-min="50" data-max="80">12</div>
-                        <div class="font-button" style="font-family: 'Creepster'" data-font="'Creepster'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Permanent Marker'" data-font="'Permanent Marker'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Amatic SC'" data-font="'Amatic SC'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Cinzel'" data-font="'Cinzel'" data-min="70" data-max="110">12</div>
-                        <div class="font-button" style="font-family: 'Audiowide'" data-font="'Audiowide'" data-min="70" data-max="110">12</div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Black Han Sans&quot;"
+                          data-font="'Black Han Sans'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Chakra Petch&quot;"
+                          data-font="'Chakra Petch'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Comfortaa&quot;"
+                          data-font="'Comfortaa'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Indie Flower&quot;"
+                          data-font="'Indie Flower'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Merriweather&quot;"
+                          data-font="'Merriweather'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Orbitron&quot;"
+                          data-font="'Orbitron'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Pacifico&quot;"
+                          data-font="'Pacifico'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Roboto&quot;"
+                          data-font="'Roboto'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;VT323&quot;"
+                          data-font="'VT323'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Atkinson Hyperlegible&quot;"
+                          data-font="'Atkinson Hyperlegible'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Lato&quot;"
+                          data-font="'Lato'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Rubik&quot;"
+                          data-font="'Rubik'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Oswald&quot;"
+                          data-font="'Oswald'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button hollow-style-btn"
+                          style="
+                            font-family: &quot;Oswald&quot;;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          "
+                          data-font="'Oswald'"
+                          data-style="hollow"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          <span
+                            style="
+                              color: transparent;
+                              -webkit-text-stroke: 1px currentColor;
+                              margin-right: 2px;
+                            "
+                            >01</span
+                          >
+                          <span style="color: currentColor">28</span>
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Raleway&quot;"
+                          data-font="'Raleway'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Montserrat&quot;"
+                          data-font="'Montserrat'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Playfair Display&quot;"
+                          data-font="'Playfair Display'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Poppins&quot;"
+                          data-font="'Poppins'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Ubuntu&quot;"
+                          data-font="'Ubuntu'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Dancing Script&quot;"
+                          data-font="'Dancing Script'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Lobster&quot;"
+                          data-font="'Lobster'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Caveat&quot;"
+                          data-font="'Caveat'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Josefin Sans&quot;"
+                          data-font="'Josefin Sans'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Bungee&quot;"
+                          data-font="'Bungee'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Press Start 2P&quot;"
+                          data-font="'Press Start 2P'"
+                          data-min="50"
+                          data-max="80"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Creepster&quot;"
+                          data-font="'Creepster'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Permanent Marker&quot;"
+                          data-font="'Permanent Marker'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Amatic SC&quot;"
+                          data-font="'Amatic SC'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Cinzel&quot;"
+                          data-font="'Cinzel'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: &quot;Audiowide&quot;"
+                          data-font="'Audiowide'"
+                          data-min="70"
+                          data-max="110"
+                        >
+                          12
+                        </div>
                       </div>
                     </div>
 
@@ -2677,25 +3302,38 @@
                             border: 1px solid gray;
                           "
                           onclick="
-  
-                            if(!document.querySelector('.wallpaper2')?.classList.contains('hidden_overlay'))
-                            {
+                            if (
+                              !document
+                                .querySelector('.wallpaper2')
+                                ?.classList.contains('hidden_overlay')
+                            ) {
                               clock_preview.style.color = contrastColor;
                               lockclock.style.color = contrastColor;
                               dateText.style.color = contrastColor;
                               date_preview.style.color = contrastColor;
-                              localStorage.setItem('color_lock_saved', contrastColor);
+                              localStorage.setItem(
+                                'color_lock_saved',
+                                contrastColor,
+                              );
                               color_contrastColor = true;
-                              localStorage.setItem('color_contrastColor_saved', 'true');
-                            }
-                            else {
+                              localStorage.setItem(
+                                'color_contrastColor_saved',
+                                'true',
+                              );
+                            } else {
                               clock_preview.style.color = contrastColor2;
                               lockclock.style.color = contrastColor2;
                               dateText.style.color = contrastColor2;
                               date_preview.style.color = contrastColor2;
-                              localStorage.setItem('color_lock_saved', contrastColor2);
+                              localStorage.setItem(
+                                'color_lock_saved',
+                                contrastColor2,
+                              );
                               color_contrastColor = true;
-                              localStorage.setItem('color_contrastColor_saved', 'true');
+                              localStorage.setItem(
+                                'color_contrastColor_saved',
+                                'true',
+                              );
                             }
                           "
                         ></div>
@@ -2802,13 +3440,63 @@
                         value="100"
                       />
                     </div>
-                    <div class="style-section" style="margin-top: 15px; margin-bottom: 15px;">
-                      <div style="color: white; margin-bottom: 8px; font-size: 14px; opacity: 0.8; text-align: center;">Position / موقع الساعة</div>
-                      <div style="display: flex; gap: 8px; justify-content: center;">
-                        <button id="btn_clock_pos_top" class="active" style="width: 100px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 12px; color: white; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.3s; font-size: 13px;">
+                    <div
+                      class="style-section"
+                      style="margin-top: 15px; margin-bottom: 15px"
+                    >
+                      <div
+                        style="
+                          color: white;
+                          margin-bottom: 8px;
+                          font-size: 14px;
+                          opacity: 0.8;
+                          text-align: center;
+                        "
+                      >
+                        Position / موقع الساعة
+                      </div>
+                      <div
+                        style="display: flex; gap: 8px; justify-content: center"
+                      >
+                        <button
+                          id="btn_clock_pos_top"
+                          class="active"
+                          style="
+                            width: 100px;
+                            height: 36px;
+                            background: rgba(255, 255, 255, 0.1);
+                            border: none;
+                            border-radius: 12px;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 6px;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            font-size: 13px;
+                          "
+                        >
                           Top / أعلى
                         </button>
-                        <button id="btn_clock_pos_center" style="width: 100px; height: 36px; background: rgba(255,255,255,0.1); border: none; border-radius: 12px; color: white; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.3s; font-size: 13px;">
+                        <button
+                          id="btn_clock_pos_center"
+                          style="
+                            width: 100px;
+                            height: 36px;
+                            background: rgba(255, 255, 255, 0.1);
+                            border: none;
+                            border-radius: 12px;
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 6px;
+                            cursor: pointer;
+                            transition: all 0.3s;
+                            font-size: 13px;
+                          "
+                        >
                           Center / وسط
                         </button>
                       </div>
@@ -2898,7 +3586,9 @@
                   style="top: calc(35% + 60px)"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="dock_glass_title">Glassy Dock Bar</div>
+                  <div class="setting-title" id="dock_glass_title">
+                    Glassy Dock Bar
+                  </div>
                   <div
                     class="toggle-switch"
                     id="dock-glass"
@@ -2911,7 +3601,9 @@
                   style="top: calc(35% + 120px)"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="glassy_control_center_title">Glassy CC / مركز التحكم الزجاجي</div>
+                  <div class="setting-title" id="glassy_control_center_title">
+                    Glassy CC / مركز التحكم الزجاجي
+                  </div>
                   <div
                     class="toggle-switch"
                     id="glassy-control-center-toggle"
@@ -2932,7 +3624,8 @@
                     id="dark-mode"
                     data-key="dark-mode"
                   ></div>
-                </div>                <div
+                </div>
+                <div
                   class="setting-item"
                   id="icon_btn"
                   style="top: calc(35% + 240px)"
@@ -2958,8 +3651,17 @@
                   style="top: calc(35% + 300px)"
                   onclick="document.getElementById('iconZipInput').click()"
                 >
-                  <input type="file" id="iconZipInput" accept=".zip" style="display: none;" />
-                  <div class="setting-title" id="extract_icon_title" data-i18n="extract_icons_zip">
+                  <input
+                    type="file"
+                    id="iconZipInput"
+                    accept=".zip"
+                    style="display: none"
+                  />
+                  <div
+                    class="setting-title"
+                    id="extract_icon_title"
+                    data-i18n="extract_icons_zip"
+                  >
                     استخراج أيقونات من ملف ZIP
                   </div>
                   <div class="toggle-switch" id="none" style="opacity: 0"></div>
@@ -3005,25 +3707,25 @@
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png');
+                            --bg--mini-icon: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png&quot;);
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png');
+                            --bg--mini-icon: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png&quot;);
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png');
+                            --bg--mini-icon: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png&quot;);
                           "
                         ></div>
                         <div
                           class="mini_icon"
                           style="
-                            --bg--mini-icon: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png');
+                            --bg--mini-icon: url(&quot;https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png&quot;);
                           "
                         ></div>
                       </div>
@@ -3035,7 +3737,7 @@
                       class="preview_icon"
                       id="preview_icon"
                       style="
-                        --bg--mini-icon: url('originos_data/system_settings.png');
+                        --bg--mini-icon: url(&quot;originos_data/system_settings.png&quot;);
                       "
                     ></div>
                     <input
@@ -3395,199 +4097,589 @@
               </div>
             </div>
 
-            <div class="app4app" id="app4display" style="z-index: 1002133; display: none; background: var(--bg--background2); color: var(--bg--color);">
-              <div class="back-button" id="back_to_setting_display" style="color: var(--bg--color);">Display Settings</div>
-              <div style="padding: 20px;">
+            <div
+              class="app4app"
+              id="app4display"
+              style="
+                z-index: 1002133;
+                display: none;
+                background: var(--bg--background2);
+                color: var(--bg--color);
+              "
+            >
+              <div
+                class="back-button"
+                id="back_to_setting_display"
+                style="color: var(--bg--color)"
+              >
+                Display Settings
+              </div>
+              <div style="padding: 20px">
                 <div class="display-setting-panel">
                   <div class="display-setting-header">
                     <span>Immersive Full Screen</span>
                     <label class="switch">
-                      <input type="checkbox" id="fullScreenToggle">
+                      <input type="checkbox" id="fullScreenToggle" />
                       <span class="slider"></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc">Scale phone to fill the entire screen.</div>
+                  <div class="display-setting-desc">
+                    Scale phone to fill the entire screen.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
                   <div class="display-setting-header">
                     <span>Natural Full Screen</span>
                     <label class="switch">
-                      <input type="checkbox" id="fullScreenToggleNormal">
+                      <input type="checkbox" id="fullScreenToggleNormal" />
                       <span class="slider"></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc">Enter full screen without enlarging the phone.</div>
+                  <div class="display-setting-desc">
+                    Enter full screen without enlarging the phone.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات حواف الهاتف</div>
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">نصف قطر الحواف</span>
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    إعدادات حواف الهاتف
+                  </div>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">نصف قطر الحواف</span>
                       <span id="phoneEdgeRadiusVal">50px</span>
                     </div>
-                    <input type="range" id="phoneEdgeRadius" min="0" max="100" value="50" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="phoneEdgeRadius"
+                      min="0"
+                      max="100"
+                      value="50"
+                      style="width: 100%"
+                    />
                   </div>
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">لون إطار الهاتف</span>
-                      <button onclick="document.getElementById('phoneEdgeColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">لون إطار الهاتف</span>
+                      <button
+                        onclick="
+                          document.getElementById('phoneEdgeColor').click()
+                        "
+                        style="
+                          background: var(--bg--swipe_color, #007aff);
+                          color: white;
+                          border: none;
+                          padding: 5px 15px;
+                          border-radius: 15px;
+                          font-size: 12px;
+                          cursor: pointer;
+                        "
+                      >
+                        تغيير اللون
+                      </button>
                     </div>
-                    <input type="color" id="phoneEdgeColor" value="#000000" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
-                       <div id="phoneEdgeColorPreview" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; background: #000000;"></div>
-                       <span id="phoneEdgeColorHex" style="font-size: 12px; opacity: 0.7;">#000000</span>
+                    <input
+                      type="color"
+                      id="phoneEdgeColor"
+                      value="#000000"
+                      style="display: none"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-top: 5px;
+                      "
+                    >
+                      <div
+                        id="phoneEdgeColorPreview"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          border-radius: 50%;
+                          border: 2px solid white;
+                          background: #000000;
+                        "
+                      ></div>
+                      <span
+                        id="phoneEdgeColorHex"
+                        style="font-size: 12px; opacity: 0.7"
+                        >#000000</span
+                      >
                     </div>
                   </div>
-                  <div class="display-setting-desc">تحكم في تدوير حواف الهاتف ولون الإطار الخارجي.</div>
+                  <div class="display-setting-desc">
+                    تحكم في تدوير حواف الهاتف ولون الإطار الخارجي.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">سمك إطار الهاتف</div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <input type="range" id="phoneBorderWidth" min="1" max="25" value="3" style="width: 80%;">
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    سمك إطار الهاتف
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <input
+                      type="range"
+                      id="phoneBorderWidth"
+                      min="1"
+                      max="25"
+                      value="3"
+                      style="width: 80%"
+                    />
                     <span id="phoneBorderWidthVal">3px</span>
                   </div>
-                  <div class="display-setting-desc">تغيير سمك الإطار الخارجي لقالب الهاتف.</div>
+                  <div class="display-setting-desc">
+                    تغيير سمك الإطار الخارجي لقالب الهاتف.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شريط السحب السفلي</div>
-                  
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-size: 14px;">إظهار شريط السحب</span>
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    إعدادات شريط السحب السفلي
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <span style="font-size: 14px">إظهار شريط السحب</span>
                     <label class="switch">
-                      <input type="checkbox" id="swipeBarDisplayToggle" checked>
+                      <input
+                        type="checkbox"
+                        id="swipeBarDisplayToggle"
+                        checked
+                      />
                       <span class="slider"></span>
                     </label>
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">العرض</span>
-                      <span id="swipeBarWidthVal" style="font-size: 14px;">130px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">العرض</span>
+                      <span id="swipeBarWidthVal" style="font-size: 14px"
+                        >130px</span
+                      >
                     </div>
-                    <input type="range" id="swipeBarWidth" min="20" max="300" value="130" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="swipeBarWidth"
+                      min="20"
+                      max="300"
+                      value="130"
+                      style="width: 100%"
+                    />
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">الارتفاع</span>
-                      <span id="swipeBarHeightVal" style="font-size: 14px;">3px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">الارتفاع</span>
+                      <span id="swipeBarHeightVal" style="font-size: 14px"
+                        >3px</span
+                      >
                     </div>
-                    <input type="range" id="swipeBarHeight" min="1" max="25" value="3" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="swipeBarHeight"
+                      min="1"
+                      max="25"
+                      value="3"
+                      style="width: 100%"
+                    />
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">المسافة من الأسفل</span>
-                      <span id="swipeBarBottomVal" style="font-size: 14px;">2px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">المسافة من الأسفل</span>
+                      <span id="swipeBarBottomVal" style="font-size: 14px"
+                        >2px</span
+                      >
                     </div>
-                    <input type="range" id="swipeBarBottom" min="0" max="30" value="2" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="swipeBarBottom"
+                      min="0"
+                      max="30"
+                      value="2"
+                      style="width: 100%"
+                    />
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">الشفافية</span>
-                      <span id="swipeBarOpacityVal" style="font-size: 14px;">1</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">الشفافية</span>
+                      <span id="swipeBarOpacityVal" style="font-size: 14px"
+                        >1</span
+                      >
                     </div>
-                    <input type="range" id="swipeBarOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="swipeBarOpacity"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value="1"
+                      style="width: 100%"
+                    />
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">نصف قطر الحواف</span>
-                      <span id="swipeBarRadiusVal" style="font-size: 14px;">20px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">نصف قطر الحواف</span>
+                      <span id="swipeBarRadiusVal" style="font-size: 14px"
+                        >20px</span
+                      >
                     </div>
-                    <input type="range" id="swipeBarRadius" min="0" max="15" value="20" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="swipeBarRadius"
+                      min="0"
+                      max="15"
+                      value="20"
+                      style="width: 100%"
+                    />
                   </div>
 
                   <div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">لون شريط السحب</span>
-                      <button onclick="document.getElementById('swipeBarColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">لون شريط السحب</span>
+                      <button
+                        onclick="
+                          document.getElementById('swipeBarColor').click()
+                        "
+                        style="
+                          background: var(--bg--swipe_color, #007aff);
+                          color: white;
+                          border: none;
+                          padding: 5px 15px;
+                          border-radius: 15px;
+                          font-size: 12px;
+                          cursor: pointer;
+                        "
+                      >
+                        تغيير اللون
+                      </button>
                     </div>
-                    <input type="color" id="swipeBarColor" value="#ffffff" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
-                       <div id="swipeBarColorPreview" style="width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; background: #ffffff;"></div>
-                       <span id="swipeBarColorHex" style="font-size: 12px; opacity: 0.7;">#ffffff</span>
+                    <input
+                      type="color"
+                      id="swipeBarColor"
+                      value="#ffffff"
+                      style="display: none"
+                    />
+                    <div
+                      style="
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-top: 5px;
+                      "
+                    >
+                      <div
+                        id="swipeBarColorPreview"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          border-radius: 50%;
+                          border: 2px solid white;
+                          background: #ffffff;
+                        "
+                      ></div>
+                      <span
+                        id="swipeBarColorHex"
+                        style="font-size: 12px; opacity: 0.7"
+                        >#ffffff</span
+                      >
                     </div>
                   </div>
-                  
-                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل حجم ولون ومكان شريط السحب في أسفل الشاشة.</div>
+
+                  <div class="display-setting-desc" style="margin-top: 10px">
+                    تعديل حجم ولون ومكان شريط السحب في أسفل الشاشة.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شاشة القفل</div>
-                  
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">شفافية الساعة</span>
-                      <span id="lockClockOpacityVal" style="font-size: 14px;">1</span>
-                    </div>
-                    <input type="range" id="lockClockOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    إعدادات شاشة القفل
                   </div>
-                  
-                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل شفافية خط الساعة في شاشة القفل.</div>
+
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">شفافية الساعة</span>
+                      <span id="lockClockOpacityVal" style="font-size: 14px"
+                        >1</span
+                      >
+                    </div>
+                    <input
+                      type="range"
+                      id="lockClockOpacity"
+                      min="0"
+                      max="1"
+                      step="0.05"
+                      value="1"
+                      style="width: 100%"
+                    />
+                  </div>
+
+                  <div class="display-setting-desc" style="margin-top: 10px">
+                    تعديل شفافية خط الساعة في شاشة القفل.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات نوتش الكاميرا</div>
-                  
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">العرض (Width)</span>
-                      <span id="notchWidthVal" style="font-size: 14px;">25.5px</span>
-                    </div>
-                    <input type="range" id="notchWidth" min="10" max="300" step="0.5" value="25.5" style="width: 100%;">
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    إعدادات نوتش الكاميرا
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">الارتفاع (Height)</span>
-                      <span id="notchHeightVal" style="font-size: 14px;">25px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">العرض (Width)</span>
+                      <span id="notchWidthVal" style="font-size: 14px"
+                        >25.5px</span
+                      >
                     </div>
-                    <input type="range" id="notchHeight" min="10" max="100" step="0.5" value="25" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="notchWidth"
+                      min="10"
+                      max="300"
+                      step="0.5"
+                      value="25.5"
+                      style="width: 100%"
+                    />
                   </div>
 
-                  <div style="margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">نصف قطر الحواف (Radius)</span>
-                      <span id="notchRadiusVal" style="font-size: 14px;">50px</span>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px">الارتفاع (Height)</span>
+                      <span id="notchHeightVal" style="font-size: 14px"
+                        >25px</span
+                      >
                     </div>
-                    <input type="range" id="notchRadius" min="0" max="150" value="50" style="width: 100%;">
+                    <input
+                      type="range"
+                      id="notchHeight"
+                      min="10"
+                      max="100"
+                      step="0.5"
+                      value="25"
+                      style="width: 100%"
+                    />
                   </div>
 
-                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل حجم وعرض وطول وحواف نوتش الكاميرا.</div>
+                  <div style="margin-bottom: 10px">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      <span style="font-size: 14px"
+                        >نصف قطر الحواف (Radius)</span
+                      >
+                      <span id="notchRadiusVal" style="font-size: 14px"
+                        >50px</span
+                      >
+                    </div>
+                    <input
+                      type="range"
+                      id="notchRadius"
+                      min="0"
+                      max="150"
+                      value="50"
+                      style="width: 100%"
+                    />
+                  </div>
+
+                  <div class="display-setting-desc" style="margin-top: 10px">
+                    تعديل حجم وعرض وطول وحواف نوتش الكاميرا.
+                  </div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">Phone Scale</div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <input type="range" id="phoneScaleSlider" min="0.3" max="2" step="0.01" value="0.8" style="width: 80%;">
+                  <div
+                    class="display-setting-header"
+                    style="margin-bottom: 10px"
+                  >
+                    Phone Scale
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <input
+                      type="range"
+                      id="phoneScaleSlider"
+                      min="0.3"
+                      max="2"
+                      step="0.01"
+                      value="0.8"
+                      style="width: 80%"
+                    />
                     <span id="phoneScaleSliderVal">0.8x</span>
                   </div>
-                  <div class="display-setting-desc">Zoom in or out of the phone interface.</div>
+                  <div class="display-setting-desc">
+                    Zoom in or out of the phone interface.
+                  </div>
                 </div>
 
-                <div class="display-setting-panel" style="border: 1px solid rgba(255, 0, 0, 0.3);">
+                <div
+                  class="display-setting-panel"
+                  style="border: 1px solid rgba(255, 0, 0, 0.3)"
+                >
                   <div class="display-setting-header">
-                    <span style="color: #ff4d4f; font-weight: bold;" data-i18n="sharp_phone">قالب حاد للزر الأحمر</span>
+                    <span
+                      style="color: #ff4d4f; font-weight: bold"
+                      data-i18n="sharp_phone"
+                      >قالب حاد للزر الأحمر</span
+                    >
                     <label class="switch">
-                      <input type="checkbox" id="sharpPhoneTemplateToggle">
-                      <span class="slider" id="sharpPhoneSlider" style="background-color: #555;"></span>
+                      <input type="checkbox" id="sharpPhoneTemplateToggle" />
+                      <span
+                        class="slider"
+                        id="sharpPhoneSlider"
+                        style="background-color: #555"
+                      ></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc" data-i18n="sharp_phone_desc">يجعل زر إغلاق الشاشة (الزر الأحمر) حاد الحواف ومستطيلاً بشكل كامل.</div>
+                  <div
+                    class="display-setting-desc"
+                    data-i18n="sharp_phone_desc"
+                  >
+                    يجعل زر إغلاق الشاشة (الزر الأحمر) حاد الحواف ومستطيلاً بشكل
+                    كامل.
+                  </div>
                 </div>
 
-                <div class="display-setting-panel" id="open_3d_phone_btn" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                <div
+                  class="display-setting-panel"
+                  id="open_3d_phone_btn"
+                  style="
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                  "
+                >
                   <div>
                     <div class="display-setting-header">قالب هاتف 3D</div>
-                    <div class="display-setting-desc">تجربة معاينة الهاتف بشكل ثلاثي الأبعاد.</div>
+                    <div class="display-setting-desc">
+                      تجربة معاينة الهاتف بشكل ثلاثي الأبعاد.
+                    </div>
                   </div>
-                  <span style="font-size: 20px; font-weight: bold; opacity: 0.5;">></span>
+                  <span style="font-size: 20px; font-weight: bold; opacity: 0.5"
+                    >></span
+                  >
                 </div>
               </div>
             </div>
@@ -3653,8 +4745,8 @@
                   <div
                     class="navicon_phone"
                     style="
-                      background: url('originos_data/phone.jpg') no-repeat
-                        center;
+                      background: url(&quot;originos_data/phone.jpg&quot;)
+                        no-repeat center;
                       background-size: contain;
                       filter: invert(1);
                       margin-left: 23%;
@@ -3687,7 +4779,8 @@
                 <div
                   class="navicon_phone"
                   style="
-                    background: url('originos_data/phone.jpg') no-repeat center;
+                    background: url(&quot;originos_data/phone.jpg&quot;)
+                      no-repeat center;
                     background-size: contain;
                     filter: invert(0.3);
                   "
@@ -3698,8 +4791,8 @@
                 <div
                   class="navicon_phone"
                   style="
-                    background: url('originos_data/contact.png') no-repeat
-                      center;
+                    background: url(&quot;originos_data/contact.png&quot;)
+                      no-repeat center;
                     background-size: contain;
                     filter: invert(0.3);
                   "
@@ -3710,7 +4803,8 @@
                 <div
                   class="navicon_phone"
                   style="
-                    background: url('originos_data/star.png') no-repeat center;
+                    background: url(&quot;originos_data/star.png&quot;)
+                      no-repeat center;
                     background-size: contain;
                     filter: brightness(0.4);
                   "
@@ -3728,13 +4822,29 @@
               </div>
 
               <!-- Nút cam ở giữa -->
-              <button class="btn-main_clock" id="mainBtn_clock" data-i18n="ui_timer">Start</button>
+              <button
+                class="btn-main_clock"
+                id="mainBtn_clock"
+                data-i18n="ui_timer"
+              >
+                Start
+              </button>
 
               <!-- Hai nút sau khi nhân đôi -->
-              <button class="btn-start_clock" id="startStopBtn_clock" data-i18n="do_not_disturb">
+              <button
+                class="btn-start_clock"
+                id="startStopBtn_clock"
+                data-i18n="do_not_disturb"
+              >
                 Stop
               </button>
-              <button class="btn-reset_clock" id="resetBtn_clock" data-i18n="ui_cancel">Reset</button>
+              <button
+                class="btn-reset_clock"
+                id="resetBtn_clock"
+                data-i18n="ui_cancel"
+              >
+                Reset
+              </button>
             </div>
           </div>
         </div>
@@ -3761,7 +4871,24 @@
       </div>
       <div class="nav"></div>
       <div class="wallpaper" id="wallpaper">
-        <video id="homeVideoWallpaper" autoplay muted loop playsinline style="border-radius: inherit; display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
+        <video
+          id="homeVideoWallpaper"
+          autoplay
+          muted
+          loop
+          playsinline
+          style="
+            border-radius: inherit;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+          "
+        ></video>
         <div class="text_lock">Xiaomi HyperOS</div>
         <div class="text_lock" id="text_lock_cus"></div>
       </div>
@@ -3794,7 +4921,24 @@
         "
       ></div>
       <div class="lockscreen" id="lockscreen">
-        <video id="lockVideoWallpaper" autoplay muted loop playsinline style="border-radius: inherit; display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
+        <video
+          id="lockVideoWallpaper"
+          autoplay
+          muted
+          loop
+          playsinline
+          style="
+            border-radius: inherit;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+          "
+        ></video>
         <div
           class="hidden"
           id="wallpaper_aod2"
@@ -3805,7 +4949,9 @@
           "
         ></div>
 
-        <div class="footer-text2" id="longer_finger" data-i18n="unlock_hint">Keep holding...</div>
+        <div class="footer-text2" id="longer_finger" data-i18n="unlock_hint">
+          Keep holding...
+        </div>
         <div class="lock-content" id="lock_content">
           <div class="date-display" id="dateText" style="z-index: -2"></div>
           <div class="lock-clock" id="lockclock"></div>
@@ -3823,7 +4969,7 @@
               z-index: 123212;
               pointer-events: auto;
               font-weight: bold;
-              font-family: 'noto sans', sans-serif;
+              font-family: &quot;noto sans&quot;, sans-serif;
               color: white;
               display: none;
             "
@@ -3870,7 +5016,7 @@
         bottom: -0px;
         color: white;
         font-size: 18px;
-        font-family: 'Noto sans', sans;
+        font-family: &quot;Noto sans&quot;, sans;
         font-weight: bold;
         z-index: 101000;
         pointer-events: none;
@@ -3909,18 +5055,98 @@
     <script src="music.js"></script>
 
     <!-- Custom Icon Edit Popup -->
-    <div id="customIconPopup" class="alert-backdrop" style="display: none; z-index: 1000000; align-items: center; justify-content: center; padding-bottom: 0;" onclick="if(event.target === this && window.closeCustomIconPopup) window.closeCustomIconPopup()">
-      <div id="customIconPopupCard" style="width: auto; min-width: 200px; height: auto; padding: 16px 28px; border-radius: 24px; background: rgba(30, 30, 30, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: scale(0.9); opacity: 0; transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); display: flex; flex-direction: column; gap: 10px; align-items: center;">
-        <span style="font-size: 17px; font-weight: 500; color: #ffffff; margin-bottom: 5px;">تغيير صورة</span>
-        <button onclick="document.getElementById('iconFileInput').click()" style="background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 20px; border-radius: 12px; cursor: pointer; width: 100%;">تحديد من المعرض</button>
-        <button id="btn_reset_icon" style="background: rgba(255, 77, 79, 0.2); border: 1px solid rgba(255, 77, 79, 0.3); color: #ff4d4f; padding: 10px 20px; border-radius: 12px; cursor: pointer; width: 100%;">استعادة الافتراضي</button>
-        <input type="file" id="iconFileInput" accept="image/*" style="display: none;">
+    <div
+      id="customIconPopup"
+      class="alert-backdrop"
+      style="
+        display: none;
+        z-index: 1000000;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 0;
+      "
+      onclick="
+        if (event.target === this && window.closeCustomIconPopup)
+          window.closeCustomIconPopup();
+      "
+    >
+      <div
+        id="customIconPopupCard"
+        style="
+          width: auto;
+          min-width: 200px;
+          height: auto;
+          padding: 16px 28px;
+          border-radius: 24px;
+          background: rgba(30, 30, 30, 0.85);
+          backdrop-filter: blur(25px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+          transform: scale(0.9);
+          opacity: 0;
+          transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+        "
+      >
+        <span
+          style="
+            font-size: 17px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 5px;
+          "
+          >تغيير صورة</span
+        >
+        <button
+          onclick="document.getElementById('iconFileInput').click()"
+          style="
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+          "
+        >
+          تحديد من المعرض
+        </button>
+        <button
+          id="btn_reset_icon"
+          style="
+            background: rgba(255, 77, 79, 0.2);
+            border: 1px solid rgba(255, 77, 79, 0.3);
+            color: #ff4d4f;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+          "
+        >
+          استعادة الافتراضي
+        </button>
+        <input
+          type="file"
+          id="iconFileInput"
+          accept="image/*"
+          style="display: none"
+        />
       </div>
     </div>
 
     <!-- 3D Phone Popup -->
-    <div id="phone3dPopup" class="alert-backdrop" style="display: none; z-index: 10000000; padding: 0;">
-      <iframe src="3d_phone.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    <div
+      id="phone3dPopup"
+      class="alert-backdrop"
+      style="display: none; z-index: 10000000; padding: 0"
+    >
+      <iframe
+        src="3d_phone.html"
+        style="width: 100%; height: 100%; border: none"
+      ></iframe>
     </div>
 
     <script src="welcome_screen.js"></script>
