@@ -276,6 +276,76 @@ back_to_setting_display.addEventListener("click", () => {
   lock_style_btn.style.pointerEvents = "auto";
 });
 
+const centerClockDisplayBtn = document.getElementById("center_clock_display_btn");
+if (centerClockDisplayBtn) {
+  centerClockDisplayBtn.addEventListener("click", () => {
+    let updatedAny = false;
+
+    // 1. Handle "Less is more" style sliders if they exist
+    const sliderData = [
+      { id: 'top_less_is_more', val: 45 },
+      { id: 'left_less_is_more', val: 50 },
+      { id: 'top_less_is_more_audio', val: 55 },
+      { id: 'left_less_is_more_audio', val: 50 },
+      { id: 'top_less_is_more_date', val: 50 },
+      { id: 'left_less_is_more_date', val: 50 }
+    ];
+
+    sliderData.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        el.value = item.val;
+        el.dispatchEvent(new Event('input'));
+        updatedAny = true;
+      }
+    });
+
+    // 2. Handle standard clock styles using centered classes
+    const clockElements = [
+      { id: "lockclock", cls: "centered" },
+      { id: "clock_preview", cls: "centered" },
+      { id: "dateText", cls: "clock-centered" },
+      { id: "dateTextPreview", cls: "clock-centered" }
+    ];
+
+    clockElements.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        if (item.cls === "centered") {
+          el.style.left = "50%";
+          el.style.transform = "translateX(-50%) translateY(35px)";
+          el.style.position = "absolute";
+        } else if (item.cls === "clock-centered") {
+          el.style.left = "50%";
+          el.style.transform = "translateX(-50%)";
+          el.style.position = "absolute";
+        }
+        updatedAny = true;
+      }
+    });
+
+    // Also remove active state from "Top" button if it exists
+    const btnClockTop = document.getElementById("btn_clock_pos_top");
+    const btnClockCenter = document.getElementById("btn_clock_pos_center");
+    if (btnClockTop) btnClockTop.classList.remove("active");
+    if (btnClockCenter) btnClockCenter.classList.add("active");
+
+    localStorage.setItem("lock_clock_position", "center");
+
+    // Clear saved manual positions for standard clocks if any
+    localStorage.removeItem("clock_pos_x");
+    localStorage.removeItem("clock_pos_y");
+
+    if (updatedAny) {
+      if (typeof showPopup1_alert !== 'undefined') {
+        showPopup1_alert("✅ Clock centered");
+      } else if (typeof tb_system === 'function') {
+        tb_system("Clock centered");
+      }
+    }
+  });
+}
+
 const fullScreenToggleNormal = document.getElementById("fullScreenToggleNormal");
 const phoneScaleSlider = document.getElementById("phoneScaleSlider");
 const phoneScaleSliderVal = document.getElementById("phoneScaleSliderVal");
@@ -300,7 +370,7 @@ if (sharpPhoneTemplateToggle) {
 function applySharpPhoneTemplate(isSharp) {
   const sharpSlider = document.getElementById("sharpPhoneSlider");
   if (sharpSlider) {
-      sharpSlider.style.backgroundColor = isSharp ? "#ff4d4f" : "#555";
+      sharpSlider.style.backgroundColor = isSharp ? "#007aff" : "#555";
   }
   if (isSharp) {
     document.documentElement.style.setProperty("--bg--power_button_radius", "0px");
@@ -3901,10 +3971,17 @@ document
         }
 
         // run
+        const lang = localStorage.getItem("language") || "en";
+        const t = (typeof translations !== 'undefined' ? translations[lang] : null) || {
+          import_config_desc: "Are you sure you want to import this txt file? It may break the web.",
+          apply: "Continue",
+          cancel: "Cancel"
+        };
+
         showPopup2_alert(
-          "Are you sure you want to import this txt file? It may break the web.",
-          "Continue",
-          "Cancel",
+          t.import_config_desc || "Are you sure you want to import this txt file? It may break the web.",
+          t.apply || "Continue",
+          t.cancel || "Cancel",
           () => {
             animationCustomByTXT(config);
           }
@@ -3988,10 +4065,17 @@ const mappingAnimationTXT = {
 };
 
 document.getElementById("exportConfigBtn").addEventListener("click", () => {
+  const lang = localStorage.getItem("language") || "en";
+  const t = (typeof translations !== 'undefined' ? translations[lang] : null) || {
+    export_config_desc: "Do you want to download your animation configuration?",
+    download: "Download",
+    cancel: "Cancel"
+  };
+
   showPopup2_alert(
-    "Do you want to download your animation configuration?",
-    "Download",
-    "Cancel",
+    t.export_config_desc || "Do you want to download your animation configuration?",
+    t.download || "Download",
+    t.cancel || "Cancel",
     () => {
       const lines = Object.entries(mappingAnimationTXT).map(
         ([exportName, localKey]) => {
@@ -4449,18 +4533,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const datePreview = document.getElementById("dateTextPreview");
 
     function applyClockPosition(position) {
+        if (!clockMain) return; // Should handle errors gracefully
+        
         if (position === "center") {
-            if (clockMain) clockMain.classList.add("centered");
+            clockMain.classList.add("centered");
             if (clockPreview) clockPreview.classList.add("centered");
             if (dateMain) dateMain.classList.add("clock-centered");
             if (datePreview) datePreview.classList.add("clock-centered");
+            
             if (btnClockCenter) btnClockCenter.classList.add("active");
             if (btnClockTop) btnClockTop.classList.remove("active");
         } else {
-            if (clockMain) clockMain.classList.remove("centered");
+            clockMain.classList.remove("centered");
             if (clockPreview) clockPreview.classList.remove("centered");
             if (dateMain) dateMain.classList.remove("clock-centered");
             if (datePreview) datePreview.classList.remove("clock-centered");
+            
             if (btnClockTop) btnClockTop.classList.add("active");
             if (btnClockCenter) btnClockCenter.classList.remove("active");
         }
@@ -4474,6 +4562,26 @@ document.addEventListener("DOMContentLoaded", () => {
         // Initial load
         const savedPos = localStorage.getItem("lock_clock_position") || "top";
         applyClockPosition(savedPos);
+    }
+    
+    // Vertical Clock Position Slider
+    const clockSlider = document.getElementById("clock_vertical_slider");
+    if (clockSlider) {
+        clockSlider.addEventListener("input", (e) => {
+            const val = e.target.value + "px";
+            document.documentElement.style.setProperty("--lock-clock-top", val);
+            localStorage.setItem("lock_clock_vertical_position", e.target.value);
+        });
+
+        // Init value
+        const savedVertical = localStorage.getItem("lock_clock_vertical_position");
+        if (savedVertical) {
+            clockSlider.value = savedVertical;
+            document.documentElement.style.setProperty("--lock-clock-top", savedVertical + "px");
+        } else {
+            // Default 120 (same as style.css)
+            document.documentElement.style.setProperty("--lock-clock-top", "120px");
+        }
     }
 });
 

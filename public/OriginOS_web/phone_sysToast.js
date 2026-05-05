@@ -36,7 +36,13 @@ function tb_system(message) {
 
 // Function to auto-generate title from message
 function extractTitleAndDesc(message, btnCount) {
-  let titleText = btnCount > 1 ? "تأكيد الإجراء" : "تنبيه النظام";
+  const lang = localStorage.getItem("language") || "en";
+  const t = (typeof translations !== 'undefined' ? translations[lang] : null) || {
+    confirm_action: "Confirm Action",
+    system_alert: "System Alert"
+  };
+  
+  let titleText = btnCount > 1 ? t.confirm_action : t.system_alert;
   let descText = message;
   
   if (message.includes('\n')) {
@@ -44,29 +50,35 @@ function extractTitleAndDesc(message, btnCount) {
     titleText = parts[0].trim();
     descText = parts.slice(1).join('\n').trim();
   } else if (message.includes('Version 2.0.00')) {
-    titleText = "تحديث النظام";
-    descText = "إصدار V2.0.00 متاح الآن، هل ترغب في تجربته للاستمتاع بواجهة أسرع؟";
+    titleText = t.update_system;
+    descText = t.update_desc;
   } else if (message.includes('bugs or want to join')) {
-    titleText = "مجتمع OriginOS";
-    descText = "هل واجهت بعض الأخطاء أو ترغب بالانضمام إلى مجموعة المحادثة الخاصة بنا؟";
+    titleText = t.originos_community;
+    descText = t.community_desc;
   } else if (message.includes('remove password')) {
-    titleText = "إزالة كلمة المرور";
-    descText = "هل أنت متأكد أنك تريد إزالة كلمة المرور الخاصة بك؟";
+    titleText = t.remove_password_title;
+    descText = t.remove_password_desc;
   } else if (message.includes('مسح كافة البيانات')) {
-    titleText = "إعادة ضبط المصنع";
+    titleText = t.factory_reset;
   }
 
   return { title: titleText, desc: descText };
 }
 
 function showPopupInput(options) {
+  const lang = localStorage.getItem("language") || "en";
+  const t = (typeof translations !== 'undefined' ? translations[lang] : null) || {
+    ok: "OK",
+    cancel: "Cancel"
+  };
+
   const {
     message = "",
     placeholder = "",
     defaultText = "",
     maxLength = null,
-    buttonText = "OK",
-    cancelText = "Cancel",
+    buttonText = t.ok || "OK",
+    cancelText = t.cancel || "Cancel",
     onSubmit,
     onCancel,
   } = options;
@@ -156,24 +168,38 @@ function showPopupInput(options) {
 
 function showPopup1_alert(
   message_alert,
-  btnText_alert = "حسناً",
+  btnText_alert = null,
   onClose_alert = null
 ) {
+  const lang = localStorage.getItem("language") || "en";
+  const t = (typeof translations !== 'undefined' ? translations[lang] : null) || { ok: "OK" };
+  const finalBtnText = btnText_alert || t.ok || "OK";
+
   createPopup_alert(message_alert, [
-    { text: btnText_alert, action: onClose_alert },
+    { text: finalBtnText, action: onClose_alert },
   ]);
 }
 
 function showPopup2_alert(
   message_alert,
-  yesText_alert = "نعم",
-  noText_alert = "إلغاء",
+  yesText_alert = null,
+  noText_alert = null,
   onYes_alert = null,
   onNo_alert = null
 ) {
+  const lang = localStorage.getItem("language") || "en";
+  const t = (typeof translations !== 'undefined' ? translations[lang] : null) || {
+    apply: "Apply",
+    yes: "Yes",
+    cancel: "Cancel",
+    no: "No"
+  };
+  const finalYesText = yesText_alert || t.apply || t.yes || "Apply";
+  const finalNoText = noText_alert || t.cancel || t.no || "Cancel";
+
   createPopup_alert(message_alert, [
-    { text: yesText_alert, action: onYes_alert, primary: true },
-    { text: noText_alert, action: onNo_alert, secondary: true },
+    { text: finalYesText, action: onYes_alert, primary: true },
+    { text: finalNoText, action: onNo_alert, secondary: true },
   ]);
 }
 
@@ -211,11 +237,27 @@ function createPopup_alert(message_alert, buttons_alert) {
     
     // Fallback translations if they were in english originally
     let text = btnData_alert.text;
-    if (text.toLowerCase() === "open") text = "تشغيل";
-    if (text.toLowerCase() === "yes") text = "نعم";
-    if (text.toLowerCase() === "no") text = "لا";
-    if (text.toLowerCase() === "join") text = "انضمام";
-    if (text.toLowerCase() === "continue") text = "متابعة";
+    const lang = localStorage.getItem("language") || "en";
+    const t = (typeof translations !== 'undefined' ? (translations[lang] || translations['en']) : null) || {};
+
+    const lowText = text.toLowerCase();
+    
+    // Check if text itself is a key
+    if (t && t[text]) {
+        text = t[text];
+    } else if (t && t[lowText]) {
+        text = t[lowText];
+    } else if (t && (lowText === "continue" || lowText === "ok")) {
+        text = t.apply || t.ok || text;
+    } else if (t && lowText === "yes") {
+        text = t.yes || t.apply || text;
+    } else if (t && (lowText === "no" || lowText === "cancel")) {
+        text = t.cancel || t.no || text;
+    } else if (t && lowText === "join") {
+        text = t.join || text;
+    } else if (t && lowText === "open") {
+        text = t.open || text;
+    }
 
     btn_alert.textContent = text;
     btn_alert.onclick = () => {

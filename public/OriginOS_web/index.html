@@ -967,15 +967,15 @@
                 <div class="back-button" id="back_to_setting10" data-i18n="back">Version</div>
                 <div class="vesion_text">
                   <div class="content-box-vesion">
-                    <h2>What's New — V0.3 BETA</h2>
-                    <h1>
-                      • redesigned everything<br />
-                      • bug fixed<br />
-                      • added smoother animation<br />
-                      • added animation tuning<br />
-                      • added center controls and smooth animations<br />
-                      • added customization<br />
-                      • and more!
+                    <h2 data-i18n="version_new">What's New — V0.3 BETA</h2>
+                    <h1 style="font-weight: normal; font-size: 1.2em; line-height: 1.5;">
+                      <span data-i18n="redesigned_everything">• redesigned everything</span><br />
+                      <span data-i18n="bug_fixed">• bug fixed</span><br />
+                      <span data-i18n="smoother_animation">• added smoother animation</span><br />
+                      <span data-i18n="animation_tuning_added">• added animation tuning</span><br />
+                      <span data-i18n="center_controls_added">• added center controls and smooth animations</span><br />
+                      <span data-i18n="customization_added">• added customization</span><br />
+                      <span data-i18n="and_more">• and more!</span>
                     </h1>
                   </div>
                 </div>
@@ -985,7 +985,9 @@
                 id="app4credits"
                 style="z-index: 1002133; display: none"
               >
-                <div class="back-button" id="back_to_setting7" data-i18n="back">Credits</div>
+                <div class="back-button" id="back_to_setting7" data-i18n="back">
+                  <span data-i18n="credits_title">Credits</span>
+                </div>
                 <div
                   class="setting-item3"
                   style="
@@ -1154,15 +1156,16 @@
                     border-top-right-radius: 0;
                   "
                   onclick='
+                    const t = translations[localStorage.getItem("language") || "en"];
                     showPopup2_alert(
-                      `Join our group to find animation config file!`,
-                      `Join`,
-                      `No`,
+                      t.join_group_anim,
+                      t.join,
+                      t.no,
                       () => { window.open("https://t.me/OriginWEBChat", "_blank");},
                       () =>{})
                     '
                 >
-                  <div class="setting-title">Get animation config file?</div>
+                  <div class="setting-title" data-i18n="get_anim_config">Get animation config file?</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1177,14 +1180,14 @@
 
                 <div class="app4app" id="app4UnlockAnimation">
                   <div class="back-button" id="back_UnlockAnimation" data-i18n="back">
-                    Animation unlock
+                    <span data-i18n="animation_unlock">Animation unlock</span>
                   </div>
                   <div class="all_cubic_custom_opening">
                     <div
                       class="settingItemNoPosition"
                       id="reset_anim_unlock_btn"
                     >
-                      <div class="setting-title" style="font-size: 20px">
+                      <div class="setting-title" style="font-size: 20px" data-i18n="reset">
                         reset
                       </div>
                     </div>
@@ -1590,7 +1593,7 @@
                       </div>
 
                       <div class="label">
-                        Blur: <span id="blurAllAppVal">20</span>px
+                        <span data-i18n="blur">Blur</span>: <span id="blurAllAppVal">20</span>px
                       </div>
                       <input
                         type="range"
@@ -1600,13 +1603,13 @@
                         step="1"
                         value="20"
                       />
-                      <div class="footer-text-positionab">
+                      <div class="footer-text-positionab" data-i18n="high_values_perf_issue">
                         High values may cause performance issues on some devices
                       </div>
                     </div>
 
                     <div class="section">
-                      <h3>Icon position and hiding time when open app</h3>
+                      <h3 data-i18n="icon_pos_hiding_time">Icon position and hiding time when open app</h3>
                       <div class="phonePreviewAll">
                         <div class="open" id="previewPositionIcon"></div>
                       </div>
@@ -1615,6 +1618,7 @@
                           class="itemScrollIconPosition"
                           data-positionIcon="top"
                           data-sizeIcon="cover"
+                          data-i18n="cover"
                         >
                           Cover
                         </div>
@@ -1622,6 +1626,7 @@
                           class="itemScrollIconPosition"
                           data-positionIcon="top"
                           data-sizeIcon="110%"
+                          data-i18n="top"
                         >
                           Top
                         </div>
@@ -1629,6 +1634,7 @@
                           class="itemScrollIconPosition"
                           data-positionIcon="center"
                           data-sizeIcon="110%"
+                          data-i18n="center"
                         >
                           Center
                         </div>
@@ -1636,13 +1642,14 @@
                           class="itemScrollIconPosition"
                           data-positionIcon="bottom"
                           data-sizeIcon="110%"
+                          data-i18n="bottom"
                         >
                           Bottom
                         </div>
                       </div>
 
                       <div class="label">
-                        Time: <span id="timeHidingIconVal">0.3</span>s
+                        <span data-i18n="time">Time</span>: <span id="timeHidingIconVal">0.3</span>s
                       </div>
                       <input
                         type="range"
@@ -1654,7 +1661,7 @@
                       />
 
                       <div class="label">
-                        Delay time: <span id="delayHidingIconVal">0</span>s
+                        <span data-i18n="delay_time">Delay time</span>: <span id="delayHidingIconVal">0</span>s
                       </div>
                       <input
                         type="range"
@@ -1667,7 +1674,7 @@
                     </div>
 
                     <div class="setting-item_volume sectionForSttingItem">
-                      <div class="setting-title_volume">Parallel animation</div>
+                      <div class="setting-title_volume" data-i18n="parallel_animation">Parallel animation</div>
                       <div
                         class="toggle-switch_volume active"
                         id="parallelAnimationToggle"
@@ -1675,7 +1682,7 @@
                     </div>
 
                     <div class="setting-item_volume sectionForSttingItem">
-                      <div class="setting-title_volume">Multiple click</div>
+                      <div class="setting-title_volume" data-i18n="multiple_click">Multiple click</div>
                       <div
                         class="toggle-switch_volume active"
                         id="multipleClickAppToggle"
@@ -1685,7 +1692,7 @@
                 </div>
                 <div class="app4app" id="app4AppClosingAnimation">
                   <div class="back-button" id="back_AppClosingAnimation" data-i18n="back">
-                    App closing animation
+                    <span data-i18n="app_opening_animation">App closing animation</span>
                   </div>
                   <div class="all_cubic_custom_opening">
                     <div
@@ -1707,7 +1714,7 @@
                         ></div>
                       </div>
                       <div class="label">
-                        Time: <span id="timeTransformClosingVal">0.5</span>s
+                        <span data-i18n="time">Time</span>: <span id="timeTransformClosingVal">0.5</span>s
                       </div>
                       <input
                         type="range"
@@ -1719,7 +1726,7 @@
                       />
 
                       <div class="label">
-                        Damping: <span id="dampingTransformClosingVal">0</span>
+                        <span data-i18n="damping">Damping</span>: <span id="dampingTransformClosingVal">0</span>
                       </div>
                       <input
                         type="range"
@@ -1742,7 +1749,7 @@
                         ></div>
                       </div>
                       <div class="label">
-                        Time: <span id="timeScaleClosingVal">0.5</span>s
+                        <span data-i18n="time">Time</span>: <span id="timeScaleClosingVal">0.5</span>s
                       </div>
                       <input
                         type="range"
@@ -1754,7 +1761,7 @@
                       />
 
                       <div class="label">
-                        Damping: <span id="dampingScaleClosingVal">0</span>
+                        <span data-i18n="damping">Damping</span>: <span id="dampingScaleClosingVal">0</span>
                       </div>
                       <input
                         type="range"
@@ -1766,7 +1773,7 @@
                       />
 
                       <div class="label">
-                        Easing: <span id="easingScaleClosingVal">0.75</span>
+                        <span data-i18n="easing">Easing</span>: <span id="easingScaleClosingVal">0.75</span>
                       </div>
                       <input
                         type="range"
@@ -1779,9 +1786,9 @@
                     </div>
 
                     <div class="section">
-                      <h3>Time showing icon when closing app</h3>
+                      <h3 data-i18n="time_showing_icon_closing">Time showing icon when closing app</h3>
                       <div class="label">
-                        Time: <span id="timeShowingIconVal">0.05</span>s
+                        <span data-i18n="time">Time</span>: <span id="timeShowingIconVal">0.05</span>s
                       </div>
                       <input
                         type="range"
@@ -1806,9 +1813,9 @@
                     </div>
 
                     <div class="section">
-                      <h3>Navigation bar sensitivity and maximum drag</h3>
+                      <h3 data-i18n="nav_bar_sens_drag">Navigation bar sensitivity and maximum drag</h3>
                       <div class="label">
-                        sensitivity: <span id="sensitivityNavBarVal">0.08</span>
+                        <span data-i18n="sensitivity">sensitivity</span>: <span id="sensitivityNavBarVal">0.08</span>
                       </div>
                       <input
                         type="range"
@@ -1820,7 +1827,7 @@
                       />
 
                       <div class="label">
-                        maximum drag: <span id="maxDragNavVal">150</span>px
+                        <span data-i18n="max_drag">maximum drag</span>: <span id="maxDragNavVal">150</span>px
                       </div>
                       <input
                         type="range"
@@ -2009,7 +2016,7 @@
                       />
                     </svg>
                   </div>
-                  <div class="setting-title" id="home_screen_name">
+                  <div class="setting-title" id="home_screen_name" data-i18n="home_screen">
                     Home<br />Screen
                   </div>
                 </div>
@@ -2031,7 +2038,7 @@
                 </svg>
               </div>
               <div class="setting-item" id="live-wallpaper-btn">
-                <div class="setting-title" id="live_wallpaper_title">
+                <div class="setting-title" id="live_wallpaper_title" data-i18n="live_wallpaper">
                   Live Wallpaper | خلفية حية (فيديو)
                 </div>
                 <div class="toggle-switch" id="none" style="opacity: 0"></div>
@@ -2182,9 +2189,7 @@
                   id="setting-item-hide-wall"
                   style="top: 160px"
                 >
-                  <div class="setting-title" id="setting_title_hide_wallpaper">
-                    Hide Wallpaper
-                  </div>
+                    <span data-i18n="hide_wallpaper">Hide Wallpaper</span>
                   <div
                     class="toggle-switch"
                     id="Hide-wallPaper"
@@ -2334,18 +2339,17 @@
                         </svg>
                       </button>
 
-                      <div class="top-tab">
+                      <div class="top-tab" id="tabs_less_is_more">
                         <a
                           class="active"
                           onclick="
                             document.getElementById('tab_color_less_is_more').classList.remove('open');
                             document.getElementById('tab_text_less_is_more').classList.remove('open');
-  
+                            document.getElementById('tab_style_less_is_more').classList.add('open');
                             Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_style_less_is_more').classList.add('open');
                           "
+                          data-i18n="style"
                           >Style</a
                         >
 
@@ -2353,12 +2357,11 @@
                           onclick="
                             document.getElementById('tab_color_less_is_more').classList.remove('open');
                             document.getElementById('tab_style_less_is_more').classList.remove('open');
-  
+                            document.getElementById('tab_text_less_is_more').classList.add('open');
                             Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_text_less_is_more').classList.add('open');
                           "
+                          data-i18n="text"
                           >Text</a
                         >
 
@@ -2366,13 +2369,34 @@
                           onclick="
                             document.getElementById('tab_style_less_is_more').classList.remove('open');
                             document.getElementById('tab_text_less_is_more').classList.remove('open');
-  
+                            document.getElementById('tab_color_less_is_more').classList.add('open');
                             Array.from(this.parentNode.querySelectorAll('a')).forEach(el => el.classList.remove('active'));
                             this.classList.add('active');
-  
-                            document.getElementById('tab_color_less_is_more').classList.add('open');
                           "
+                          data-i18n="color"
                           >Color</a
+                        >
+                        <a
+                          href="javascript:void(0)"
+                          class="tab-link"
+                          onclick="
+                            document.getElementById('top_less_is_more').value = 45;
+                            document.getElementById('left_less_is_more').value = 50;
+                            document.getElementById('top_less_is_more_audio').value = 55;
+                            document.getElementById('left_less_is_more_audio').value = 50;
+                            document.getElementById('top_less_is_more_date').value = 50;
+                            document.getElementById('left_less_is_more_date').value = 50;
+                            
+                            // Trigger input events to update UI
+                            document.getElementById('top_less_is_more').dispatchEvent(new Event('input'));
+                            document.getElementById('left_less_is_more').dispatchEvent(new Event('input'));
+                            document.getElementById('top_less_is_more_audio').dispatchEvent(new Event('input'));
+                            document.getElementById('left_less_is_more_audio').dispatchEvent(new Event('input'));
+                            document.getElementById('top_less_is_more_date').dispatchEvent(new Event('input'));
+                            document.getElementById('left_less_is_more_date').dispatchEvent(new Event('input'));
+                          "
+                          data-i18n="center"
+                          >Center</a
                         >
                       </div>
 
@@ -2827,6 +2851,7 @@
                           Center / وسط
                         </button>
                       </div>
+                      <div style="margin-top: 15px;"></div>
                     </div>
                   </div>
                   <div class="bottom-buttons">
@@ -2868,7 +2893,9 @@
                 id="app4home"
                 style="z-index: 1002133; display: none"
               >
-                <div class="back-button" id="back_to_setting8" data-i18n="back">Home screen</div>
+                <div class="back-button" id="back_to_setting8" data-i18n="back">
+                  <span data-i18n="home_screen">Home screen</span>
+                </div>
                 <div class="settings-box">
                   <div class="box-title" id="size_icon_title" data-i18n="icon_size">Icon Size</div>
                   <div class="button-container">
@@ -3000,7 +3027,7 @@
                   id="borderRadiusSystemBtn"
                   style="top: calc(35% + 360px)"
                 >
-                  <div class="setting-title">Border radius system</div>
+                  <div class="setting-title" data-i18n="border_radius_system">Border radius system</div>
                   <div class="toggle-switch" style="opacity: 0"></div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -3016,7 +3043,7 @@
 
                 <div class="app4app" id="app4icon">
                   <div class="back-button" id="back_to_setting12" data-i18n="back">
-                    Icon packs
+                    <span data-i18n="icon_packs">Icon packs</span>
                   </div>
                   <div class="container_icon">
                     <div class="icon_item" onclick="icon_hyperos3()">
@@ -3152,7 +3179,7 @@
 
               <div class="app4app" id="app4finger">
                 <div class="back-button" id="back_to_setting9" data-i18n="back">
-                  Finger print
+                  <span data-i18n="fingerprint">Finger print</span>
                 </div>
                 <div class="half-border-box">
                   <img
@@ -3163,8 +3190,8 @@
                   />
                 </div>
                 <div class="button-group-finger">
-                  <button class="button-finger" id="btn-white">White</button>
-                  <button class="button-finger" id="btn-blue">Blue</button>
+                  <button class="button-finger" id="btn-white" data-i18n="white">White</button>
+                  <button class="button-finger" id="btn-blue" data-i18n="blue">Blue</button>
                 </div>
 
                 <div id="lottiePreviewContainer">
@@ -3205,9 +3232,9 @@
               </div>
             </div>
             <div class="app4app" id="app4audio" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting11" data-i18n="back">Sound</div>
+              <div class="back-button" id="back_to_setting11" data-i18n="back"><span data-i18n="sound">Sound</span></div>
               <div class="volume-setting_volume">
-                <div class="setting-title_volume">Master Volume</div>
+                <div class="setting-title_volume" data-i18n="master_volume">Master Volume</div>
                 <input
                   type="range"
                   id="volume_all_slider"
@@ -3226,7 +3253,7 @@
                   border-bottom-right-radius: 0px;
                 "
               >
-                <div class="setting-title_volume">Click Sound</div>
+                <div class="setting-title_volume" data-i18n="click_sound">Click Sound</div>
                 <div
                   class="toggle-switch_volume active"
                   id="toggle_click_volume"
@@ -3234,7 +3261,7 @@
               </div>
 
               <div class="setting-item_volume" style="border-radius: 0">
-                <div class="setting-title_volume">Unlock Sound</div>
+                <div class="setting-title_volume" data-i18n="unlock_sound">Unlock Sound</div>
                 <div
                   class="toggle-switch_volume active"
                   id="toggle_unlock_volume"
@@ -3248,7 +3275,7 @@
                   border-top-right-radius: 0px;
                 "
               >
-                <div class="setting-title_volume">Charging Sound</div>
+                <div class="setting-title_volume" data-i18n="charging_sound">Charging Sound</div>
                 <div
                   class="toggle-switch_volume active"
                   id="toggle_charge_volume"
@@ -3256,11 +3283,13 @@
               </div>
             </div>
             <div class="app4app" id="app4lockstyle" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting13" data-i18n="back">Lock style</div>
+              <div class="back-button" id="back_to_setting13" data-i18n="back">
+                <span data-i18n="lock_screen">Lock style</span>
+              </div>
               <div id="all_box_pass">
                 <div class="box_pass" id="box_pass1">
-                  <div class="setting-title" style="margin: 15px">Password</div>
-                  <div class="left-text-small2" id="status_pass1">ON</div>
+                  <div class="setting-title" style="margin: 15px" data-i18n="password">Password</div>
+                  <div class="left-text-small2" id="status_pass1" data-i18n="on">ON</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 -960 960 960"
@@ -3275,10 +3304,11 @@
                   <div
                     class="setting-title"
                     style="margin: 13px; margin-top: 16px; font-size: 15px"
+                    data-i18n="fingerprint"
                   >
                     FingerPrint
                   </div>
-                  <div class="left-text-small2" id="status_pass2">ON</div>
+                  <div class="left-text-small2" id="status_pass2" data-i18n="on">ON</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 -960 960 960"
@@ -3296,7 +3326,7 @@
                 id="fast_finger_item"
                 style="top: 230px"
               >
-                <div class="setting-title" id="fast_finger_title">
+                <div class="setting-title" id="fast_finger_title" data-i18n="fast_fingerprint">
                   Fast fingerprint
                 </div>
                 <div
@@ -3315,6 +3345,7 @@
                   class="setting-title"
                   id="transparent_password_title"
                   style="text-align: left"
+                  data-i18n="transparent_password"
                 >
                   Transparent password button
                 </div>
@@ -3330,6 +3361,7 @@
                   class="back-button"
                   id="back_to_setting14"
                   style="color: #ffffff !important"
+                  data-i18n="lock_screen_back"
                 >
                   Back
                 </div>
@@ -3344,6 +3376,7 @@
                     z-index: 123212;
                     pointer-events: auto;
                   "
+                  data-i18n="remove_password"
                 >
                   Remove password
                 </div>
@@ -3437,6 +3470,14 @@
                     </label>
                   </div>
                   <div class="display-setting-desc" data-i18n="natural_full_screen_desc">Enter full screen without enlarging the phone.</div>
+                </div>
+
+                <div class="display-setting-panel" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 10px;">
+                  <div style="flex: 1;">
+                    <div style="font-size: 15px; font-weight: 500;" data-i18n="center_clock">Center Clock</div>
+                    <div style="font-size: 12px; opacity: 0.6; margin-top: 2px;" data-i18n="center_clock_desc">Center the lock screen clock automatically.</div>
+                  </div>
+                  <button id="center_clock_display_btn" style="background: #007aff; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3);" data-i18n="apply">Apply</button>
                 </div>
 
                 <div class="display-setting-panel">
@@ -3548,7 +3589,14 @@
                     <input type="range" id="lockClockOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
                   </div>
                   
-                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل شفافية خط الساعة في شاشة القفل.</div>
+                  <div style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                      <span style="font-size: 14px;">Vertical Position / النزول للأسفل</span>
+                    </div>
+                    <input type="range" id="clock_vertical_slider" min="0" max="600" value="120" style="width: 100%; accent-color: #007aff;" />
+                  </div>
+                  
+                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل شفافية خط الساعة و نسبة نزولها في شاشة القفل.</div>
                 </div>
 
                 <div class="display-setting-panel">
@@ -3590,15 +3638,15 @@
                   <div class="display-setting-desc">Zoom in or out of the phone interface.</div>
                 </div>
 
-                <div class="display-setting-panel" style="border: 1px solid rgba(255, 0, 0, 0.3);">
+                <div class="display-setting-panel" style="border: 1px solid rgba(0, 122, 255, 0.3);">
                   <div class="display-setting-header">
-                    <span style="color: #ff4d4f; font-weight: bold;" data-i18n="sharp_phone">قالب حاد للزر الأحمر</span>
+                    <span style="color: #007aff; font-weight: bold;" data-i18n="sharp_phone">قالب حاد للزر الأزرق</span>
                     <label class="switch">
                       <input type="checkbox" id="sharpPhoneTemplateToggle">
                       <span class="slider" id="sharpPhoneSlider" style="background-color: #555;"></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc" data-i18n="sharp_phone_desc">يجعل زر إغلاق الشاشة (الزر الأحمر) حاد الحواف ومستطيلاً بشكل كامل.</div>
+                  <div class="display-setting-desc" data-i18n="sharp_phone_desc">يجعل زر إغلاق الشاشة (الزر الأزرق) حاد الحواف ومستطيلاً بشكل كامل.</div>
                 </div>
 
                 <div class="display-setting-panel" id="open_3d_phone_btn" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">

@@ -12,6 +12,9 @@ const passTranslations = {
     not_match: "Passwords do not match",
     remove_success: "Password removed successfully",
     forgot: "Forgot password",
+    remove_warning: "Are you sure you want to remove password?",
+    yes: "Yes",
+    no: "No"
   },
   vi: {
     create_new: "Tạo mật khẩu mới",
@@ -39,6 +42,9 @@ const passTranslations = {
     not_match: "كلمات المرور غير متطابقة",
     remove_success: "تمت إزالة كلمة المرور بنجاح",
     forgot: "نسيت كلمة المرور",
+    remove_warning: "هل أنت متأكد أنك تريد إزالة كلمة المرور؟",
+    yes: "نعم",
+    no: "لا"
   },
   fr: {
     create_new: "Créer un nouveau mot de passe",
@@ -587,9 +593,9 @@ function handleFullInput_crea_pass() {
 
 remove_pass_btn.addEventListener("click", () => {
   showPopup2_alert(
-    "Are you sure you want to remove password?",
-    "Yes",
-    "No",
+    t("remove_warning"),
+    t("yes"),
+    t("no"),
     () => {
       remove_pass_btn.style.display = "none";
       pass_password = "";
