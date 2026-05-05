@@ -148,22 +148,22 @@ const border_radius_phone = getComputedStyle(root2)
 let custom_text_lock_screen =
   localStorage.getItem("custom_text_lock_screen") || "";
 
-const now = new Date();
-const options = {
-  weekday: "short",
-  month: "short",
-  day: "numeric",
-};
-const formatted = now.toLocaleDateString("en-US", options);
-
-dateElement.textContent = `${formatted} ${custom_text_lock_screen}`;
-dateElement2.textContent = formatted;
-document.getElementById(
-  "dateTextPreview"
-).textContent = `${formatted} ${custom_text_lock_screen}`;
-
 function updateTime() {
   const now = new Date();
+  
+  // Date logic
+  const lang = localStorage.getItem("language") || "en";
+  const options = { weekday: "short", month: "short", day: "numeric" };
+  const formatted = now.toLocaleDateString(lang, options);
+  let custom_text = localStorage.getItem("custom_text_lock_screen") || "";
+  
+  if(document.getElementById("dateText")) 
+    document.getElementById("dateText").textContent = `${formatted} ${custom_text}`;
+  if(document.getElementById("dateText2")) 
+    document.getElementById("dateText2").textContent = formatted;
+  if(document.getElementById("dateTextPreview")) 
+    document.getElementById("dateTextPreview").textContent = `${formatted} ${custom_text}`;
+
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 

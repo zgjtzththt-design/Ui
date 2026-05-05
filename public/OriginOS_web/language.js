@@ -328,7 +328,11 @@ function applyLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         if (t[key]) {
-            el.textContent = t[key];
+            if (key === 'back' || el.classList.contains('back-button')) {
+                el.textContent = t[key] + ' ‹';
+            } else {
+                el.textContent = t[key];
+            }
         }
     });
 
@@ -370,23 +374,25 @@ function applyLanguage(lang) {
     const labels = document.querySelectorAll('.label-icon-box p, .icon-box p');
     labels.forEach(label => {
         const text = label.textContent.trim();
-        // Simple heuristic to translate existing labels
-        for (const key in translations['ar']) {
-            if (translations['ar'][key] === text) {
-                label.textContent = t[key];
-                break;
+        let found = false;
+        for (const l in translations) {
+            for (const key in translations[l]) {
+                if (translations[l][key] === text) {
+                    label.textContent = t[key];
+                    found = true;
+                    break;
+                }
             }
-        }
-        for (const key in translations['en']) {
-             if (translations['en'][key] === text) {
-                label.textContent = t[key];
-                break;
-            }
+            if (found) break;
         }
     });
 
     // Handle any specific text placeholders or dynamic content in global JS functions
     window.currentLanguage = lang;
+    
+    if (typeof updatePassLanguage === 'function') {
+        updatePassLanguage(lang);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

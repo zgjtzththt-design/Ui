@@ -521,7 +521,9 @@
       </div>
 
       <div class="lp2" id="lp2"></div>
-              <div class="left-text-tb" id="left-text-tb" data-i18n="ui_hide_wallpaper">Hide Wallpaper</div>
+      <div class="left-text-tb" id="left-text-tb">
+        <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1777963935/doynolhpjbugek8bwwks.png" style="width: 100%; border-radius: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" alt="Notification">
+      </div>
       <div class="thanh-status2" id="thanh-status2"></div>
       <div class="thanh-status" id="thanh-status"></div>
       <div class="status-battery">
@@ -623,18 +625,18 @@
               />
 
               <div class="playlist_music" id="playlist_music"></div>
-
-              <div class="player-popup_music" id="playerPopup_music">
+            </div>
+            <div class="player-popup_music" id="playerPopup_music">
                 <div
                   onclick="closePlayer_music()"
-                  style="background: none; position: absolute; right: 10px"
+                  style="background: none; position: absolute; right: 20px; top: 35px; cursor: pointer; z-index: 10;"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="40px"
                     viewBox="0 -960 960 960"
                     width="40px"
-                    fill="#434343"
+                    fill="currentColor"
                   >
                     <path
                       d="m251.33-204.67-46.66-46.66L433.33-480 204.67-708.67l46.66-46.66L480-526.67l228.67-228.66 46.66 46.66L526.67-480l228.66 228.67-46.66 46.66L480-433.33 251.33-204.67Z"
@@ -643,6 +645,15 @@
                 </div>
                 <img id="popupImage_music" src="" alt="Album Art" />
                 <div class="popup-title_music" id="popupTitle_music"></div>
+                <div class="popup-author_music" id="popupAuthor_music"></div>
+                <input
+                  type="range"
+                  id="progressBar_music"
+                  value="0"
+                  min="0"
+                  max="100"
+                  step="0.1"
+                />
                 <div class="controls_music">
                   <div onclick="prevTrack_music()">
                     <svg
@@ -687,21 +698,11 @@
                   controls
                   style="display: none"
                 ></audio>
-                <input
-                  type="range"
-                  id="progressBar_music"
-                  value="0"
-                  min="0"
-                  max="100"
-                  step="0.1"
-                />
               </div>
-            </div>
           </div>
         </div>
         <div class="box" id="box4">
           <div class="app" id="app4main">
-            <div class="footer-text">Made by Quandz24</div>
             <div
               class="left-text"
               id="name_setting"
@@ -774,9 +775,8 @@
               <div
                 class="circle"
                 style="
-                  background: url('originos_data/language.png') no-repeat center
-                    center fixed;
-                  background-size: 130%;
+                  background: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1777973896/htrtbmauylj2sjvuk0di.png') no-repeat center center;
+                  background-size: 100%;
                 "
               ></div>
               <div
@@ -865,7 +865,7 @@
             </div>
 
               <div class="app4app" id="app4" style="z-index: 5020">
-              <div class="back-button" id="back_to_setting">رجوع ‹</div>
+              <div class="back-button" id="back_to_setting" data-i18n="back">رجوع ‹</div>
               
               <div class="phone-container">
                 
@@ -961,10 +961,10 @@
                 id="app4vesion"
                 style="z-index: 10021323; display: none"
               >
-                <div class="back-button" id="back_to_setting10">Version</div>
+                <div class="back-button" id="back_to_setting10" data-i18n="back">Version</div>
                 <div class="vesion_text">
                   <div class="content-box-vesion">
-                    <h2>What's New — V0.2 BETA Animation update</h2>
+                    <h2>What's New — V0.3 BETA</h2>
                     <h1>
                       • redesigned everything<br />
                       • bug fixed<br />
@@ -982,7 +982,7 @@
                 id="app4credits"
                 style="z-index: 1002133; display: none"
               >
-                <div class="back-button" id="back_to_setting7">Credits</div>
+                <div class="back-button" id="back_to_setting7" data-i18n="back">Credits</div>
                 <div
                   class="setting-item3"
                   style="
@@ -1005,7 +1005,7 @@
               </div>
             </div>
             <div class="app4app" id="app4animation" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting2">Animation</div>
+              <div class="back-button" id="back_to_setting2" data-i18n="back">Animation</div>
               <div class="box-wrapper">
                 <div class="scaling-box" id="scaling-box"></div>
               </div>
@@ -1041,7 +1041,7 @@
               </div>
 
               <div class="app4app" id="app4MoreAnimation">
-                <div class="back-button" id="back_to_setting_MoreAnimation">
+                <div class="back-button" id="back_to_setting_MoreAnimation" data-i18n="back">
                   Animation tuning
                 </div>
                 <div class="setting-item" id="anim_unlock_btn">
@@ -1173,7 +1173,7 @@
                 </div>
 
                 <div class="app4app" id="app4UnlockAnimation">
-                  <div class="back-button" id="back_UnlockAnimation">
+                  <div class="back-button" id="back_UnlockAnimation" data-i18n="back">
                     Animation unlock
                   </div>
                   <div class="all_cubic_custom_opening">
@@ -1404,7 +1404,7 @@
                   </div>
                 </div>
                 <div class="app4app" id="app4AppOpeningAnimation">
-                  <div class="back-button" id="back_AppOpeningAnimation">
+                  <div class="back-button" id="back_AppOpeningAnimation" data-i18n="back">
                     App opening animation
                   </div>
                   <div class="all_cubic_custom_opening">
@@ -1681,7 +1681,7 @@
                   </div>
                 </div>
                 <div class="app4app" id="app4AppClosingAnimation">
-                  <div class="back-button" id="back_AppClosingAnimation">
+                  <div class="back-button" id="back_AppClosingAnimation" data-i18n="back">
                     App closing animation
                   </div>
                   <div class="all_cubic_custom_opening">
@@ -1832,7 +1832,7 @@
                 </div>
 
                 <div class="app4app" id="app4ControlsCenterAnim">
-                  <div class="back-button" id="back_ControlsCenterAnim">
+                  <div class="back-button" id="back_ControlsCenterAnim" data-i18n="back">
                     Controls center animation
                   </div>
                   <div class="phone_preview">
@@ -1924,7 +1924,7 @@
               </div>
             </div>
             <div class="app4app" id="app4theme" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting3">Themes</div>
+              <div class="back-button" id="back_to_setting3" data-i18n="back">Themes</div>
               <div class="container_themes">
                 <div class="wallpaper-btn" id="wallpaper-btn">
                   <div
@@ -2047,7 +2047,7 @@
                 id="app4wallpaper"
                 style="z-index: 100213923; display: none"
               >
-                <div class="back-button" id="back_to_setting4">WallPaper</div>
+                <div class="back-button" id="back_to_setting4" data-i18n="back">WallPaper</div>
                 <div class="button-row" id="button-row">
                   <div
                     class="img-button active"
@@ -2149,7 +2149,7 @@
                 id="app4aod"
                 style="z-index: 1002133; display: none"
               >
-                <div class="back-button" id="back_to_setting5">
+                <div class="back-button" id="back_to_setting5" data-i18n="back">
                   Always On Display
                 </div>
                 <div class="setting-item" id="setting-item-aod">
@@ -2853,7 +2853,7 @@
                 id="app4home"
                 style="z-index: 1002133; display: none"
               >
-                <div class="back-button" id="back_to_setting8">Home screen</div>
+                <div class="back-button" id="back_to_setting8" data-i18n="back">Home screen</div>
                 <div class="settings-box">
                   <div class="box-title" id="size_icon_title">Icon Size</div>
                   <div class="button-container">
@@ -3018,7 +3018,7 @@
                 </div>
 
                 <div class="app4app" id="app4icon">
-                  <div class="back-button" id="back_to_setting12">
+                  <div class="back-button" id="back_to_setting12" data-i18n="back">
                     Icon packs
                   </div>
                   <div class="container_icon">
@@ -3071,7 +3071,7 @@
                 </div>
 
                 <div class="app4app" id="app4BorderRadiusSystem">
-                  <div class="back-button" id="back_BorderRadiusSystem">
+                  <div class="back-button" id="back_BorderRadiusSystem" data-i18n="back">
                     Border radius system
                   </div>
                   <div
@@ -3154,7 +3154,7 @@
               </div>
 
               <div class="app4app" id="app4finger">
-                <div class="back-button" id="back_to_setting9">
+                <div class="back-button" id="back_to_setting9" data-i18n="back">
                   Finger print
                 </div>
                 <div class="half-border-box">
@@ -3208,7 +3208,7 @@
               </div>
             </div>
             <div class="app4app" id="app4audio" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting11">Sound</div>
+              <div class="back-button" id="back_to_setting11" data-i18n="back">Sound</div>
               <div class="volume-setting_volume">
                 <div class="setting-title_volume">Master Volume</div>
                 <input
@@ -3259,7 +3259,7 @@
               </div>
             </div>
             <div class="app4app" id="app4lockstyle" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting13">Lock style</div>
+              <div class="back-button" id="back_to_setting13" data-i18n="back">Lock style</div>
               <div id="all_box_pass">
                 <div class="box_pass" id="box_pass1">
                   <div class="setting-title" style="margin: 15px">Password</div>
@@ -3418,7 +3418,7 @@
             </div>
 
             <div class="app4app" id="app4display" style="z-index: 1002133; display: none; background: var(--bg--background2); color: var(--bg--color);">
-              <div class="back-button" id="back_to_setting_display" style="color: var(--bg--color);">Display Settings</div>
+              <div class="back-button" id="back_to_setting_display" style="color: var(--bg--color);" data-i18n="back">Display Settings</div>
               <div style="padding: 20px;">
                 <div class="display-setting-panel">
                   <div class="display-setting-header">
@@ -3898,7 +3898,7 @@
         pointer-events: none;
       "
     >
-      V0.2 BETA
+      V0.3 BETA
     </div>
     <div class="power-button" title="power-button"></div>
 

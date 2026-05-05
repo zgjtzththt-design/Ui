@@ -3,7 +3,7 @@ let input_password = "";
 const saved_pass_local = localStorage.getItem("pass_saved");
 if (saved_pass_local) pass_password = saved_pass_local;
 
-const translations = {
+const passTranslations = {
   en: {
     create_new: "Create new password",
     enter_old: "Enter old password",
@@ -14,19 +14,45 @@ const translations = {
     forgot: "Forgot password",
   },
   vi: {
-    create_new: "Create new password",
-    enter_old: "Enter old password",
-    confirm_new: "Confirm new password",
-    wrong_old: "Incorrect old password",
-    not_match: "Passwords do not match",
-    remove_success: "Password removed successfully",
-    forgot: "Forgot password",
+    create_new: "Tạo mật khẩu mới",
+    enter_old: "Nhập mật khẩu cũ",
+    confirm_new: "Xác nhận mật khẩu mới",
+    wrong_old: "Mật khẩu cũ không đúng",
+    not_match: "Mật khẩu không khớp",
+    remove_success: "Xóa mật khẩu thành công",
+    forgot: "Quên mật khẩu",
   },
-  // ... Thêm ngôn ngữ khác
+  'zh-CN': {
+    create_new: "创建新密码",
+    enter_old: "输入旧密码",
+    confirm_new: "确认新密码",
+    wrong_old: "旧密码不正确",
+    not_match: "密码不匹配",
+    remove_success: "密码已成功删除",
+    forgot: "忘记密码",
+  },
+  ar: {
+    create_new: "إنشاء كلمة مرور جديدة",
+    enter_old: "أدخل كلمة المرور القديمة",
+    confirm_new: "تأكيد كلمة المرور الجديدة",
+    wrong_old: "كلمة المرور القديمة غير صحيحة",
+    not_match: "كلمات المرور غير متطابقة",
+    remove_success: "تمت إزالة كلمة المرور بنجاح",
+    forgot: "نسيت كلمة المرور",
+  },
+  fr: {
+    create_new: "Créer un nouveau mot de passe",
+    enter_old: "Entrer l'ancien mot de passe",
+    confirm_new: "Confirmer le nouveau mot de passe",
+    wrong_old: "Ancien mot de passe incorrect",
+    not_match: "Les mots de passe ne correspondent pas",
+    remove_success: "Mot de passe supprimé avec succès",
+    forgot: "Mot de passe oublié",
+  }
 };
-let currentLang = localStorage.getItem("language") || "en"; // mặc định tiếng Việt
+let currentLang_pass = localStorage.getItem("language") || "en";
 function t(key) {
-  return translations[currentLang]?.[key] || key;
+  return passTranslations[currentLang_pass]?.[key] || passTranslations['en'][key] || key;
 }
 function updatePasswordTexts() {
   document.getElementById("title_crea_pass").textContent =
@@ -39,10 +65,8 @@ function updatePasswordTexts() {
   document.getElementById("error_crea_pass").textContent = "";
   fogot_pass_btn.textContent = t("forgot");
 }
-function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem("language", lang);
-
+function updatePassLanguage(lang) {
+  currentLang_pass = lang;
   updatePasswordTexts();
 }
 

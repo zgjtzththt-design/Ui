@@ -1,24 +1,14 @@
 // === Danh sách nhạc mặc định ===
 const musicList_music = [
   {
-    title: "HEADPHONK",
-    img: "originos_data/Music/headphonk.png",
-    src: "originos_data/Music/phonk/HEADPHONK - phonk.mp3",
+    title: "Agharta Super Slowed",
+    img: "agharta.jpg",
+    src: "https://pdftourl.net/audio/1777979566620-a0aadc76-e69b-4c91-a6a6-24b61d5d04a4.mp3",
   },
   {
-    title: "Dark Heart",
-    img: "originos_data/Music/dark_heart.png",
-    src: "originos_data/Music/ambient/Dark Heart - ambient.mp3",
-  },
-  {
-    title: "Machine",
-    img: "originos_data/Music/machine.png",
-    src: "originos_data/Music/eletric/Machine -electric.mp3",
-  },
-  {
-    title: "Happy",
-    img: "originos_data/Music/happy.png",
-    src: "originos_data/Music/pop/Happy - pop.mp3",
+    title: "Illuminati Sped Up",
+    img: "illuminati.jpg",
+    src: "https://pdftourl.net/audio/1777979496675-f6c40081-97c9-412c-bbd1-86530b158f1d.mp3",
   },
 ];
 
