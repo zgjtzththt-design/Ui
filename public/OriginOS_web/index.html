@@ -171,6 +171,7 @@
       ></div>
     </div>
     <div class="phone">
+      <div id="phone_mold_overlay" style="position: absolute; top:0; left:0; width: 100%; height: 100%; pointer-events: none; z-index: 100000000; display: none; background-image: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1778001721/lsesg8d3a9jiwpfvuraj.png'); background-size: 100% 100%;"></div>
       <!-- Gemini Assistant UI -->
       <div id="gemini-assistant" class="gemini-assistant">
         <div class="gemini-glow"></div>
@@ -727,6 +728,7 @@
                 class="left-text-small"
                 id="about_name_small_setting"
                 style="left: 60px"
+                data-i18n="os_information"
               >
                 OS &middot; Information
               </div>
@@ -818,6 +820,7 @@
                 class="left-text-small"
                 id="about_name_small_setting"
                 style="left: 60px"
+                data-i18n="biometrics"
               >
                 Biometrics
               </div>
@@ -1005,7 +1008,7 @@
               </div>
             </div>
             <div class="app4app" id="app4animation" style="z-index: 123213123">
-              <div class="back-button" id="back_to_setting2" data-i18n="back">Animation</div>
+              <div class="back-button" id="back_to_setting2" data-i18n="ui_animation">Animation</div>
               <div class="box-wrapper">
                 <div class="scaling-box" id="scaling-box"></div>
               </div>
@@ -1018,7 +1021,7 @@
                 <div class="speed-box" data-speed="8">10x</div>
               </div>
               <div class="setting-item">
-                <div class="setting-title">Blur</div>
+                <div class="setting-title" data-i18n="blur">Blur</div>
                 <div
                   class="toggle-switch"
                   id="blurApp"
@@ -1026,7 +1029,7 @@
                 ></div>
               </div>
               <div class="setting-item" id="animation_more_btn">
-                <div class="setting-title">Animation tuning</div>
+                <div class="setting-title" data-i18n="animation_tuning">Animation tuning</div>
                 <div class="toggle-switch" id="none2" style="opacity: 0"></div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1045,7 +1048,7 @@
                   Animation tuning
                 </div>
                 <div class="setting-item" id="anim_unlock_btn">
-                  <div class="setting-title">Unlock animation</div>
+                  <div class="setting-title" data-i18n="unlock_animation">Unlock animation</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1059,7 +1062,7 @@
                 </div>
 
                 <div class="setting-item" id="anim_open_app_btn">
-                  <div class="setting-title">App opening animation</div>
+                  <div class="setting-title" data-i18n="app_opening_animation">App opening animation</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1073,7 +1076,7 @@
                 </div>
 
                 <div class="setting-item" id="anim_close_app_btn">
-                  <div class="setting-title">App closing animation</div>
+                  <div class="setting-title" data-i18n="app_closing_animation">App closing animation</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1087,7 +1090,7 @@
                 </div>
 
                 <div class="setting-item" id="ControlsCenterAnimBtn">
-                  <div class="setting-title">Controls center animation</div>
+                  <div class="setting-title" data-i18n="controls_center_animation">Controls center animation</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1114,7 +1117,7 @@
                     border-bottom-right-radius: 0;
                   "
                 >
-                  <div class="setting-title">upload animation file .txt</div>
+                <div class="setting-title" data-i18n="upload_animation_file">upload animation file .txt</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1131,7 +1134,7 @@
                   id="exportConfigBtn"
                   style="border-radius: 0"
                 >
-                  <div class="setting-title">Export animation file .txt</div>
+                  <div class="setting-title" data-i18n="export_animation_file">Export animation file .txt</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -1418,7 +1421,7 @@
                     </div>
 
                     <div class="section" id="section-aspect">
-                      <h3>Aspect-Ratio Animation</h3>
+                    <h3 data-i18n="aspect_ratio_animation">Aspect-Ratio Animation</h3>
 
                       <div class="label">
                         cubic-bezier:
@@ -1437,7 +1440,7 @@
                     </div>
 
                     <div class="section" id="section-all">
-                      <h3>Scale Animation</h3>
+                    <h3 data-i18n="scale_animation">Scale Animation</h3>
 
                       <div class="label">
                         Time: <span id="timeAllVal">0.4</span>s
@@ -1930,6 +1933,7 @@
                   <div
                     style="font-size: 15px; margin: 10px; margin-bottom: 7px"
                     id="wallpaper_name"
+                    data-i18n="wallpaper"
                   >
                     Wallpaper
                   </div>
@@ -1940,6 +1944,7 @@
                   <div
                     style="font-size: 15px; margin: 10px; margin-bottom: 7px"
                     id="lock_screen_name"
+                    data-i18n="ui_lock"
                   >
                     Lock Screen
                   </div>
@@ -1978,7 +1983,7 @@
                       />
                     </svg>
                   </div>
-                  <div class="setting-title" id="finger_print_name">
+                  <div class="setting-title" id="finger_print_name" data-i18n="finger_print">
                     Finger<br />Print
                   </div>
                 </div>
@@ -2011,7 +2016,7 @@
               </div>
               <div class="setting-item" id="aod-btn">
                 <div class="setting-title" id="aod_title">
-                  Always On Display
+                  <span data-i18n="always_on_display">Always On Display</span>
                 </div>
                 <div class="toggle-switch" id="none" style="opacity: 0"></div>
                 <svg
@@ -2040,6 +2045,12 @@
                     d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
                   />
                 </svg>
+              </div>
+              <div class="setting-item" id="phone-mold-toggle-btn">
+                <div class="setting-title" id="phone_mold_title" data-i18n="phone_mold">
+                  Phone Template | قالب هاتف
+                </div>
+                <div class="toggle-switch" id="phone_mold_switch"></div>
               </div>
               <input type="file" accept="video/*" id="videoInput" style="display: none" />
               <div
@@ -2105,7 +2116,7 @@
                   style="display: none"
                 >
                   <div class="popup_wallpaper" id="popup_wallpaperid">
-                    <h3>Select scope of application</h3>
+                    <h3 data-i18n="wallpaper_scope">Select scope of application</h3>
                     <div
                       class="popup_wallpaper_button"
                       id="btn_set_home_wallpaper"
@@ -2113,6 +2124,7 @@
                         border-bottom-left-radius: 0px;
                         border-bottom-right-radius: 0px;
                       "
+                      data-i18n="set_home_wallpaper"
                     >
                       Set as Home screen
                     </div>
@@ -2120,6 +2132,7 @@
                       class="popup_wallpaper_button"
                       id="btn_set_lock_wallpaper"
                       style="border-radius: 0px"
+                      data-i18n="set_lock_wallpaper"
                     >
                       Set as Lock screen
                     </div>
@@ -2130,6 +2143,7 @@
                         border-top-left-radius: 0px;
                         border-top-right-radius: 0px;
                       "
+                      data-i18n="set_both"
                     >
                       Set both
                     </div>
@@ -2138,6 +2152,7 @@
                       id="btn_cancel_wallpaper"
                       class="cancel-btn_wallpaper"
                       style="margin: 6px 0"
+                      data-i18n="cancel"
                     >
                       Cancel
                     </div>
@@ -2150,11 +2165,11 @@
                 style="z-index: 1002133; display: none"
               >
                 <div class="back-button" id="back_to_setting5" data-i18n="back">
-                  Always On Display
+                  <span data-i18n="always_on_display">Always On Display</span>
                 </div>
                 <div class="setting-item" id="setting-item-aod">
                   <div class="setting-title" id="setting_title_AOD">
-                    Always On Display
+                    <span data-i18n="always_on_display">Always On Display</span>
                   </div>
                   <div
                     class="toggle-switch active"
@@ -2855,12 +2870,13 @@
               >
                 <div class="back-button" id="back_to_setting8" data-i18n="back">Home screen</div>
                 <div class="settings-box">
-                  <div class="box-title" id="size_icon_title">Icon Size</div>
+                  <div class="box-title" id="size_icon_title" data-i18n="icon_size">Icon Size</div>
                   <div class="button-container">
                     <button
                       class="scale-button"
                       id="scale-button80"
                       data-scale="80"
+                      data-i18n="small"
                     >
                       Small
                     </button>
@@ -2868,6 +2884,7 @@
                       class="scale-button"
                       id="scale-button90"
                       data-scale="90"
+                      data-i18n="medium"
                     >
                       medium
                     </button>
@@ -2875,6 +2892,7 @@
                       class="scale-button active"
                       id="scale-button100"
                       data-scale="100"
+                      data-i18n="large"
                     >
                       Large
                     </button>
@@ -2885,7 +2903,7 @@
                   style="top: 35%"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="dock_bar_title">Dock Bar</div>
+                  <div class="setting-title" id="dock_bar_title" data-i18n="dock_bar">Dock Bar</div>
                   <div
                     class="toggle-switch active"
                     id="dock-bar"
@@ -2898,7 +2916,7 @@
                   style="top: calc(35% + 60px)"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="dock_glass_title">Glassy Dock Bar</div>
+                  <div class="setting-title" id="dock_glass_title" data-i18n="glassy_dock_bar">Glassy Dock Bar</div>
                   <div
                     class="toggle-switch"
                     id="dock-glass"
@@ -2911,7 +2929,7 @@
                   style="top: calc(35% + 120px)"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="glassy_control_center_title">Glassy CC / مركز التحكم الزجاجي</div>
+                  <div class="setting-title" id="glassy_control_center_title" data-i18n="glassy_cc">Glassy CC / مركز التحكم الزجاجي</div>
                   <div
                     class="toggle-switch"
                     id="glassy-control-center-toggle"
@@ -2924,7 +2942,7 @@
                   style="top: calc(35% + 180px)"
                   id="setting-item-aod"
                 >
-                  <div class="setting-title" id="dark_mode_title">
+                  <div class="setting-title" id="dark_mode_title" data-i18n="dark_mode">
                     Dark Mode
                   </div>
                   <div
@@ -2932,12 +2950,13 @@
                     id="dark-mode"
                     data-key="dark-mode"
                   ></div>
-                </div>                <div
+                </div>
+                <div
                   class="setting-item"
                   id="icon_btn"
                   style="top: calc(35% + 240px)"
                 >
-                  <div class="setting-title" id="icon_packs_title">
+                  <div class="setting-title" id="icon_packs_title" data-i18n="icon_packs">
                     Icon Packs
                   </div>
                   <div class="toggle-switch" id="none" style="opacity: 0"></div>
@@ -2988,28 +3007,6 @@
                     height="24px"
                     viewBox="0 -960 960 960"
                     width="24px"
-                  >
-                    <path
-                      d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
-                    />
-                  </svg>
-                </div>
-
-                <div
-                  class="setting-item"
-                  id="bootAnimationUploadBtn"
-                  style="top: calc(35% + 420px)"
-                  onclick="document.getElementById('bootAnimationInput').click()"
-                >
-                  <input type="file" id="bootAnimationInput" accept="image/*" style="display: none;" />
-                  <div class="setting-title" id="boot_animation_title" data-i18n="upload_boot_animation">Upload Boot Animation</div>
-                  <div class="toggle-switch" id="none" style="opacity: 0"></div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="currentColor"
                   >
                     <path
                       d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"
@@ -3418,43 +3415,43 @@
             </div>
 
             <div class="app4app" id="app4display" style="z-index: 1002133; display: none; background: var(--bg--background2); color: var(--bg--color);">
-              <div class="back-button" id="back_to_setting_display" style="color: var(--bg--color);" data-i18n="back">Display Settings</div>
+              <div class="back-button" id="back_to_setting_display" style="color: var(--bg--color);" data-i18n="display_settings">Display Settings</div>
               <div style="padding: 20px;">
                 <div class="display-setting-panel">
                   <div class="display-setting-header">
-                    <span>Immersive Full Screen</span>
+                    <span data-i18n="immersive_full_screen">Immersive Full Screen</span>
                     <label class="switch">
                       <input type="checkbox" id="fullScreenToggle">
                       <span class="slider"></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc">Scale phone to fill the entire screen.</div>
+                  <div class="display-setting-desc" data-i18n="immersive_full_screen_desc">Scale phone to fill the entire screen.</div>
                 </div>
 
                 <div class="display-setting-panel">
                   <div class="display-setting-header">
-                    <span>Natural Full Screen</span>
+                    <span data-i18n="natural_full_screen">Natural Full Screen</span>
                     <label class="switch">
                       <input type="checkbox" id="fullScreenToggleNormal">
                       <span class="slider"></span>
                     </label>
                   </div>
-                  <div class="display-setting-desc">Enter full screen without enlarging the phone.</div>
+                  <div class="display-setting-desc" data-i18n="natural_full_screen_desc">Enter full screen without enlarging the phone.</div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات حواف الهاتف</div>
+                  <div class="display-setting-header" style="margin-bottom: 10px;" data-i18n="phone_edge_settings">Phone Edge Settings</div>
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">نصف قطر الحواف</span>
+                      <span style="font-size: 14px;" data-i18n="edge_radius">Edge Radius</span>
                       <span id="phoneEdgeRadiusVal">50px</span>
                     </div>
                     <input type="range" id="phoneEdgeRadius" min="0" max="100" value="50" style="width: 100%;">
                   </div>
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">لون إطار الهاتف</span>
-                      <button onclick="document.getElementById('phoneEdgeColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                      <span style="font-size: 14px;" data-i18n="phone_edge_color">Edge Color</span>
+                      <button onclick="document.getElementById('phoneEdgeColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;" data-i18n="change_color">Change Color</button>
                     </div>
                     <input type="color" id="phoneEdgeColor" value="#000000" style="display: none;">
                     <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
@@ -3462,23 +3459,23 @@
                        <span id="phoneEdgeColorHex" style="font-size: 12px; opacity: 0.7;">#000000</span>
                     </div>
                   </div>
-                  <div class="display-setting-desc">تحكم في تدوير حواف الهاتف ولون الإطار الخارجي.</div>
+                  <div class="display-setting-desc" data-i18n="phone_edge_desc">Control the phone edge radius and border color.</div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">سمك إطار الهاتف</div>
+                  <div class="display-setting-header" style="margin-bottom: 10px;" data-i18n="phone_border_width">Phone Border Width</div>
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <input type="range" id="phoneBorderWidth" min="1" max="25" value="3" style="width: 80%;">
                     <span id="phoneBorderWidthVal">3px</span>
                   </div>
-                  <div class="display-setting-desc">تغيير سمك الإطار الخارجي لقالب الهاتف.</div>
+                  <div class="display-setting-desc" data-i18n="phone_border_width_desc">Change the outer border thickness of the phone template.</div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شريط السحب السفلي</div>
+                  <div class="display-setting-header" style="margin-bottom: 10px;" data-i18n="swipe_bar_settings">Swipe Bar Settings</div>
                   
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <span style="font-size: 14px;">إظهار شريط السحب</span>
+                    <span style="font-size: 14px;" data-i18n="show_swipe_bar">Show Swipe Bar</span>
                     <label class="switch">
                       <input type="checkbox" id="swipeBarDisplayToggle" checked>
                       <span class="slider"></span>
@@ -3487,7 +3484,7 @@
 
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">العرض</span>
+                      <span style="font-size: 14px;" data-i18n="width">Width</span>
                       <span id="swipeBarWidthVal" style="font-size: 14px;">130px</span>
                     </div>
                     <input type="range" id="swipeBarWidth" min="20" max="300" value="130" style="width: 100%;">
@@ -3495,7 +3492,7 @@
 
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">الارتفاع</span>
+                      <span style="font-size: 14px;" data-i18n="height">Height</span>
                       <span id="swipeBarHeightVal" style="font-size: 14px;">3px</span>
                     </div>
                     <input type="range" id="swipeBarHeight" min="1" max="25" value="3" style="width: 100%;">
@@ -3503,7 +3500,7 @@
 
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">المسافة من الأسفل</span>
+                      <span style="font-size: 14px;" data-i18n="bottom_distance">Bottom Distance</span>
                       <span id="swipeBarBottomVal" style="font-size: 14px;">2px</span>
                     </div>
                     <input type="range" id="swipeBarBottom" min="0" max="30" value="2" style="width: 100%;">
@@ -3511,7 +3508,7 @@
 
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">الشفافية</span>
+                      <span style="font-size: 14px;" data-i18n="opacity">Opacity</span>
                       <span id="swipeBarOpacityVal" style="font-size: 14px;">1</span>
                     </div>
                     <input type="range" id="swipeBarOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">
@@ -3519,7 +3516,7 @@
 
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">نصف قطر الحواف</span>
+                      <span style="font-size: 14px;" data-i18n="swipe_bar_radius">Swipe Bar Radius</span>
                       <span id="swipeBarRadiusVal" style="font-size: 14px;">20px</span>
                     </div>
                     <input type="range" id="swipeBarRadius" min="0" max="15" value="20" style="width: 100%;">
@@ -3527,8 +3524,8 @@
 
                   <div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">لون شريط السحب</span>
-                      <button onclick="document.getElementById('swipeBarColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;">تغيير اللون</button>
+                      <span style="font-size: 14px;" data-i18n="swipe_bar_color">Swipe Bar Color</span>
+                      <button onclick="document.getElementById('swipeBarColor').click()" style="background: var(--bg--swipe_color, #007aff); color: white; border: none; padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer;" data-i18n="change_color">Change Color</button>
                     </div>
                     <input type="color" id="swipeBarColor" value="#ffffff" style="display: none;">
                     <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
@@ -3537,15 +3534,15 @@
                     </div>
                   </div>
                   
-                   <div class="display-setting-desc" style="margin-top: 10px;">تعديل حجم ولون ومكان شريط السحب في أسفل الشاشة.</div>
+                   <div class="display-setting-desc" style="margin-top: 10px;" data-i18n="swipe_bar_desc">Adjust the size, color and position of the swipe bar at the bottom.</div>
                 </div>
 
                 <div class="display-setting-panel">
-                  <div class="display-setting-header" style="margin-bottom: 10px;">إعدادات شاشة القفل</div>
+                  <div class="display-setting-header" style="margin-bottom: 10px;" data-i18n="lock_screen_settings">Lock Screen Settings</div>
                   
                   <div style="margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                      <span style="font-size: 14px;">شفافية الساعة</span>
+                      <span style="font-size: 14px;" data-i18n="clock_opacity">Clock Opacity</span>
                       <span id="lockClockOpacityVal" style="font-size: 14px;">1</span>
                     </div>
                     <input type="range" id="lockClockOpacity" min="0" max="1" step="0.05" value="1" style="width: 100%;">

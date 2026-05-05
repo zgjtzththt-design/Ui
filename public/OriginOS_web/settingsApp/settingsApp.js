@@ -4431,26 +4431,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    const bootAnimationInput = document.getElementById("bootAnimationInput");
-    if (bootAnimationInput) {
-        bootAnimationInput.addEventListener("change", (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                const dataUrl = ev.target.result;
-                if (typeof setData === "function") {
-                    setData("boot_animation", dataUrl, () => {
-                        if (typeof tb_system === "function") tb_system("تم حفظ صورة بوت أنميشن بنجاح");
-                        const bootAnimationImg = document.getElementById("bootAnimationImg");
-                        if (bootAnimationImg) bootAnimationImg.src = dataUrl;
-                    });
-                }
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
     const open3dPhoneBtn = document.getElementById("open_3d_phone_btn");
     const phone3dPopup = document.getElementById("phone3dPopup");
     

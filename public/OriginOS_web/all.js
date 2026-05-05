@@ -123,13 +123,6 @@ window.applyWallpapers = () => {
       if (wallpaper_aod2) wallpaper_aod2.style.backgroundImage = `url('${value}')`;
     }
   });
-
-  getData("boot_animation", (value) => {
-    if (value) {
-      const bootAnimationImg = document.getElementById("bootAnimationImg");
-      if (bootAnimationImg) bootAnimationImg.src = value;
-    }
-  });
 };
 
 initOriginDB(() => {
@@ -1547,10 +1540,11 @@ function unlock() {
 
   setTimeout(() => {
     if (!localStorage.getItem("xhyper_update_shown2")) {
+      const t = translations[localStorage.getItem("language") || "en"];
       showPopup2_alert(
-        "تحديث جديد يخص OriginOS\nتم تحديث أصدار جديد مع تحسينات و أصلاح أخطاء تم صنعه بواسطة XHyper \nللأنظمام كا مطور \nhttps://t.me/+KABuuONjRtBkMWY0",
-        "تطبيق",
-        "إلغاء",
+        t.update_message,
+        t.apply,
+        t.cancel,
         () => {
           localStorage.setItem("xhyper_update_shown2", "true");
           window.open("https://t.me/+KABuuONjRtBkMWY0", "_blank");
@@ -1933,10 +1927,11 @@ function unlock_noanim() {
 
   setTimeout(() => {
     if (!localStorage.getItem("xhyper_update_shown2")) {
+      const t = translations[localStorage.getItem("language") || "en"];
       showPopup2_alert(
-        "تحديث جديد يخص OriginOS\nتم تحديث أصدار جديد مع تحسينات و أصلاح أخطاء تم صنعه بواسطة XHyper \nللأنظمام كا مطور \nhttps://t.me/+KABuuONjRtBkMWY0",
-        "تطبيق",
-        "إلغاء",
+        t.update_message,
+        t.apply,
+        t.cancel,
         () => {
           localStorage.setItem("xhyper_update_shown2", "true");
           window.open("https://t.me/+KABuuONjRtBkMWY0", "_blank");
@@ -3008,3 +3003,76 @@ function showChangelog() {
 - تحسينات عامة في استقرار النظام.`
     );
 }
+
+
+// Phone mold setup
+document.addEventListener("DOMContentLoaded", () => {
+  const moldBtn = document.getElementById("phone-mold-toggle-btn");
+  const moldSwitch = document.getElementById("phone_mold_switch");
+  const moldOverlay = document.getElementById("phone_mold_overlay");
+  
+  if (moldBtn && moldSwitch && moldOverlay) {
+    const isMoldEnabled = localStorage.getItem("phone_mold_enabled") === "true";
+    if (isMoldEnabled) {
+      moldSwitch.classList.add("active");
+      moldOverlay.style.display = "block";
+    }
+
+    moldBtn.addEventListener("click", () => {
+      const isActive = moldSwitch.classList.toggle("active");
+      if (isActive) {
+        moldOverlay.style.display = "block";
+        localStorage.setItem("phone_mold_enabled", "true");
+      } else {
+        moldOverlay.style.display = "none";
+        localStorage.setItem("phone_mold_enabled", "false");
+      }
+    });
+  }
+});
+
+
+// Refined Phone mold setup
+document.addEventListener("DOMContentLoaded", () => {
+  const moldBtn = document.getElementById("phone-mold-toggle-btn");
+  const moldSwitch = document.getElementById("phone_mold_switch");
+  const moldOverlay = document.getElementById("phone_mold_overlay");
+  const islandCircle = document.getElementById("island_circle");
+  const island2 = document.getElementById("island2");
+  const island = document.getElementById("island");
+  
+  if (moldBtn && moldSwitch && moldOverlay) {
+    const isMoldEnabled = localStorage.getItem("phone_mold_enabled") === "true";
+    
+    function toggleIslands(enabled) {
+      if(enabled) {
+         if(islandCircle) islandCircle.style.display = 'none';
+         if(island2) island2.style.display = 'none';
+         if(island) island.style.display = 'none';
+      } else {
+         if(islandCircle) islandCircle.style.display = '';
+         if(island2) island2.style.display = '';
+         if(island) island.style.display = '';
+      }
+    }
+
+    if (isMoldEnabled) {
+      moldSwitch.classList.add("active");
+      moldOverlay.style.display = "block";
+      toggleIslands(true);
+    }
+
+    moldBtn.addEventListener("click", () => {
+      const isActive = moldSwitch.classList.toggle("active");
+      if (isActive) {
+        moldOverlay.style.display = "block";
+        localStorage.setItem("phone_mold_enabled", "true");
+        toggleIslands(true);
+      } else {
+        moldOverlay.style.display = "none";
+        localStorage.setItem("phone_mold_enabled", "false");
+        toggleIslands(false);
+      }
+    });
+  }
+});
