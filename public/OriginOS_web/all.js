@@ -63,13 +63,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1000); // Give it more time to assemble the string
 });
-let home_wallpaper = "";
-let lock_wallpaper = "";
+let home_wallpaper = localStorage.getItem("home_wallpaper") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
+let lock_wallpaper = localStorage.getItem("lock_wallpaper") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
 
 document.getElementById("phoneName").textContent =
   localStorage.getItem("phoneName") || "Your Phone";
 
 window.applyWallpapers = () => {
+  const applyValue = (key, value, callback) => {
+    if (!value) {
+      value = localStorage.getItem(key);
+    }
+    if (value) {
+      callback(value);
+    }
+  };
+
   getData("lock_video_wallpaper", (value) => {
     const lockVideo = document.getElementById("lockVideoWallpaper");
     if (value && lockVideo) {
@@ -81,18 +90,18 @@ window.applyWallpapers = () => {
   });
 
   getData("lock_wallpaper", (value) => {
-    if (value) {
+    applyValue("lock_wallpaper", value, (finalValue) => {
       const wallpaper_preview2 = document.querySelector(".wallpaper-preview2");
       const wallPaper2 = document.querySelector(".wallpaper2");
       const wallpaper = document.querySelector(".wallpaper");
       const lockVideo = document.getElementById("lockVideoWallpaper");
 
-      lock_wallpaper = value;
-      if (wallpaper) wallpaper.style.backgroundImage = `url('${value}')`;
-      if (wallPaper2) wallPaper2.style.backgroundImage = `url('${value}')`;
-      if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = `url('${value}')`;
+      lock_wallpaper = finalValue;
+      if (wallpaper) wallpaper.style.backgroundImage = `url('${finalValue}')`;
+      if (wallPaper2) wallPaper2.style.backgroundImage = `url('${finalValue}')`;
+      if (wallpaper_preview2) wallpaper_preview2.style.backgroundImage = `url('${finalValue}')`;
       if (lockVideo) lockVideo.style.display = "none";
-    }
+    });
   });
 
   getData("home_video_wallpaper", (value) => {
@@ -106,28 +115,43 @@ window.applyWallpapers = () => {
   });
 
   getData("home_wallpaper", (value) => {
-    if (value) {
+    applyValue("home_wallpaper", value, (finalValue) => {
       const homeVideo = document.getElementById("homeVideoWallpaper");
-      home_wallpaper = value;
+      home_wallpaper = finalValue;
       document.documentElement.style.setProperty(
         "--bg--wallpaper",
-        `url('${value}')`
+        `url('${finalValue}')`
       );
       if (homeVideo) homeVideo.style.display = "none";
-    }
+    });
   });
 
   getData("wallpaper_aod2_image", (value) => {
-    if (value) {
+    applyValue("wallpaper_aod2_image", value, (finalValue) => {
       const wallpaper_aod2 = document.getElementById("wallpaper_aod2");
-      if (wallpaper_aod2) wallpaper_aod2.style.backgroundImage = `url('${value}')`;
-    }
+      if (wallpaper_aod2) wallpaper_aod2.style.backgroundImage = `url('${finalValue}')`;
+    });
   });
 };
 
 initOriginDB(() => {
-  localStorage.setItem("home_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777849635/ta5ppmokdiactygun7pk.png");
-  localStorage.setItem("lock_wallpaper", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1777849635/ta5ppmokdiactygun7pk.png");
+  const defaultHome = "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
+  const defaultLock = "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
+
+  const checkAndSet = (key, defaultValue) => {
+    getData(key, (value) => {
+      if (!value && !localStorage.getItem(key)) {
+        localStorage.setItem(key, defaultValue);
+        if (typeof setData === "function") {
+          setData(key, defaultValue);
+        }
+      }
+    });
+  };
+
+  checkAndSet("home_wallpaper", defaultHome);
+  checkAndSet("lock_wallpaper", defaultLock);
+  
   window.applyWallpapers();
 });
 

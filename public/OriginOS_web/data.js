@@ -21,17 +21,6 @@ function setData(id, content, callback) {
   };
 }
 
-function getData(id, callback) {
-  if (!db) return callback(null);
-  const tx = db.transaction("user_data", "readonly");
-  const store = tx.objectStore("user_data");
-  const req = store.get(id);
-
-  req.onsuccess = () => callback(req.result ? req.result.content : null);
-  req.onerror = () => callback(null);
-}
-
-// ✅ Xóa một mục
 function removeData(id) {
   const tx = db.transaction("user_data", "readwrite");
   const store = tx.objectStore("user_data");
