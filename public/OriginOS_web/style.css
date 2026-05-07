@@ -875,8 +875,8 @@ body.full-screen .app4app.open {
   display: flex;
   position: absolute;
   bottom: 80px;
-  width: 60px;
-  height: 60px;
+  width: 110px;
+  height: 110px;
   background-color: #00000000;
   background-image: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png");
   background-size: contain;
