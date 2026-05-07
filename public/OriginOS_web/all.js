@@ -63,16 +63,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1000); // Give it more time to assemble the string
 });
-let home_wallpaper = localStorage.getItem("home_wallpaper") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
-let lock_wallpaper = localStorage.getItem("lock_wallpaper") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
+// Force set the wallpapers to the new URL requested by the user
+const userRequestedWallpaper = "https://i.ibb.co/RktrvxGs/Xiaomi-17-Pro-Wallpaper-3.jpg";
+// Only force set once to allow user changes later, but ensure it's the initial default
+if (!localStorage.getItem("initial_wallpaper_set_v2")) {
+    localStorage.setItem("home_wallpaper", userRequestedWallpaper);
+    localStorage.setItem("lock_wallpaper", userRequestedWallpaper);
+    localStorage.setItem("initial_wallpaper_set_v2", "true");
+}
+
+let home_wallpaper = localStorage.getItem("home_wallpaper") || userRequestedWallpaper;
+let lock_wallpaper = localStorage.getItem("lock_wallpaper") || userRequestedWallpaper;
 
 document.getElementById("phoneName").textContent =
-  localStorage.getItem("phoneName") || "Your Phone";
+  localStorage.getItem("phoneName") || "Xiaomi 17 Pro";
 
 window.applyWallpapers = () => {
   const applyValue = (key, value, callback) => {
     if (!value) {
-      value = localStorage.getItem(key);
+      value = localStorage.getItem(key) || userRequestedWallpaper;
     }
     if (value) {
       callback(value);
@@ -135,22 +144,18 @@ window.applyWallpapers = () => {
 };
 
 initOriginDB(() => {
-  const defaultHome = "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
-  const defaultLock = "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778063127/sdf2ybjjbv6zk6pcoeyv.jpg";
+  const defaultHome = userRequestedWallpaper;
+  const defaultLock = userRequestedWallpaper;
+  const defaultAod = userRequestedWallpaper;
 
-  const checkAndSet = (key, defaultValue) => {
-    getData(key, (value) => {
-      if (!value && !localStorage.getItem(key)) {
-        localStorage.setItem(key, defaultValue);
-        if (typeof setData === "function") {
-          setData(key, defaultValue);
-        }
-      }
-    });
-  };
-
-  checkAndSet("home_wallpaper", defaultHome);
-  checkAndSet("lock_wallpaper", defaultLock);
+  if (!localStorage.getItem("initial_db_wallpaper_set_v2")) {
+    if (typeof setData === "function") {
+      setData("home_wallpaper", defaultHome);
+      setData("lock_wallpaper", defaultLock);
+      setData("wallpaper_aod2_image", defaultAod);
+      localStorage.setItem("initial_db_wallpaper_set_v2", "true");
+    }
+  }
   
   window.applyWallpapers();
 });
@@ -1651,8 +1656,7 @@ unlockBtn.addEventListener("pointerup", () => {
 });
 
 let phone_lock_off_background = "#000000";
-let phone_lock_background =
-  "linear-gradient(to bottom, rgba(47, 11, 34, 255), rgba(147, 111, 134, 255))";
+let phone_lock_background = `url("${userRequestedWallpaper}")`;
 wallpaper.style.height = `${wallpaper_lock_height}%`;
 wallpaper.style.scale = `${wallpaper_lock_scale}%`;
 wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;
