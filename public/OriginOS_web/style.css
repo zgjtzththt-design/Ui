@@ -811,7 +811,7 @@ body.full-screen .app4app.open {
   top: var(--lock-clock-top, 120px);
   user-select: none;
   font-weight: bold;
-  font-family: "Abril Fatface", serif;
+  font-family: "Roboto", sans-serif;
   transform: scale(1) translateY(0px);
   transition: all 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
   display: flex;
@@ -871,13 +871,17 @@ body.full-screen .app4app.open {
 .date-display.tat {
   transform: translateY(165px) translateX(-52%) scale(0.95);
 }
-.lock-fingerprint {
+#unlock-btn.lock-fingerprint {
   display: flex;
   position: absolute;
   bottom: 80px;
   width: 60px;
   height: 60px;
   background-color: #00000000;
+  background-image: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 100px;
   cursor: pointer;
   user-select: none;
@@ -886,6 +890,7 @@ body.full-screen .app4app.open {
   align-items: center;
   z-index: 12;
 }
+
 .lock-fingerprint:hover {
   transform: scale(0.95);
 }
@@ -1222,7 +1227,7 @@ body.full-screen .app4app.open {
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   padding: 8px 15px;
-  border-radius: 30px;
+  border-radius: 35px;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(15px);
   z-index: 10001;
@@ -5035,7 +5040,7 @@ input[type="color"] {
 .connectControlsCenter,
 .volumeControlsCenter,
 .brightnessControlsCenter {
-  border-radius: 20px !important;
+  border-radius: 23px !important;
 }
 .itemControlsCenter svg {
   font-size: 22px;
@@ -5112,7 +5117,7 @@ input[type="color"] {
 .control-centerControlsCenter.glassy-controls-center .itemControlsCenter.connectControlsCenter::before,
 .control-centerControlsCenter.glassy-controls-center .itemControlsCenter.volumeControlsCenter::before,
 .control-centerControlsCenter.glassy-controls-center .itemControlsCenter.brightnessControlsCenter::before {
-  border-radius: 30px !important;
+  border-radius: 35px !important;
 }
 
 .lpControlCenterControlsCenter.glassy-mode {

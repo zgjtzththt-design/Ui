@@ -2582,8 +2582,8 @@ const fingerprint_preview = document.getElementById("fingerprint_preview");
 const btnWhite = document.getElementById("btn-white");
 const btnBlue = document.getElementById("btn-blue");
 
-fingerprint_preview.style.filter = "brightness(1000%) grayscale(100%)";
-fingerprint.style.filter = "brightness(1000%) grayscale(100%)";
+fingerprint_preview.style.filter = "none";
+fingerprint.style.filter = "none";
 btnWhite.style.border = "4px solid #f65268";
 
 function handleBtnWhiteClick() {
@@ -4499,11 +4499,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (updated) {
                     localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                    if (window.syncEverything) window.syncEverything();
                     if (typeof applyCustomIcons === "function") {
                         applyCustomIcons();
                     }
                     if (typeof tb_system === "function") {
-                        tb_system("تم استخراج الأيقونات من ZIP بنجاح");
+                        tb_system("تم استخراج الأيقونات من ZIP وحفظها في Firebase بنجاح");
                     }
                 } else {
                     if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة في ملف ZIP");

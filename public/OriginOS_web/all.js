@@ -1394,8 +1394,8 @@ let lockscreen_style_opacity = 1;
 
 function lock() {
   if (!islock) {
-    finger_print.stop();
-    finger_print.play();
+  if (typeof finger_print !== 'undefined' && finger_print) finger_print.stop();
+  if (typeof finger_print !== 'undefined' && finger_print) finger_print.play();
   }
   hideAllClickables();
   lockscreen.style.display = "flex";
@@ -2397,6 +2397,7 @@ let animation = lottie.loadAnimation({
 animation.setSpeed(0.7 * currentSpeed);
 animation.goToAndStop(animation.totalFrames - 1, true);
 
+/*
 const finger_print = lottie.loadAnimation({
   container: document.getElementById("unlock-btn2"),
   renderer: "svg",
@@ -2404,8 +2405,17 @@ const finger_print = lottie.loadAnimation({
   autoplay: true,
   path: "originos_data/finger_print.json",
 });
-finger_print.setSpeed(currentSpeed);
-finger_print.goToAndStop(animation.totalFrames - 1, true);
+if (finger_print) {
+  finger_print.setSpeed(currentSpeed);
+  finger_print.goToAndStop(animation.totalFrames - 1, true);
+}
+*/
+const finger_print = {
+    stop: () => {},
+    play: () => {},
+    setSpeed: () => {},
+    goToAndStop: () => {}
+};
 
 // battery
 let battery_level = 100;

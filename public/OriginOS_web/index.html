@@ -3171,7 +3171,7 @@
                 </div>
                 <div class="half-border-box">
                   <img
-                    src="originos_data/finger_print.png"
+                    src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png"
                     class="fingerprint_preview"
                     id="fingerprint_preview"
                     alt="Vân tay"
@@ -3182,7 +3182,7 @@
                   <button class="button-finger" id="btn-blue" data-i18n="blue">Blue</button>
                 </div>
 
-                <div id="lottiePreviewContainer">
+                <div id="lottiePreviewContainer" style="display: none;">
                   <div
                     class="lottie-box"
                     data-path="originos_data/Artboard_1.json"
@@ -3836,17 +3836,7 @@
       <!-- Màn hình khóa -->
       <div
         id="lottie"
-        style="
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 270px;
-          height: 270px;
-          transform: translateX(14%) translateY(170%);
-          pointer-events: none;
-          scale: 0.9;
-          z-index: 1123;
-        "
+        style="display: none;"
       ></div>
       <div class="lockscreen" id="lockscreen">
         <video id="lockVideoWallpaper" autoplay muted loop playsinline style="border-radius: inherit; display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
@@ -3905,17 +3895,6 @@
         <div id="swipe_handle"></div>
 
         <div class="lock-fingerprint" id="unlock-btn" style="z-index: 1">
-          <div
-            class="lock-fingerprint"
-            id="unlock-btn2"
-            style="
-              position: absolute;
-              bottom: -145px;
-              width: 360px;
-              height: 360px;
-              pointer-events: none;
-            "
-          ></div>
         </div>
       </div>
     </div>
