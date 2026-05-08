@@ -379,6 +379,136 @@ function applySharpPhoneTemplate(isSharp) {
   }
 }
 
+// Performance Monitor Logic
+const perfMonitorToggle = document.getElementById("perfMonitorToggle");
+const perfMonitorOverlay = document.getElementById("perf_monitor_overlay");
+let perfMonitorInterval = null;
+
+// Make draggable
+if (perfMonitorOverlay) {
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+
+  perfMonitorOverlay.addEventListener("mousedown", dragStart);
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("mouseup", dragEnd);
+
+  // Touch support for dragging
+  perfMonitorOverlay.addEventListener("touchstart", dragStart, {passive: false});
+  document.addEventListener("touchmove", drag, {passive: false});
+  document.addEventListener("touchend", dragEnd);
+
+  function dragStart(e) {
+    if (e.type === "touchstart") {
+      initialX = e.touches[0].clientX - xOffset;
+      initialY = e.touches[0].clientY - yOffset;
+    } else {
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+    }
+    isDragging = true;
+    perfMonitorOverlay.style.cursor = "grabbing";
+  }
+
+  function drag(e) {
+    if (isDragging) {
+      e.preventDefault();
+      if (e.type === "touchmove") {
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+      } else {
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+      }
+      xOffset = currentX;
+      yOffset = currentY;
+      setTranslate(currentX, currentY, perfMonitorOverlay);
+    }
+  }
+
+  function setTranslate(xPos, yPos, el) {
+    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+  }
+
+  function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+    isDragging = false;
+    perfMonitorOverlay.style.cursor = "grab";
+  }
+}
+
+if (perfMonitorToggle && perfMonitorOverlay) {
+  perfMonitorToggle.addEventListener("change", (e) => {
+    const isChecked = e.target.checked;
+    localStorage.setItem("perfMonitorEnabled", isChecked);
+    applyPerfMonitor(isChecked);
+  });
+}
+
+function updatePerfStats() {
+  const fpsEl = document.getElementById("perf_fps");
+  const gpuEl = document.getElementById("perf_gpu");
+  const ramEl = document.getElementById("perf_ram");
+  const tempEl = document.getElementById("perf_temp");
+
+  // Simulated metrics
+  if (fpsEl) {
+    // Generate a random FPS between 58 and 62
+    fpsEl.textContent = Math.floor(Math.random() * (62 - 58 + 1)) + 58;
+  }
+  if (gpuEl) {
+    // Random GPU usage between 20% and 45%
+    gpuEl.textContent = (Math.floor(Math.random() * 26) + 20) + "%";
+  }
+  if (ramEl) {
+    // Actual JS heap size or simulated
+    if (performance && performance.memory) {
+      const usedJSHeapSize = performance.memory.usedJSHeapSize / (1024 * 1024);
+      ramEl.textContent = usedJSHeapSize.toFixed(1) + " MB";
+    } else {
+      ramEl.textContent = (Math.random() * (4.5 - 3.8) + 3.8).toFixed(1) + " GB";
+    }
+  }
+  if (tempEl) {
+    // Random Temp between 35 and 42
+    tempEl.textContent = (Math.floor(Math.random() * 8) + 35) + "°C";
+  }
+}
+
+function applyPerfMonitor(isEnabled) {
+  if (perfMonitorOverlay) {
+    if (isEnabled) {
+      perfMonitorOverlay.style.display = "flex";
+      // Allow slight delay for display block before animating opacity
+      setTimeout(() => {
+        perfMonitorOverlay.style.opacity = "1";
+      }, 10);
+      
+      // Update stats every 1 second
+      if (!perfMonitorInterval) {
+        updatePerfStats(); // initial update
+        perfMonitorInterval = setInterval(updatePerfStats, 1000);
+      }
+    } else {
+      perfMonitorOverlay.style.opacity = "0";
+      setTimeout(() => {
+        perfMonitorOverlay.style.display = "none";
+      }, 300);
+      
+      if (perfMonitorInterval) {
+        clearInterval(perfMonitorInterval);
+        perfMonitorInterval = null;
+      }
+    }
+  }
+}
+
 phoneEdgeRadius.addEventListener("input", (e) => {
   const val = e.target.value;
   phoneEdgeRadiusVal.textContent = `${val}px`;
@@ -829,6 +959,14 @@ if (saved_finger_local == 0) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Restore Performance Monitor Setting
+    const savedPerfMonitor = localStorage.getItem("perfMonitorEnabled");
+    if (savedPerfMonitor !== "false" && typeof applyPerfMonitor === 'function') {
+        const perfToggle = document.getElementById("perfMonitorToggle");
+        if (perfToggle) perfToggle.checked = true;
+        applyPerfMonitor(true);
+    }
+
     // Restore sharp phone template Setting
     const savedSharpPhoneTemplate = localStorage.getItem("sharpPhoneTemplate");
     if (savedSharpPhoneTemplate === "true" && typeof applySharpPhoneTemplate === 'function') {

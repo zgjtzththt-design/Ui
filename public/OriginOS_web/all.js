@@ -1656,7 +1656,7 @@ unlockBtn.addEventListener("pointerup", () => {
 });
 
 let phone_lock_off_background = "#000000";
-let phone_lock_background = `url("${userRequestedWallpaper}")`;
+let phone_lock_background = "#000000";
 wallpaper.style.height = `${wallpaper_lock_height}%`;
 wallpaper.style.scale = `${wallpaper_lock_scale}%`;
 wallpaper.style.borderRadius = wallpaper_lock_borderRadius == 50 ? "var(--bg--border_radius_phone)" : `${wallpaper_lock_borderRadius}px`;

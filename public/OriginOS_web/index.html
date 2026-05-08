@@ -170,8 +170,31 @@
         style="display: none; top: 285px"
       ></div>
     </div>
+
+    <!-- Performance Monitor Overlay -->
+    <div id="perf_monitor_overlay" style="display: none; position: fixed; z-index: 9999999; top: 20px; left: 20px; background: rgba(0,0,0,0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 10px 12px; border-radius: 14px; color: #00ff00; font-family: 'JetBrains Mono', 'Courier New', monospace, sans-serif; font-size: 11px; flex-direction: column; gap: 6px; border: 1px solid rgba(255,255,255,0.15); pointer-events: auto; cursor: grab; transition: opacity 0.3s ease; opacity: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; font-weight: bold; font-size: 14px;">
+        <span style="color: #b3b3b3;">FPS</span>
+        <span id="perf_fps" style="color: #00ff00; text-shadow: 0 0 5px rgba(0,255,0,0.5);">60</span>
+      </div>
+      <div style="height: 1px; background: rgba(255,255,255,0.15); margin: 2px 0;"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; color: #999;">
+        <span>GPU</span>
+        <span id="perf_gpu" style="color: #e0e0e0; font-weight: 500;">35%</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; color: #999;">
+        <span>RAM</span>
+        <span id="perf_ram" style="color: #e0e0e0; font-weight: 500;">4.0 GB</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; color: #999;">
+        <span>Temp</span>
+        <span id="perf_temp" style="color: #ff9800; font-weight: 500; text-shadow: 0 0 5px rgba(255,152,0,0.3);">38°C</span>
+      </div>
+    </div>
+
     <div class="phone">
       <div id="phone_mold_overlay" style="position: absolute; top:0; left:0; width: 100%; height: 100%; pointer-events: none; z-index: 100000000; display: none; background-image: url('https://res.cloudinary.com/dhlxcif1m/image/upload/v1778001721/lsesg8d3a9jiwpfvuraj.png'); background-size: 100% 100%;"></div>
+
       <!-- Gemini Assistant UI -->
       <div id="gemini-assistant" class="gemini-assistant">
         <div class="gemini-glow"></div>
@@ -3635,6 +3658,17 @@
                     </label>
                   </div>
                   <div class="display-setting-desc" data-i18n="sharp_phone_desc">يجعل زر إغلاق الشاشة (الزر الأزرق) حاد الحواف ومستطيلاً بشكل كامل.</div>
+                </div>
+
+                <div class="display-setting-panel">
+                  <div class="display-setting-header">
+                    <span style="font-weight: bold;">نافذة المراقبة والإداء</span>
+                    <label class="switch">
+                      <input type="checkbox" id="perfMonitorToggle">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  <div class="display-setting-desc">إظهار نافذة أستهلاك FPS, GPU, RAM والحرارة.</div>
                 </div>
 
                 <div class="display-setting-panel" id="open_3d_phone_btn" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">

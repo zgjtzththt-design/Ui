@@ -90,8 +90,7 @@ body::-webkit-scrollbar-thumb:hover {
   border: var(--bg--border_width_phone, 3px) solid var(--bg--border_color_phone, rgb(0, 0, 0));
   outline: 1px solid gray;
   outline-offset: 1px;
-  background: url("https://i.ibb.co/RktrvxGs/Xiaomi-17-Pro-Wallpaper-3.jpg")
-    center / cover no-repeat;
+  background: #000000;
   position: absolute;
   top: 50%;
   left: 50%;
