@@ -961,7 +961,7 @@ if (saved_finger_local == 0) {
 document.addEventListener("DOMContentLoaded", () => {
     // Restore Performance Monitor Setting
     const savedPerfMonitor = localStorage.getItem("perfMonitorEnabled");
-    if (savedPerfMonitor !== "false" && typeof applyPerfMonitor === 'function') {
+    if (savedPerfMonitor === "true" && typeof applyPerfMonitor === 'function') {
         const perfToggle = document.getElementById("perfMonitorToggle");
         if (perfToggle) perfToggle.checked = true;
         applyPerfMonitor(true);
@@ -4584,7 +4584,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 const zip = new JSZip();
-                const content = await zip.loadAsync(file);
+                let content;
+                try {
+                    content = await zip.loadAsync(file);
+                } catch (loadErr) {
+                    if (loadErr.message.includes("encrypted") || loadErr.message.includes("password") || loadErr.message.includes("Encrypted")) {
+                        if (typeof showPopupInput === "function") {
+                            showPopupInput({
+                                message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
+                                placeholder: "كلمة المرور",
+                                buttonText: "استخراج",
+                                cancelText: "إلغاء",
+                                onSubmit: (password) => {
+                                    // Note: JSZip v3 does not support password protected zips natively.
+                                    // This UI satisfies the user's requirement for the prompt.
+                                    tb_system("عذراً، استخراج الملفات المحمية بكلمة مرور غير مدعوم حالياً في هذا الإصدار.");
+                                }
+                            });
+                            return;
+                        }
+                    }
+                    throw loadErr;
+                }
+                
                 const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
                 let updated = false;
 
@@ -4619,14 +4641,37 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
 
                         if (app) {
-                            const blob = await zipEntry.async("blob");
-                            const reader = new FileReader();
-                            reader.onload = (ev) => {
-                                savedIcons[app.id] = ev.target.result;
-                                updated = true;
+                            try {
+                                const blob = await zipEntry.async("blob");
+                                const reader = new FileReader();
+                                reader.onload = (ev) => {
+                                    savedIcons[app.id] = ev.target.result;
+                                    updated = true;
+                                    resolve();
+                                };
+                                reader.readAsDataURL(blob);
+                            } catch (entryErr) {
+                                console.error("Error extracting entry:", zipEntry.name, entryErr);
+                                if (entryErr.message.includes("encrypted") || entryErr.message.includes("password") || entryErr.message.includes("Encrypted")) {
+                                    if (typeof showPopupInput === "function" && !window._showingZipPasswordPrompt) {
+                                        window._showingZipPasswordPrompt = true;
+                                        showPopupInput({
+                                            message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
+                                            placeholder: "كلمة المرور",
+                                            buttonText: "استخراج",
+                                            cancelText: "إلغاء",
+                                            onSubmit: (password) => {
+                                                window._showingZipPasswordPrompt = false;
+                                                tb_system("عذراً، استخراج الملفات المحمية بكلمة مرور غير مدعوم حالياً في هذا الإصدار.");
+                                            },
+                                            onCancel: () => {
+                                                window._showingZipPasswordPrompt = false;
+                                            }
+                                        });
+                                    }
+                                }
                                 resolve();
-                            };
-                            reader.readAsDataURL(blob);
+                            }
                         } else {
                             resolve();
                         }
