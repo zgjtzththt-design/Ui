@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000); // Give it more time to assemble the string
 });
 // Force set the wallpapers to the new URL requested by the user
-const userRequestedWallpaper = "https://i.ibb.co/RktrvxGs/Xiaomi-17-Pro-Wallpaper-3.jpg";
+const userRequestedWallpaper = "https://i.ibb.co/v4szSDcd/Hyper-OS-3-Wallpaper-5.jpg";
 // Only force set once to allow user changes later, but ensure it's the initial default
-if (!localStorage.getItem("initial_wallpaper_set_v2")) {
+if (!localStorage.getItem("initial_wallpaper_set_v3")) {
     localStorage.setItem("home_wallpaper", userRequestedWallpaper);
     localStorage.setItem("lock_wallpaper", userRequestedWallpaper);
-    localStorage.setItem("initial_wallpaper_set_v2", "true");
+    localStorage.setItem("initial_wallpaper_set_v3", "true");
 }
 
 let home_wallpaper = localStorage.getItem("home_wallpaper") || userRequestedWallpaper;
@@ -544,16 +544,16 @@ const handlers = {
 
     if (isPlaying_music) {
       island2.style.transition =
-        "transform 0.3s, width 1.2s cubic-bezier(1,-0.13,.27,1.34)";
+        "transform 0.3s, width 1.2s cubic-bezier(0.23, 1, 0.32, 1)";
       island2.style.width = "25px";
       island2.style.transform = "translateX(-50%) translateY(0px) scale(1)";
       clickables["box3"].style.pointerEvents = "auto";
 
       island.style.width = "120px";
-      island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+      island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
       island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
 
-      clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+      clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
       clock.style.scale = "0.8";
       clock.style.left = "25px";
     }
@@ -572,7 +572,7 @@ const handlers = {
 
     if (isRunning_clock) {
       island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
-      clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+      clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
       clock.style.scale = "0.8";
       clock.style.left = "25px";
     }
@@ -715,7 +715,7 @@ island.addEventListener("click", () => {
     island.style.transform = `translateX(-50%) translateY(20px)`;
     
     setTimeout(() => {
-      island.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island.style.transition = `transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.3s ease`;
       island.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island.style.height = "75px";
       island.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
@@ -731,7 +731,7 @@ island.addEventListener("click", () => {
     clock.style.transform = "translateX(-100px)";
 
     if (isPlaying_music) {
-      island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+      island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
       island_circle.style.transform = "translateX(-50%) scale(1)";
     }
   }
@@ -755,9 +755,9 @@ document.addEventListener("pointerdown", function (e) {
       }
     }, 300);
 
-    battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+    battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
     battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
-    clock.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+    clock.style.transition = `transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
     clock.style.transform = "translateX(0px)";
 
     if (!isRunning_clock) {
@@ -769,21 +769,21 @@ document.addEventListener("pointerdown", function (e) {
         image_island_right.classList.remove("show");
 
         if (isPlaying_music) {
-          clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+          clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
           clock.style.scale = "1";
           clock.style.left = "30px";
 
           island_circle.style.transition =
-            "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+            "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
           island_circle.style.transform = "translateX(-50%) scale(1)";
-          island2.style.transition = `transform 0.3s, width 0.6s cubic-bezier(.67,.2,.38,1.27)`;
+          island2.style.transition = `transform 0.3s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
           island2.style.width = "120px";
         }
       }, 20);
     }
 
     if (isPlaying_music) {
-      island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+      island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
       island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
     }
 
@@ -805,11 +805,11 @@ clickables["box9"].addEventListener("pointerup", () => {
     island_circle.style.transition = "all 0.3s";
     island_circle.style.transform = "translateX(-50%) scale(1)";
 
-    island2.style.transition = "all 0.5s cubic-bezier(.68,.01,.62,.14)";
+    island2.style.transition = "all 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
     island2.style.width = "120px";
     island2.style.transform = "translateX(-50%) translateY(0) scale(1)";
 
-    clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+    clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
     clock.style.scale = "1";
     clock.style.left = "30px";
   } else {
@@ -836,18 +836,18 @@ function closePopupToIsland() {
   lp.style.scale = 1;
   allApp.style.scale = 1;
 
-  island.style.transition = `transform 0.2s, width 0.6s cubic-bezier(.67,.2,.38,1.27)`;
+  island.style.transition = `transform 0.2s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
   document.querySelector(".camera").style.transform =
-    "translateX(-50%) translateY(-1px) scale(1.2)";
-  island.style.transform = "translateX(-50%) translateY(-1px) scale(1.2)";
+    "translateX(-50%) translateY(0) scale(1)";
+  island.style.transform = "translateX(-50%) translateY(0) scale(1)";
   if (!isPlaying_music) {
     island.style.width = "120px";
   }
   if (isPlaying_music) {
     island2.style.transition = "all 0.4s";
     island2.style.width = "25px";
-    island2.style.transition = `transform 0.2s, width 0.6s cubic-bezier(.67,.2,.38,1.27)`;
-    island2.style.transform = "translateX(-50%) translateY(-1px) scale(1.2)";
+    island2.style.transition = `transform 0.2s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
+    island2.style.transform = "translateX(-50%) translateY(0) scale(1)";
     clickables["box3"].style.pointerEvents = "none";
   }
 
@@ -883,13 +883,13 @@ function closePopupToIsland() {
     document.querySelector(".camera").style.transform =
       "translateX(-50%) translateY(0px) scale(1)";
     if (isPlaying_music) {
-      island2.style.transition = `transform 0.3s, width 1.2s cubic-bezier(1,-0.13,.27,1.34)`;
+      island2.style.transition = `transform 0.3s, width 1.2s cubic-bezier(0.23, 1, 0.32, 1)`;
       island.style.width = "120px";
-      island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+      island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
       island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
       island2.style.transform = "translateX(-50%) translateY(0px) scale(1)";
       clickables["box3"].style.pointerEvents = "auto";
-      clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+      clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
       clock.style.scale = "0.8";
       clock.style.left = "25px";
     }
@@ -905,7 +905,7 @@ const controls_music2 = document.querySelector(".controls_music2");
 
 island_circle.addEventListener("click", () => {
   hideAllClickables();
-  island2.style.transition = `all 0.56s cubic-bezier(.14,1.34,.41,1)`;
+  island2.style.transition = `all 0.56s cubic-bezier(0.23, 1, 0.32, 1)`;
 
   Object.assign(island2.style, {
     height: "25px",
@@ -927,7 +927,7 @@ island_circle.addEventListener("click", () => {
     island2.style.transform = `translateX(-50%) translateY(20px)`;
     
     setTimeout(() => {
-      island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island2.style.transition = `transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.3s ease`;
       island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island2.style.height = "150px";
       island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
@@ -954,7 +954,7 @@ island2.addEventListener("click", () => {
     island2.style.transform = `translateX(-50%) translateY(20px)`;
     
     setTimeout(() => {
-      island2.style.transition = `transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.3s ease`;
+      island2.style.transition = `transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), width 0.4s cubic-bezier(0.23, 1, 0.32, 1), height 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.3s ease`;
       island2.style.width = "calc(var(--bg--size_width_phone) - 6%)";
       island2.style.height = "150px";
       island2.style.borderRadius = "calc(var(--bg--border_radius_phone) - 20px)";
@@ -1016,12 +1016,12 @@ document.addEventListener("pointerdown", function (e) {
         }, 300);
       }
 
-      battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+      battery1.style.transition = statusWifi.style.transition = `transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
       battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
-      clock.style.transition = `transform 0.7s cubic-bezier(.14,1.34,.41,1)`;
+      clock.style.transition = `transform 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
       clock.style.transform = "translateX(0px)";
     } else {
-      island2.style.transition = `all 0.35s ease-out, width 1.2s cubic-bezier(.14,1.34,.41,1)`;
+      island2.style.transition = `all 0.35s ease-out, width 1.2s cubic-bezier(0.23, 1, 0.32, 1)`;
       island2.style.height = "25px";
       island2.style.borderRadius = "25px";
       island2.style.width = "25px";
@@ -1034,16 +1034,16 @@ document.addEventListener("pointerdown", function (e) {
       clock.style.transform = "translateX(0px)";
       setTimeout(() => {
         island.style.transform = "translateX(-50%) translateY(0) scale(1)";
-        island2.style.transition = `transform 0.3s, width 1.2s cubic-bezier(1,-0.13,.27,1.34)`;
+        island2.style.transition = `transform 0.3s, width 1.2s cubic-bezier(0.23, 1, 0.32, 1)`;
         island.style.width = "120px";
         island_circle.style.transition =
-          "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+          "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
 
         if (!isPlaying_music) {
           island2.style.transition = `all 0.3s`;
           island2.style.width = "25px";
           island_circle.style.transition =
-            "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+            "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
           island_circle.style.transform = "translateX(-50%) scale(1)";
         } else {
           island_circle.style.transform =
@@ -1051,7 +1051,7 @@ document.addEventListener("pointerdown", function (e) {
         }
         island2.style.transform = "translateX(-50%) translateY(0px) scale(1)";
         clickables["box3"].style.pointerEvents = "auto";
-        clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+        clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
         clock.style.scale = "0.8";
         clock.style.left = "25px";
         image_island_right.classList.add("show");
@@ -1062,10 +1062,10 @@ document.addEventListener("pointerdown", function (e) {
 
 clickables["box3"].addEventListener("pointerup", () => {
   if (isRunning_clock) {
-    island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+    island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
     island_circle.style.transform = "translateX(-50%) scale(1)";
 
-    clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+    clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
     clock.style.scale = "1";
     clock.style.left = "30px";
   } else {
@@ -1096,23 +1096,23 @@ function closePopupToIsland3() {
   nav.style.height = "30px";
 
   document.querySelector(".camera").style.transform =
-    "translateX(-50%) translateY(-1px) scale(1.2)";
-  island2.style.transform = "translateX(-50%) translateY(-1px) scale(1.2)";
+    "translateX(-50%) translateY(0) scale(1)";
+  island2.style.transform = "translateX(-50%) translateY(0) scale(1)";
   if (isRunning_clock) {
     island2.style.transition = `all 0.3s`;
 
     island2.style.transform = "";
-    island.style.transition = `transform 0.2s, width 0.6s cubic-bezier(.67,.2,.38,1.27)`;
-    island.style.transform = "translateX(-50%) translateY(-1px) scale(1.2)";
+    island.style.transition = `transform 0.2s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
+    island.style.transform = "translateX(-50%) translateY(0) scale(1)";
     island.style.width = "80px";
     clickables["box9"].style.pointerEvents = "none";
 
-    clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+    clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
 
     island2.style.width = clock.style.left = "25px";
     clock.style.scale = "0.8";
   } else {
-    island2.style.transition = `transform 0.2s, width 0.6s cubic-bezier(.67,.2,.38,1.27)`;
+    island2.style.transition = `transform 0.2s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
     island2.style.width = "120px";
   }
 
@@ -1156,7 +1156,7 @@ function closePopupToIsland3() {
     battery1.style.transform = statusWifi.style.transform = "translateX(0px)";
     clock.style.transform = "translateX(0px)";
     if (isRunning_clock) {
-      island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+      island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
       island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
     }
   }, 300 * currentSpeed);
@@ -1171,13 +1171,13 @@ function open_all_island() {
   ) {
     island2.style.transition = `all 0.2s`;
     island2.style.width = "25px";
-    island.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(.62,0,.25,1.36)`;
+    island.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
     island.style.width = "120px";
-    island_circle.style.transition = "all 0.7s cubic-bezier(.67,.2,.38,1.27)";
+    island_circle.style.transition = "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)";
     island_circle.style.transform = "translateX(calc(-50% - 77px)) scale(1)";
     island2.style.transform = "translateX(-50%) translateY(0px) scale(1)";
     clickables["box3"].style.pointerEvents = "auto";
-    clock.style.transition = "all 0.6s cubic-bezier(.67,.2,.38,1.27)";
+    clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
     clock.style.scale = "0.8";
     clock.style.left = "25px";
   } else {
@@ -1191,7 +1191,7 @@ function open_all_island() {
     }
 
     if (isPlaying_music && currentOpeningBtn != boxes["box3"]) {
-      island2.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(.14,1.34,.41,1)`;
+      island2.style.transition = `all 0.35s ease-out, width 0.7s cubic-bezier(0.23, 1, 0.32, 1)`;
       island2.style.width = "120px";
       image_island_right2.classList.remove("show");
       controls_music2.classList.remove("show");
@@ -2468,7 +2468,7 @@ function showChargingIsland() {
 
   island_charging_percent.textContent = `${battery_level}%`;
 
-  island.style.transition = `all 0.6s cubic-bezier(.14,1.34,.41,1)`;
+  island.style.transition = `all 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
   island.style.width = "160px";
   island.style.height = "35px";
   island.style.borderRadius = "20px";
@@ -2785,7 +2785,7 @@ function openAppFromRight() {
   timeOutOpenAppFromRight = setTimeout(() => {
     currentOpeningBtn.style.transition = `all ${
       currentSpeed * 0.7
-    }s , scale ${currentSpeed}s cubic-bezier(0,-2.28,.62,.94)`;
+    }s , scale ${currentSpeed}s cubic-bezier(0.23, 1, 0.32, 1)`;
     currentOpeningBtn.style.scale = "1";
     currentOpeningBtn.style.transform = `scale(${scaleAllAppReverse})`;
   }, currentSpeed * 10);

@@ -25,7 +25,7 @@
   --bg--background: #eaeaea;
   --bg--background2: #ffffff;
   --bg--color: #101010;
-  --bg--wallpaper: url("https://i.ibb.co/RktrvxGs/Xiaomi-17-Pro-Wallpaper-3.jpg");
+  --bg--wallpaper: url("https://i.ibb.co/v4szSDcd/Hyper-OS-3-Wallpaper-5.jpg");
   --bg--timeHidingIcon: 0.21s;
   --bg--delayHidingIcon: 0s;
   --bg--timeShowingIcon: 0.21s;
@@ -697,7 +697,7 @@ body.full-screen .app4app.open {
   position: absolute;
   background: none;
   transform: scale(1);
-  transition: all 1.5s cubic-bezier(0.07, 1.33, 1, 1);
+  transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: 3;
   scale: 1;
 }
@@ -987,7 +987,7 @@ body.full-screen .app4app.open {
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: bottom 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   pointer-events: auto;
 }
 
@@ -1228,7 +1228,7 @@ body.full-screen .app4app.open {
   backdrop-filter: blur(15px);
   z-index: 10001;
   gap: 15px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 2);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 #editControlsCenterBtn.open {
   opacity: 1;
@@ -1581,7 +1581,7 @@ p {
   flex-direction: column;
   min-width: 160px;
   border: 1px solid rgba(255,255,255,0.1);
-  animation: menuIn 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  animation: menuIn 0.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @keyframes menuIn {
@@ -1894,10 +1894,10 @@ p {
   font-family: "Noto sans", sans-serif;
   font-weight: bold;
   transform: translateY(300px);
-  transition: transform 0.4s cubic-bezier(0.27, 0, 0.47, -0.31);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .popup_wallpaper.open {
-  transition: transform 0.4s cubic-bezier(0.35, 1.31, 0.47, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   transform: none;
 }
 
@@ -3853,7 +3853,7 @@ input[type="color"] {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
-  transition: all 0.85s cubic-bezier(0.14, 1.34, 0.41, 1);
+  transition: all 0.85s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .image_island_right2.show {
   width: 60px;
@@ -4632,14 +4632,14 @@ input[type="color"] {
 }
 
 #box1_setup.anim::after {
-  transition: all 0.7s cubic-bezier(0.77, -0.1, 0.79, -0.52);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
   width: 250%;
   height: 250%;
   opacity: 1;
 }
 
 #box2_setup.anim {
-  transition: all 0.6s, scale 0.5s cubic-bezier(0.84, -1.12, 0.55, 0.55);
+  transition: all 0.6s, scale 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   transform: translateX(155%) translateY(-50%);
   width: 40px;
   height: 45px;
@@ -5469,10 +5469,10 @@ canvas {
   position: absolute;
   bottom: 30px;
   transform: translateY(130%);
-  transition: transform 0.4s cubic-bezier(0.27, 0, 0.47, -0.31);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .popup-box_alert.show_alert {
-  transition: transform 0.4s cubic-bezier(0.35, 1.31, 0.47, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   transform: translateY(0);
 }
 
@@ -5689,11 +5689,11 @@ canvas {
   
   /* Animation from bottom */
   transform: translateY(100vh);
-  transition: transform 0.4s cubic-bezier(0.27, 0, 0.47, -0.31);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .alert-card.show_alert {
   transform: translateY(0);
-  transition: transform 0.4s cubic-bezier(0.35, 1.31, 0.47, 1);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .alert-title {
   font-size: 16px;

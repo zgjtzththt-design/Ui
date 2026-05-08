@@ -4353,7 +4353,7 @@ function reset_anim_unlock_btn_event(
       group.ids.forEach((id) => {
         const box = document.getElementById(`preview_box${id}`);
 
-        box.style.transition = `all ${currentSpeed6}s cubic-bezier(.38,1.25,.65,1), opacity ${currentSpeed3}s`;
+        box.style.transition = `all ${currentSpeed6}s cubic-bezier(0.23, 1, 0.32, 1), opacity ${currentSpeed3}s`;
         box.style.transitionDelay = `${delay}s`;
         box.style.transform = "translateX(0px) translateY(0px) scale(1)";
         box.style.opacity = "1";

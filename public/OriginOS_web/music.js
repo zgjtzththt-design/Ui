@@ -173,48 +173,52 @@ function openFilePicker_music() {
 document
   .getElementById("fileInput_music")
   .addEventListener("change", function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = Array.from(e.target.files).filter(f => f.type.startsWith("audio/"));
+    if (!files.length) return;
 
-    const url = URL.createObjectURL(file);
-    jsmediatags.read(file, {
-      onSuccess: function (tag) {
-        const tags = tag.tags;
-        const title = tags.title || file.name.replace(/\.[^/.]+$/, "");
-        const artist = tags.artist || "Unknown Artist";
+    let processedCount = 0;
+    const totalFiles = files.length;
 
-        let imgUrl = "originos_data/system_music.png";
-        if (tags.picture) {
-          const { data, format } = tags.picture;
-          const byteArray = new Uint8Array(data);
-          const blob = new Blob([byteArray], { type: format });
-          imgUrl = URL.createObjectURL(blob);
-        }
+    files.forEach((file) => {
+      const url = URL.createObjectURL(file);
+      jsmediatags.read(file, {
+        onSuccess: function (tag) {
+          const tags = tag.tags;
+          const title = tags.title || file.name.replace(/\.[^/.]+$/, "");
+          const artist = tags.artist || "Unknown Artist";
 
-        const newTrack = { title, img: imgUrl, src: url };
+          let imgUrl = "originos_data/iconPacks/hype_icon/system_music.png";
+          if (tags.picture) {
+            const { data, format } = tags.picture;
+            const byteArray = new Uint8Array(data);
+            const blob = new Blob([byteArray], { type: format });
+            imgUrl = URL.createObjectURL(blob);
+          }
 
-        if (customTracks_music.length >= 3) {
-          customTracks_music.shift();
-        }
-        customTracks_music.push(newTrack);
+          const newTrack = { title, img: imgUrl, src: url };
+          customTracks_music.push(newTrack);
 
-        updatePlaylist_music();
-        playTrack_music(musicList_music.length + customTracks_music.length - 1);
-      },
-      onError: function () {
-        const fallbackTrack = {
-          title: file.name.replace(/\.[^/.]+$/, ""),
-          img: "originos_data/system_music.png",
-          src: url,
-        };
-        if (customTracks_music.length >= 3) {
-          customTracks_music.shift();
-        }
-        customTracks_music.push(fallbackTrack);
+          processedCount++;
+          if (processedCount === totalFiles) {
+            updatePlaylist_music();
+            playTrack_music(musicList_music.length + customTracks_music.length - totalFiles);
+          }
+        },
+        onError: function () {
+          const fallbackTrack = {
+            title: file.name.replace(/\.[^/.]+$/, ""),
+            img: "originos_data/iconPacks/hype_icon/system_music.png",
+            src: url,
+          };
+          customTracks_music.push(fallbackTrack);
 
-        updatePlaylist_music();
-        playTrack_music(musicList_music.length + customTracks_music.length - 1);
-      },
+          processedCount++;
+          if (processedCount === totalFiles) {
+            updatePlaylist_music();
+            playTrack_music(musicList_music.length + customTracks_music.length - totalFiles);
+          }
+        },
+      });
     });
   });
 

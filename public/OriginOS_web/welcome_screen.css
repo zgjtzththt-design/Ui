@@ -91,7 +91,7 @@
 .entry-anim {
     opacity: 0;
     transform: scale(0.7) translateY(20px);
-    animation: elementPop 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: elementPop 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .logo-box {
@@ -121,7 +121,7 @@
     cursor: pointer;
     display: flex; justify-content: center; align-items: center;
     animation-delay: 0.9s;
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
