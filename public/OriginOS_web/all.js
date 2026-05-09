@@ -2952,6 +2952,10 @@ window.customApps = [
   { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
   { id: "box11", name: "ويدجت الحالة", defaultIcon: "https://img.icons8.com/ios/256/info.png" },
   { id: "box12", name: "المتجر", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
+  { id: "box13", name: "تطبيق 13", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
+  { id: "box14", name: "Terminal", defaultIcon: "https://img.icons8.com/color/256/console.png" },
+  { id: "box15", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_browser.png" },
+  { id: "box16", name: "YouTube", defaultIcon: "https://img.icons8.com/color/256/youtube-play--v1.png" },
 ];
 
 window.getAppKeywords = function() {
@@ -2967,9 +2971,268 @@ window.getAppKeywords = function() {
     "box9": "browser",
     "box10": "weather",
     "box11": "widget",
-    "box12": "store"
+    "box12": "store",
+    "box13": "app13",
+    "box14": "terminal",
+    "box15": "browser",
+    "box16": "youtube"
   };
 };
+
+// YouTube App Initialization and Search logic
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof lucide !== "undefined") {
+    lucide.createIcons();
+  }
+
+  const searchInput = document.getElementById("yt-search-input");
+  const searchBtn = document.getElementById("yt-search-btn");
+  const ytIframe = document.getElementById("yt-main-iframe");
+
+  if (searchBtn && searchInput && ytIframe) {
+    const performSearch = () => {
+      const query = searchInput.value.trim();
+      if (query) {
+        // We can't really "search" in the embed, but we can try to guess a video or just use a search list
+        // YouTube doesn't support a true broad search in embed without API keys, 
+        // but we can try redirecting to a search result list if they allow it (usually they don't in embed)
+        // For simulation, we'll just show we are "searching" by using a generic search list
+        ytIframe.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(query)}`;
+      }
+    };
+
+    searchBtn.onclick = performSearch;
+    searchInput.onkeypress = (e) => {
+      if (e.key === "Enter") performSearch();
+    };
+  }
+
+  // Terminal App (App 14) logic
+  const termInput = document.getElementById("term-input");
+  const termOutput = document.getElementById("term-output");
+
+  if (termInput && termOutput) {
+    const commands = {
+      help: () => `Available commands: 
+- help: Show this message
+- ls: List files
+- clear: Clear the terminal
+- pwd: Print working directory
+- grep: Search for patterns in files
+- cat [file]: View file content
+- whoami: Current user
+- date: Show current date
+- echo [text]: Display text
+- set-size [w] [h]: Change phone dimensions
+- reset-size: Reset phone dimensions
+- set-virus: Activate system virus simulation
+- stop-virus: Stop all virus effects`,
+      ls: () => "Documents\nDownloads\nMusic\nPictures\nVideos\nSystem32",
+      clear: () => {
+        termOutput.innerHTML = "";
+        return "";
+      },
+      whoami: () => "guest",
+      date: () => new Date().toLocaleString(),
+      echo: (args) => args.join(" "),
+      sysinfo: () => `OS: OriginOS Web
+Version: 1.0.0
+Environment: AISTUDIO-Cloud
+Browser: ${navigator.userAgent.split(')')[0]})`,
+    };
+
+    const processCommand = async (input) => {
+      const parts = input.trim().split(/\s+/);
+      const cmd = parts[0].toLowerCase();
+      const args = parts.slice(1);
+
+      if (!input.trim()) return;
+
+      const outputLine = document.createElement("div");
+      outputLine.className = "command-echo";
+      outputLine.innerHTML = `> ${input}`;
+      termOutput.appendChild(outputLine);
+
+      if (cmd) {
+        // Local commands
+        if (cmd === "clear") {
+          commands.clear();
+        } else if (cmd === "help") {
+          const respLine = document.createElement("div");
+          respLine.innerText = commands.help();
+          termOutput.appendChild(respLine);
+        } else if (cmd === "set-size") {
+          const width = args[0];
+          const height = args[1];
+          if (width && height) {
+            document.documentElement.style.setProperty('--bg--size_width_phone', width.includes('px') ? width : width + 'px');
+            document.documentElement.style.setProperty('--bg--size_height_phone', height.includes('px') ? height : height + 'px');
+            const respLine = document.createElement("div");
+            respLine.className = "success-text";
+            respLine.innerText = `Phone size updated to ${width}x${height}`;
+            termOutput.appendChild(respLine);
+          } else {
+            const respLine = document.createElement("div");
+            respLine.className = "error-text";
+            respLine.innerText = "Usage: set-size [width] [height] (e.g. set-size 400 800)";
+            termOutput.appendChild(respLine);
+          }
+        } else if (cmd === "reset-size") {
+          document.documentElement.style.removeProperty('--bg--size_width_phone');
+          document.documentElement.style.removeProperty('--bg--size_height_phone');
+          const respLine = document.createElement("div");
+          respLine.className = "success-text";
+          respLine.innerText = "Phone size reset to default";
+          termOutput.appendChild(respLine);
+        } else if (cmd === "set-virus") {
+          // Trigger Virus Logic
+          const popup = document.createElement("div");
+          popup.className = "virus-popup";
+          popup.innerHTML = `
+            <h3>OK</h3>
+            <button onclick="activateVirus(this)">OK</button>
+          `;
+          document.body.appendChild(popup);
+          
+          window.virusAudioContext = null;
+          window.virusOscillators = [];
+
+          window.activateVirus = (btn) => {
+            btn.parentElement.remove();
+            
+            // 1. Shake screen
+            document.body.classList.add("virus-shake");
+            
+            // 2. Add color overlay
+            if (!document.querySelector(".virus-overlay")) {
+              const overlay = document.createElement("div");
+              overlay.className = "virus-overlay";
+              document.body.appendChild(overlay);
+            }
+            
+            // 3. Web Audio API for Scary Siren
+            try {
+              const AudioContext = window.AudioContext || window.webkitAudioContext;
+              const ctx = new AudioContext();
+              window.virusAudioContext = ctx;
+              
+              const playSiren = () => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(100, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.5);
+                osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 1.0);
+                
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 1.0);
+                window.virusOscillators.push(osc);
+              };
+
+              const interval = setInterval(() => {
+                if (window.virusAudioContext && window.virusAudioContext.state !== 'closed') {
+                  playSiren();
+                } else {
+                  clearInterval(interval);
+                }
+              }, 1000);
+              window.virusInterval = interval;
+
+            } catch (e) {
+              console.error("Audio API failed", e);
+            }
+
+            const virusMsg = document.createElement("div");
+            virusMsg.className = "error-text";
+            virusMsg.style.fontSize = "20px";
+            virusMsg.style.fontWeight = "bold";
+            virusMsg.innerText = "CRITICAL ERROR: SYSTEM INFECTED!!!";
+            termOutput.appendChild(virusMsg);
+          };
+
+          const respLine = document.createElement("div");
+          respLine.className = "info-text";
+          respLine.innerText = "Virus simulation initialized...";
+          termOutput.appendChild(respLine);
+        } else if (cmd === "stop-virus") {
+          document.body.classList.remove("virus-shake");
+          const overlay = document.querySelector(".virus-overlay");
+          if (overlay) overlay.remove();
+          
+          if (window.virusAudioContext) {
+            window.virusAudioContext.close();
+          }
+          if (window.virusInterval) {
+            clearInterval(window.virusInterval);
+          }
+          
+          const respLine = document.createElement("div");
+          respLine.className = "success-text";
+          respLine.innerText = "Virus sanitized. System normalized.";
+          termOutput.appendChild(respLine);
+        } else {
+          // Send to backend API
+          try {
+            const response = await fetch("/api/shell", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ command: input })
+            });
+            const data = await response.json();
+            
+            const respLine = document.createElement("div");
+            if (data.error) {
+              respLine.className = "error-text";
+              respLine.innerText = data.error;
+            } else {
+              respLine.innerText = data.output;
+            }
+            termOutput.appendChild(respLine);
+          } catch (err) {
+            const errLine = document.createElement("div");
+            errLine.className = "error-text";
+            errLine.innerText = "Error: Could not connect to terminal server.";
+            termOutput.appendChild(errLine);
+          }
+        }
+      }
+      termOutput.scrollTop = termOutput.scrollHeight;
+    };
+
+    const termSendBtn = document.getElementById("term-send-btn");
+
+    const handleSend = () => {
+      processCommand(termInput.value);
+      termInput.value = "";
+    };
+
+    termInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleSend();
+      }
+    });
+
+    if (termSendBtn) {
+      termSendBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        handleSend();
+      });
+    }
+
+    // Handle clicks to focus input
+    document.querySelector(".simple-shell").addEventListener("click", () => {
+      termInput.focus();
+    });
+  }
+});
+
 
 function setIconAndBackgroundGradient(boxId, imageUrl) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");

@@ -3934,7 +3934,21 @@
 
         <div class="box" id="box14">
           <div class="app" id="app14">
-            <div class="center_item">App 14</div>
+            <div class="simple-shell">
+              <div class="shell-top-spacer"></div>
+              <div class="shell-header">
+                <div class="shell-input-wrapper">
+                  <i class="lucide-terminal"></i>
+                  <input type="text" id="term-input" placeholder="Enter shell command..." spellcheck="false" autocomplete="off">
+                  <button id="term-send-btn" title="Send Command">
+                    <i class="lucide-send"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="shell-results" id="term-output">
+                <div class="info-text">System ready. Type 'help' for commands.</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -3946,7 +3960,56 @@
 
         <div class="box" id="box16">
           <div class="app" id="app16">
-            <div class="center_item">App 16</div>
+            <div class="yt-container">
+              <div class="yt-header">
+                <div class="yt-logo">
+                  <i class="lucide-youtube" style="color: #FF0000; font-size: 16px;"></i>
+                  <span>YouTube</span>
+                </div>
+                <div class="yt-header-icons">
+                  <div class="yt-search-bar">
+                    <input type="text" id="yt-search-input" placeholder="Search YouTube...">
+                    <i class="lucide-search" id="yt-search-btn"></i>
+                  </div>
+                  <i class="lucide-cast"></i>
+                  <i class="lucide-bell"></i>
+                  <div class="yt-profile-circle"></div>
+                </div>
+              </div>
+              
+              <div class="yt-main-content">
+                <iframe 
+                  id="yt-main-iframe"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                  title="YouTube video player" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+
+              <div class="yt-bottom-nav">
+                <div class="yt-nav-item active">
+                  <i class="lucide-home"></i>
+                  <span>Home</span>
+                </div>
+                <div class="yt-nav-item">
+                  <i class="lucide-play-circle"></i>
+                  <span>Shorts</span>
+                </div>
+                <div class="yt-nav-item plus">
+                  <i class="lucide-plus-circle"></i>
+                </div>
+                <div class="yt-nav-item">
+                  <i class="lucide-layers"></i>
+                  <span>Subs</span>
+                </div>
+                <div class="yt-nav-item">
+                  <i class="lucide-play-square"></i>
+                  <span>Library</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -4115,6 +4178,7 @@
     <input type="file" id="iconInput" accept="image/*" style="display: none" />
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
 
