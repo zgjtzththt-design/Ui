@@ -4577,28 +4577,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const file = e.target.files[0];
             if (!file) return;
 
-            const processZip = async (password = null) => {
+            const processZip = async () => {
                 try {
                     const reader = new zip.ZipReader(new zip.BlobReader(file));
                     let entries;
                     try {
-                        entries = await reader.getEntries({ password });
+                        entries = await reader.getEntries();
                     } catch (err) {
-                        const errMsg = err.message.toLowerCase();
-                        if (errMsg.includes("password") || errMsg.includes("encrypted") || errMsg.includes("pkcenter") || errMsg.includes("decrypt")) {
-                             if (typeof showPopupInput === "function") {
-                                showPopupInput({
-                                    message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
-                                    placeholder: "كلمة المرور",
-                                    buttonText: "استخراج",
-                                    cancelText: "إلغاء",
-                                    onSubmit: (pass) => {
-                                        processZip(pass);
-                                    }
-                                });
-                                return;
-                            }
-                        }
                         throw err;
                     }
 
@@ -4618,6 +4603,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const baseNameLower = baseName.toLowerCase().trim();
                         const fullNameLower = fileName.toLowerCase().trim();
 
+                        let appId = null;
                         let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === baseNameLower) : null;
                         if (!app && window.customApps) {
                             app = window.customApps.find(a => {
@@ -4631,34 +4617,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
 
                         if (app) {
+                            appId = app.id;
+                        } else if (/^\d+$/.test(baseNameLower)) {
+                            const maybeId = "box" + baseNameLower;
+                            if (document.getElementById(maybeId)) {
+                                appId = maybeId;
+                            }
+                        }
+
+                        if (appId) {
                             try {
-                                const blob = await entry.getData(new zip.BlobWriter(), { password });
+                                const blob = await entry.getData(new zip.BlobWriter());
                                 const dataUrl = await new Promise((resolve, reject) => {
                                     const r = new FileReader();
                                     r.onload = (ev) => resolve(ev.target.result);
                                     r.onerror = (e) => reject(e);
                                     r.readAsDataURL(blob);
                                 });
-                                savedIcons[app.id] = dataUrl;
+                                savedIcons[appId] = dataUrl;
                                 updated = true;
                             } catch (entryErr) {
                                 console.error("Error extracting entry:", entry.filename, entryErr);
-                                if (entryErr.message.toLowerCase().includes("password") || entryErr.message.toLowerCase().includes("encrypted")) {
-                                    // If we haven't asked for a password yet, ask for it
-                                    if (!password && typeof showPopupInput === "function") {
-                                        showPopupInput({
-                                            message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
-                                            placeholder: "كلمة المرور",
-                                            buttonText: "استخراج",
-                                            cancelText: "إلغاء",
-                                            onSubmit: (pass) => {
-                                                processZip(pass);
-                                            }
-                                        });
-                                        await reader.close();
-                                        return;
-                                    }
-                                }
                             }
                         }
                     }
@@ -4675,7 +4654,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 } catch (err) {
                     console.error("Error processing ZIP:", err);
-                    if (typeof tb_system === "function") tb_system("خطأ في كلمة المرور أو في معالجة الملف");
+                    if (typeof tb_system === "function") tb_system("خطأ في معالجة الملف");
                 }
             };
 
@@ -4683,7 +4662,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 processZip();
             } else if (typeof JSZip !== "undefined") {
                 // Fallback to JSZip if zip.js fails to load for some reason (though it won't support passwords)
-                tb_system("تنبيه: مكتبة التشفير لم تحمل بالكامل، قد لا يعمل استخراج الملفات المحمية");
+                tb_system("تنبيه: مكتبة التشفير لم تحمل بالكامل");
                 // Original logic could go here, but better to just use zip.js
             }
         });
