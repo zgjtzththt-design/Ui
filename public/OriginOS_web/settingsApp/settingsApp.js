@@ -4618,10 +4618,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         if (app) {
                             appId = app.id;
-                        } else if (/^\d+$/.test(baseNameLower)) {
-                            const maybeId = "box" + baseNameLower;
-                            if (document.getElementById(maybeId)) {
-                                appId = maybeId;
+                        } else {
+                            // Extract numeric ID from baseNameLower (e.g., "12", "box12", "app.12", "icon.12")
+                            const match = baseNameLower.match(/^(?:box|app|icon|)(?:\.|)0*(\d+)$/);
+                            if (match) {
+                                const maybeId = "box" + match[1];
+                                if (document.getElementById(maybeId)) {
+                                    appId = maybeId;
+                                }
                             }
                         }
 
@@ -4661,9 +4665,82 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof zip !== "undefined") {
                 processZip();
             } else if (typeof JSZip !== "undefined") {
-                // Fallback to JSZip if zip.js fails to load for some reason (though it won't support passwords)
-                tb_system("تنبيه: مكتبة التشفير لم تحمل بالكامل");
-                // Original logic could go here, but better to just use zip.js
+                // Fallback to JSZip for unencrypted ZIPs
+                const processWithJSZip = async () => {
+                    try {
+                        const jszip = new JSZip();
+                        const content = await jszip.loadAsync(file);
+                        const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                        let updated = false;
+                        const imageExtensions = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
+                        const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
+
+                        for (const [filename, fileObj] of Object.entries(content.files)) {
+                            if (fileObj.dir) continue;
+
+                            const fileName = filename.split('/').pop();
+                            const extension = fileName.split('.').pop().toLowerCase();
+                            if (!imageExtensions.includes(extension)) continue;
+
+                            const baseName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+                            const baseNameLower = baseName.toLowerCase().trim();
+                            const fullNameLower = fileName.toLowerCase().trim();
+
+                            let appId = null;
+                            let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === baseNameLower) : null;
+                            if (!app && window.customApps) {
+                                app = window.customApps.find(a => {
+                                    const kw = keywords[a.id];
+                                    if (kw) {
+                                        const kwClean = kw.substring(0, kw.lastIndexOf('.')).toLowerCase().trim() || kw.toLowerCase().trim();
+                                        return kwClean === baseNameLower || kw === fullNameLower;
+                                    }
+                                    return false;
+                                });
+                            }
+
+                            if (app) {
+                                appId = app.id;
+                            } else {
+                                // Extract numeric ID from baseNameLower (e.g., "12", "box12", "app.12", "icon.12")
+                                const match = baseNameLower.match(/^(?:box|app|icon|)(?:\.|)0*(\d+)$/);
+                                if (match) {
+                                    const maybeId = "box" + match[1];
+                                    if (document.getElementById(maybeId)) {
+                                        appId = maybeId;
+                                    }
+                                }
+                            }
+
+                            if (appId) {
+                                const blob = await fileObj.async("blob");
+                                const dataUrl = await new Promise((resolve, reject) => {
+                                    const r = new FileReader();
+                                    r.onload = (ev) => resolve(ev.target.result);
+                                    r.onerror = (e) => reject(e);
+                                    r.readAsDataURL(blob);
+                                });
+                                savedIcons[appId] = dataUrl;
+                                updated = true;
+                            }
+                        }
+
+                        if (updated) {
+                            localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                            if (window.syncEverything) window.syncEverything();
+                            if (typeof applyCustomIcons === "function") applyCustomIcons();
+                            if (typeof tb_system === "function") tb_system("تم استخراج الأيقونات بنجاح (JSZip)");
+                        } else {
+                            if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة");
+                        }
+                    } catch (err) {
+                        console.error("JSZip error:", err);
+                        if (typeof tb_system === "function") tb_system("خطأ في معالجة الملف");
+                    }
+                };
+                processWithJSZip();
+            } else {
+                if (typeof tb_system === "function") tb_system("المكتبة المطلوبة للمعالجة غير متوفرة");
             }
         });
     }
