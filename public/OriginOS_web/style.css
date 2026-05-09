@@ -358,6 +358,14 @@ body.full-screen .app4app.open {
 
 /* Custom lock positions */
 #previewPositionIcon.open::before,
+#box20.open::before,
+#box19.open::before,
+#box18.open::before,
+#box17.open::before,
+#box16.open::before,
+#box15.open::before,
+#box14.open::before,
+#box13.open::before,
 #box4.open::before,
 #box3.open::before,
 #box2.open::before,
@@ -392,25 +400,25 @@ body.full-screen .app4app.open {
 }
 #box3 {
   --bg--originos: url("originos_data/system_music.png");
-  right: 30.5%;
+  left: 51%;
   top: calc(var(--bg--size_height_phone) - 95px);
   background-color: rgba(235, 68, 96, 1);
 }
 #box4 {
   --bg--originos: url("originos_data/system_settings.png");
-  right: 10%;
+  left: 71.5%;
   top: calc(var(--bg--size_height_phone) - 95px);
   background-color: #eaeaea;
 }
 #box5 {
   --bg--originos: url("originos_data/system_messages.png");
-  right: 10%;
+  left: 71.5%;
   background-color: #fdfdfd;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
 #box6 {
   --bg--originos: url("originos_data/system_photos.png");
-  right: 30.5%;
+  left: 51%;
   background-color: #bbdefc;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
@@ -431,79 +439,137 @@ body.full-screen .app4app.open {
   left: 10%;
   background-color: #fefdfc;
   top: calc(var(--bg--size_height_phone) - 280px);
-  width: calc(60px + 20.5%);
-  aspect-ratio: 260 / 123;
 }
 #box10 {
   --bg--originos: url("originos_data/system_compass.png");
-  left: 10%;
+  left: 30.5%;
   background-color: #fefdfd;
-  top: calc(var(--bg--size_height_phone) - 350px);
-  width: calc(60px + 20.5%);
-  aspect-ratio: 260 / 123;
+  top: calc(var(--bg--size_height_phone) - 280px);
 }
 #box11 {
-  background-color: transparent;
-  width: 260px;
-  aspect-ratio: 260 / 135;
-  top: 70px;
-  left: 10%;
-  display: none !important; /* مخفي حسب طلب المستخدم */
+  background-color: #fdcfdf;
+  left: 51%;
+  --bg--originos: url("originos_data/system_calculator.png");
+  top: calc(var(--bg--size_height_phone) - 280px);
 }
 #box12 {
   --bg--originos: url("./originos_data/other/tiktok.png");
   background-color: rgba(255, 255, 255, 0.5);
-  right: 10%;
-  width: calc(60px + 20.5%);
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 280px);
+}
+#box13 {
+  --bg--originos: url("originos_data/system_weather.png");
+  background-color: #8c5ff2;
+  left: 10%;
   top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box14 {
+  --bg--originos: url("originos_data/system_camera.png");
+  background-color: #ff6b6b;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box15 {
+  --bg--originos: url("originos_data/system_browser.png");
+  background-color: #3b82f6;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box16 {
+  --bg--originos: url("originos_data/system_calendar.png");
+  background-color: #ef4444;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box17 {
+  --bg--originos: url("originos_data/theme_icon.png");
+  background-color: #10b981;
+  left: 10%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box18 {
+  --bg--originos: url("originos_data/contact.png");
+  background-color: #14b8a6;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box19 {
+  --bg--originos: url("originos_data/language.png");
+  background-color: #8b5cf6;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box20 {
+  --bg--originos: url("originos_data/star.png");
+  background-color: #f59e0b;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box21 {
+  --bg--originos: url("originos_data/system_messages.png");
+  background-color: #f43f5e;
+  left: 10%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box22 {
+  --bg--originos: url("originos_data/system_settings.png");
+  background-color: #0ea5e9;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box23 {
+  --bg--originos: url("originos_data/system_music.png");
+  background-color: #84cc16;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box24 {
+  --bg--originos: url("originos_data/system_filemanager.png");
+  background-color: #d946ef;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 490px);
 }
 
 /* Special icon background size */
 #box12::before {
   background-size: cover;
 }
-#box9::before,
-#box10::before {
-  background-size: 50%;
-}
 
 /* Open state (full screen) */
-#box11.open {
-  width: 100%;
-  aspect-ratio: var(--bg--ratio_phone);
-  border-radius: calc(var(--bg--border_radius_phone) - 1px);
-  transform: scale(1.1628);
-  left: 0;
-  top: 0%;
-  z-index: 200;
-}
-
+#box24.open,
+#box23.open,
+#box22.open,
+#box21.open,
+#box20.open,
+#box19.open,
+#box18.open,
+#box17.open,
+#box16.open,
+#box15.open,
+#box14.open,
+#box13.open,
 #box12.open,
-#box5.open,
-#box6.open,
-#box3.open,
-#box4.open {
-  width: 100%;
-  aspect-ratio: var(--bg--ratio_phone);
-  border-radius: calc(var(--bg--border_radius_phone) - 1px);
-  transform: scale(1.1628);
-  right: 0;
-  top: 0%;
-  z-index: 200;
-}
+#box11.open,
 #box10.open,
 #box9.open,
 #box8.open,
 #box7.open,
-#box1.open,
-#box2.open {
+#box6.open,
+#box5.open,
+#box4.open,
+#box3.open,
+#box2.open,
+#box1.open {
   width: 100%;
   aspect-ratio: var(--bg--ratio_phone);
   border-radius: calc(var(--bg--border_radius_phone) - 1px);
   transform: scale(1.1628);
   left: 0;
+  right: 0;
   top: 0%;
   z-index: 200;
+  transform-origin: center;
 }
 
 .box.hien::before {
@@ -537,21 +603,21 @@ body.full-screen .app4app.open {
 }
 #clicke3 {
   bottom: 35px;
-  right: 30.5%;
+  left: 51%;
   height: 80px;
 }
 #clicke4 {
   bottom: 35px;
-  right: 10%;
+  left: 71.5%;
   height: 80px;
 }
 #clicke5 {
   bottom: 150px;
-  right: 10%;
+  left: 71.5%;
 }
 #clicke6 {
   bottom: 150px;
-  right: 30.5%;
+  left: 51%;
 }
 #clicke7 {
   bottom: 150px;
@@ -563,26 +629,67 @@ body.full-screen .app4app.open {
 }
 #clicke9 {
   bottom: 220px;
-  width: calc(60px + 20.5%);
   left: 10%;
 }
 #clicke10 {
-  bottom: 290px;
-  left: 10%;
-  width: calc(60px + 20.5%);
+  bottom: 220px;
+  left: 30.5%;
 }
 #clicke11 {
-  top: 70px;
-  left: 10%;
-  height: 135px;
-  width: 260px;
-  display: none !important;
+  bottom: 220px;
+  left: 51%;
 }
 #clicke12 {
-  top: calc(var(--bg--size_height_phone) - 350px);
-  right: 10%;
-  width: calc(60px + 20.5%);
-  height: 130px;
+  bottom: 220px;
+  left: 71.5%;
+}
+#clicke13 {
+  bottom: 290px;
+  left: 10%;
+}
+#clicke14 {
+  bottom: 290px;
+  left: 30.5%;
+}
+#clicke15 {
+  bottom: 290px;
+  left: 51%;
+}
+#clicke16 {
+  bottom: 290px;
+  left: 71.5%;
+}
+#clicke17 {
+  bottom: 360px;
+  left: 10%;
+}
+#clicke18 {
+  bottom: 360px;
+  left: 30.5%;
+}
+#clicke19 {
+  bottom: 360px;
+  left: 51%;
+}
+#clicke20 {
+  bottom: 360px;
+  left: 71.5%;
+}
+#clicke21 {
+  bottom: 430px;
+  left: 10%;
+}
+#clicke22 {
+  bottom: 430px;
+  left: 30.5%;
+}
+#clicke23 {
+  bottom: 430px;
+  left: 51%;
+}
+#clicke24 {
+  bottom: 430px;
+  left: 71.5%;
 }
 .thanh {
   position: absolute;

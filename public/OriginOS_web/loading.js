@@ -26,7 +26,7 @@ setTimeout(() => {
         sessionStorage.clear();
         location.reload();
     }
-}, 6000); // 6 giây
+}, 10000); // 10 giây
 
 // Removed setup logic
 // const box1_setup = null;
@@ -215,9 +215,9 @@ window.addEventListener("DOMContentLoaded", () => {
     scale_icon = localStorage.getItem("scale_icon_saved") || 100;
 
     if (scale_icon) {
-        for (let i = 1; i <= 11; i++) {
-            boxes[`box${i}`].style.scale = `${scale_icon}%`;
-        }
+        Object.values(boxes).forEach(box => {
+            if (box) box.style.scale = `${scale_icon}%`;
+        });
         document.querySelectorAll(".scale-button").forEach((el) => {
             el.classList.remove("active");
         });

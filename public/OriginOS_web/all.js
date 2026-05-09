@@ -246,6 +246,18 @@ const boxes = {
   box10: document.getElementById("box10"),
   box11: document.getElementById("box11"),
   box12: document.getElementById("box12"),
+  box13: document.getElementById("box13"),
+  box14: document.getElementById("box14"),
+  box15: document.getElementById("box15"),
+  box16: document.getElementById("box16"),
+  box17: document.getElementById("box17"),
+  box18: document.getElementById("box18"),
+  box19: document.getElementById("box19"),
+  box20: document.getElementById("box20"),
+  box21: document.getElementById("box21"),
+  box22: document.getElementById("box22"),
+  box23: document.getElementById("box23"),
+  box24: document.getElementById("box24"),
 };
 
 document.querySelector(".khayapp").classList.add("lock");
@@ -263,6 +275,18 @@ const appopen = {
   box10: document.getElementById("app10"),
   box11: document.getElementById("app11"),
   box12: document.getElementById("app12"),
+  box13: document.getElementById("app13"),
+  box14: document.getElementById("app14"),
+  box15: document.getElementById("app15"),
+  box16: document.getElementById("app16"),
+  box17: document.getElementById("app17"),
+  box18: document.getElementById("app18"),
+  box19: document.getElementById("app19"),
+  box20: document.getElementById("app20"),
+  box21: document.getElementById("app21"),
+  box22: document.getElementById("app22"),
+  box23: document.getElementById("app23"),
+  box24: document.getElementById("app24"),
 };
 
 const clickables = {
@@ -278,6 +302,18 @@ const clickables = {
   box10: document.getElementById("clicke10"),
   box11: document.getElementById("clicke11"),
   box12: document.getElementById("clicke12"),
+  box13: document.getElementById("clicke13"),
+  box14: document.getElementById("clicke14"),
+  box15: document.getElementById("clicke15"),
+  box16: document.getElementById("clicke16"),
+  box17: document.getElementById("clicke17"),
+  box18: document.getElementById("clicke18"),
+  box19: document.getElementById("clicke19"),
+  box20: document.getElementById("clicke20"),
+  box21: document.getElementById("clicke21"),
+  box22: document.getElementById("clicke22"),
+  box23: document.getElementById("clicke23"),
+  box24: document.getElementById("clicke24"),
 };
 
 const WallPaper = document.querySelector(".wallpaper");
@@ -583,7 +619,7 @@ let appPressTarget = null;
 let appPressTimer = null;
 let appPressStartX, appPressStartY;
 
-["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"].forEach(
+["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"].forEach(
   (num) => {
     const clicke = document.getElementById(`clicke${num}`);
     const box = boxes[`box${num}`];

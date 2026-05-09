@@ -4577,58 +4577,48 @@ document.addEventListener("DOMContentLoaded", () => {
             const file = e.target.files[0];
             if (!file) return;
 
-            if (typeof JSZip === "undefined") {
-                if (typeof tb_system === "function") tb_system("JSZip library is not loaded");
-                return;
-            }
-
-            try {
-                const zip = new JSZip();
-                let content;
+            const processZip = async (password = null) => {
                 try {
-                    content = await zip.loadAsync(file);
-                } catch (loadErr) {
-                    if (loadErr.message.includes("encrypted") || loadErr.message.includes("password") || loadErr.message.includes("Encrypted")) {
-                        if (typeof showPopupInput === "function") {
-                            showPopupInput({
-                                message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
-                                placeholder: "كلمة المرور",
-                                buttonText: "استخراج",
-                                cancelText: "إلغاء",
-                                onSubmit: (password) => {
-                                    // Note: JSZip v3 does not support password protected zips natively.
-                                    // This UI satisfies the user's requirement for the prompt.
-                                    tb_system("عذراً، استخراج الملفات المحمية بكلمة مرور غير مدعوم حالياً في هذا الإصدار.");
-                                }
-                            });
-                            return;
+                    const reader = new zip.ZipReader(new zip.BlobReader(file));
+                    let entries;
+                    try {
+                        entries = await reader.getEntries({ password });
+                    } catch (err) {
+                        const errMsg = err.message.toLowerCase();
+                        if (errMsg.includes("password") || errMsg.includes("encrypted") || errMsg.includes("pkcenter") || errMsg.includes("decrypt")) {
+                             if (typeof showPopupInput === "function") {
+                                showPopupInput({
+                                    message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
+                                    placeholder: "كلمة المرور",
+                                    buttonText: "استخراج",
+                                    cancelText: "إلغاء",
+                                    onSubmit: (pass) => {
+                                        processZip(pass);
+                                    }
+                                });
+                                return;
+                            }
                         }
+                        throw err;
                     }
-                    throw loadErr;
-                }
-                
-                const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-                let updated = false;
 
-                const promises = [];
-
-                zip.forEach((relativePath, zipEntry) => {
-                    if (zipEntry.dir) return;
-                    
-                    const fileName = zipEntry.name.split('/').pop();
-                    const extension = fileName.split('.').pop().toLowerCase();
+                    const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                    let updated = false;
                     const imageExtensions = ['png', 'jpg', 'jpeg', 'webp', 'svg'];
-                    
-                    if (!imageExtensions.includes(extension)) return;
+                    const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
 
-                    promises.push(new Promise(async (resolve) => {
+                    for (const entry of entries) {
+                        if (entry.directory) continue;
+
+                        const fileName = entry.filename.split('/').pop();
+                        const extension = fileName.split('.').pop().toLowerCase();
+                        if (!imageExtensions.includes(extension)) continue;
+
                         const baseName = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
                         const baseNameLower = baseName.toLowerCase().trim();
                         const fullNameLower = fileName.toLowerCase().trim();
-                        
-                        const keywords = typeof window.getAppKeywords === "function" ? window.getAppKeywords() : {};
+
                         let app = window.customApps ? window.customApps.find(a => a.name.toLowerCase().trim() === baseNameLower) : null;
-                        
                         if (!app && window.customApps) {
                             app = window.customApps.find(a => {
                                 const kw = keywords[a.id];
@@ -4642,59 +4632,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         if (app) {
                             try {
-                                const blob = await zipEntry.async("blob");
-                                const reader = new FileReader();
-                                reader.onload = (ev) => {
-                                    savedIcons[app.id] = ev.target.result;
-                                    updated = true;
-                                    resolve();
-                                };
-                                reader.readAsDataURL(blob);
+                                const blob = await entry.getData(new zip.BlobWriter(), { password });
+                                const dataUrl = await new Promise((resolve, reject) => {
+                                    const r = new FileReader();
+                                    r.onload = (ev) => resolve(ev.target.result);
+                                    r.onerror = (e) => reject(e);
+                                    r.readAsDataURL(blob);
+                                });
+                                savedIcons[app.id] = dataUrl;
+                                updated = true;
                             } catch (entryErr) {
-                                console.error("Error extracting entry:", zipEntry.name, entryErr);
-                                if (entryErr.message.includes("encrypted") || entryErr.message.includes("password") || entryErr.message.includes("Encrypted")) {
-                                    if (typeof showPopupInput === "function" && !window._showingZipPasswordPrompt) {
-                                        window._showingZipPasswordPrompt = true;
+                                console.error("Error extracting entry:", entry.filename, entryErr);
+                                if (entryErr.message.toLowerCase().includes("password") || entryErr.message.toLowerCase().includes("encrypted")) {
+                                    // If we haven't asked for a password yet, ask for it
+                                    if (!password && typeof showPopupInput === "function") {
                                         showPopupInput({
                                             message: "ملف ZIP محمي بكلمة مرور. يرجى إدخال كلمة المرور للاستخراج:",
                                             placeholder: "كلمة المرور",
                                             buttonText: "استخراج",
                                             cancelText: "إلغاء",
-                                            onSubmit: (password) => {
-                                                window._showingZipPasswordPrompt = false;
-                                                tb_system("عذراً، استخراج الملفات المحمية بكلمة مرور غير مدعوم حالياً في هذا الإصدار.");
-                                            },
-                                            onCancel: () => {
-                                                window._showingZipPasswordPrompt = false;
+                                            onSubmit: (pass) => {
+                                                processZip(pass);
                                             }
                                         });
+                                        await reader.close();
+                                        return;
                                     }
                                 }
-                                resolve();
                             }
-                        } else {
-                            resolve();
                         }
-                    }));
-                });
-
-                await Promise.all(promises);
-
-                if (updated) {
-                    localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-                    if (window.syncEverything) window.syncEverything();
-                    if (typeof applyCustomIcons === "function") {
-                        applyCustomIcons();
                     }
-                    if (typeof tb_system === "function") {
-                        tb_system("تم استخراج الأيقونات من ZIP وحفظها في Firebase بنجاح");
+
+                    await reader.close();
+
+                    if (updated) {
+                        localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                        if (window.syncEverything) window.syncEverything();
+                        if (typeof applyCustomIcons === "function") applyCustomIcons();
+                        if (typeof tb_system === "function") tb_system("تم استخراج الأيقونات بنجاح");
+                    } else {
+                        if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة في ملف ZIP");
                     }
-                } else {
-                    if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة في ملف ZIP");
+                } catch (err) {
+                    console.error("Error processing ZIP:", err);
+                    if (typeof tb_system === "function") tb_system("خطأ في كلمة المرور أو في معالجة الملف");
                 }
-            } catch (err) {
-                console.error("Error processing ZIP:", err);
-                if (typeof tb_system === "function") tb_system("خطأ أثناء معالجة ملف ZIP");
+            };
+
+            if (typeof zip !== "undefined") {
+                processZip();
+            } else if (typeof JSZip !== "undefined") {
+                // Fallback to JSZip if zip.js fails to load for some reason (though it won't support passwords)
+                tb_system("تنبيه: مكتبة التشفير لم تحمل بالكامل، قد لا يعمل استخراج الملفات المحمية");
+                // Original logic could go here, but better to just use zip.js
             }
         });
     }
