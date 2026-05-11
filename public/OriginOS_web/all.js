@@ -3306,21 +3306,6 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
 function applyCustomIcons(forceAll = false) {
   const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
   
-  if (Object.keys(savedIcons).length > 0) {
-      const customItem = document.getElementById("custom_icon_pack_item");
-      if (customItem) customItem.style.display = "flex";
-      
-      const packName = localStorage.getItem("custom_pack_name");
-      if (packName) {
-          const label = document.getElementById("custom_icon_pack_label");
-          if (label) label.innerText = packName;
-      }
-  }
-  
-  if (!forceAll && localStorage.getItem("selected_icon_pack") !== "custom") {
-      return; // Only apply if custom is selected
-  }
-
   // Apply saved custom icons
   Object.keys(savedIcons).forEach((appId) => {
       setIconAndBackgroundGradient(appId, savedIcons[appId]);
@@ -3348,23 +3333,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof window.restoreIconPack === "function") {
             window.restoreIconPack();
         }
-        applyCustomIcons(); // Check UI, apply if selected
+        applyCustomIcons(); // custom extracted icons go on top
         updateIconBorder(`${pack}_icon`);
     }, 150);
 });
-
-window.icon_custom = function() {
-    localStorage.setItem("selected_icon_pack", "custom");
-    updateIconBorder("custom_icon");
-    
-    // We should probably invoke the base pack first so missing icons are set, but for now just applying custom
-    if (typeof window.icon_hyperos3 === "function") {
-        window.icon_hyperos3();
-    }
-    localStorage.setItem("selected_icon_pack", "custom");
-    updateIconBorder("custom_icon");
-    applyCustomIcons(true);
-};
 
 function showChangelog() {
     showPopup1_alert(

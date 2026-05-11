@@ -3750,10 +3750,7 @@ function restoreIconPack() {
   else if (pack === "neonos") icon_neonos();
   else if (pack === "3dos") icon_3dos();
   else if (pack === "minimalos") icon_minimalos();
-  else if (pack === "custom") {
-      if (typeof window.icon_custom === 'function') window.icon_custom();
-      else if (typeof applyCustomIcons === 'function') applyCustomIcons(true);
-  }
+  else if (pack === "custom") applyCustomIcons();
   else if (pack === "flymeos") icon_flymeos();
   else icon_originos();
 }
@@ -4652,24 +4649,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     await reader.close();
 
                     if (updated) {
-                        const packName = file.name ? file.name.replace(/\.[^/.]+$/, "") : "Custom Pack";
-                        localStorage.setItem("custom_pack_name", packName);
                         localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
                         if (window.syncEverything) window.syncEverything();
-                        
-                        const customItem = document.getElementById("custom_icon_pack_item");
-                        if (customItem) customItem.style.display = "flex";
-                        const customLabel = document.getElementById("custom_icon_pack_label");
-                        if (customLabel) customLabel.innerText = packName;
-
-                        if (typeof applyCustomIcons === "function") {
-                            // If they are extracting, auto select it
-                            if (typeof window.icon_custom === 'function') {
-                                window.icon_custom();
-                            } else {
-                                applyCustomIcons();
-                            }
-                        }
+                        if (typeof applyCustomIcons === "function") applyCustomIcons();
                         if (typeof tb_system === "function") tb_system("تم استخراج الأيقونات بنجاح");
                     } else {
                         if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة في ملف ZIP");
@@ -4744,24 +4726,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
 
                         if (updated) {
-                            const packName = file.name ? file.name.replace(/\.[^/.]+$/, "") : "Custom Pack";
-                            localStorage.setItem("custom_pack_name", packName);
                             localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
                             if (window.syncEverything) window.syncEverything();
-                            
-                            const customItem = document.getElementById("custom_icon_pack_item");
-                            if (customItem) customItem.style.display = "flex";
-                            const customLabel = document.getElementById("custom_icon_pack_label");
-                            if (customLabel) customLabel.innerText = packName;
-
-                            if (typeof applyCustomIcons === "function") {
-                                // If they are extracting, auto select it
-                                if (typeof window.icon_custom === 'function') {
-                                    window.icon_custom();
-                                } else {
-                                    applyCustomIcons();
-                                }
-                            }
+                            if (typeof applyCustomIcons === "function") applyCustomIcons();
                             if (typeof tb_system === "function") tb_system("تم استخراج الأيقونات بنجاح (JSZip)");
                         } else {
                             if (typeof tb_system === "function") tb_system("لم يتم العثور على أيقونات مطابقة");
