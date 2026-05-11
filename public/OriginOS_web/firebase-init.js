@@ -76,6 +76,8 @@ window.syncEverything = async () => {
     // 1. Get Icons from LocalStorage
     const customIcons = localStorage.getItem("custom_icons");
     if (customIcons) settings.custom_icons = JSON.parse(customIcons);
+    const customPackName = localStorage.getItem("custom_pack_name");
+    if (customPackName) settings.custom_pack_name = customPackName;
     
     // 2. Get Wallpapers from IndexedDB (OriginDB)
     if (typeof window.getData === "function") {
@@ -121,6 +123,9 @@ window.applyCloudSettings = (settings) => {
         const localIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
         const mergedIcons = { ...localIcons, ...settings.custom_icons };
         localStorage.setItem("custom_icons", JSON.stringify(mergedIcons));
+    }
+    if (settings.custom_pack_name) {
+        localStorage.setItem("custom_pack_name", settings.custom_pack_name);
     }
     
     const promises = [];
