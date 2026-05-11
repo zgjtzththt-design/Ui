@@ -4,7 +4,7 @@ service cloud.firestore {
     // 0. Global Safety Net
     match /{document=**} { allow read, write: if false; }
 
-    // Path Variable Hardening & Globals
+    // 3. Path Variable Hardening & Globals
     function isSignedIn() { return request.auth != null; }
     function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
     function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
@@ -12,35 +12,29 @@ service cloud.firestore {
     function incoming() { return request.resource.data; }
     function existing() { return resource.data; }
 
-    // Validation Blueprints
+    // 2. Validation Blueprints
     function isValidUserSettings(data) {
       return data.keys().hasAll(['userId', 'updatedAt'])
              && data.userId == request.auth.uid
              && data.updatedAt == request.time
              && (data.get('home_wallpaper', null) == null || (data.home_wallpaper is string && data.home_wallpaper.size() <= 1048576))
              && (data.get('lock_wallpaper', null) == null || (data.lock_wallpaper is string && data.lock_wallpaper.size() <= 1048576))
-             && (data.get('custom_pack_name', null) == null || (data.custom_pack_name is string && data.custom_pack_name.size() <= 128));
+             && (data.get('custom_icons', null) == null || (data.custom_icons is map && data.custom_icons.size() <= 50))
+             && (data.get('custom_icons_keywords', null) == null || (data.custom_icons_keywords is map && data.custom_icons_keywords.size() <= 50));
     }
 
-    function isValidCustomIcon(data) {
-      return data.keys().hasAll(['appId', 'content', 'updatedAt'])
-             && data.appId is string && data.appId.size() <= 64
-             && data.content is string && data.content.size() <= 1048576
-             && data.updatedAt == request.time;
-    }
-
+    // 4. Tiered Identity & 10. Temporal Integrity
     match /user_settings/{userId} {
       allow get: if isOwner(userId);
       allow create: if isOwner(userId) && isValidId(userId) && isValidUserSettings(incoming());
       allow update: if isOwner(userId) 
                     && isValidUserSettings(incoming())
-                    && incoming().userId == existing().userId;
-      
-      match /icons/{iconId} {
-        allow list, get: if isOwner(userId);
-        allow create, update: if isOwner(userId) && isValidId(iconId) && isValidCustomIcon(incoming());
-        allow delete: if isOwner(userId);
-      }
+                    && incoming().userId == existing().userId
+                    && (
+                      // Action: Sync Settings
+                      incoming().diff(existing()).affectedKeys().hasAny(['home_wallpaper', 'lock_wallpaper', 'custom_icons', 'custom_icons_keywords', 'updatedAt'])
+                    );
+      allow delete: if false;
     }
   }
 }

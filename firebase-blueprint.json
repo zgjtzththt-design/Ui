@@ -8,31 +8,17 @@
         "userId": { "type": "string", "description": "The UID of the user." },
         "home_wallpaper": { "type": "string", "description": "Base64 or URL of the home wallpaper." },
         "lock_wallpaper": { "type": "string", "description": "Base64 or URL of the lock wallpaper." },
-        "custom_pack_name": { "type": "string", "description": "Name of the imported icon pack." },
+        "custom_icons": { "type": "object", "description": "Map of boxId to Base64 icon." },
+        "custom_icons_keywords": { "type": "object", "description": "Map of boxId to search keyword." },
         "updatedAt": { "type": "string", "format": "date-time" }
       },
       "required": ["userId", "updatedAt"]
-    },
-    "CustomIcon": {
-      "title": "Custom Icon",
-      "description": "A single custom icon for an app.",
-      "type": "object",
-      "properties": {
-        "appId": { "type": "string" },
-        "content": { "type": "string", "description": "Base64 data URL" },
-        "updatedAt": { "type": "string", "format": "date-time" }
-      },
-      "required": ["appId", "content", "updatedAt"]
     }
   },
   "firestore": {
     "/user_settings/{userId}": {
       "schema": "UserSettings",
       "description": "Stores individual user preferences."
-    },
-    "/user_settings/{userId}/icons/{iconId}": {
-      "schema": "CustomIcon",
-      "description": "Stores individual custom icons to stay within document size limits."
     }
   }
 }

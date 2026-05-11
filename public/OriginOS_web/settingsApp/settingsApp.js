@@ -2845,12 +2845,10 @@ window.showIconPopup = function showIconPopup(boxNum) {
             reader.onload = (event) => {
                 const base64 = event.target.result;
                 
-                // Save to localStorage and IndexedDB
+                // Save to localStorage
                 const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
                 savedIcons[boxId] = base64;
                 localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-                if (typeof window.setData === "function") window.setData("custom_icons", savedIcons);
-                if (window.syncSingleIcon) window.syncSingleIcon(boxId, base64);
                 
                 // Apply immediately
                 if (typeof window.restoreIconPack === "function") {
@@ -2872,9 +2870,6 @@ window.showIconPopup = function showIconPopup(boxNum) {
              const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
              delete savedIcons[boxId];
              localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-             if (typeof window.setData === "function") window.setData("custom_icons", savedIcons);
-             if (window.deleteSingleIcon) window.deleteSingleIcon(boxId);
-             
              if (typeof window.restoreIconPack === "function") {
                  window.restoreIconPack();
              } else if (typeof applyCustomIcons === "function") {
@@ -4659,17 +4654,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (updated) {
                         const packName = file.name ? file.name.replace(/\.[^/.]+$/, "") : "Custom Pack";
                         localStorage.setItem("custom_pack_name", packName);
-                        
-                        // Save to IndexedDB (as a whole map for local use)
-                        if (typeof window.setData === "function") {
-                             window.setData("custom_icons", savedIcons, () => {
-                                 if (window.syncAllIcons) window.syncAllIcons(); // Sync to Firebase sub-collection
-                                 if (window.syncEverything) window.syncEverything();
-                             });
-                        } else {
-                             localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-                             if (window.syncEverything) window.syncEverything();
-                        }
+                        localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                        if (window.syncEverything) window.syncEverything();
                         
                         const customItem = document.getElementById("custom_icon_pack_item");
                         if (customItem) customItem.style.display = "flex";
@@ -4760,17 +4746,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (updated) {
                             const packName = file.name ? file.name.replace(/\.[^/.]+$/, "") : "Custom Pack";
                             localStorage.setItem("custom_pack_name", packName);
-
-                            // Save to IndexedDB
-                            if (typeof window.setData === "function") {
-                                window.setData("custom_icons", savedIcons, () => {
-                                    if (window.syncAllIcons) window.syncAllIcons();
-                                    if (window.syncEverything) window.syncEverything();
-                                });
-                            } else {
-                                localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-                                if (window.syncEverything) window.syncEverything();
-                            }
+                            localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                            if (window.syncEverything) window.syncEverything();
                             
                             const customItem = document.getElementById("custom_icon_pack_item");
                             if (customItem) customItem.style.display = "flex";
