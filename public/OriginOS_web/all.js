@@ -3304,27 +3304,36 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
 }
 
 function applyCustomIcons(forceAll = false) {
-  const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-  
-  if (Object.keys(savedIcons).length > 0) {
-      const customItem = document.getElementById("custom_icon_pack_item");
-      if (customItem) customItem.style.display = "flex";
-      
-      const packName = localStorage.getItem("custom_pack_name");
-      if (packName) {
-          const label = document.getElementById("custom_icon_pack_label");
-          if (label) label.innerText = packName;
-      }
-  }
-  
-  if (!forceAll && localStorage.getItem("selected_icon_pack") !== "custom") {
-      return; // Only apply if custom is selected
-  }
+  const process = (savedIcons) => {
+    if (Object.keys(savedIcons).length > 0) {
+        const customItem = document.getElementById("custom_icon_pack_item");
+        if (customItem) customItem.style.display = "flex";
+        
+        const packName = localStorage.getItem("custom_pack_name");
+        if (packName) {
+            const label = document.getElementById("custom_icon_pack_label");
+            if (label) label.innerText = packName;
+        }
+    }
+    
+    if (!forceAll && localStorage.getItem("selected_icon_pack") !== "custom") {
+        return; // Only apply if custom is selected
+    }
 
-  // Apply saved custom icons
-  Object.keys(savedIcons).forEach((appId) => {
-      setIconAndBackgroundGradient(appId, savedIcons[appId]);
-  });
+    // Apply saved custom icons
+    Object.keys(savedIcons).forEach((appId) => {
+        setIconAndBackgroundGradient(appId, savedIcons[appId]);
+    });
+  };
+
+  if (typeof window.getData === "function") {
+      window.getData("custom_icons", (data) => {
+          process(data || {});
+      });
+  } else {
+      const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+      process(savedIcons);
+  }
 }
 
 function updateIconBorder(activeId) {

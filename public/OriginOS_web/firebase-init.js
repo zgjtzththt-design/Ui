@@ -1,7 +1,7 @@
 // Firebase Configuration and Initialization
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, serverTimestamp, writeBatch, collection, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 const firebaseConfig = {
   projectId: "gen-lang-client-0714112513",
@@ -73,9 +73,7 @@ window.syncEverything = async () => {
         updatedAt: serverTimestamp()
     };
     
-    // 1. Get Icons from LocalStorage
-    const customIcons = localStorage.getItem("custom_icons");
-    if (customIcons) settings.custom_icons = JSON.parse(customIcons);
+    // 1. Get Icons (Pack name only, the icons themselves are in sub-collection)
     const customPackName = localStorage.getItem("custom_pack_name");
     if (customPackName) settings.custom_pack_name = customPackName;
     
@@ -95,9 +93,81 @@ window.syncEverything = async () => {
     const userRef = doc(db, "user_settings", auth.currentUser.uid);
     try {
         await setDoc(userRef, settings, { merge: true });
-        console.log("✅ Sync complete");
+        console.log("✅ Sync basic settings complete");
     } catch (error) {
         console.error("❌ Sync failed:", error);
+    }
+};
+
+window.syncAllIcons = async () => {
+    if (!auth.currentUser) return;
+    console.log("☁️ Syncing all icons to specialized sub-collection...");
+    
+    let icons = {};
+    if (typeof window.getData === "function") {
+        await new Promise(resolve => {
+            window.getData("custom_icons", (data) => {
+                icons = data || {};
+                resolve();
+            });
+        });
+    } else {
+        icons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+    }
+
+    const userId = auth.currentUser.uid;
+    const batch = writeBatch(db);
+    let count = 0;
+
+    for (const [appId, content] of Object.entries(icons)) {
+        const iconRef = doc(db, "user_settings", userId, "icons", appId);
+        batch.set(iconRef, {
+            appId,
+            content,
+            updatedAt: serverTimestamp()
+        });
+        count++;
+        // Firestore batches are limited to 500 operations
+        if (count >= 400) {
+            await batch.commit();
+            count = 0;
+            console.log("📦 Mid-batch icons committed...");
+        }
+    }
+
+    if (count > 0) {
+        await batch.commit();
+    }
+    console.log(`✅ ${Object.keys(icons).length} icons synced to cloud.`);
+};
+
+window.syncSingleIcon = async (appId, content) => {
+    if (!auth.currentUser) return;
+    const userId = auth.currentUser.uid;
+    const iconRef = doc(db, "user_settings", userId, "icons", appId);
+    try {
+        if (content === null) {
+            await deleteDoc(iconRef);
+        } else {
+            await setDoc(iconRef, {
+                appId,
+                content,
+                updatedAt: serverTimestamp()
+            });
+        }
+    } catch (err) {
+        console.error("Error syncing single icon:", err);
+    }
+};
+
+window.deleteSingleIcon = async (appId) => {
+    if (!auth.currentUser) return;
+    const userId = auth.currentUser.uid;
+    const iconRef = doc(db, "user_settings", userId, "icons", appId);
+    try {
+        await deleteDoc(iconRef);
+    } catch (err) {
+        console.error("Error deleting single icon:", err);
     }
 };
 
@@ -107,25 +177,45 @@ onAuthStateChanged(auth, async (user) => {
         console.log("👤 User logged in:", user.email);
         const cloudSettings = await window.loadSettingsFromCloud();
         if (cloudSettings) {
-            window.applyCloudSettings(cloudSettings);
+            await window.applyCloudSettings(cloudSettings);
+            if (typeof window.applyCustomIcons === "function") {
+                window.applyCustomIcons(true);
+            }
         }
     } else {
         console.log("👤 User logged out");
     }
 });
 
-window.applyCloudSettings = (settings) => {
+window.applyCloudSettings = async (settings) => {
     window.isSyncingFromCloud = true;
     console.log("📦 Applying cloud settings...");
     
     // Merge custom icons instead of simple overwrite
-    if (settings.custom_icons) {
-        const localIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-        const mergedIcons = { ...localIcons, ...settings.custom_icons };
-        localStorage.setItem("custom_icons", JSON.stringify(mergedIcons));
-    }
     if (settings.custom_pack_name) {
         localStorage.setItem("custom_pack_name", settings.custom_pack_name);
+    }
+    
+    // Load icons from sub-collection
+    const iconsRef = collection(db, "user_settings", auth.currentUser.uid, "icons");
+    try {
+        const iconsSnap = await getDocs(iconsRef);
+        const cloudIcons = {};
+        iconsSnap.forEach(doc => {
+            const data = doc.data();
+            cloudIcons[data.appId] = data.content;
+        });
+        
+        if (Object.keys(cloudIcons).length > 0) {
+            console.log(`📥 Loaded ${Object.keys(cloudIcons).length} icons from cloud.`);
+            if (typeof window.setData === "function") {
+                await new Promise(resolve => window.setData("custom_icons", cloudIcons, resolve));
+            } else {
+                localStorage.setItem("custom_icons", JSON.stringify(cloudIcons));
+            }
+        }
+    } catch (err) {
+        console.error("Error loading icons from sub-collection:", err);
     }
     
     const promises = [];
