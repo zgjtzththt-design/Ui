@@ -495,7 +495,7 @@
           <div
             class="itemControlsCenter"
             id="controlCenterID14ControlsCenter"
-            onclick="openApp(9); closeControlsCenter()"
+            onclick="openApp(11); closeControlsCenter()"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path
@@ -3915,8 +3915,13 @@
         </div>
 
         <div class="box" id="box11">
-          <div class="app" id="app11">
-            <div class="center_item">App 11</div>
+          <div class="app" id="app11" style="background:#000;">
+            <div id="app_clock" class="stopwatch-app_clock">
+              <div class="stopwatch-display_clock" id="display_clock">00:00.00</div>
+              <button class="btn-main_clock" id="mainBtn_clock">Start</button>
+              <button class="btn-start_clock" id="startStopBtn_clock" style="pointer-events: none;">Stop</button>
+              <button class="btn-reset_clock" id="resetBtn_clock">Reset</button>
+            </div>
           </div>
         </div>
 
@@ -4156,6 +4161,7 @@
         <div id="swipe_handle"></div>
 
         <div class="lock-fingerprint" id="unlock-btn" style="z-index: 1">
+          <div id="finger_lottie" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 240px; height: 240px; pointer-events: none; opacity: 0; transition: opacity 0.2s;"></div>
         </div>
       </div>
     </div>

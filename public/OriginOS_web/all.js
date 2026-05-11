@@ -487,10 +487,10 @@ let handlersMap = new Map();
 function updateActionsMap() {
   actions = new Map([
     [boxes["box3"], isPlaying_music ? closePopupToIsland3 : closePopup],
-    [boxes["box9"], isRunning_clock ? closePopupToIsland : closePopup],
+    [boxes["box11"], isRunning_clock ? closePopupToIsland : closePopup],
   ]);
   handlersMap.clear();
-  if (isRunning_clock) handlersMap.set(boxes["box9"], handlers.box9);
+  if (isRunning_clock) handlersMap.set(boxes["box11"], handlers.box11);
   if (isPlaying_music) handlersMap.set(boxes["box3"], handlers.box3);
 }
 
@@ -568,7 +568,7 @@ window.addEventListener("mouseup", () => {
 });
 
 const handlers = {
-  box9: () => {
+  box11: () => {
     Object.assign(island.style, {
       height: "25px",
       borderRadius: "25px",
@@ -831,7 +831,7 @@ document.addEventListener("pointerdown", function (e) {
   }
 });
 
-clickables["box9"].addEventListener("pointerup", () => {
+clickables["box11"].addEventListener("pointerup", () => {
   if (isPlaying_music) {
     island.style.transition = `all 0.2s ease-out`;
     island.style.height = "25px";
@@ -895,26 +895,24 @@ function closePopupToIsland() {
   Object.values(clickables).forEach((el) => {
     el.style.display = "block";
   });
-  boxes[
-    "box9"
-  ].style.transform = `translateY(calc(-33% * ${scaleAllAppReverse})) scale(0.25)`;
-  boxes["box9"].classList.add("island_200");
-  boxes["box9"].classList.remove("hien");
-  boxes["box9"].style.opacity = 0;
+  boxes["box11"].style.transform = `translateY(calc(-33% * ${scaleAllAppReverse})) scale(0.25)`;
+  boxes["box11"].classList.add("island_200");
+  boxes["box11"].classList.remove("hien");
+  boxes["box11"].style.opacity = 0;
   currentOpeningBtn = null;
 
   nav.style.height = "30px";
-  clickables["box9"].style.pointerEvents = "none";
+  clickables["box11"].style.pointerEvents = "none";
 
   setTimeout(() => {
-    boxes["box9"].style.scale = `${scale_icon}%`;
-    boxes["box9"].style.transition = "all 0s, opacity 0.3s";
-    boxes["box9"].classList.remove("island_200");
-    boxes["box9"].classList.remove("open");
-    boxes["box9"].style.transform = `translateX(0%) translateY(0%) scale(1)`;
-    boxes["box9"].style.opacity = 1;
+    boxes["box11"].style.scale = `${scale_icon}%`;
+    boxes["box11"].style.transition = "all 0s, opacity 0.3s";
+    boxes["box11"].classList.remove("island_200");
+    boxes["box11"].classList.remove("open");
+    boxes["box11"].style.transform = `translateX(0%) translateY(0%) scale(1)`;
+    boxes["box11"].style.opacity = 1;
 
-    clickables["box9"].style.pointerEvents = "auto";
+    clickables["box11"].style.pointerEvents = "auto";
     island.style.transform = "translateX(-50%) translateY(0) scale(1)";
     document.querySelector(".camera").style.transform =
       "translateX(-50%) translateY(0px) scale(1)";
@@ -1141,7 +1139,7 @@ function closePopupToIsland3() {
     island.style.transition = `transform 0.2s, width 0.6s cubic-bezier(0.23, 1, 0.32, 1)`;
     island.style.transform = "translateX(-50%) translateY(0) scale(1)";
     island.style.width = "80px";
-    clickables["box9"].style.pointerEvents = "none";
+    clickables["box11"].style.pointerEvents = "none";
 
     clock.style.transition = "all 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
 
@@ -1184,7 +1182,7 @@ function closePopupToIsland3() {
     if (isRunning_clock) {
       island.style.width = "120px";
       island.style.transform = "translateX(-50%) translateY(0) scale(1)";
-      clickables["box9"].style.pointerEvents = "auto";
+      clickables["box11"].style.pointerEvents = "auto";
     } else {
       island2.style.width = "120px";
       island2.style.transform = "translateX(-50%) translateY(0) scale(1)";
@@ -1202,7 +1200,7 @@ function open_all_island() {
   if (
     isPlaying_music &&
     isRunning_clock &&
-    currentOpeningBtn != boxes["box9"] &&
+    currentOpeningBtn != boxes["box11"] &&
     currentOpeningBtn != boxes["box3"]
   ) {
     island2.style.transition = `all 0.2s`;
@@ -1217,7 +1215,7 @@ function open_all_island() {
     clock.style.scale = "0.8";
     clock.style.left = "25px";
   } else {
-    if (isRunning_clock && currentOpeningBtn != boxes["box9"]) {
+    if (isRunning_clock && currentOpeningBtn != boxes["box11"]) {
       island.style.height = "25px";
       island.style.borderRadius = "25px";
       island.style.width = "120px";
@@ -1496,6 +1494,10 @@ let easingAnimationForUnlock =
 let speedUnlockHand = 1;
 function unlock() {
   fingerprint.style.pointerEvents = "none";
+  if (fingerAnim && typeof fingerAnim.stop === 'function') {
+    fingerAnim.stop();
+    fingerLottieEl.style.opacity = 0;
+  }
   island.style.pointerEvents = "auto";
   island2.style.pointerEvents = "auto";
   island_circle.style.pointerEvents = "auto";
@@ -1628,6 +1630,10 @@ let unlock_time = null;
 unlockBtn.addEventListener("pointerdown", () => {
   animation.stop();
   animation.play();
+  if (fingerAnim && typeof fingerAnim.play === 'function') {
+    fingerLottieEl.style.opacity = 1;
+    fingerAnim.play();
+  }
   unlock_time = setTimeout(() => {
     if (show_pass_for_cuslock) {
       currentOpeningBtn = boxes["box4"];
@@ -1680,6 +1686,10 @@ unlockBtn.addEventListener("pointerdown", () => {
 });
 unlockBtn.addEventListener("pointerup", () => {
   clearTimeout(unlock_time);
+  if (fingerAnim && typeof fingerAnim.stop === 'function') {
+    fingerAnim.stop();
+    fingerLottieEl.style.opacity = 0;
+  }
 
   // Reset lại animation nếu đã từng chạy trước đó
   footerText.classList.remove("shake-animate");
@@ -2437,19 +2447,18 @@ let animation = lottie.loadAnimation({
 animation.setSpeed(0.7 * currentSpeed);
 animation.goToAndStop(animation.totalFrames - 1, true);
 
-/*
-const finger_print = lottie.loadAnimation({
-  container: document.getElementById("unlock-btn2"),
-  renderer: "svg",
-  loop: false,
-  autoplay: true,
-  path: "originos_data/finger_print.json",
-});
-if (finger_print) {
-  finger_print.setSpeed(currentSpeed);
-  finger_print.goToAndStop(animation.totalFrames - 1, true);
+const fingerLottieEl = document.getElementById("finger_lottie");
+let fingerAnim = null;
+if (fingerLottieEl) {
+  fingerAnim = lottie.loadAnimation({
+    container: fingerLottieEl,
+    renderer: "svg",
+    loop: true,
+    autoplay: false,
+    path: "originos_data/finger_animation.json",
+  });
 }
-*/
+
 const finger_print = {
     stop: () => {},
     play: () => {},
@@ -2950,7 +2959,7 @@ window.customApps = [
   { id: "box8", name: "الهاتف", defaultIcon: "originos_data/iconPacks/hype_icon/system_dialer.png" },
   { id: "box9", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
   { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
-  { id: "box11", name: "ويدجت الحالة", defaultIcon: "https://img.icons8.com/ios/256/info.png" },
+  { id: "box11", name: "المؤقت", defaultIcon: "https://img.icons8.com/color/256/timer.png" },
   { id: "box12", name: "المتجر", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
   { id: "box13", name: "تطبيق 13", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
   { id: "box14", name: "Terminal", defaultIcon: "https://img.icons8.com/color/256/console.png" },
@@ -2970,7 +2979,7 @@ window.getAppKeywords = function() {
     "box8": "phone",
     "box9": "browser",
     "box10": "weather",
-    "box11": "widget",
+    "box11": "clock",
     "box12": "store",
     "box13": "app13",
     "box14": "terminal",
