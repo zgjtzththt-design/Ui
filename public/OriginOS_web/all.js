@@ -2949,22 +2949,23 @@ if (window.visualViewport) {
 
 // Custom Icon Pack Logic
 window.customApps = [
-  { id: "box1", name: "الحاسبة", defaultIcon: "originos_data/iconPacks/hype_icon/system_calculator.png" },
-  { id: "box2", name: "مدير الملفات", defaultIcon: "originos_data/iconPacks/hype_icon/system_filemanager.png" },
+  { id: "box1", name: "الحاسبة", defaultIcon: "https://i.ibb.co/gLMPFscR/com-miui-calculator.png" },
+  { id: "box2", name: "مدير الملفات", defaultIcon: "https://i.ibb.co/zVVT4xz0/com-android-fileexplorer.png" },
   { id: "box3", name: "الموسيقى", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
   { id: "box4", name: "الإعدادات", defaultIcon: "originos_data/iconPacks/hype_icon/system_settings.png" },
   { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
   { id: "box6", name: "الصور", defaultIcon: "originos_data/iconPacks/hype_icon/system_photos.png" },
   { id: "box7", name: "التقويم", defaultIcon: "originos_data/iconPacks/hype_icon/system_calendar.png" },
-  { id: "box8", name: "الهاتف", defaultIcon: "originos_data/iconPacks/hype_icon/system_dialer.png" },
+  { id: "box8", name: "الهاتف", defaultIcon: "https://i.ibb.co/DfnWR6GJ/com-android-contacts.png" },
   { id: "box9", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
   { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
   { id: "box11", name: "المؤقت", defaultIcon: "https://img.icons8.com/color/256/timer.png" },
-  { id: "box12", name: "المتجر", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
+  { id: "box12", name: "الثيمات", defaultIcon: "https://i.ibb.co/XZhG8f19/com-android-thememanager.png" },
   { id: "box13", name: "تطبيق 13", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
   { id: "box14", name: "Terminal", defaultIcon: "https://img.icons8.com/color/256/console.png" },
   { id: "box15", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_browser.png" },
   { id: "box16", name: "YouTube", defaultIcon: "https://img.icons8.com/color/256/youtube-play--v1.png" },
+  { id: "box24", name: "البحث الصوتي", defaultIcon: "https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png" },
 ];
 
 window.getAppKeywords = function() {

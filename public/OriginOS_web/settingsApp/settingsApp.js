@@ -3734,6 +3734,16 @@ function updateIconBorder(activeId) {
 let pack = localStorage.getItem("selected_icon_pack");
 // -- Restore icon pack when loading --
 function restoreIconPack() {
+  const savedRadius = localStorage.getItem("bg-border_radius_saved");
+  if (savedRadius) {
+    const root = document.documentElement;
+    const slider = document.getElementById("radius_slider");
+    const preview = document.getElementById("preview_icon");
+    if (slider) slider.value = savedRadius;
+    if (preview) preview.style.borderRadius = `${savedRadius}px`;
+    root.style.setProperty("--bg-border_radius", `${savedRadius}px`);
+  }
+
   pack = localStorage.getItem("selected_icon_pack");
   if (pack === "originos") icon_originos();
   else if (pack === "hyperos") icon_hyperos();
@@ -3768,7 +3778,9 @@ slider.addEventListener("pointerdown", () => {
   }
 });
 slider.addEventListener("input", () => {
-  root.style.setProperty("--bg-border_radius", slider.value + "px");
+  const val = slider.value + "px";
+  root.style.setProperty("--bg-border_radius", val);
+  localStorage.setItem("bg-border_radius_saved", slider.value);
   value = slider.value;
   preview.style.borderRadius = `${value}px`;
 });
