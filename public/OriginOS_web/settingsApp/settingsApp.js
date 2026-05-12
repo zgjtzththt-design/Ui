@@ -1220,6 +1220,16 @@ back3.addEventListener("click", () => {
 function handleOpenWallpaperPopup() {
   showPopup_open_close(wallpaper_option);
   addWallpaperImageListeners();
+  
+  // Set toggle state for Blur Wallpaper
+  const blurToggle = document.getElementById("Blur-wallPaper");
+  if (blurToggle) {
+    if (localStorage.getItem("blur_wallpaper_saved") == "1") {
+      blurToggle.classList.add("active");
+    } else {
+      blurToggle.classList.remove("active");
+    }
+  }
 }
 function handleCloseWallpaperPopup() {
   hidePopup_open_close(wallpaper_option);
@@ -1404,6 +1414,11 @@ function addWallpaperImageListeners() {
 
   addBtn.addEventListener("click", handleAddButtonClick);
   fileInput.addEventListener("change", handleFileInputChange);
+
+  const blurWallRow = document.getElementById("setting-item-blur-wall");
+  if (blurWallRow) {
+    blurWallRow.addEventListener("click", handleToggleBlurWallpaper);
+  }
 }
 
 function removeWallpaperImageListeners() {
@@ -1415,6 +1430,11 @@ function removeWallpaperImageListeners() {
 
   addBtn.removeEventListener("click", handleAddButtonClick);
   fileInput.removeEventListener("change", handleFileInputChange);
+
+  const blurWallRow = document.getElementById("setting-item-blur-wall");
+  if (blurWallRow) {
+    blurWallRow.removeEventListener("click", handleToggleBlurWallpaper);
+  }
 }
 
 // Tùy chọn: auto click ảnh đầu tiên
@@ -1515,6 +1535,30 @@ function handleToggleHideWallpaper() {
     dateText_style_transform = "translateY(160px) translateX(-50%) scale(0.95)";
 
     localStorage.removeItem("hide_wallpaper_saved");
+  }
+}
+
+function handleToggleBlurWallpaper() {
+  const el = document.getElementById("Blur-wallPaper");
+  if (!el) return;
+  el.classList.toggle("active");
+  const isBlurred = el.classList.contains("active") ? 1 : 0;
+
+  localStorage.setItem("blur_wallpaper_saved", isBlurred);
+
+  const wallpapers = [document.getElementById("wallpaper"), document.getElementById("wallpaper2")];
+  wallpapers.forEach(wp => {
+    if (wp) {
+      if (isBlurred) {
+        wp.classList.add("blurred");
+      } else {
+        wp.classList.remove("blurred");
+      }
+    }
+  });
+  
+  if (typeof tb_system === 'function') {
+      tb_system(isBlurred ? "Blur Enabled" : "Blur Disabled");
   }
 }
 

@@ -2218,8 +2218,11 @@
                   <div class="img-button add-button" id="addBtn">+</div>
                   <div class="img-button add-button" id="addLiveWallpaperBtn" style="font-size: 12px; display: flex; align-items: center; justify-content: center;">Vid</div>
                 </div>
+                <div class="setting-item" id="setting-item-blur-wall" style="margin: 20px auto; position: relative; top: auto; display: flex; justify-content: space-between; align-items: center; background: var(--bg--background2); border-radius: 13px; padding: 12px 20px; width: 260px; max-width: 400px; transition: all 0.2s; cursor: pointer;">
+                    <span data-i18n="blur_wallpaper">Blur Wallpaper</span>
+                    <div class="toggle-switch" id="Blur-wallPaper" data-key="Blur-wallPaper"></div>
+                </div>
                 <input type="file" accept="image/*" id="fileInput" />
-                <input type="file" accept="video/*" id="videoInput" style="display: none" />
                 <div
                   id="popup_overlay_wallpaper"
                   class="popup-overlay_wallpaper"
@@ -4227,5 +4230,21 @@
     </div>
 
     <script src="welcome_screen.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const restoreBlur = () => {
+          if (localStorage.getItem("blur_wallpaper_saved") == "1") {
+            const el = document.getElementById("Blur-wallPaper");
+            if (el) el.classList.add("active");
+            const wallpapers = [document.getElementById("wallpaper"), document.getElementById("wallpaper2")];
+            wallpapers.forEach(wp => {
+                if (wp) wp.classList.add("blurred");
+            });
+          }
+        };
+        restoreBlur();
+        setTimeout(restoreBlur, 1000); // Back-up restore
+      });
+    </script>
   </body>
 </html>

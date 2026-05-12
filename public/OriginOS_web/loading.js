@@ -3,7 +3,7 @@ setTimeout(() => {
     const loading = document.getElementById("loading-screen");
     loading.style.opacity = "0";
     setTimeout(() => {
-        removeWithFade(loading);
+        loading.classList.add("fade-out");
         
         if (typeof powerbtn !== 'undefined') {
             // Handled on pointerup in all.js for Gemini support
@@ -19,14 +19,14 @@ setTimeout(() => {
             sessionStorage.clear();
             location.reload();
         }
-    }, 300);
+    }, 800);
     const el = document.getElementById("lolhaha");
     if (!el || el.textContent.trim() !== "tiktok: @sungsamtech - @._naq.") {
         localStorage.clear();
         sessionStorage.clear();
         location.reload();
     }
-}, 10000); // 10 giây
+}, 3000); // 10 giây
 
 // Removed setup logic
 // const box1_setup = null;

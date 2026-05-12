@@ -30,7 +30,7 @@
     background: linear-gradient(45deg, #0a0a1a, #16213e, #0f3460, #000000);
     background-size: 300% 300%;
     z-index: 0;
-    animation: gradientFlow 8s ease infinite;
+    animation: gradientFlow 6s ease infinite;
 }
 
 /* --- 2. الخلفية الدائرية (Mesh) --- */
@@ -44,7 +44,7 @@
         radial-gradient(circle at 50% 80%, rgba(161, 196, 253, 0.8) 0%, transparent 50%);
     filter: blur(50px);
     z-index: 1;
-    animation: rotateMesh 15s linear infinite;
+    animation: rotateMesh 11.25s linear infinite;
 }
 
 @keyframes rotateMesh {
@@ -63,8 +63,8 @@
     mix-blend-mode: hard-light;
     opacity: 0.95;
     animation: 
-        waterSpread 1.5s cubic-bezier(0.1, 0.5, 0.2, 1) forwards,
-        gradientFlow 6s ease-in-out infinite alternate;
+        waterSpread 1.125s cubic-bezier(0.1, 0.5, 0.2, 1) forwards,
+        gradientFlow 4.5s ease-in-out infinite alternate;
 }
 
 @keyframes waterSpread {
@@ -91,7 +91,7 @@
 .entry-anim {
     opacity: 0;
     transform: scale(0.7) translateY(20px);
-    animation: elementPop 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation: elementPop 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .logo-box {
@@ -102,14 +102,14 @@
     display: flex; justify-content: center; align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    animation-delay: 0.5s;
+    animation-delay: 0.375s;
 }
 
 .welcome-title {
     font-size: 36px; font-weight: 800; color: #111;
     margin-bottom: 50px;
     text-shadow: 0 4px 15px rgba(255,255,255,0.4);
-    animation-delay: 0.7s;
+    animation-delay: 0.525s;
 }
 
 .welcome-nav-btn {
@@ -120,7 +120,7 @@
     border: 1px solid rgba(255,255,255,0.2);
     cursor: pointer;
     display: flex; justify-content: center; align-items: center;
-    animation-delay: 0.9s;
+    animation-delay: 0.675s;
     transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }

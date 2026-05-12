@@ -98,5 +98,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
         showWelcomeScreen();
-    }, 6500); // Wait for boot animation to finish
+    }, 3200); // Wait for boot animation to finish (now shorter)
 });
