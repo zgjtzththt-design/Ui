@@ -2963,9 +2963,10 @@ window.customApps = [
   { id: "box12", name: "الثيمات", defaultIcon: "https://i.ibb.co/XZhG8f19/com-android-thememanager.png" },
   { id: "box13", name: "تطبيق 13", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
   { id: "box14", name: "Terminal", defaultIcon: "https://img.icons8.com/color/256/console.png" },
-  { id: "box15", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_browser.png" },
+  { id: "box15", name: "تطبيق 15", defaultIcon: "https://www.hostpic.org/images/2605131558540092.png" },
   { id: "box16", name: "YouTube", defaultIcon: "https://img.icons8.com/color/256/youtube-play--v1.png" },
-  { id: "box24", name: "البحث الصوتي", defaultIcon: "https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png" },
+  { id: "box23", name: "البحث الصوتي", defaultIcon: "https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png" },
+  { id: "box24", name: "جهات الاتصال", defaultIcon: "https://i.ibb.co/DfnWR6GJ/com-android-contacts.png" },
 ];
 
 window.getAppKeywords = function() {

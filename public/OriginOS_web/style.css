@@ -386,6 +386,10 @@ body.full-screen .app4app.open {
 
 /* Custom lock positions */
 #previewPositionIcon.open::before,
+#box24.open::before,
+#box23.open::before,
+#box22.open::before,
+#box21.open::before,
 #box20.open::before,
 #box19.open::before,
 #box18.open::before,
@@ -421,7 +425,7 @@ body.full-screen .app4app.open {
   background-color: #3e4043;
 }
 #box2 {
-  --bg--originos: url("originos_data/system_filemanager.png");
+  --bg--originos: url("https://i.ibb.co/zVVT4xz0/com-android-fileexplorer.png");
   left: 30.5%;
   top: calc(var(--bg--size_height_phone) - 95px);
   background-color: rgb(255, 196, 0);
@@ -499,7 +503,7 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 350px);
 }
 #box15 {
-  --bg--originos: url("originos_data/system_browser.png");
+  --bg--originos: url("https://www.hostpic.org/images/2605131558540092.png");
   background-color: #3b82f6;
   left: 51%;
   top: calc(var(--bg--size_height_phone) - 350px);
@@ -547,20 +551,32 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 490px);
 }
 #box23 {
-  --bg--originos: url("originos_data/system_music.png");
+  --bg--originos: url("https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png");
   background-color: #84cc16;
   left: 51%;
   top: calc(var(--bg--size_height_phone) - 490px);
 }
 #box24 {
-  --bg--originos: url("originos_data/system_filemanager.png");
+  --bg--originos: url("https://i.ibb.co/DfnWR6GJ/com-android-contacts.png");
   background-color: #d946ef;
   left: 71.5%;
   top: calc(var(--bg--size_height_phone) - 490px);
 }
 
 /* Special icon background size */
+#box24::before,
+#box23::before,
+#box15::before,
+#box2::before,
 #box12::before {
+  background-size: cover;
+}
+
+#box24.open::before,
+#box23.open::before,
+#box15.open::before,
+#box2.open::before,
+#box12.open::before {
   background-size: cover;
 }
 
