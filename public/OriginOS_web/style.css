@@ -388,7 +388,6 @@ body.full-screen .app4app.open {
 #previewPositionIcon.open::before,
 #box24.open::before,
 #box23.open::before,
-#box22.open::before,
 #box21.open::before,
 #box20.open::before,
 #box19.open::before,
@@ -397,7 +396,6 @@ body.full-screen .app4app.open {
 #box16.open::before,
 #box15.open::before,
 #box14.open::before,
-#box13.open::before,
 #box4.open::before,
 #box3.open::before,
 #box2.open::before,
@@ -407,8 +405,7 @@ body.full-screen .app4app.open {
 #box7.open::before,
 #box8.open::before,
 #box9.open::before,
-#box10.open::before,
-#box11.open::before {
+#box10.open::before {
   background-size: var(--bg--sizeIcon);
   background-position: var(--bg--positionIcon);
 }
@@ -481,7 +478,7 @@ body.full-screen .app4app.open {
 #box11 {
   background-color: #fdcfdf;
   left: 51%;
-  --bg--originos: url("originos_data/system_calculator.png");
+  --bg--originos: url("https://www.hostpic.org/images/2605131949480104.png");
   top: calc(var(--bg--size_height_phone) - 280px);
 }
 #box12 {
@@ -491,7 +488,7 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 280px);
 }
 #box13 {
-  --bg--originos: url("originos_data/system_weather.png");
+  --bg--originos: url("https://www.hostpic.org/images/2605131954290084.png");
   background-color: #8c5ff2;
   left: 10%;
   top: calc(var(--bg--size_height_phone) - 350px);
@@ -545,7 +542,7 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 490px);
 }
 #box22 {
-  --bg--originos: url("originos_data/system_settings.png");
+  --bg--originos: url("https://www.hostpic.org/images/2605132000110097.png");
   background-color: #0ea5e9;
   left: 30.5%;
   top: calc(var(--bg--size_height_phone) - 490px);
@@ -564,6 +561,9 @@ body.full-screen .app4app.open {
 }
 
 /* Special icon background size */
+#box22::before,
+#box13::before,
+#box11::before,
 #box24::before,
 #box23::before,
 #box15::before,
@@ -572,6 +572,9 @@ body.full-screen .app4app.open {
   background-size: cover;
 }
 
+#box22.open::before,
+#box13.open::before,
+#box11.open::before,
 #box24.open::before,
 #box23.open::before,
 #box15.open::before,
@@ -5187,7 +5190,7 @@ input[type="color"] {
 }
 
 .itemControlsCenter {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(78, 78, 78, 0.5);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -5211,9 +5214,12 @@ input[type="color"] {
 }
 .itemControlsCenter svg {
   font-size: 22px;
-  fill: rgb(40, 40, 40);
+  fill: white;
   height: 25px !important;
   width: 29px !important;
+}
+.itemControlsCenter.sliderControlsCenter svg {
+  fill: rgb(40, 40, 40);
 }
 .itemControlsCenter:active {
   transition: all 0.2s !important;
