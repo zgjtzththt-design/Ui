@@ -581,7 +581,8 @@ body.full-screen .app4app.open {
 #box17::before,
 #box18::before,
 #box19::before,
-#box20::before {
+#box20::before,
+#box21::before {
   background-size: cover;
 }
 
@@ -596,7 +597,8 @@ body.full-screen .app4app.open {
 #box17.open::before,
 #box18.open::before,
 #box19.open::before,
-#box20.open::before {
+#box20.open::before,
+#box21.open::before {
   background-size: cover;
 }
 
