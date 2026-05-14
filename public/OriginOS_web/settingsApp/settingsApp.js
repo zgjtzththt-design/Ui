@@ -3050,7 +3050,7 @@ function icon_originos() {
   document.documentElement.style.setProperty("--bg-size_img", "105%");
 
   setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
-  setIconAndBackgroundGradient("box2", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png");
+  setIconAndBackgroundGradient("box2", "https://yourimageshare.com/ib/rNiozTmpqK.png");
   setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
   setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
   setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
@@ -3078,7 +3078,7 @@ function icon_hyperos() {
   );
   setIconAndBackgroundGradient2(
     "box2",
-    "originos_data/iconPacks/hype_icon/system_filemanager.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient2(
     "box3",
@@ -3125,7 +3125,7 @@ function icon_hyperos3() {
   document.documentElement.style.setProperty("--bg-size_img", "100%");
 
   setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
-  setIconAndBackgroundGradient("box2", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879798/pzbkxijj1fndyljflsyo.png");
+  setIconAndBackgroundGradient("box2", "https://yourimageshare.com/ib/rNiozTmpqK.png");
   setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
   setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
   setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
@@ -3154,7 +3154,7 @@ function icon_ios(e) {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/i_icon/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3206,7 +3206,7 @@ function icon_coloros() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/o_icon/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3262,7 +3262,7 @@ function icon_oneui() {
 
   box2.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/files.png")`
+    `url("https://yourimageshare.com/ib/rNiozTmpqK.png")`
   );
   box2.style.background = "#00000000";
 
@@ -3328,7 +3328,7 @@ function icon_harmonyos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/harmonyos_icon/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3380,7 +3380,7 @@ function icon_ios26_light1() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/i26Light1/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3434,7 +3434,7 @@ function icon_ios26_light2() {
 
   box2.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/i26Light2/files.png")`
+    `url("https://yourimageshare.com/ib/rNiozTmpqK.png")`
   );
   box2.style.background = "#00000000";
 
@@ -3502,7 +3502,7 @@ function icon_pixel() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/pix_icon/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3554,7 +3554,7 @@ function icon_nothing() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "originos_data/iconPacks/nothing_icon/files.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3606,7 +3606,7 @@ function icon_minimalos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "https://img.icons8.com/ios-filled/256/folder-invoices.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3658,7 +3658,7 @@ function icon_neonos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "https://img.icons8.com/neon/256/folder-invoices.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3710,7 +3710,7 @@ function icon_3dos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "https://img.icons8.com/3d-fluency/256/folder-invoices.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3762,7 +3762,7 @@ function icon_glassos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "https://img.icons8.com/glassmorphism/256/folder-invoices.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",
@@ -3820,7 +3820,7 @@ function icon_flymeos() {
   );
   setIconAndBackgroundGradient(
     "box2",
-    "https://img.icons8.com/fluency/256/folder-invoices.png"
+    "https://yourimageshare.com/ib/rNiozTmpqK.png"
   );
   setIconAndBackgroundGradient(
     "box3",

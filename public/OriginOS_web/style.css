@@ -387,6 +387,13 @@ body.full-screen .app4app.open {
 }
 
 /* Custom lock positions */
+#box17.open::before,
+#box18.open::before,
+#box19.open::before,
+#box20.open::before {
+  border-radius: var(--bg-border_radius, 20px);
+}
+
 #previewPositionIcon.open::before,
 #box24.open::before,
 #box23.open::before,
@@ -424,7 +431,7 @@ body.full-screen .app4app.open {
   background-color: #3e4043;
 }
 #box2 {
-  --bg--originos: url("https://i.ibb.co/zVVT4xz0/com-android-fileexplorer.png");
+  --bg--originos: url("https://yourimageshare.com/ib/rNiozTmpqK.png");
   left: 30.5%;
   top: calc(var(--bg--size_height_phone) - 95px);
   background-color: rgb(255, 196, 0);
@@ -514,32 +521,32 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 350px);
 }
 #box17 {
-  --bg--originos: url("originos_data/theme_icon.png");
-  background-color: #10b981;
+  --bg--originos: url("https://yourimageshare.com/ib/OsPhnHfsFG.png");
+  background-color: transparent;
   left: 10%;
   top: calc(var(--bg--size_height_phone) - 420px);
 }
 #box18 {
-  --bg--originos: url("originos_data/contact.png");
-  background-color: #14b8a6;
+  --bg--originos: url("https://yourimageshare.com/ib/0pWb2eWwsz.png");
+  background-color: transparent;
   left: 30.5%;
   top: calc(var(--bg--size_height_phone) - 420px);
 }
 #box19 {
-  --bg--originos: url("originos_data/language.png");
-  background-color: #8b5cf6;
+  --bg--originos: url("https://yourimageshare.com/ib/67pckx4E52.png");
+  background-color: transparent;
   left: 51%;
   top: calc(var(--bg--size_height_phone) - 420px);
 }
 #box20 {
-  --bg--originos: url("originos_data/star.png");
-  background-color: #f59e0b;
+  --bg--originos: url("https://yourimageshare.com/ib/UqBJTjjpCe.png");
+  background-color: transparent;
   left: 71.5%;
   top: calc(var(--bg--size_height_phone) - 420px);
 }
 #box21 {
-  --bg--originos: url("originos_data/system_calculator.png");
-  background-color: #3b82f6;
+  --bg--originos: url("https://yourimageshare.com/ib/UqBJTjjpCe.png");
+  background-color: transparent;
   left: 10%;
   top: calc(var(--bg--size_height_phone) - 490px);
 }
@@ -570,7 +577,11 @@ body.full-screen .app4app.open {
 #box23::before,
 #box15::before,
 #box2::before,
-#box12::before {
+#box12::before,
+#box17::before,
+#box18::before,
+#box19::before,
+#box20::before {
   background-size: cover;
 }
 
@@ -581,7 +592,11 @@ body.full-screen .app4app.open {
 #box23.open::before,
 #box15.open::before,
 #box2.open::before,
-#box12.open::before {
+#box12.open::before,
+#box17.open::before,
+#box18.open::before,
+#box19.open::before,
+#box20.open::before {
   background-size: cover;
 }
 
@@ -619,6 +634,7 @@ body.full-screen .app4app.open {
   top: 0%;
   z-index: 200;
   transform-origin: center;
+  background-color: transparent;
 }
 
 .box.hien::before {

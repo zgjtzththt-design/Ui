@@ -3058,7 +3058,7 @@ if (window.visualViewport) {
 // Custom Icon Pack Logic
 window.customApps = [
   { id: "box1", name: "الحاسبة", defaultIcon: "https://i.ibb.co/gLMPFscR/com-miui-calculator.png" },
-  { id: "box2", name: "مدير الملفات", defaultIcon: "https://i.ibb.co/zVVT4xz0/com-android-fileexplorer.png" },
+  { id: "box2", name: "مدير الملفات", defaultIcon: "https://yourimageshare.com/ib/rNiozTmpqK.png" },
   { id: "box3", name: "الموسيقى", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
   { id: "box4", name: "الإعدادات", defaultIcon: "originos_data/iconPacks/hype_icon/system_settings.png" },
   { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
