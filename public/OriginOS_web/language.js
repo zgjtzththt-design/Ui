@@ -30,6 +30,12 @@ const translations = {
         'app_weather': 'Weather',
         'app_store': 'Store',
         'app_clock': 'Clock',
+        'glass_tuner': 'Glass Tuner',
+        'glass_opacity': 'Glass Opacity',
+        'glass_blur': 'Background Blur',
+        'glassy_windows': 'Glassy Windows',
+        'apply': 'Apply',
+        'apply_success': 'Applied Successfully',
         // UI Elements
         'unlock_hint': 'Press to unlock',
         'notification_center': 'Notification Center',
@@ -176,6 +182,11 @@ const translations = {
         'thin': 'Thin',
         'bold': 'Bold',
         'glassy': 'Glassy',
+        'glass_tuner': 'Glassmorphism Tuner',
+        'glass_tuner_desc': 'Blur & Transparency',
+        'transparency': 'Transparency',
+        'blur_strength': 'Blur Strength',
+        'glassy_windows': 'Glassy Windows',
         'font_size': 'Font Size',
         'position_clock': 'Clock Position',
         'top_clock': 'Top',
@@ -229,6 +240,9 @@ const translations = {
         'open': 'Open',
         'white': 'White',
         'blue': 'Blue',
+        'original': 'Original',
+        'finger_themes': 'Fingerprint Themes',
+        'finger_anims': 'Fingerprint Animations',
         'center': 'Center'
     },
     'ar': {
@@ -262,6 +276,12 @@ const translations = {
         'app_weather': 'الطقس',
         'app_store': 'المتجر',
         'app_clock': 'الساعة',
+        'glass_tuner': 'معدل الزجاجية',
+        'glass_opacity': 'شفافية الزجاج',
+        'glass_blur': 'تضبيب الخلفية',
+        'glassy_windows': 'نوافذ زجاجية',
+        'apply': 'تطبيق',
+        'apply_success': 'تم التطبيق بنجاح',
         // UI Elements
         'unlock_hint': 'اضغط لإلغاء القفل',
         'notification_center': 'مركز الإشعارات',
@@ -422,6 +442,11 @@ const translations = {
         'thin': 'نحيف',
         'bold': 'عريض',
         'glassy': 'زجاجي',
+        'glass_tuner': 'تخصيص مستوى زجاجية الواجهة',
+        'glass_tuner_desc': 'التحكم بالضبابية والشفافية',
+        'transparency': 'الشفافية',
+        'blur_strength': 'قوة ضبابية الخلفية',
+        'glassy_windows': 'نوافذ زجاجية',
         'font_size': 'حجم الخط',
         'position_clock': 'موضع الساعة',
         'top_clock': 'أعلى',
@@ -475,6 +500,9 @@ const translations = {
         'open': 'فتح',
         'white': 'أبيض',
         'blue': 'أزرق',
+        'original': 'الأصلي',
+        'finger_themes': 'أشكال البصمة',
+        'finger_anims': 'حركات البصمة',
         'center': 'توسيط'
     },
     'fr': {
@@ -673,7 +701,8 @@ function applyLanguage(lang) {
             'box8': 'app_phone',
             'box9': 'app_browser',
             'box10': 'app_weather',
-            'box12': 'app_store'
+            'box12': 'app_store',
+            'box21': 'glass_tuner'
         };
         
         window.customApps.forEach(app => {

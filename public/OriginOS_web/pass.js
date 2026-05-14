@@ -625,5 +625,3 @@ remove_pass_btn.addEventListener("click", () => {
     () => {}
   );
 });
-
-if (!pass_password || !finger_biometrics) fingerprint.style.display = "none";

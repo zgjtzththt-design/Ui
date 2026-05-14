@@ -1,5 +1,7 @@
 :root {
   -webkit-tap-highlight-color: transparent;
+  --glass-opacity: 0.3;
+  --glass-blur: 8px;
   --bg--notch-width: 25.5px;
   --bg--notch-height: 25px;
   --bg--notch-radius: 50%;
@@ -536,8 +538,8 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 420px);
 }
 #box21 {
-  --bg--originos: url("originos_data/system_messages.png");
-  background-color: #f43f5e;
+  --bg--originos: url("originos_data/system_calculator.png");
+  background-color: #3b82f6;
   left: 10%;
   top: calc(var(--bg--size_height_phone) - 490px);
 }
@@ -554,7 +556,7 @@ body.full-screen .app4app.open {
   top: calc(var(--bg--size_height_phone) - 490px);
 }
 #box24 {
-  --bg--originos: url("https://i.ibb.co/DfnWR6GJ/com-android-contacts.png");
+  --bg--originos: url("https://yourimageshare.com/ib/1DNRlKIoeD.png");
   background-color: #d946ef;
   left: 71.5%;
   top: calc(var(--bg--size_height_phone) - 490px);
@@ -874,9 +876,9 @@ body.full-screen .app4app.open {
   z-index: 0;
 }
 .khayapp.glassy {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background-color: rgba(255, 255, 255, var(--glass-opacity)) !important;
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
@@ -999,6 +1001,41 @@ body.full-screen .app4app.open {
 .lock-clock.tat {
   transform: scale(0.95) translateY(160px);
 }
+
+.lock-clock.image-style, .clock-display.image-style {
+  background-image: url('https://yourimageshare.com/ib/YrujrkWqNJ.png') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 250px !important;
+  height: 250px !important;
+  color: transparent !important;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  background-color: transparent !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+.lock-clock.image-style.centered {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.clock-display.image-style {
+  width: 180px !important;
+  height: 180px !important;
+  transform: scale(0.6) !important;
+  left: 50% !important;
+  transform: translateX(-50%) scale(0.6) !important;
+  position: absolute !important;
+  top: 60px !important;
+}
+
 .date-display {
   position: absolute;
   flex-grow: 1;
@@ -1028,7 +1065,6 @@ body.full-screen .app4app.open {
   width: 110px;
   height: 110px;
   background-color: #00000000;
-  background-image: url("https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -1041,11 +1077,23 @@ body.full-screen .app4app.open {
   z-index: 12;
 }
 
-.lock-fingerprint:hover {
+/* .lock-fingerprint:hover {
   transform: scale(0.95);
-}
+} */
 .lock-fingerprint.hidden {
   opacity: 0;
+}
+.fingerprint-themes::-webkit-scrollbar {
+  display: none;
+}
+.fingerprint-themes,
+.fingerprint-anims {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.finger-theme-item.active,
+.finger-anim-item.active {
+  border-color: #f65268 !important;
 }
 .power-button {
   position: absolute;
@@ -1279,6 +1327,54 @@ body.full-screen .app4app.open {
   pointer-events: none;
   overflow-y: auto;
   touch-action: auto;
+}
+.app.glassy-mode {
+  background: rgba(255, 255, 255, var(--glass-opacity)) !important;
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sys-btn-blue {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    font-family: "MiSans", sans-serif;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sys-btn-blue:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+}
+
+.tuner-group {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.slider-container input[type="range"] {
+    flex: 1;
+}
+
+.slider-container span {
+    min-width: 40px;
+    text-align: right;
+    font-weight: 500;
+    font-size: 14px;
 }
 .app {
   transition: all var(--bg--timeShowingIcon) ease var(--bg--delayShowingIcon);
@@ -1961,7 +2057,6 @@ p {
 
 #aod-btn:active,
 .lock-btn:active,
-.finger-btn:active,
 .wallpaper-btn:active {
   filter: brightness(0.8);
 }
@@ -5185,8 +5280,9 @@ input[type="color"] {
   display: flex;
 }
 .lpControlCenterControlsCenter.open {
-  backdrop-filter: blur(8px);
-  background: rgb(0, 0, 0, 0.3);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: rgba(0, 0, 0, var(--glass-opacity));
 }
 
 .itemControlsCenter {
@@ -5249,48 +5345,6 @@ input[type="color"] {
 .brightnessControlsCenter {
   grid-column: span 1;
   grid-row: span 2;
-}
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter {
-  background: rgba(255, 255, 255, 0.0) !important;
-  backdrop-filter: blur(3px) saturate(1.67) !important;
-  border-radius: 50% !important;
-  border: 2px solid rgba(255, 255, 255, 0.35) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
-  position: relative;
-  overflow: hidden;
-}
-
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter::before {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(346deg, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.02)) !important;
-  border-radius: 50% !important;
-  z-index: 0;
-}
-
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter * {
-  z-index: 1;
-}
-
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.activeControlsCenter {
-  background: rgba(0, 102, 255, 0.4) !important;
-}
-
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.wifiControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.focusControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.connectControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.volumeControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.brightnessControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.musicControlsCenter::before,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.wifiControlsCenter::before,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.focusControlsCenter::before,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.connectControlsCenter::before,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.volumeControlsCenter::before,
-.control-centerControlsCenter.glassy-controls-center .itemControlsCenter.brightnessControlsCenter::before {
-  border-radius: 35px !important;
 }
 
 .lpControlCenterControlsCenter.glassy-mode {

@@ -225,8 +225,19 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const savedFinger = localStorage.getItem("btn_finger_saved");
+    const savedFingerUrl = localStorage.getItem("finger_theme_url");
+    if (savedFingerUrl) {
+        if (typeof fingerprint_preview !== "undefined" && fingerprint_preview) fingerprint_preview.src = savedFingerUrl;
+        if (typeof fingerprint !== "undefined" && fingerprint) fingerprint.style.backgroundImage = `url("${savedFingerUrl}")`;
+    }
 
-    if (savedFinger === "btnWhite") {
+    if (savedFinger === "btnOrig") {
+        if (typeof fingerprint_preview !== "undefined" && fingerprint_preview) fingerprint_preview.style.filter = "none";
+        if (typeof fingerprint !== "undefined" && fingerprint) fingerprint.style.filter = "none";
+        if (typeof btnOrig !== "undefined" && btnOrig) btnOrig.style.border = "4px solid #f65268";
+        if (typeof btnWhite !== "undefined" && btnWhite) btnWhite.style.border = "4px solid rgb(225, 225, 225)";
+        if (typeof btnBlue !== "undefined" && btnBlue) btnBlue.style.border = "4px solid rgb(225, 225, 225)";
+    } else if (savedFinger === "btnWhite") {
         fingerprint_preview.style.filter = "none";
         fingerprint.style.filter = "none";
         btnWhite.classList.add("active");

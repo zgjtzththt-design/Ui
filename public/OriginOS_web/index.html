@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Black+Han+Sans&family=Chakra+Petch&family=Comfortaa&family=Indie+Flower&family=Merriweather&family=Orbitron&family=Pacifico&family=Paytone+One&family=Righteous&family=Roboto&family=Silkscreen&family=VT323&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Black+Han+Sans&family=Chakra+Petch&family=Comfortaa&family=Indie+Flower&family=Merriweather&family=Orbitron&family=Pacifico&family=Paytone+One&family=Righteous&family=Roboto&family=Silkscreen&family=VT323&family=Lexend:wght@100..900&family=Outfit:wght@100..900&family=Kanit:wght@900&family=Syne:wght@800&family=Montserrat:wght@900&display=swap"
       rel="stylesheet"
     />
 
@@ -892,6 +892,8 @@
               </div>
             </div>
 
+
+
               <div class="app4app" id="app4" style="z-index: 5020">
               <div class="back-button" id="back_to_setting" data-i18n="back">رجوع ‹</div>
               
@@ -1434,6 +1436,8 @@
                     </div>
                   </div>
                 </div>
+
+
                 <div class="app4app" id="app4AppOpeningAnimation">
                   <div class="back-button" id="back_AppOpeningAnimation" data-i18n="back">
                     App opening animation
@@ -2691,6 +2695,13 @@
                       <div class="font-bar">
                         <div
                           class="font-button"
+                          style="background-image: url('https://yourimageshare.com/ib/YrujrkWqNJ.png'); background-size: cover; background-position: center; border-radius: 8px; border: 2px solid rgba(255,255,255,0.2);"
+                          data-style="image"
+                          data-min="80"
+                          data-max="140"
+                        ></div>
+                        <div
+                          class="font-button"
                           style="font-family: 'Abril Fatface'"
                           data-font="'Abril Fatface'"
                           data-min="75"
@@ -2751,6 +2762,54 @@
                           data-font="'Paytone One'"
                           data-min="70"
                           data-max="115"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: 'Lexend', sans-serif"
+                          data-font="'Lexend', sans-serif"
+                          data-min="75"
+                          data-max="120"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: 'Kanit', sans-serif; font-weight: 900;"
+                          data-font="'Kanit', sans-serif"
+                          data-weight="900"
+                          data-min="75"
+                          data-max="120"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: 'Montserrat', sans-serif; font-weight: 900;"
+                          data-font="'Montserrat', sans-serif"
+                          data-weight="900"
+                          data-min="75"
+                          data-max="120"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: 'Syne', sans-serif; font-weight: 800;"
+                          data-font="'Syne', sans-serif"
+                          data-weight="800"
+                          data-min="75"
+                          data-max="120"
+                        >
+                          12
+                        </div>
+                        <div
+                          class="font-button"
+                          style="font-family: 'Outfit', sans-serif"
+                          data-font="'Outfit', sans-serif"
+                          data-min="75"
+                          data-max="120"
                         >
                           12
                         </div>
@@ -3296,8 +3355,29 @@
                   />
                 </div>
                 <div class="button-group-finger">
+                  <button class="button-finger" id="btn-orig" data-i18n="original" style="background: rgba(255,255,255,0.1); border: 4px solid transparent; color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; cursor: pointer;">Original</button>
                   <button class="button-finger" id="btn-white" data-i18n="white">White</button>
                   <button class="button-finger" id="btn-blue" data-i18n="blue">Blue</button>
+                </div>
+
+                <div style="margin-left: 20px; margin-top: 20px; color: white; font-size: 15px;" data-i18n="finger_themes">Fingerprint Themes</div>
+                <div class="fingerprint-themes" style="display: flex; gap: 15px; overflow-x: auto; padding: 15px; scrollbar-width: none;">
+                  <div class="finger-theme-item active" data-url="https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png" style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #f65268;">
+                    <img src="https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="finger-theme-item" data-url="https://www.hostpic.org/images/2605140612180094.png" style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid transparent;">
+                    <img src="https://www.hostpic.org/images/2605140612180094.png" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                </div>
+
+                <div style="margin-left: 20px; margin-top: 10px; color: white; font-size: 15px; display: none;" data-i18n="finger_anims">Fingerprint Animations</div>
+                <div class="fingerprint-anims" style="display: none; gap: 15px; overflow-x: auto; padding: 15px; scrollbar-width: none;">
+                  <div class="finger-anim-item active" data-type="lottie" data-path="originos_data/finger_animation.json" style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #f65268;">
+                    <lottie-player src="originos_data/finger_animation.json" style="width: 40px; height: 40px;"></lottie-player>
+                  </div>
+                  <div class="finger-anim-item" data-type="frames" data-name="new_anim" style="width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid transparent;">
+                    <img src="https://yourimageshare.com/ib/EBwggtiEyA.png" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
                 </div>
 
                 <div id="lottiePreviewContainer" style="display: none;">
@@ -4047,7 +4127,42 @@
 
         <div class="box" id="box21">
           <div class="app" id="app21">
-            <div class="center_item">App 21</div>
+            <div class="header_app4">
+              <div class="title_app4" data-i18n="glass_tuner" style="margin-left: 15px;">Glassmorphism Tuner</div>
+            </div>
+            <div class="content_app4">
+              <div class="khaysetting">
+                <div class="tuner-group">
+                    <label data-i18n="glass_opacity" style="color: var(--bg--color);">Glass Opacity</label>
+                    <div class="slider-container">
+                        <input type="range" id="glassOpacitySlider" min="0" max="1" step="0.05" value="0.3">
+                        <span id="glassOpacityVal" style="color: var(--bg--color);">0.3</span>
+                    </div>
+                </div>
+                <div class="tuner-group">
+                    <label data-i18n="glass_blur" style="color: var(--bg--color);">Background Blur</label>
+                    <div class="slider-container">
+                        <input type="range" id="glassBlurSlider" min="0" max="40" step="1" value="8">
+                        <span id="glassBlurVal" style="color: var(--bg--color);">8</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="left_setting">
+                        <span data-i18n="glassy_windows" style="color: var(--bg--color);">Glassy Windows</span>
+                    </div>
+                    <div class="right_setting">
+                        <div class="switch" id="glassyWindowsToggle"></div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="khaysetting" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+                <div id="glassPreviewBox" style="width: 150px; height: 100px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: white;">
+                    Preview
+                </div>
+                <button class="sys-btn-blue" id="apply_glass_btn" style="margin-top: 20px; width: 100%;" data-i18n="apply">Apply</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -4163,8 +4278,8 @@
 
         <div id="swipe_handle"></div>
 
-        <div class="lock-fingerprint" id="unlock-btn" style="z-index: 1">
-          <div id="finger_lottie" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 240px; height: 240px; pointer-events: none; opacity: 0; transition: opacity 0.2s;"></div>
+        <div class="lock-fingerprint" id="unlock-btn" style="z-index: 12">
+          <div id="finger_lottie" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 240px; height: 240px; pointer-events: none; opacity: 0; z-index: 100;"></div>
         </div>
       </div>
     </div>

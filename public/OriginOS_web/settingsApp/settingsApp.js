@@ -1995,19 +1995,33 @@ document.querySelectorAll(".font-button").forEach((btn) => {
   btn.addEventListener("click", () => {
     const font = btn.getAttribute("data-font");
     const style = btn.getAttribute("data-style") || "default";
+    const weight = btn.getAttribute("data-weight") || "600";
     const min = parseInt(btn.getAttribute("data-min")) || 40;
     const max = parseInt(btn.getAttribute("data-max")) || 150;
 
     clock_preview.style.fontFamily = font;
     lockclock.style.fontFamily = font;
+    clock_preview.style.fontWeight = weight;
+    lockclock.style.fontWeight = weight;
+    localStorage.setItem("font_weight_lock", weight);
 
     if (style === "hollow") {
       clock_preview.classList.add("hollow-style");
       lockclock.classList.add("hollow-style");
+      clock_preview.classList.remove("image-style");
+      lockclock.classList.remove("image-style");
       localStorage.setItem("clock_style_saved", "hollow");
+    } else if (style === "image") {
+      clock_preview.classList.add("image-style");
+      lockclock.classList.add("image-style");
+      clock_preview.classList.remove("hollow-style");
+      lockclock.classList.remove("hollow-style");
+      localStorage.setItem("clock_style_saved", "image");
     } else {
       clock_preview.classList.remove("hollow-style");
       lockclock.classList.remove("hollow-style");
+      clock_preview.classList.remove("image-style");
+      lockclock.classList.remove("image-style");
       localStorage.setItem("clock_style_saved", "default");
     }
     
@@ -2746,31 +2760,111 @@ document.documentElement.style.setProperty(
 function showFingerPopup() {
   showPopup_open_close(app4_finger);
 
+  btnOrig.addEventListener("click", handleBtnOrigClick);
   btnWhite.addEventListener("click", handleBtnWhiteClick);
   btnBlue.addEventListener("click", handleBtnBlueClick);
-
+  
+  addFingerThemeEvents();
+  addFingerAnimEvents();
   addLottiePreviewEvents();
 }
 function hideFingerPopup() {
   hidePopup_open_close(app4_finger);
 
+  btnOrig.removeEventListener("click", handleBtnOrigClick);
   btnWhite.removeEventListener("click", handleBtnWhiteClick);
   btnBlue.removeEventListener("click", handleBtnBlueClick);
-
+  
+  // No need to remove finger theme events as they are added to list items that persisted
   removeLottiePreviewEvents();
 }
 
+function addFingerAnimEvents() {
+  const fingerAnims = document.querySelectorAll(".finger-anim-item");
+  const savedType = localStorage.getItem("finger_anim_type") || "lottie";
+  const savedData = localStorage.getItem("finger_anim_data") || "originos_data/finger_animation.json";
+
+  fingerAnims.forEach((item) => {
+    const type = item.getAttribute("data-type");
+    const data = type === "lottie" ? item.getAttribute("data-path") : item.getAttribute("data-name");
+
+    // Set initial active state
+    if (type === savedType && data === savedData) {
+      fingerAnims.forEach(i => {
+          i.classList.remove("active");
+          i.style.borderColor = "transparent";
+      });
+      item.classList.add("active");
+      item.style.borderColor = "#f65268";
+    }
+
+    item.addEventListener("click", () => {
+      fingerAnims.forEach((i) => {
+          i.classList.remove("active");
+          i.style.borderColor = "transparent";
+      });
+      item.classList.add("active");
+      item.style.borderColor = "#f65268";
+      
+      if (window.changeFingerAnim) {
+          window.changeFingerAnim(type, data);
+      }
+    });
+  });
+}
+
+function addFingerThemeEvents() {
+  const fingerThemes = document.querySelectorAll(".finger-theme-item");
+  const savedUrl = localStorage.getItem("finger_theme_url") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png";
+  
+  fingerThemes.forEach((item) => {
+    const url = item.getAttribute("data-url");
+    
+    // Set initial active state based on saved URL
+    if (url === savedUrl) {
+      fingerThemes.forEach(i => {
+          i.classList.remove("active");
+          i.style.borderColor = "transparent";
+      });
+      item.classList.add("active");
+      item.style.borderColor = "#f65268";
+    }
+
+    item.addEventListener("click", () => {
+      fingerThemes.forEach((i) => {
+          i.classList.remove("active");
+          i.style.borderColor = "transparent";
+      });
+      item.classList.add("active");
+      item.style.borderColor = "#f65268";
+      fingerprint_preview.src = url;
+      fingerprint.style.backgroundImage = `url("${url}")`;
+      localStorage.setItem("finger_theme_url", url);
+    });
+  });
+}
+
 const fingerprint_preview = document.getElementById("fingerprint_preview");
+const btnOrig = document.getElementById("btn-orig");
 const btnWhite = document.getElementById("btn-white");
 const btnBlue = document.getElementById("btn-blue");
 
 fingerprint_preview.style.filter = "none";
 fingerprint.style.filter = "none";
-btnWhite.style.border = "4px solid #f65268";
+
+function handleBtnOrigClick() {
+  fingerprint_preview.style.filter = "none";
+  fingerprint.style.filter = "none";
+  btnOrig.style.border = "4px solid #f65268";
+  btnWhite.style.border = "4px solid rgb(225, 225, 225)";
+  btnBlue.style.border = "4px solid rgb(225, 225, 225)";
+  localStorage.setItem("btn_finger_saved", "btnOrig");
+}
 
 function handleBtnWhiteClick() {
   fingerprint_preview.style.filter = "brightness(1000%) grayscale(100%)";
   fingerprint.style.filter = "brightness(1000%) grayscale(100%)";
+  btnOrig.style.border = "4px solid rgb(225, 225, 225)";
   btnWhite.classList.add("active");
   btnBlue.classList.remove("active");
   btnBlue.style.border = "4px solid rgb(225, 225, 225)";
@@ -2784,6 +2878,7 @@ function handleBtnBlueClick() {
     "brightness(0) saturate(100%) invert(72%) sepia(35%) saturate(1172%) hue-rotate(174deg) brightness(104%) contrast(104%)";
   fingerprint.style.filter =
     "brightness(0) saturate(100%) invert(72%) sepia(35%) saturate(1172%) hue-rotate(174deg) brightness(104%) contrast(104%)";
+  btnOrig.style.border = "4px solid rgb(225, 225, 225)";
   btnWhite.style.border = "4px solid rgb(225, 225, 225)";
   btnBlue.style.border = "4px solid #f65268";
   footerText.style.color = "#6cd0ff";
@@ -2961,7 +3056,7 @@ function icon_originos() {
   setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
   setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
   setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
-  setIconAndBackgroundGradient("box8", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png");
+  setIconAndBackgroundGradient("box8", "https://yourimageshare.com/ib/1DNRlKIoeD.png");
   setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
   setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
   setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
@@ -3007,7 +3102,7 @@ function icon_hyperos() {
   );
   setIconAndBackgroundGradient2(
     "box8",
-    "originos_data/iconPacks/hype_icon/system_dialer.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient2(
     "box9",
@@ -3036,7 +3131,7 @@ function icon_hyperos3() {
   setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
   setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
   setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
-  setIconAndBackgroundGradient("box8", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880178/ulmb11gfmhkfahxfqnrb.png");
+  setIconAndBackgroundGradient("box8", "https://yourimageshare.com/ib/1DNRlKIoeD.png");
   setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
   setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
   setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
@@ -3083,7 +3178,7 @@ function icon_ios(e) {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/i_icon/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3135,7 +3230,7 @@ function icon_coloros() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/o_icon/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3203,7 +3298,7 @@ function icon_oneui() {
 
   box8.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/phone.png")`
+    `url("https://yourimageshare.com/ib/1DNRlKIoeD.png")`
   );
   box8.style.background = "#00000000";
 
@@ -3257,7 +3352,7 @@ function icon_harmonyos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/harmonyos_icon/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3309,7 +3404,7 @@ function icon_ios26_light1() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/i26Light1/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3375,7 +3470,7 @@ function icon_ios26_light2() {
 
   box8.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/i26Light2/phone.png")`
+    `url("https://yourimageshare.com/ib/1DNRlKIoeD.png")`
   );
   box8.style.background = "#00000000";
 
@@ -3431,7 +3526,7 @@ function icon_pixel() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/pix_icon/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3483,7 +3578,7 @@ function icon_nothing() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "originos_data/iconPacks/nothing_icon/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3535,7 +3630,7 @@ function icon_minimalos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "https://img.icons8.com/ios-filled/256/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3587,7 +3682,7 @@ function icon_neonos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "https://img.icons8.com/neon/256/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3639,7 +3734,7 @@ function icon_3dos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "https://img.icons8.com/3d-fluency/256/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3691,7 +3786,7 @@ function icon_glassos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "https://img.icons8.com/glassmorphism/256/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -3749,7 +3844,7 @@ function icon_flymeos() {
   );
   setIconAndBackgroundGradient(
     "box8",
-    "https://img.icons8.com/fluency/256/phone.png"
+    "https://yourimageshare.com/ib/1DNRlKIoeD.png"
   );
   setIconAndBackgroundGradient(
     "box9",
@@ -4869,6 +4964,95 @@ document.addEventListener("DOMContentLoaded", () => {
             document.documentElement.style.setProperty("--lock-clock-top", "120px");
         }
     }
+
+    // Glassmorphism Tuner Logic
+    const app21 = document.getElementById("app21");
+    
+    // Elements are now within app21 instead of app4glass
+    const glassOpacitySlider = document.getElementById("glassOpacitySlider");
+    const glassOpacityVal = document.getElementById("glassOpacityVal");
+    const glassBlurSlider = document.getElementById("glassBlurSlider");
+    const glassBlurVal = document.getElementById("glassBlurVal");
+    const glassyWindowsToggle = document.getElementById("glassyWindowsToggle");
+    const applyGlassBtn = document.getElementById("apply_glass_btn");
+
+    function updateGlassStyle() {
+      const opacity = glassOpacitySlider.value;
+      const blur = glassBlurSlider.value;
+      
+      if (glassOpacityVal) glassOpacityVal.textContent = opacity;
+      if (glassBlurVal) glassBlurVal.textContent = blur;
+      
+      // Update preview
+      const previewBox = document.getElementById("glassPreviewBox");
+      if (previewBox) {
+        previewBox.style.background = `rgba(50,50,50,${opacity})`;
+        previewBox.style.backdropFilter = `blur(${blur}px)`;
+        previewBox.style.webkitBackdropFilter = `blur(${blur}px)`;
+      }
+    }
+
+    if (applyGlassBtn) {
+        applyGlassBtn.addEventListener("click", () => {
+            const opacity = glassOpacitySlider.value;
+            const blur = glassBlurSlider.value;
+            
+            document.documentElement.style.setProperty("--glass-opacity", opacity);
+            document.documentElement.style.setProperty("--glass-blur", `${blur}px`);
+            
+            localStorage.setItem("glass_opacity", opacity);
+            localStorage.setItem("glass_blur", blur);
+            
+            if (typeof tb_system === "function") {
+                tb_system(translations[window.currentLanguage || 'en']['apply_success'] || "Applied Successfully");
+            }
+        });
+    }
+
+    if (glassOpacitySlider) glassOpacitySlider.addEventListener("input", updateGlassStyle);
+    if (glassBlurSlider) glassBlurSlider.addEventListener("input", updateGlassStyle);
+
+    if (glassyWindowsToggle) {
+      glassyWindowsToggle.addEventListener("click", () => {
+        const isActive = glassyWindowsToggle.classList.toggle("active");
+        localStorage.setItem("glassy_windows_saved", isActive ? "1" : "0");
+        applyGlassyWindows(isActive);
+      });
+    }
+
+    function applyGlassyWindows(isActive) {
+      const apps = document.querySelectorAll(".app, .app4app");
+      apps.forEach(app => {
+        if (isActive) {
+          app.classList.add("glassy-mode");
+        } else {
+          app.classList.remove("glassy-mode");
+        }
+      });
+      if (glassyWindowsToggle) {
+        if (isActive) glassyWindowsToggle.classList.add("active");
+        else glassyWindowsToggle.classList.remove("active");
+      }
+    }
+
+    // Restore Glass Settings
+    const savedGlassOpacity = localStorage.getItem("glass_opacity") || "0.3";
+    const savedGlassBlur = localStorage.getItem("glass_blur") || "8";
+    const savedGlassyWindows = localStorage.getItem("glassy_windows_saved") === "1";
+
+    if (glassOpacitySlider) {
+      glassOpacitySlider.value = savedGlassOpacity;
+      if (glassOpacityVal) glassOpacityVal.textContent = savedGlassOpacity;
+    }
+    if (glassBlurSlider) {
+      glassBlurSlider.value = savedGlassBlur;
+      if (glassBlurVal) glassBlurVal.textContent = savedGlassBlur;
+    }
+    
+    document.documentElement.style.setProperty("--glass-opacity", savedGlassOpacity);
+    document.documentElement.style.setProperty("--glass-blur", `${savedGlassBlur}px`);
+    applyGlassyWindows(savedGlassyWindows);
+    updateGlassStyle(); // Initial preview update
 });
 
 window.close3DPhonePopup = function() {

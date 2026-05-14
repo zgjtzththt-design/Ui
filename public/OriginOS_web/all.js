@@ -189,16 +189,26 @@ function updateTime() {
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
-  const isHollow = localStorage.getItem("clock_style_saved") === "hollow";
+  const clockStyle = localStorage.getItem("clock_style_saved");
+  const isHollow = clockStyle === "hollow";
+  const isImage = clockStyle === "image";
 
   const render = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
     if (isHollow && id === "lockclock") {
       el.classList.add("hollow-style");
+      el.classList.remove("image-style");
       el.innerHTML = `<span class="hours">${hours}</span><span class="minutes">${minutes}</span>`;
+    } else if (isImage && id === "lockclock") {
+      el.classList.add("image-style");
+      el.classList.remove("hollow-style");
+      el.textContent = "";
     } else {
-      if (id === "lockclock") el.classList.remove("hollow-style");
+      if (id === "lockclock") {
+        el.classList.remove("hollow-style");
+        el.classList.remove("image-style");
+      }
       el.textContent = `${hours}:${minutes}`;
     }
   };
@@ -211,16 +221,24 @@ function updateTime2() {
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
-  const isHollow = localStorage.getItem("clock_style_saved") === "hollow";
+  const clockStyle = localStorage.getItem("clock_style_saved");
+  const isHollow = clockStyle === "hollow";
+  const isImage = clockStyle === "image";
   const clockPreview = document.getElementById("clock_preview");
   const lockScreenPreview = document.getElementById("lock-screen-preview");
 
   if (clockPreview) {
     if (isHollow) {
       clockPreview.classList.add("hollow-style");
+      clockPreview.classList.remove("image-style");
       clockPreview.innerHTML = `<span class="hours">${hours}</span><span class="minutes">${minutes}</span>`;
+    } else if (isImage) {
+      clockPreview.classList.add("image-style");
+      clockPreview.classList.remove("hollow-style");
+      clockPreview.textContent = "";
     } else {
       clockPreview.classList.remove("hollow-style");
+      clockPreview.classList.remove("image-style");
       clockPreview.textContent = `${hours}:${minutes}`;
     }
   }
@@ -1628,11 +1646,16 @@ target.innerText += "ech";
 
 let unlock_time = null;
 unlockBtn.addEventListener("pointerdown", () => {
-  animation.stop();
-  animation.play();
-  if (fingerAnim && typeof fingerAnim.play === 'function') {
-    fingerLottieEl.style.opacity = 1;
-    fingerAnim.play();
+  // animation.stop();
+  // animation.play();
+  if (currentFingerAnimType === "lottie") {
+      // if (fingerAnim && typeof fingerAnim.play === 'function') {
+      //   fingerLottieEl.style.opacity = 1;
+      //   fingerAnim.goToAndPlay(0, true);
+      // }
+  } else if (currentFingerAnimType === "frames") {
+      // fingerLottieEl.style.opacity = 1;
+      // playFingerFrames(currentFingerAnimData);
   }
   unlock_time = setTimeout(() => {
     if (show_pass_for_cuslock) {
@@ -1686,15 +1709,20 @@ unlockBtn.addEventListener("pointerdown", () => {
 });
 unlockBtn.addEventListener("pointerup", () => {
   clearTimeout(unlock_time);
-  if (fingerAnim && typeof fingerAnim.stop === 'function') {
-    fingerAnim.stop();
-    fingerLottieEl.style.opacity = 0;
+  if (currentFingerAnimType === "lottie") {
+      // if (fingerAnim && typeof fingerAnim.stop === 'function') {
+      //   fingerAnim.stop();
+      //   fingerLottieEl.style.opacity = 0;
+      // }
+  } else if (currentFingerAnimType === "frames") {
+      // stopFingerFrames();
+      // fingerLottieEl.style.opacity = 0;
   }
 
   // Reset lại animation nếu đã từng chạy trước đó
-  footerText.classList.remove("shake-animate");
-  void footerText.offsetWidth; // trigger reflow
-  footerText.classList.add("shake-animate");
+  // footerText.classList.remove("shake-animate");
+  // void footerText.offsetWidth; // trigger reflow
+  // footerText.classList.add("shake-animate");
 
   document.getElementById("wallpaper_aod2").classList.remove("open");
   document.getElementById("lockclock").style.filter = "brightness(1)";
@@ -2449,15 +2477,95 @@ animation.goToAndStop(animation.totalFrames - 1, true);
 
 const fingerLottieEl = document.getElementById("finger_lottie");
 let fingerAnim = null;
+
+const fingerFrameAnims = {
+  "new_anim": [
+    "https://yourimageshare.com/ib/EBwggtiEyA.png",
+    "https://yourimageshare.com/ib/IHWRsiSTBs.png",
+    "https://yourimageshare.com/ib/iKKr9683mQ.png",
+    "https://yourimageshare.com/ib/YksMDLYUcV.png",
+    "https://yourimageshare.com/ib/zScx8farkW.png",
+    "https://yourimageshare.com/ib/PhOjDGhAwn.png",
+    "https://yourimageshare.com/ib/YMOSu34dZl.png",
+    "https://yourimageshare.com/ib/y3XePrRbfh.png",
+    "https://yourimageshare.com/ib/FBc7qgvmPH.png",
+    "https://yourimageshare.com/ib/W4XhpKlCYw.png",
+    "https://yourimageshare.com/ib/h0lbifAvHb.png",
+    "https://yourimageshare.com/ib/yoUxHlhvve.png",
+    "https://yourimageshare.com/ib/GAnMixMJVt.png",
+    "https://yourimageshare.com/ib/M491KajDjg.png",
+    "https://yourimageshare.com/ib/YBETa5kVDv.png",
+    "https://yourimageshare.com/ib/VVh8xFhjw3.png",
+    "https://yourimageshare.com/ib/FyrMnfCrsN.png",
+    "https://yourimageshare.com/ib/2dR8qLj2QP.png"
+  ]
+};
+
+let currentFingerAnimType = localStorage.getItem("finger_anim_type") || "lottie";
+let currentFingerAnimData = localStorage.getItem("finger_anim_data") || "originos_data/finger_animation.json";
+
+let fingerFrameIdx = 0;
+let fingerFrameInterval = null;
+const fingerFramesEl = document.createElement("img");
+fingerFramesEl.style.cssText = "position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: contain; pointer-events: none; opacity: 0; display: none; z-index: 10;";
+
 if (fingerLottieEl) {
-  fingerAnim = lottie.loadAnimation({
-    container: fingerLottieEl,
-    renderer: "svg",
-    loop: true,
-    autoplay: false,
-    path: "originos_data/finger_animation.json",
-  });
+  fingerLottieEl.appendChild(fingerFramesEl);
+  if (currentFingerAnimType === "lottie") {
+    fingerAnim = lottie.loadAnimation({
+      container: fingerLottieEl,
+      renderer: "svg",
+      loop: true,
+      autoplay: false,
+      path: currentFingerAnimData,
+    });
+  }
 }
+
+function playFingerFrames(name) {
+  const frames = fingerFrameAnims[name];
+  if (!frames) return;
+  fingerFrameIdx = 0;
+  fingerFramesEl.src = frames[0];
+  fingerFramesEl.style.display = "block";
+  fingerFramesEl.style.opacity = 1;
+  clearInterval(fingerFrameInterval);
+  fingerFrameInterval = setInterval(() => {
+    fingerFrameIdx = (fingerFrameIdx + 1) % frames.length;
+    fingerFramesEl.src = frames[fingerFrameIdx];
+  }, 50);
+}
+
+function stopFingerFrames() {
+  clearInterval(fingerFrameInterval);
+  fingerFramesEl.style.opacity = 0;
+  setTimeout(() => {
+    if (fingerFramesEl.style.opacity == "0") fingerFramesEl.style.display = "none";
+  }, 200);
+}
+
+function changeFingerAnim(type, data) {
+    if (fingerAnim) {
+        fingerAnim.destroy();
+        fingerAnim = null;
+    }
+    stopFingerFrames();
+    currentFingerAnimType = type;
+    currentFingerAnimData = data;
+    localStorage.setItem("finger_anim_type", type);
+    localStorage.setItem("finger_anim_data", data);
+
+    if (type === "lottie") {
+        fingerAnim = lottie.loadAnimation({
+            container: fingerLottieEl,
+            renderer: "svg",
+            loop: true,
+            autoplay: false,
+            path: data,
+        });
+    }
+}
+window.changeFingerAnim = changeFingerAnim; // Expose to settingsApp.js
 
 const finger_print = {
     stop: () => {},
@@ -2956,7 +3064,7 @@ window.customApps = [
   { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
   { id: "box6", name: "الصور", defaultIcon: "originos_data/iconPacks/hype_icon/system_photos.png" },
   { id: "box7", name: "التقويم", defaultIcon: "originos_data/iconPacks/hype_icon/system_calendar.png" },
-  { id: "box8", name: "الهاتف", defaultIcon: "https://i.ibb.co/DfnWR6GJ/com-android-contacts.png" },
+  { id: "box8", name: "الهاتف", defaultIcon: "https://yourimageshare.com/ib/1DNRlKIoeD.png" },
   { id: "box9", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
   { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
   { id: "box11", name: "المؤقت", defaultIcon: "https://www.hostpic.org/images/2605131949480104.png" },
@@ -2967,7 +3075,7 @@ window.customApps = [
   { id: "box16", name: "YouTube", defaultIcon: "https://img.icons8.com/color/256/youtube-play--v1.png" },
   { id: "box22", name: "تطبيق 22", defaultIcon: "https://www.hostpic.org/images/2605132000110097.png" },
   { id: "box23", name: "البحث الصوتي", defaultIcon: "https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png" },
-  { id: "box24", name: "جهات الاتصال", defaultIcon: "https://i.ibb.co/DfnWR6GJ/com-android-contacts.png" },
+  { id: "box24", name: "جهات الاتصال", defaultIcon: "https://yourimageshare.com/ib/1DNRlKIoeD.png" },
 ];
 
 window.getAppKeywords = function() {
