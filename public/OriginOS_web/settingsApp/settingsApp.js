@@ -32,7 +32,7 @@ let selectedVideoFile = null;
 
 const lock_btn = document.getElementById("lock-btn");
 const back6 = document.getElementById("back_to_setting6");
-target.innerText += " ga";
+if (typeof target !== "undefined" && target) target.innerText += " ga";
 const lock_option = document.getElementById("app4lock");
 const wallpaper_btn2 = document.querySelector(".wallpaper-btn-2");
 
@@ -113,7 +113,7 @@ function showPopup_open_close(target, mode = "flex", className = "open") {
   });
 }
 
-target.innerText += "lax";
+if (typeof target !== "undefined" && target) target.innerText += "lax";
 
 function hidePopup_open_close(target, mode = "none", className = "open") {
   const el =
@@ -177,11 +177,11 @@ AboutInSetting.addEventListener("click", () => {
   theme_option.style.pointerEvents = "none";
   animationInSetting.style.pointerEvents = "none";
 
-  vesion_setting.addEventListener("click", handleShowVersion);
-  back10.addEventListener("click", handleHideVersion);
+  if (vesion_setting) vesion_setting.addEventListener("click", handleShowVersion);
+  if (back10) back10.addEventListener("click", handleHideVersion);
 
-  khaysetting1_2.addEventListener("click", handleShowCredits);
-  back7.addEventListener("click", handleHideCredits);
+  if (khaysetting1_2) khaysetting1_2.addEventListener("click", handleShowCredits);
+  if (back7) back7.addEventListener("click", handleHideCredits);
 });
 back.addEventListener("click", () => {
   hidePopup_open_close(app4);
@@ -189,11 +189,11 @@ back.addEventListener("click", () => {
   theme_option.style.pointerEvents = "auto";
   animationInSetting.style.pointerEvents = "auto";
 
-  vesion_setting.removeEventListener("click", handleShowVersion);
-  back10.removeEventListener("click", handleHideVersion);
+  if (vesion_setting) vesion_setting.removeEventListener("click", handleShowVersion);
+  if (back10) back10.removeEventListener("click", handleHideVersion);
 
-  khaysetting1_2.removeEventListener("click", handleShowCredits);
-  back7.removeEventListener("click", handleHideCredits);
+  if (khaysetting1_2) khaysetting1_2.removeEventListener("click", handleShowCredits);
+  if (back7) back7.removeEventListener("click", handleHideCredits);
 });
 
 function handleShowCredits() {
@@ -1086,6 +1086,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (notchRadiusVal) notchRadiusVal.textContent = `${savedNotchRadius}px`;
         document.documentElement.style.setProperty("--bg--notch-radius", `${savedNotchRadius}px`);
     }
+
+    const savedDeviceName = localStorage.getItem("device_name");
+    const deviceNameInput = document.getElementById("device_name_input");
+    if (savedDeviceName && deviceNameInput) {
+        deviceNameInput.value = savedDeviceName;
+    }
+    if (deviceNameInput) {
+        deviceNameInput.addEventListener("input", (e) => {
+            localStorage.setItem("device_name", e.target.value);
+        });
+        deviceNameInput.addEventListener("click", (e) => e.stopPropagation());
+    }
 });
 
 // Notch event listeners
@@ -1733,7 +1745,7 @@ const colorCircles = document.querySelectorAll(".color-circle");
 const customColorBtn = document.getElementById("customColor");
 const colorPicker = document.getElementById("colorPicker");
 const sizeSlider = document.getElementById("sizeSlider");
-target.innerText += "yA";
+if (typeof target !== "undefined" && target) target.innerText += "yA";
 const date_preview = document.getElementById("dateTextPreview");
 const button_decor = document.getElementById("button_decor");
 
@@ -2530,7 +2542,7 @@ function handle_color_circle2(e) {
   }
 }
 
-target.innerText += "15";
+if (typeof target !== "undefined" && target) target.innerText += "15";
 
 function showHomeApp() {
   showPopup_open_close(app4_home);

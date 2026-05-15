@@ -75,8 +75,10 @@ if (!localStorage.getItem("initial_wallpaper_set_v3")) {
 let home_wallpaper = localStorage.getItem("home_wallpaper") || userRequestedWallpaper;
 let lock_wallpaper = localStorage.getItem("lock_wallpaper") || userRequestedWallpaper;
 
-document.getElementById("phoneName").textContent =
-  localStorage.getItem("phoneName") || "Xiaomi 17 Pro";
+const phoneNameEl = document.getElementById("phoneName");
+if (phoneNameEl) {
+  phoneNameEl.textContent = localStorage.getItem("phoneName") || "Xiaomi 17 Pro";
+}
 
 window.applyWallpapers = () => {
   const applyValue = (key, value, callback) => {
@@ -339,7 +341,7 @@ const allApp = document.getElementById("allApp");
 const lp = document.getElementById("lp");
 const target = document.getElementById("name_dev");
 const nav = document.querySelector(".nav");
-document.getElementById("name_dev").textContent = "";
+if (target) target.textContent = "";
 
 let currentOpeningBtn = null;
 let autoHideClickablesTimer = null;
@@ -416,70 +418,72 @@ function openPopupFromCurrentButton() {
   nav.style.height = "40px";
 }
 
-target.innerText += "Ti";
+if (target) target.innerText += "Ti";
 const scale = 1;
 let hide_app = null;
 function closePopup() {
-  hidePopup_open_close(app);
-  app.style.pointerEvents = "none";
+  try {
+      hidePopup_open_close(app);
+      app.style.pointerEvents = "none";
 
-  currentOpeningBtn.style.transition = `all ${timeTransformClosing}s ${cubicTransformClosing}, transform ${timeTransformClosing}s ${cubicTransformClosing}, width ${timeScaleClosing}s ${cubicScaleClosing}, z-index ${timeTransformClosing}s, left ${timeScaleClosing}s ${cubicScaleClosing}, right ${timeScaleClosing}s ${cubicScaleClosing}`;
-  clearTimeout(autoHideClickablesTimer);
-  currentOpeningBtn.classList.remove("open");
-  currentOpeningBtn.classList.remove("hien");
-  currentOpeningBtn.style.scale = `${scale_icon}%`;
+      currentOpeningBtn.style.transition = `all ${timeTransformClosing}s ${cubicTransformClosing}, transform ${timeTransformClosing}s ${cubicTransformClosing}, width ${timeScaleClosing}s ${cubicScaleClosing}, z-index ${timeTransformClosing}s, left ${timeScaleClosing}s ${cubicScaleClosing}, right ${timeScaleClosing}s ${cubicScaleClosing}`;
+      clearTimeout(autoHideClickablesTimer);
+      currentOpeningBtn.classList.remove("open");
+      currentOpeningBtn.classList.remove("hien");
+      currentOpeningBtn.style.scale = `${scale_icon}%`;
 
-  lp.style.transition = `all ${currentSpeed5}s cubic-bezier(.35,.04,.69,.94), opacity ${currentSpeed6}s`;
-  allApp.style.transition =
-    wallpaper.style.transition = `all ${currentSpeed5}s cubic-bezier(.13,.21,.45,.95)`;
+      lp.style.transition = `all ${currentSpeed5}s cubic-bezier(.35,.04,.69,.94), opacity ${currentSpeed6}s`;
+      allApp.style.transition =
+        wallpaper.style.transition = `all ${currentSpeed5}s cubic-bezier(.13,.21,.45,.95)`;
 
-  wallpaper.style.scale = `100%`;
+      wallpaper.style.scale = `100%`;
 
-  lp.classList.remove("open");
-  lp.style.scale = 1;
-  allApp.style.scale = 1;
+      lp.classList.remove("open");
+      lp.style.scale = 1;
+      allApp.style.scale = 1;
 
-  Object.values(clickables).forEach((el) => {
-    el.style.display = "block";
-  });
-  currentOpeningBtn.style.transform = ``;
+      Object.values(clickables).forEach((el) => {
+        if (el) el.style.display = "block";
+      });
+      currentOpeningBtn.style.transform = ``;
 
-  if (currentOpeningBtn === boxes["box4"]) {
-    document.getElementById("scaling-box").style.animation = "none";
+      if (currentOpeningBtn === boxes["box4"]) {
+        const scalingBox = document.getElementById("scaling-box");
+        if (scalingBox) scalingBox.style.animation = "none";
 
-    theme_option.style.pointerEvents = "auto";
-    AboutInSetting.style.pointerEvents = "auto";
-    animationInSetting.style.pointerEvents = "auto";
+        if (typeof theme_option !== "undefined" && theme_option) theme_option.style.pointerEvents = "auto";
+        if (typeof AboutInSetting !== "undefined" && AboutInSetting) AboutInSetting.style.pointerEvents = "auto";
+        if (typeof animationInSetting !== "undefined" && animationInSetting) animationInSetting.style.pointerEvents = "auto";
 
-    removeAllUIEventListeners();
+        if (window.removeAllUIEventListeners) removeAllUIEventListeners();
+        
+        const appsToHide = [
+            app4, credits, app4_vesion, app4animation, app4_theme, app4_home,
+            wallpaper_option, aod_option, lock_option, app4_finger,
+            "app4icon", "app4audio", app4_lock_style, crea_pass,
+            "app4MoreAnimation", "app4UnlockAnimation", "app4AppOpeningAnimation",
+            "app4AppClosingAnimation", "app4ControlsCenterAnim"
+        ];
+        
+        appsToHide.forEach(item => {
+            if (item) {
+                const el = typeof item === "string" ? document.getElementById(item) : item;
+                if (el && window.hidePopup_open_close_noanim) hidePopup_open_close_noanim(el);
+            }
+        });
 
-    hidePopup_open_close_noanim(app4);
-    hidePopup_open_close_noanim(credits);
-    hidePopup_open_close_noanim(app4_vesion);
-    hidePopup_open_close_noanim(app4animation);
-    hidePopup_open_close_noanim(app4_theme);
-    hidePopup_open_close_noanim(app4_home);
-    hidePopup_open_close_noanim(wallpaper_option);
-    hidePopup_open_close_noanim(aod_option);
-    hidePopup_open_close_noanim(lock_option);
-    hidePopup_open_close_noanim(app4_finger);
-    hidePopup_open_close_noanim("app4icon");
-    hidePopup_open_close_noanim("app4audio");
-    hidePopup_open_close_noanim(app4_lock_style);
-    hidePopup_open_close_noanim(crea_pass);
-    hidePopup_open_close_noanim(app4_more_animation);
-    hidePopup_open_close_noanim(app4_unlock_animation);
-    hidePopup_open_close_noanim(app4AppOpeningAnimation);
-    hidePopup_open_close_noanim(app4AppClosingAnimation);
-    hidePopup_open_close_noanim(app4ControlsCenterAnim);
-    hideBorderRadiusSystem();
+        if (typeof hideBorderRadiusSystem === "function") hideBorderRadiusSystem();
+      }
+
+      nav.style.height = "30px";
+  } catch (e) {
+      console.error("Error in closePopup:", e);
+  } finally {
+      currentOpeningBtn = null;
   }
-
-  nav.style.height = "30px";
-  currentOpeningBtn = null;
 }
 
-target.innerText += "kT";
+if (target) target.innerText += "kT";
 
 let sensitivityNav = localStorage.getItem("sensitivityNavBar") || 0.08;
 let maxNav = localStorage.getItem("maxDragNav") || 150;
@@ -518,7 +522,7 @@ let deltaY = 0;
 let deltaX = 0;
 let dragging = false;
 
-target.innerText += "ok";
+if (target) target.innerText += "ok";
 
 nav.addEventListener("touchstart", (e) => {
   nav.style.bottom = "10px";
@@ -544,7 +548,7 @@ nav.addEventListener(
   }
 );
 
-target.innerText += ": ";
+if (target) target.innerText += ": ";
 
 nav.addEventListener("touchend", () => {
   nav.style.bottom = "0px";
@@ -568,7 +572,7 @@ nav.addEventListener("mousedown", (e) => {
   startX = e.clientX;
 });
 
-target.innerText += "@su";
+if (target) target.innerText += "@su";
 
 window.addEventListener("mousemove", (e) => {
   if (!dragging || !currentOpeningBtn) return;
@@ -1409,7 +1413,7 @@ if (powerbtn) {
 const fingerprint = document.querySelector(".lock-fingerprint");
 const lockclock = document.querySelector(".lock-clock");
 const lock_clock_date = document.getElementById("lock_content");
-target.innerText += "amt";
+if (target) target.innerText += "amt";
 const dateText = document.getElementById("dateText");
 const clock = document.getElementById("lockclock2");
 const battery3 = document.querySelector(".battery-num");
@@ -1642,7 +1646,7 @@ function unlock() {
   }, 1000);
 }
 
-target.innerText += "ech";
+if (target) target.innerText += "ech";
 
 let unlock_time = null;
 unlockBtn.addEventListener("pointerdown", () => {
@@ -1871,7 +1875,7 @@ function powerbtnEvent() {
   closeControlsCenter();
 }
 
-target.innerText += " -";
+if (target) target.innerText += " -";
 
 lockscreen.addEventListener("click", () => {
   if (!ison) {
@@ -3060,7 +3064,7 @@ window.customApps = [
   { id: "box1", name: "الحاسبة", defaultIcon: "https://i.ibb.co/gLMPFscR/com-miui-calculator.png" },
   { id: "box2", name: "مدير الملفات", defaultIcon: "https://yourimageshare.com/ib/rNiozTmpqK.png" },
   { id: "box3", name: "الموسيقى", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
-  { id: "box4", name: "الإعدادات", defaultIcon: "originos_data/iconPacks/hype_icon/system_settings.png" },
+  { id: "box4", name: "الإعدادات", defaultIcon: "https://yourimageshare.com/ib/lP6p1xwNKO.png" },
   { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
   { id: "box6", name: "الصور", defaultIcon: "originos_data/iconPacks/hype_icon/system_photos.png" },
   { id: "box7", name: "التقويم", defaultIcon: "originos_data/iconPacks/hype_icon/system_calendar.png" },

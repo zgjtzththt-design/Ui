@@ -894,148 +894,48 @@
 
 
 
-              <div class="app4app" id="app4" style="z-index: 5020">
-              <div class="back-button" id="back_to_setting" data-i18n="back">رجوع ‹</div>
-              
-              <div class="phone-container">
-                
-                <div class="header-title">Xiaomi HyperOS</div>
-                <div class="version-subtitle">3.0.18.0</div>
+              <div class="app4app" id="app4" style="z-index: 5020;">
+                <div class="back-button" id="back_to_setting"></div>
 
-                <div class="card-group">
-                    <div class="list-item" onclick='
-                      showPopupInput({
-                        message: translations[localStorage.getItem("language") || "en"].ui_enter_name,
-                        placeholder: document.getElementById("phoneName").textContent.trim(),
-                        defaultText: document.getElementById("phoneName").textContent.trim(),
-                        maxLength: 30,
-                        buttonText: translations[localStorage.getItem("language") || "en"].ui_rename,
-                        onSubmit: (resultText) => {
-                          document.getElementById("phoneName").textContent = resultText;
-                          localStorage.setItem("phoneName", resultText);
-                        },
-                      });'>
-                        <span class="label" data-i18n="ui_device_name">اسم الجهاز</span>
-                        <div class="left-content">
-                            <svg class="icon-settings" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m19 12-5 5-5-5h3V3h4v9h3Zm-7 7.09c1.68 0 3.29-.65 4.56-1.84L21.37 12c-1.27-1.19-2.88-1.84-4.56-1.84H17v2h-.19c1.01 0 1.94.4 2.75 1.16L12 21.09l-7.56-7.77c.81-.76 1.74-1.16 2.75-1.16H7v-2h-.19c-1.68 0-3.29.65-4.56 1.84l4.81 5.25c1.27 1.19 2.88 1.84 4.56 1.84H12ZM19 12V3h-4v9h-3l5 5 5-5h-3Z"/></svg>
-                            <span class="value" id="phoneName">Xiaomi REDMI 14C Édition</span>
-                            <span class="arrow">‹</span>
-                        </div>
-                    </div>
+                <div class="brand-section-new">
+                  <h1 class="os-title-new">HyperOS WEB</h1>
+                  <div class="os-version-new">0.3 beta</div>
                 </div>
 
-                <div class="card-group">
-                    <div class="list-item">
-                        <span class="label" data-i18n="ui_storage">التخزين</span>
-                        <div class="left-content">
-                            <span class="value"><span id="storageUsed">--MB</span>/<span id="storage">--MB</span></span>
-                            <span class="arrow">‹</span>
-                        </div>
+                <div class="white-list-container-new">
+                  <div class="list-row-new" id="about_setting_internal" onclick="document.getElementById('about_setting').click()">
+                    <span class="list-label-new">device name</span>
+                    <div class="list-value-new">
+                      <input type="text" id="device_name_input" value="Phone" style="background:transparent; border:none; color:#1a1a1a; text-align:right; font-size:14.5px; font-family:inherit; width: 100px;" />
+                      <svg class="list-arrow-new" viewBox="0 0 24 24"><polyline points="9 19 16 12 9 5"></polyline></svg>
                     </div>
-                </div>
+                  </div>
 
-                <div class="card-group">
-                    <div class="list-item" id="khaysetting1-1">
-                        <span class="label" data-i18n="ui_system_version">إصدار نظام التشغيل</span>
-                        <span class="value" id="Vesion">3.0.18.0.WGTMIXM</span>
-                    </div>
-                </div>
-                
-                <div class="card-group">
-                    <div class="list-item" id="khaysetting1-2" onclick='window.open("https://quandz24-ui.github.io/OriginOS_web", "_blank");'>
-                        <span class="label" data-i18n="ui_android_version">إصدار Android</span>
-                        <span class="value">16 BP2A.250605.03</span>
-                    </div>
-                </div>
+                  <div class="list-row-new">
+                    <span class="list-label-new">system name</span>
+                    <div class="list-value-new">HOS</div>
+                  </div>
 
-                <div class="card-group">
-                    <div class="list-item">
-                        <span class="label" data-i18n="ui_android_security">تحديث أمان نظام Android</span>
-                        <span class="value">2026-02-01</span>
-                    </div>
-                </div>
+                  <div class="list-row-new">
+                    <span class="list-label-new">OS version</span>
+                    <div class="list-value-new">2.0.8.5</div>
+                  </div>
 
-                <div class="card-group">
-                    <div class="list-item" onclick="showChangelog()">
-                        <span class="label" data-i18n="ui_specs">المواصفات والمعلومات التفصيلية</span>
-                        <span class="arrow">‹</span>
+                  <div class="list-row-new" id="khaysetting1-1-trigger" onclick="const v = document.getElementById('khaysetting1-1'); if(v) v.click();">
+                    <span class="list-label-new">update log</span>
+                    <div class="list-value-new" id="app4vesion">
+                      <span>click to view</span>
+                      <svg class="list-arrow-new" viewBox="0 0 24 24"><polyline points="9 19 16 12 9 5"></polyline></svg>
                     </div>
-                    <div class="list-item" onclick='window.open("https://t.me/OriginWEB", "_blank");'>
-                        <span class="label" id="name_dev" data-i18n="ui_dev_comm">مجتمع المطورين</span>
-                        <span class="arrow">‹</span>
-                    </div>
-                </div>
-
-                <div class="card-group">
-                    <div class="list-item" onclick="
-                      const t = translations[localStorage.getItem('language') || 'en'];
-                      showPopup2_alert(
-                        t.ui_reset_warning,
-                        t.ui_reset_btn,
-                        t.ui_cancel,
-                        () => { 
-                          localStorage.clear();
-                          sessionStorage.clear();
-                          location.reload();
-                        },
-                        () =>{}
-                      )">
-                        <span class="label" style="color: #ff4d4f;" data-i18n="ui_factory_reset">إعادة ضبط المصنع</span>
-                        <span class="arrow">‹</span>
-                    </div>
-                </div>
-              </div>
-
-              <div
-                class="app4app"
-                id="app4vesion"
-                style="z-index: 10021323; display: none"
-              >
-                <div class="back-button" id="back_to_setting10" data-i18n="back">Version</div>
-                <div class="vesion_text">
-                  <div class="content-box-vesion">
-                    <h2 data-i18n="version_new">What's New — V0.3 BETA</h2>
-                    <h1 style="font-weight: normal; font-size: 1.2em; line-height: 1.5;">
-                      <span data-i18n="redesigned_everything">• redesigned everything</span><br />
-                      <span data-i18n="bug_fixed">• bug fixed</span><br />
-                      <span data-i18n="smoother_animation">• added smoother animation</span><br />
-                      <span data-i18n="animation_tuning_added">• added animation tuning</span><br />
-                      <span data-i18n="center_controls_added">• added center controls and smooth animations</span><br />
-                      <span data-i18n="customization_added">• added customization</span><br />
-                      <span data-i18n="and_more">• and more!</span>
-                    </h1>
                   </div>
                 </div>
+
+                <!-- Hidden sub-apps to satisfy JS selectors -->
+                <div id="app4credits" style="display:none"></div>
+                <div id="app4vesion_container" style="display:none"></div>
+                <div id="khaysetting1-1" style="display:none"></div>
+                <div id="khaysetting1-2" style="display:none"></div>
               </div>
-              <div
-                class="app4app"
-                id="app4credits"
-                style="z-index: 1002133; display: none"
-              >
-                <div class="back-button" id="back_to_setting7" data-i18n="back">
-                  <span data-i18n="credits_title">Credits</span>
-                </div>
-                <div
-                  class="setting-item3"
-                  style="
-                    font-size: 17px;
-                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
-                  "
-                >
-                  @vivo_x200_pro_mini_zeiss
-                </div>
-                <div
-                  class="setting-item3"
-                  style="
-                    font-size: 17px;
-                    top: 130px;
-                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
-                  "
-                >
-                  @toi.daylabo2015
-                </div>
-              </div>
-            </div>
             <div class="app4app" id="app4animation" style="z-index: 123213123">
               <div class="back-button" id="back_to_setting2" data-i18n="ui_animation">Animation</div>
               <div class="box-wrapper">

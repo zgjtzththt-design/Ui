@@ -562,8 +562,10 @@ function updateLocalStorageUsage() {
     let usedBytes = totalUsed;
 
     if (!isNaN(totalBytes) && !isNaN(usedBytes)) {
-        document.getElementById("storage").textContent = formatSize(totalBytes);
-        document.getElementById("storageUsed").textContent = formatSize(usedBytes);
+        const sInfo = document.getElementById("storage");
+        if (sInfo) sInfo.textContent = formatSize(totalBytes);
+        const suInfo = document.getElementById("storageUsed");
+        if (suInfo) suInfo.textContent = formatSize(usedBytes);
     }
 }
 
