@@ -430,7 +430,7 @@ items_unlock_anim_btn.forEach((item) => {
         group.ids.forEach((id) => {
           const box = document.getElementById(`preview_box${id}`);
 
-          box.style.transition = `all ${timeUnlock}s cubic-bezier(.25,.1,${easingAnimationForUnlock},1), opacity ${currentSpeed3}s`;
+          box.style.transition = `all ${timeUnlock}s cubic-bezier(0.34, 1.56, 0.64, 1), opacity ${currentSpeed3}s`;
           box.style.transitionDelay = `${delay}s`;
           box.style.transform = "translateX(0px) translateY(0px) scale(1)";
           box.style.opacity = "1";

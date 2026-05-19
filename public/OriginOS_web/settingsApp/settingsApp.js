@@ -3061,17 +3061,18 @@ function icon_originos() {
   updateIconBorder("originos_icon");
   document.documentElement.style.setProperty("--bg-size_img", "105%");
 
-  setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
+  setIconAndBackgroundGradient("box1", "https://yourimageshare.com/ib/jhcdkbaDfC.png");
   setIconAndBackgroundGradient("box2", "https://yourimageshare.com/ib/rNiozTmpqK.png");
-  setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
-  setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
-  setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
-  setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
-  setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
+  setIconAndBackgroundGradient("box3", "https://yourimageshare.com/ib/7l3Gk00BxW.png");
+  setIconAndBackgroundGradient("box4", "https://yourimageshare.com/ib/lP6p1xwNKO.png");
+  setIconAndBackgroundGradient("box5", "https://yourimageshare.com/ib/ucZd6pq45a.png");
+  setIconAndBackgroundGradient("box6", "https://yourimageshare.com/ib/BQMUAQLi1i.png");
+  setIconAndBackgroundGradient("box7", "https://yourimageshare.com/ib/lcOGD7bWbw.png");
   setIconAndBackgroundGradient("box8", "https://yourimageshare.com/ib/1DNRlKIoeD.png");
-  setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
-  setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
-  setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
+  setIconAndBackgroundGradient("box9", "https://yourimageshare.com/ib/bLfJRLuhMK.png");
+  setIconAndBackgroundGradient("box10", "https://yourimageshare.com/ib/c123oPx7Nz.png");
+  setIconAndBackgroundGradient("box11", "https://yourimageshare.com/ib/7cGQdxnoO3.png");
+  setIconAndBackgroundGradient("box12", "https://yourimageshare.com/ib/MmRdzUMY0f.png");
   slider.value = 20;
   value = slider.value;
   preview.style.borderRadius = `${value}px`;
@@ -3086,7 +3087,7 @@ function icon_hyperos() {
 
   setIconAndBackgroundGradient2(
     "box1",
-    "originos_data/iconPacks/hype_icon/system_calculator.png"
+    "https://yourimageshare.com/ib/jhcdkbaDfC.png"
   );
   setIconAndBackgroundGradient2(
     "box2",
@@ -3094,23 +3095,23 @@ function icon_hyperos() {
   );
   setIconAndBackgroundGradient2(
     "box3",
-    "originos_data/iconPacks/hype_icon/system_music.png"
+    "https://yourimageshare.com/ib/7l3Gk00BxW.png"
   );
   setIconAndBackgroundGradient2(
     "box4",
-    "originos_data/iconPacks/hype_icon/system_settings.png"
+    "https://yourimageshare.com/ib/lP6p1xwNKO.png"
   );
   setIconAndBackgroundGradient2(
     "box5",
-    "originos_data/iconPacks/hype_icon/system_messages.png"
+    "https://yourimageshare.com/ib/ucZd6pq45a.png"
   );
   setIconAndBackgroundGradient2(
     "box6",
-    "originos_data/iconPacks/hype_icon/system_photos.png"
+    "https://yourimageshare.com/ib/BQMUAQLi1i.png"
   );
   setIconAndBackgroundGradient2(
     "box7",
-    "originos_data/iconPacks/hype_icon/system_calendar.png"
+    "https://yourimageshare.com/ib/lcOGD7bWbw.png"
   );
   setIconAndBackgroundGradient2(
     "box8",
@@ -3118,11 +3119,11 @@ function icon_hyperos() {
   );
   setIconAndBackgroundGradient2(
     "box9",
-    "originos_data/iconPacks/hype_icon/system_clock.png"
+    "https://yourimageshare.com/ib/bLfJRLuhMK.png"
   );
   setIconAndBackgroundGradient2(
     "box10",
-    "originos_data/iconPacks/hype_icon/system_compass.png"
+    "https://yourimageshare.com/ib/c123oPx7Nz.png"
   );
   slider.value = 20;
   value = slider.value;
@@ -3136,17 +3137,18 @@ function icon_hyperos3() {
   updateIconBorder("hyperos3_icon");
   document.documentElement.style.setProperty("--bg-size_img", "100%");
 
-  setIconAndBackgroundGradient("box1", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879769/epi1zelgc7psfftbiolu.png");
+  setIconAndBackgroundGradient("box1", "https://yourimageshare.com/ib/jhcdkbaDfC.png");
   setIconAndBackgroundGradient("box2", "https://yourimageshare.com/ib/rNiozTmpqK.png");
-  setIconAndBackgroundGradient("box3", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879893/ofqsd17zxv2lovn7gkzw.png");
-  setIconAndBackgroundGradient("box4", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776879959/scmhkapwddr2ec1qxyj9.png");
-  setIconAndBackgroundGradient("box5", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880033/kyjzfzvvpcluqxskwai0.png");
-  setIconAndBackgroundGradient("box6", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880068/n7au3djcmnr0zmb9u4un.png");
-  setIconAndBackgroundGradient("box7", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776880129/q9hmesxieiqaacrtwxw8.png");
+  setIconAndBackgroundGradient("box3", "https://yourimageshare.com/ib/7l3Gk00BxW.png");
+  setIconAndBackgroundGradient("box4", "https://yourimageshare.com/ib/lP6p1xwNKO.png");
+  setIconAndBackgroundGradient("box5", "https://yourimageshare.com/ib/ucZd6pq45a.png");
+  setIconAndBackgroundGradient("box6", "https://yourimageshare.com/ib/BQMUAQLi1i.png");
+  setIconAndBackgroundGradient("box7", "https://yourimageshare.com/ib/lcOGD7bWbw.png");
   setIconAndBackgroundGradient("box8", "https://yourimageshare.com/ib/1DNRlKIoeD.png");
-  setIconAndBackgroundGradient("box9", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881062/gw2qnq06r2a0ffurbqba.png");
-  setIconAndBackgroundGradient("box10", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881228/lp1xh3qqb6bnd23r0wcc.png");
-  setIconAndBackgroundGradient("box12", "https://res.cloudinary.com/dhlxcif1m/image/upload/v1776881265/toeld2nea85tifvh0gti.png");
+  setIconAndBackgroundGradient("box9", "https://yourimageshare.com/ib/bLfJRLuhMK.png");
+  setIconAndBackgroundGradient("box10", "https://yourimageshare.com/ib/c123oPx7Nz.png");
+  setIconAndBackgroundGradient("box11", "https://yourimageshare.com/ib/7cGQdxnoO3.png");
+  setIconAndBackgroundGradient("box12", "https://yourimageshare.com/ib/MmRdzUMY0f.png");
   
   slider.value = 20;
   value = slider.value;
@@ -3162,7 +3164,7 @@ function icon_ios(e) {
 
   setIconAndBackgroundGradient(
     "box1",
-    "originos_data/iconPacks/i_icon/calculator.png"
+    "https://yourimageshare.com/ib/jhcdkbaDfC.png"
   );
   setIconAndBackgroundGradient(
     "box2",
@@ -3170,23 +3172,23 @@ function icon_ios(e) {
   );
   setIconAndBackgroundGradient(
     "box3",
-    "originos_data/iconPacks/i_icon/music.png"
+    "https://yourimageshare.com/ib/7l3Gk00BxW.png"
   );
   setIconAndBackgroundGradient(
     "box4",
-    "originos_data/iconPacks/i_icon/settings.png"
+    "https://yourimageshare.com/ib/lP6p1xwNKO.png"
   );
   setIconAndBackgroundGradient(
     "box5",
-    "originos_data/iconPacks/i_icon/messages.png"
+    "https://yourimageshare.com/ib/ucZd6pq45a.png"
   );
   setIconAndBackgroundGradient(
     "box6",
-    "originos_data/iconPacks/i_icon/gallery.png"
+    "https://yourimageshare.com/ib/BQMUAQLi1i.png"
   );
   setIconAndBackgroundGradient(
     "box7",
-    "originos_data/iconPacks/i_icon/calendar.png"
+    "https://yourimageshare.com/ib/lcOGD7bWbw.png"
   );
   setIconAndBackgroundGradient(
     "box8",
@@ -3194,11 +3196,11 @@ function icon_ios(e) {
   );
   setIconAndBackgroundGradient(
     "box9",
-    "originos_data/iconPacks/i_icon/clock.png"
+    "https://yourimageshare.com/ib/bLfJRLuhMK.png"
   );
   setIconAndBackgroundGradient(
     "box10",
-    "originos_data/iconPacks/i_icon/compass.png"
+    "https://yourimageshare.com/ib/c123oPx7Nz.png"
   );
   slider.value = 20;
   value = slider.value;
@@ -3214,7 +3216,7 @@ function icon_coloros() {
 
   setIconAndBackgroundGradient(
     "box1",
-    "originos_data/iconPacks/o_icon/calculator.png"
+    "https://yourimageshare.com/ib/jhcdkbaDfC.png"
   );
   setIconAndBackgroundGradient(
     "box2",
@@ -3222,23 +3224,23 @@ function icon_coloros() {
   );
   setIconAndBackgroundGradient(
     "box3",
-    "originos_data/iconPacks/o_icon/music.png"
+    "https://yourimageshare.com/ib/7l3Gk00BxW.png"
   );
   setIconAndBackgroundGradient(
     "box4",
-    "originos_data/iconPacks/o_icon/settings.png"
+    "https://yourimageshare.com/ib/lP6p1xwNKO.png"
   );
   setIconAndBackgroundGradient(
     "box5",
-    "originos_data/iconPacks/o_icon/messages.png"
+    "https://yourimageshare.com/ib/ucZd6pq45a.png"
   );
   setIconAndBackgroundGradient(
     "box6",
-    "originos_data/iconPacks/o_icon/gallery.png"
+    "https://yourimageshare.com/ib/BQMUAQLi1i.png"
   );
   setIconAndBackgroundGradient(
     "box7",
-    "originos_data/iconPacks/o_icon/calendar.png"
+    "https://yourimageshare.com/ib/lcOGD7bWbw.png"
   );
   setIconAndBackgroundGradient(
     "box8",
@@ -3246,11 +3248,11 @@ function icon_coloros() {
   );
   setIconAndBackgroundGradient(
     "box9",
-    "originos_data/iconPacks/o_icon/clock.png"
+    "https://yourimageshare.com/ib/bLfJRLuhMK.png"
   );
   setIconAndBackgroundGradient(
     "box10",
-    "originos_data/iconPacks/o_icon/compass.png"
+    "https://yourimageshare.com/ib/c123oPx7Nz.png"
   );
   slider.value = 20;
   value = slider.value;
@@ -3280,31 +3282,31 @@ function icon_oneui() {
 
   box3.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/music.png")`
+    `url("https://yourimageshare.com/ib/7l3Gk00BxW.png")`
   );
   box3.style.background = "#00000000";
 
   box4.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/settings.png")`
+    `url("https://yourimageshare.com/ib/lP6p1xwNKO.png")`
   );
   box4.style.background = "#00000000";
 
   box5.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/messages.png")`
+    `url("https://yourimageshare.com/ib/ucZd6pq45a.png")`
   );
   box5.style.background = "#00000000";
 
   box6.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/gallery.png")`
+    `url("https://yourimageshare.com/ib/BQMUAQLi1i.png")`
   );
   box6.style.background = "#00000000";
 
   box7.style.setProperty(
     "--bg--originos",
-    `url("originos_data/iconPacks/oui_icon/calendar.png")`
+    `url("https://yourimageshare.com/ib/lcOGD7bWbw.png")`
   );
   box7.style.background = "#00000000";
 
@@ -3344,23 +3346,23 @@ function icon_harmonyos() {
   );
   setIconAndBackgroundGradient(
     "box3",
-    "originos_data/iconPacks/harmonyos_icon/music.png"
+    "https://yourimageshare.com/ib/7l3Gk00BxW.png"
   );
   setIconAndBackgroundGradient(
     "box4",
-    "originos_data/iconPacks/harmonyos_icon/settings.png"
+    "https://yourimageshare.com/ib/lP6p1xwNKO.png"
   );
   setIconAndBackgroundGradient(
     "box5",
-    "originos_data/iconPacks/harmonyos_icon/messages.png"
+    "https://yourimageshare.com/ib/ucZd6pq45a.png"
   );
   setIconAndBackgroundGradient(
     "box6",
-    "originos_data/iconPacks/harmonyos_icon/gallery.png"
+    "https://yourimageshare.com/ib/BQMUAQLi1i.png"
   );
   setIconAndBackgroundGradient(
     "box7",
-    "originos_data/iconPacks/harmonyos_icon/calendar.png"
+    "https://yourimageshare.com/ib/lcOGD7bWbw.png"
   );
   setIconAndBackgroundGradient(
     "box8",

@@ -1599,7 +1599,7 @@ function unlock() {
       //);
 
       // normal anim
-      box.style.transition = `all ${timeUnlock}s cubic-bezier(.25,.1,${easingAnimationForUnlock},1), opacity ${currentSpeed3}s`;
+      box.style.transition = `all ${timeUnlock}s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity ${currentSpeed3}s`;
       box.style.transitionDelay = `${delay}ms`;
       box.style.transform = "translateX(0px) translateY(0px) scale(1)";
       box.style.opacity = "1";
@@ -1609,7 +1609,7 @@ function unlock() {
   // Khay app xuất hiện sau nhóm cuối
   const khay = document.querySelector(".khayapp");
   const lastDelay = (groups_anim.length + 1) * 0.1 * currentSpeed; // delay của nhóm cuối
-  khay.style.transition = `all ${timeUnlock}s cubic-bezier(.25,.1,${easingAnimationForUnlock},1)`;
+  khay.style.transition = `all ${timeUnlock}s cubic-bezier(0.175, 0.885, 0.32, 1.275)`;
   khay.style.transitionDelay = `${lastDelay}s`;
   khay.classList.remove("lock");
 
@@ -3061,18 +3061,18 @@ if (window.visualViewport) {
 
 // Custom Icon Pack Logic
 window.customApps = [
-  { id: "box1", name: "الحاسبة", defaultIcon: "https://i.ibb.co/gLMPFscR/com-miui-calculator.png" },
+  { id: "box1", name: "الحاسبة", defaultIcon: "https://yourimageshare.com/ib/jhcdkbaDfC.png" },
   { id: "box2", name: "مدير الملفات", defaultIcon: "https://yourimageshare.com/ib/rNiozTmpqK.png" },
-  { id: "box3", name: "الموسيقى", defaultIcon: "originos_data/iconPacks/hype_icon/system_music.png" },
+  { id: "box3", name: "الموسيقى", defaultIcon: "https://yourimageshare.com/ib/7l3Gk00BxW.png" },
   { id: "box4", name: "الإعدادات", defaultIcon: "https://yourimageshare.com/ib/lP6p1xwNKO.png" },
-  { id: "box5", name: "الرسائل", defaultIcon: "originos_data/iconPacks/hype_icon/system_messages.png" },
-  { id: "box6", name: "الصور", defaultIcon: "originos_data/iconPacks/hype_icon/system_photos.png" },
-  { id: "box7", name: "التقويم", defaultIcon: "originos_data/iconPacks/hype_icon/system_calendar.png" },
+  { id: "box5", name: "الرسائل", defaultIcon: "https://yourimageshare.com/ib/ucZd6pq45a.png" },
+  { id: "box6", name: "الصور", defaultIcon: "https://yourimageshare.com/ib/BQMUAQLi1i.png" },
+  { id: "box7", name: "التقويم", defaultIcon: "https://yourimageshare.com/ib/lcOGD7bWbw.png" },
   { id: "box8", name: "الهاتف", defaultIcon: "https://yourimageshare.com/ib/1DNRlKIoeD.png" },
-  { id: "box9", name: "المتصفح", defaultIcon: "originos_data/iconPacks/hype_icon/system_compass.png" },
-  { id: "box10", name: "الطقس", defaultIcon: "originos_data/iconPacks/hype_icon/system_clock.png" },
-  { id: "box11", name: "المؤقت", defaultIcon: "https://www.hostpic.org/images/2605131949480104.png" },
-  { id: "box12", name: "الثيمات", defaultIcon: "https://i.ibb.co/XZhG8f19/com-android-thememanager.png" },
+  { id: "box9", name: "المتصفح", defaultIcon: "https://yourimageshare.com/ib/bLfJRLuhMK.png" },
+  { id: "box10", name: "الطقس", defaultIcon: "https://yourimageshare.com/ib/c123oPx7Nz.png" },
+  { id: "box11", name: "المؤقت", defaultIcon: "https://yourimageshare.com/ib/7cGQdxnoO3.png" },
+  { id: "box12", name: "الثيمات", defaultIcon: "https://yourimageshare.com/ib/MmRdzUMY0f.png" },
   { id: "box13", name: "تطبيق 13", defaultIcon: "https://www.hostpic.org/images/2605131954290084.png" },
   { id: "box14", name: "Terminal", defaultIcon: "https://img.icons8.com/color/256/console.png" },
   { id: "box15", name: "تطبيق 15", defaultIcon: "https://www.hostpic.org/images/2605131558540092.png" },
@@ -3536,4 +3536,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// Device name management
+document.addEventListener("DOMContentLoaded", () => {
+    const deviceNameInput = document.getElementById("device_name_input");
+    if (deviceNameInput) {
+        deviceNameInput.value = localStorage.getItem("device_name") || "Phone";
+        deviceNameInput.addEventListener("input", (e) => {
+            localStorage.setItem("device_name", e.target.value);
+        });
+    }
 });
