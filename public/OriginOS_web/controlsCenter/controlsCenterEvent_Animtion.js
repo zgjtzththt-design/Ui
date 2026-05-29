@@ -243,7 +243,8 @@ function closeControlsCenter() {
 
   isOpenControlsCenterTmp = false;
 
-  lpControlCenterControlsCenter.style.backdropFilter = `blur(0px)`;
+  lpControlCenterControlsCenter.style.backdropFilter = ``;
+  lpControlCenterControlsCenter.style.webkitBackdropFilter = ``;
   battery1.style.transition = statusWifi.style.transition = `all ${currentSpeed4}s`;
   battery1.style.transform = statusWifi.style.transform = ``;
 
@@ -257,6 +258,24 @@ function closeControlsCenter() {
   // Disable sortable if active
   if (isReorderingCC) {
     toggleReorderCC();
+  }
+
+  if (typeof islock !== "undefined" && islock) {
+    const lock_content_el = document.getElementById("lock_content");
+    const unlockBtn_el = document.getElementById("unlock-btn");
+    const longer_finger_el = document.getElementById("longer_finger");
+    if (lock_content_el) {
+      lock_content_el.style.transition = `opacity ${currentSpeed5}s`;
+      lock_content_el.style.opacity = 1;
+    }
+    if (unlockBtn_el) {
+      unlockBtn_el.style.transition = `opacity ${currentSpeed5}s`;
+      unlockBtn_el.style.opacity = 1;
+    }
+    if (longer_finger_el) {
+      longer_finger_el.style.transition = `opacity ${currentSpeed5}s`;
+      longer_finger_el.style.opacity = 1;
+    }
   }
 }
 
@@ -452,7 +471,14 @@ function openControlsCenter() {
     .getElementById("openSettingBtnInControlsCenter")
     .addEventListener("click", openSettingsApp);
 
-  lpControlCenterControlsCenter.style.backdropFilter = `blur(20px)`;
+  const isGlassy = lpControlCenterControlsCenter.classList.contains("glassy-mode");
+  if (isGlassy) {
+    lpControlCenterControlsCenter.style.backdropFilter = `blur(20px) saturate(1.67)`;
+    lpControlCenterControlsCenter.style.webkitBackdropFilter = `blur(20px) saturate(1.67)`;
+  } else {
+    lpControlCenterControlsCenter.style.backdropFilter = `blur(40px) saturate(1.8)`;
+    lpControlCenterControlsCenter.style.webkitBackdropFilter = `blur(40px) saturate(1.8)`;
+  }
   battery1.style.transition = statusWifi.style.transition = `all ${currentSpeed6}s`;
   battery1.style.transform = statusWifi.style.transform = `translateX(-16px) translateY(40px)`;
 
@@ -464,6 +490,24 @@ function openControlsCenter() {
   dongnotification();
   close_all_island();
   addDragVolumeAndBrightnessEvents();
+
+  if (typeof islock !== "undefined" && islock) {
+    const lock_content_el = document.getElementById("lock_content");
+    const unlockBtn_el = document.getElementById("unlock-btn");
+    const longer_finger_el = document.getElementById("longer_finger");
+    if (lock_content_el) {
+      lock_content_el.style.transition = `opacity ${currentSpeed5}s`;
+      lock_content_el.style.opacity = 0;
+    }
+    if (unlockBtn_el) {
+      unlockBtn_el.style.transition = `opacity ${currentSpeed5}s`;
+      unlockBtn_el.style.opacity = 0;
+    }
+    if (longer_finger_el) {
+      longer_finger_el.style.transition = `opacity ${currentSpeed5}s`;
+      longer_finger_el.style.opacity = 0;
+    }
+  }
 }
 
 // controls center s2 even listener
@@ -493,12 +537,45 @@ function updateTransformS2(y) {
 
   if (!isOpenControlsCenterTmp) {
     lpControlCenterControlsCenter.style.transition = `all ${currentSpeed3}s`;
-    lpControlCenterControlsCenter.style.backdropFilter = `blur(${-y2 / 5}px)`;
+    const progress = Math.min(Math.max(-y2 / 130, 0), 1);
+    const isGlassy = lpControlCenterControlsCenter.classList.contains("glassy-mode");
+    if (isGlassy) {
+      const b = progress * 20;
+      const s = 1.0 + progress * 0.67;
+      lpControlCenterControlsCenter.style.backdropFilter = `blur(${b}px) saturate(${s})`;
+      lpControlCenterControlsCenter.style.webkitBackdropFilter = `blur(${b}px) saturate(${s})`;
+    } else {
+      const b = progress * 40;
+      const s = 1.0 + progress * 0.8;
+      lpControlCenterControlsCenter.style.backdropFilter = `blur(${b}px) saturate(${s})`;
+      lpControlCenterControlsCenter.style.webkitBackdropFilter = `blur(${b}px) saturate(${s})`;
+    }
     lpControlCenterControlsCenter.style.zIndex = 10000;
   }
 
   controlsCenterAll.style.marginTop = `${-y2 / 2.5}px`;
   controlsCenterAll.style.rowGap = `${23 + -y2 / 10}px`;
+
+  if (typeof islock !== "undefined" && islock) {
+    const progress = Math.min(Math.max(-y2 / 130, 0), 1);
+    const targetOpacity = 1 - progress;
+    const lock_content_el = document.getElementById("lock_content");
+    const unlockBtn_el = document.getElementById("unlock-btn");
+    const longer_finger_el = document.getElementById("longer_finger");
+    
+    if (lock_content_el) {
+      lock_content_el.style.transition = `opacity ${currentSpeed3}s`;
+      lock_content_el.style.opacity = targetOpacity;
+    }
+    if (unlockBtn_el) {
+      unlockBtn_el.style.transition = `opacity ${currentSpeed3}s`;
+      unlockBtn_el.style.opacity = targetOpacity;
+    }
+    if (longer_finger_el) {
+      longer_finger_el.style.transition = `opacity ${currentSpeed3}s`;
+      longer_finger_el.style.opacity = targetOpacity;
+    }
+  }
 }
 
 thanhS2.addEventListener("touchstart", (e) => {

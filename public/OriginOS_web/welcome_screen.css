@@ -23,59 +23,97 @@
     overflow: hidden;
 }
 
-/* --- 1. تأثير الخلفية الداكنة المتحركة --- */
-.dark-fluid-bg {
+/* --- 1. تأثير الخلفية الملونة المتحركة الجديدة --- */
+.gradient-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(45deg, #0a0a1a, #16213e, #0f3460, #000000);
-    background-size: 300% 300%;
-    z-index: 0;
-    animation: gradientFlow 6s ease infinite;
+    z-index: 0; 
+    overflow: hidden;
+    background: #eaeaff;
 }
 
-/* --- 2. الخلفية الدائرية (Mesh) --- */
-.mesh-layer {
+/* تنسيق عام لبقع الألوان - مع تقليل البلور قليلاً لزيادة وضوح الألوان */
+.color-blob {
     position: absolute;
-    width: 200%; height: 200%;
-    top: -50%; left: -50%;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 154, 158, 0.8) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(250, 208, 196, 0.8) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(161, 196, 253, 0.8) 0%, transparent 50%);
-    filter: blur(50px);
-    z-index: 1;
-    animation: rotateMesh 11.25s linear infinite;
+    border-radius: 50%; 
+    filter: blur(135px); /* تم تقليل الضبابية ليكون اللون أوضح وأعمق */
+    will-change: transform, opacity;
+    mix-blend-mode: normal; 
 }
 
-@keyframes rotateMesh {
-    from { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.1); }
-    to { transform: rotate(360deg) scale(1); }
-}
-
-/* --- 3. تأثير الموجة المائية --- */
-.water-ripple-bg {
-    position: absolute;
-    inset: 0;
-    background: var(--fluid-gradient);
-    background-size: 300% 300%;
-    z-index: 2;
-    mix-blend-mode: hard-light;
+/* أزرق أكثر حيوية - الحركة الآن سريعة (7.5 ثواني بدلا من 14) */
+.color-blue {
+    background: #7990ff; /* تم تشبع اللون ليكون أوضح */
+    width: 60%;
+    height: 70%;
+    top: -20%;
+    left: -15%;
+    animation: moveFastBlue 7.5s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.95;
-    animation: 
-        waterSpread 1.125s cubic-bezier(0.1, 0.5, 0.2, 1) forwards,
-        gradientFlow 4.5s ease-in-out infinite alternate;
 }
 
-@keyframes waterSpread {
-    0% { clip-path: circle(0% at 50% 50%); filter: brightness(2) contrast(1.5); }
-    100% { clip-path: circle(150% at 50% 50%); filter: brightness(1) contrast(1); }
+/* بنفسجي نقي وبارز - الحركة الآن في (9 ثواني بدلاً من 18) */
+.color-purple {
+    background: #b8b5ff; 
+    width: 65%;
+    height: 60%;
+    top: -10%;
+    right: -10%;
+    animation: moveFastPurple 9s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* وردي/مشمشي أكثر إشراقاً ووضوحاً - في (8 ثواني) */
+.color-pink {
+    background: #ff878d; 
+    width: 75%;
+    height: 70%;
+    bottom: -20%;
+    right: -10%;
+    animation: moveFastPink 8s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* توهج أبيض حاد ونقي يختلط مع بقية الألوان بسرعة - (8.5 ثواني) */
+.color-white {
+    background: #ffffff;
+    width: 70%;
+    height: 65%;
+    bottom: -20%;
+    left: -20%;
+    animation: moveFastWhite 8.5s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(115px); /* قللت بلور الأبيض ليبرز أكثر كالإضاءة الساطعة */
+    opacity: 1;
+}
+
+/* ============================================================
+   مفاتيح الحركة بعد مضاعفة السرعة ومنع العتامة الباهتة (Opacities)
+   ============================================================ */
+
+@keyframes moveFastBlue {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.9; }
+    33% { transform: translate(15vw, 20vh) scale(1.1) rotate(15deg); opacity: 1; }
+    66% { transform: translate(-5vw, 35vh) scale(0.9) rotate(-10deg); opacity: 0.85; }
+    100% { transform: translate(30vw, -10vh) scale(1.2) rotate(20deg); opacity: 1; }
+}
+
+@keyframes moveFastPurple {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.9; }
+    33% { transform: translate(-25vw, 10vh) scale(0.95) rotate(-20deg); opacity: 0.85; }
+    66% { transform: translate(-10vw, 35vh) scale(1.2) rotate(10deg); opacity: 1; }
+    100% { transform: translate(15vw, 15vh) scale(1.1) rotate(35deg); opacity: 0.9; }
+}
+
+@keyframes moveFastPink {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+    33% { transform: translate(-15vw, -30vh) scale(1.25) rotate(-15deg); opacity: 1; }
+    66% { transform: translate(10vw, -10vh) scale(0.9) rotate(10deg); opacity: 0.9; }
+    100% { transform: translate(-35vw, -15vh) scale(1.15) rotate(-5deg); opacity: 1; }
+}
+
+@keyframes moveFastWhite {
+    0% { transform: translate(0, 0) scale(1.1); opacity: 1; }
+    33% { transform: translate(25vw, -10vh) scale(0.9) rotate(15deg); opacity: 0.85; }
+    66% { transform: translate(-5vw, 15vh) scale(1.2) rotate(-10deg); opacity: 1; }
+    100% { transform: translate(25vw, -20vh) scale(1.1); opacity: 0.95; }
 }
 
 /* محتوى الشاشة */

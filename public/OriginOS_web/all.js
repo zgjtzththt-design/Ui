@@ -278,6 +278,8 @@ const boxes = {
   box22: document.getElementById("box22"),
   box23: document.getElementById("box23"),
   box24: document.getElementById("box24"),
+  box25: document.getElementById("box25"),
+  box26: document.getElementById("box26"),
 };
 
 document.querySelector(".khayapp").classList.add("lock");
@@ -307,6 +309,8 @@ const appopen = {
   box22: document.getElementById("app22"),
   box23: document.getElementById("app23"),
   box24: document.getElementById("app24"),
+  box25: document.getElementById("app25"),
+  box26: document.getElementById("app26"),
 };
 
 const clickables = {
@@ -334,6 +338,8 @@ const clickables = {
   box22: document.getElementById("clicke22"),
   box23: document.getElementById("clicke23"),
   box24: document.getElementById("clicke24"),
+  box25: document.getElementById("clicke25"),
+  box26: document.getElementById("clicke26"),
 };
 
 const WallPaper = document.querySelector(".wallpaper");
@@ -641,13 +647,17 @@ let appPressTarget = null;
 let appPressTimer = null;
 let appPressStartX, appPressStartY;
 
-["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"].forEach(
+["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"].forEach(
   (num) => {
     const clicke = document.getElementById(`clicke${num}`);
     const box = boxes[`box${num}`];
 
     clicke.addEventListener("pointerdown", (e) => {
-      if (currentOpeningBtn) return;
+      if (currentOpeningBtn && !multipleClickApp) return;
+
+      clicke.appPressTarget = num;
+      clicke.appPressStartX = e.clientX;
+      clicke.appPressStartY = e.clientY;
 
       appPressTarget = num;
       appPressStartX = e.clientX;
@@ -656,8 +666,8 @@ let appPressStartX, appPressStartY;
       // Prevent system context menu on long press on this element
       clicke.oncontextmenu = (e) => e.preventDefault();
 
-      appPressTimer = setTimeout(() => {
-        if (appPressTarget && window.showIconPopup) {
+      clicke.appPressTimer = setTimeout(() => {
+        if (clicke.appPressTarget && window.showIconPopup) {
             // Apply bounce animation
             if (box) {
                box.classList.add("bouncing");
@@ -665,15 +675,25 @@ let appPressStartX, appPressStartY;
                  box.classList.remove("bouncing");
                }, 300); // Wait for animation to finish
             }
-            window.showIconPopup(appPressTarget);
+            window.showIconPopup(clicke.appPressTarget);
+            clicke.appPressTarget = null;
             appPressTarget = null;
         }
       }, 700);
     });
 
+    clicke.clickCount = 0;
+    clicke.lastClickTime = 0;
+
     clicke.addEventListener("pointerup", () => {
-      clearTimeout(appPressTimer);
-      if(!appPressTarget) return;
+      clearTimeout(clicke.appPressTimer);
+      if(!clicke.appPressTarget) return;
+
+      if (num === "25" || num === "26") {
+        clicke.appPressTarget = null;
+        appPressTarget = null;
+        return;
+      }
 
       if (currentOpeningBtn) {
         currentOpeningBtn.style.transition = `all ${time_opening_app}s ${cubicScaleClosing}`;
@@ -725,17 +745,18 @@ let appPressStartX, appPressStartY;
           }
         }, multipleClickAppTime);
       }
+      clicke.appPressTarget = null;
       appPressTarget = null;
     });
 
     clicke.addEventListener("pointercancel", () => {
-      clearTimeout(appPressTimer);
-      appPressTarget = null;
+      clearTimeout(clicke.appPressTimer);
+      clicke.appPressTarget = null;
     });
 
     clicke.addEventListener("pointerleave", () => {
-      clearTimeout(appPressTimer);
-      appPressTarget = null;
+      clearTimeout(clicke.appPressTimer);
+      clicke.appPressTarget = null;
     });
   }
 );
@@ -746,6 +767,16 @@ window.addEventListener("beforeunload", () => {
 });
 
 window.addEventListener("pointermove", (e) => {
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"].forEach((num) => {
+    const clicke = document.getElementById(`clicke${num}`);
+    if (clicke && clicke.appPressTarget) {
+      const dist = Math.sqrt(Math.pow(e.clientX - clicke.appPressStartX, 2) + Math.pow(e.clientY - clicke.appPressStartY, 2));
+      if (dist > 30) {
+        clearTimeout(clicke.appPressTimer);
+        clicke.appPressTarget = null;
+      }
+    }
+  });
   if (appPressTarget) {
      const dist = Math.sqrt(Math.pow(e.clientX - appPressStartX, 2) + Math.pow(e.clientY - appPressStartY, 2));
      if (dist > 30) {
@@ -755,7 +786,13 @@ window.addEventListener("pointermove", (e) => {
 });
 
 window.addEventListener("pointerup", () => {
-    appPressTarget = null;
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"].forEach((num) => {
+    const clicke = document.getElementById(`clicke${num}`);
+    if (clicke) {
+      clicke.appPressTarget = null;
+    }
+  });
+  appPressTarget = null;
 });
 
 const island = document.getElementById("island");
@@ -1599,7 +1636,8 @@ function unlock() {
       //);
 
       // normal anim
-      box.style.transition = `all ${timeUnlock}s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity ${currentSpeed3}s`;
+      const unlockEasingOpt = localStorage.getItem("disable_unlock_bounce") === "true" ? "cubic-bezier(0.25, 1, 0.5, 1)" : "cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+      box.style.transition = `all ${timeUnlock}s ${unlockEasingOpt}, opacity ${currentSpeed3}s`;
       box.style.transitionDelay = `${delay}ms`;
       box.style.transform = "translateX(0px) translateY(0px) scale(1)";
       box.style.opacity = "1";
@@ -1609,7 +1647,8 @@ function unlock() {
   // Khay app xuất hiện sau nhóm cuối
   const khay = document.querySelector(".khayapp");
   const lastDelay = (groups_anim.length + 1) * 0.1 * currentSpeed; // delay của nhóm cuối
-  khay.style.transition = `all ${timeUnlock}s cubic-bezier(0.175, 0.885, 0.32, 1.275)`;
+  const khayEasing = localStorage.getItem("disable_unlock_bounce") === "true" ? "cubic-bezier(0.25, 1, 0.5, 1)" : "cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+  khay.style.transition = `all ${timeUnlock}s ${khayEasing}`;
   khay.style.transitionDelay = `${lastDelay}s`;
   khay.classList.remove("lock");
 
@@ -3080,6 +3119,8 @@ window.customApps = [
   { id: "box22", name: "تطبيق 22", defaultIcon: "https://www.hostpic.org/images/2605132000110097.png" },
   { id: "box23", name: "البحث الصوتي", defaultIcon: "https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png" },
   { id: "box24", name: "جهات الاتصال", defaultIcon: "https://yourimageshare.com/ib/1DNRlKIoeD.png" },
+  { id: "box25", name: "الطقس", defaultIcon: "" },
+  { id: "box26", name: "التقويم", defaultIcon: "" },
 ];
 
 window.getAppKeywords = function() {
@@ -3370,6 +3411,30 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
   // Set icon background image first
   box.style.setProperty("--bg--originos", `url("${imageUrl}")`);
 
+  // Special handling for widgets 25 & 26 to show background image
+  if (boxId === "box25" || boxId === "box26") {
+      if (imageUrl && imageUrl !== "") {
+          box.style.backgroundImage = `url("${imageUrl}")`;
+          box.style.backgroundSize = "cover";
+          box.style.backgroundPosition = "center center";
+          
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = "transparent";
+              widgetContent.style.backdropFilter = "none";
+              widgetContent.style.webkitBackdropFilter = "none";
+          }
+      } else {
+          box.style.backgroundImage = "none";
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = boxId === "box25" ? "rgba(255, 255, 255, 0.7)" : "#222";
+              widgetContent.style.backdropFilter = "";
+              widgetContent.style.webkitBackdropFilter = "";
+          }
+      }
+  }
+
   const img = new Image();
   // Ensure Base64 or local images don't trigger CORS issues where possible
   if (!imageUrl.startsWith('data:')) {
@@ -3405,7 +3470,9 @@ function setIconAndBackgroundGradient(boxId, imageUrl) {
       const topColor = `rgb(${top[0]}, ${top[1]}, ${top[2]})`;
       const bottomColor = `rgb(${bottom[0]}, ${bottom[1]}, ${bottom[2]})`;
 
-      box.style.background = `linear-gradient(to bottom, ${topColor}, ${bottomColor})`;
+      if (boxId !== "box25" && boxId !== "box26") {
+          box.style.background = `linear-gradient(to bottom, ${topColor}, ${bottomColor})`;
+      }
     } catch (e) {
       console.warn("Could not extract image data:", e);
       box.style.background = "#eaeaea";
@@ -3426,6 +3493,7 @@ function applyCustomIcons(forceAll = false) {
       setIconAndBackgroundGradient(appId, savedIcons[appId]);
   });
 }
+window.applyCustomIcons = applyCustomIcons;
 
 function updateIconBorder(activeId) {
   document.querySelectorAll(".box_icon").forEach((el) => {

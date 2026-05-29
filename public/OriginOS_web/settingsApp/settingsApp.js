@@ -2827,7 +2827,7 @@ function addFingerAnimEvents() {
 
 function addFingerThemeEvents() {
   const fingerThemes = document.querySelectorAll(".finger-theme-item");
-  const savedUrl = localStorage.getItem("finger_theme_url") || "https://res.cloudinary.com/dhlxcif1m/image/upload/v1778120788/nulc38vtxyqsg4y6vdke.png";
+  const savedUrl = localStorage.getItem("finger_theme_url") || "https://yourimageshare.com/ib/4OL1YwyVVC.png";
   
   fingerThemes.forEach((item) => {
     const url = item.getAttribute("data-url");
@@ -2956,6 +2956,71 @@ function addLottiePreviewEvents() {
 
 // Tự động khởi động khi trang sẵn sàng
 
+document.addEventListener("DOMContentLoaded", () => {
+    const widgetFileInput = document.getElementById("widgetFileInput");
+    if (widgetFileInput) {
+        widgetFileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            const widgetSelector = document.getElementById("widgetSelector");
+            const boxNum = widgetSelector ? widgetSelector.value : "25";
+            const boxId = `box${boxNum}`;
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const base64 = event.target.result;
+                    
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement("canvas");
+                        const maxSize = 512;
+                        let width = img.width;
+                        let height = img.height;
+                        
+                        if (width > height) {
+                            if (width > maxSize) {
+                                height = Math.round(height * (maxSize / width));
+                                width = maxSize;
+                            }
+                        } else {
+                            if (height > maxSize) {
+                                width = Math.round(width * (maxSize / height));
+                                height = maxSize;
+                            }
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
+                        
+                        try {
+                            const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                            savedIcons[boxId] = compressedBase64;
+                            localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                            
+                            if (typeof window.restoreIconPack === "function") {
+                                window.restoreIconPack();
+                            } else if (typeof applyCustomIcons === "function") {
+                                applyCustomIcons();
+                            }
+                            
+                            if (typeof tb_system === "function") tb_system("تم تغيير صورة الويدجت بنجاح");
+                        } catch (err) {
+                            console.error("Storage full:", err);
+                            if (typeof tb_system === "function") tb_system("حجم الصورة كبير جداً، فشل الحفظ.");
+                        }
+                    };
+                    img.src = base64;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+
 window.showIconPopup = function showIconPopup(boxNum) {
   // If boxNum is a string or number, it's called from a long press on an app icon
   if ((typeof boxNum === "string" || typeof boxNum === "number") && boxNum !== "") {
@@ -2996,20 +3061,53 @@ window.showIconPopup = function showIconPopup(boxNum) {
             reader.onload = (event) => {
                 const base64 = event.target.result;
                 
-                // Save to localStorage
-                const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
-                savedIcons[boxId] = base64;
-                localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
-                
-                // Apply immediately
-                if (typeof window.restoreIconPack === "function") {
-                    window.restoreIconPack();
-                } else if (typeof applyCustomIcons === "function") {
-                    applyCustomIcons();
-                }
-                
-                if (window.closeCustomIconPopup) window.closeCustomIconPopup();
-                if (typeof tb_system === "function") tb_system("تم تغيير الأيقونة بنجاح");
+                const img = new Image();
+                img.onload = () => {
+                    // Resize image to prevent localStorage QuotaExceededError
+                    const canvas = document.createElement("canvas");
+                    const maxSize = 512;
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = Math.round(height * (maxSize / width));
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = Math.round(width * (maxSize / height));
+                            height = maxSize;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Compress to JPEG with 0.8 quality
+                    const compressedBase64 = canvas.toDataURL("image/jpeg", 0.8);
+                    
+                    try {
+                        const savedIcons = JSON.parse(localStorage.getItem("custom_icons") || "{}");
+                        savedIcons[boxId] = compressedBase64;
+                        localStorage.setItem("custom_icons", JSON.stringify(savedIcons));
+                        
+                        if (typeof window.restoreIconPack === "function") {
+                            window.restoreIconPack();
+                        } else if (typeof applyCustomIcons === "function") {
+                            applyCustomIcons();
+                        }
+                        
+                        if (window.closeCustomIconPopup) window.closeCustomIconPopup();
+                        if (typeof tb_system === "function") tb_system("تم تغيير الأيقونة بنجاح");
+                    } catch (err) {
+                        console.error("Storage full:", err);
+                        if (typeof tb_system === "function") tb_system("حجم الصورة كبير جداً، فشل الحفظ.");
+                    }
+                };
+                img.src = base64;
             };
             reader.readAsDataURL(file);
         }
@@ -3886,7 +3984,7 @@ function updateIconBorder(activeId) {
 
 let pack = localStorage.getItem("selected_icon_pack");
 // -- Restore icon pack when loading --
-function restoreIconPack() {
+window.restoreIconPack = function restoreIconPack() {
   const savedRadius = localStorage.getItem("bg-border_radius_saved");
   if (savedRadius) {
     const root = document.documentElement;
@@ -3916,6 +4014,11 @@ function restoreIconPack() {
   else if (pack === "custom") applyCustomIcons();
   else if (pack === "flymeos") icon_flymeos();
   else icon_originos();
+
+  // Ensure all custom icons are applied over the pack defaults
+  if (typeof applyCustomIcons === "function") {
+    applyCustomIcons();
+  }
 }
 
 const root = document.documentElement;
@@ -3950,8 +4053,34 @@ function setIconAndBackgroundGradient2(boxSelector, imageUrl) {
   // Gán icon vào CSS biến
   box.style.setProperty("--bg--originos", `url("${imageUrl}")`);
 
+  // Special handling for widgets 25 & 26 to show background image
+  if (boxSelector === "box25" || boxSelector === "box26") {
+      if (imageUrl && imageUrl !== "") {
+          box.style.backgroundImage = `url("${imageUrl}")`;
+          box.style.backgroundSize = "cover";
+          box.style.backgroundPosition = "center center";
+          
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = "transparent";
+              widgetContent.style.backdropFilter = "none";
+              widgetContent.style.webkitBackdropFilter = "none";
+          }
+      } else {
+          box.style.backgroundImage = "none";
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = boxSelector === "box25" ? "rgba(255, 255, 255, 0.7)" : "#222";
+              widgetContent.style.backdropFilter = "";
+              widgetContent.style.webkitBackdropFilter = "";
+          }
+      }
+  }
+
   const img = new Image();
-  // img.crossOrigin = "anonymous"; // CORS: bắt buộc nếu ảnh từ CDN, GitHub...
+  if (imageUrl && !imageUrl.startsWith('data:')) {
+    img.crossOrigin = "anonymous";
+  }
   img.src = imageUrl;
 
   img.onload = () => {
@@ -3978,7 +4107,9 @@ function setIconAndBackgroundGradient2(boxSelector, imageUrl) {
       const leftColor = `rgb(${leftColorData[0]}, ${leftColorData[1]}, ${leftColorData[2]})`;
       const rightColor = `rgb(${rightColorData[0]}, ${rightColorData[1]}, ${rightColorData[2]})`;
 
-      box.style.background = `linear-gradient(to right, ${leftColor}, ${rightColor})`;
+      if (boxSelector !== "box25" && boxSelector !== "box26") {
+          box.style.background = `linear-gradient(to right, ${leftColor}, ${rightColor})`;
+      }
     } catch (e) {
       console.warn("getImageData error:", e);
       box.style.background = "#eaeaea"; // fallback
@@ -3998,8 +4129,34 @@ function setIconAndBackgroundGradient(boxSelector, imageUrl) {
   // Set icon background
   box.style.setProperty("--bg--originos", `url("${imageUrl}")`);
 
+  // Special handling for widgets 25 & 26 to show background image
+  if (boxSelector === "box25" || boxSelector === "box26") {
+      if (imageUrl && imageUrl !== "") {
+          box.style.backgroundImage = `url("${imageUrl}")`;
+          box.style.backgroundSize = "cover";
+          box.style.backgroundPosition = "center center";
+          
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = "transparent";
+              widgetContent.style.backdropFilter = "none";
+              widgetContent.style.webkitBackdropFilter = "none";
+          }
+      } else {
+          box.style.backgroundImage = "none";
+          const widgetContent = box.querySelector(".widget-content");
+          if (widgetContent) {
+              widgetContent.style.background = boxSelector === "box25" ? "rgba(255, 255, 255, 0.7)" : "#222";
+              widgetContent.style.backdropFilter = "";
+              widgetContent.style.webkitBackdropFilter = "";
+          }
+      }
+  }
+
   const img = new Image();
-  img.crossOrigin = "anonymous"; // important for CORS
+  if (imageUrl && !imageUrl.startsWith('data:')) {
+    img.crossOrigin = "anonymous";
+  }
   img.src = imageUrl;
 
   img.onload = () => {
@@ -4025,7 +4182,9 @@ function setIconAndBackgroundGradient(boxSelector, imageUrl) {
       const topColor = `rgb(${top[0]}, ${top[1]}, ${top[2]})`;
       const bottomColor = `rgb(${bottom[0]}, ${bottom[1]}, ${bottom[2]})`;
 
-      box.style.background = `linear-gradient(to bottom, ${topColor}, ${bottomColor})`;
+      if (boxSelector !== "box25" && boxSelector !== "box26") {
+          box.style.background = `linear-gradient(to bottom, ${topColor}, ${bottomColor})`;
+      }
     } catch (e) {
       console.warn("Could not extract image data:", e);
       box.style.background = "#eaeaea"; // fallback
@@ -4410,12 +4569,35 @@ const anim_unlock_btn = document.getElementById("anim_unlock_btn");
 const app4_unlock_animation = document.getElementById("app4UnlockAnimation");
 const back16 = document.getElementById("back_UnlockAnimation");
 
+const toggle_disable_bounce_btn = document.getElementById("toggle_disable_bounce_btn");
+const toggle_disable_bounce = document.getElementById("toggle_disable_bounce");
+
+// Initialize state
+if (toggle_disable_bounce) {
+  const isDisableBounce = localStorage.getItem("disable_unlock_bounce") === "true";
+  if (isDisableBounce) {
+    toggle_disable_bounce.classList.add("active");
+  } else {
+    toggle_disable_bounce.classList.remove("active");
+  }
+}
+
+function onToggleDisableBounce() {
+  if (toggle_disable_bounce) {
+    const isActive = toggle_disable_bounce.classList.toggle("active");
+    localStorage.setItem("disable_unlock_bounce", isActive ? "true" : "false");
+  }
+}
+
 function show_app4UnlockAnimation() {
   showPopup_open_close(app4_unlock_animation);
 
   timeAnimationUnlock.addEventListener("input", timeAnimationUnlockEvent);
   easingAnimationUnlock.addEventListener("input", easingAnimationUnlockEvent);
   reset_anim_unlock_btn.addEventListener("click", reset_anim_unlock_btn_event);
+  if (toggle_disable_bounce_btn) {
+    toggle_disable_bounce_btn.addEventListener("click", onToggleDisableBounce);
+  }
 }
 function hide_app4UnlockAnimation() {
   hidePopup_open_close(app4_unlock_animation);
@@ -4429,6 +4611,9 @@ function hide_app4UnlockAnimation() {
     "click",
     reset_anim_unlock_btn_event
   );
+  if (toggle_disable_bounce_btn) {
+    toggle_disable_bounce_btn.removeEventListener("click", onToggleDisableBounce);
+  }
 }
 
 const timeAnimationUnlock = document.getElementById("timeAnimationUnlock");
