@@ -93,6 +93,8 @@ const back14 = document.getElementById("back_to_setting14");
 
 const hideTimeouts_open_close = {};
 
+window.globalHighestZIndex = 150000000;
+
 function showPopup_open_close(target, mode = "flex", className = "open") {
   const el =
     typeof target === "string" ? document.getElementById(target) : target;
@@ -105,6 +107,8 @@ function showPopup_open_close(target, mode = "flex", className = "open") {
     hideTimeouts_open_close[id] = null;
   }
 
+  // Ensure opened app is on top
+  el.style.zIndex = window.globalHighestZIndex++;
   el.style.display = mode;
 
   requestAnimationFrame(() => {
@@ -279,69 +283,10 @@ back_to_setting_display.addEventListener("click", () => {
 const centerClockDisplayBtn = document.getElementById("center_clock_display_btn");
 if (centerClockDisplayBtn) {
   centerClockDisplayBtn.addEventListener("click", () => {
-    let updatedAny = false;
-
-    // 1. Handle "Less is more" style sliders if they exist
-    const sliderData = [
-      { id: 'top_less_is_more', val: 45 },
-      { id: 'left_less_is_more', val: 50 },
-      { id: 'top_less_is_more_audio', val: 55 },
-      { id: 'left_less_is_more_audio', val: 50 },
-      { id: 'top_less_is_more_date', val: 50 },
-      { id: 'left_less_is_more_date', val: 50 }
-    ];
-
-    sliderData.forEach(item => {
-      const el = document.getElementById(item.id);
-      if (el) {
-        el.value = item.val;
-        el.dispatchEvent(new Event('input'));
-        updatedAny = true;
-      }
-    });
-
-    // 2. Handle standard clock styles using centered classes
-    const clockElements = [
-      { id: "lockclock", cls: "centered" },
-      { id: "clock_preview", cls: "centered" },
-      { id: "dateText", cls: "clock-centered" },
-      { id: "dateTextPreview", cls: "clock-centered" }
-    ];
-
-    clockElements.forEach(item => {
-      const el = document.getElementById(item.id);
-      if (el) {
-        if (item.cls === "centered") {
-          el.style.left = "50%";
-          el.style.transform = "translateX(-50%) translateY(35px)";
-          el.style.position = "absolute";
-        } else if (item.cls === "clock-centered") {
-          el.style.left = "50%";
-          el.style.transform = "translateX(-50%)";
-          el.style.position = "absolute";
-        }
-        updatedAny = true;
-      }
-    });
-
-    // Also remove active state from "Top" button if it exists
-    const btnClockTop = document.getElementById("btn_clock_pos_top");
-    const btnClockCenter = document.getElementById("btn_clock_pos_center");
-    if (btnClockTop) btnClockTop.classList.remove("active");
-    if (btnClockCenter) btnClockCenter.classList.add("active");
-
-    localStorage.setItem("lock_clock_position", "center");
-
-    // Clear saved manual positions for standard clocks if any
-    localStorage.removeItem("clock_pos_x");
-    localStorage.removeItem("clock_pos_y");
-
-    if (updatedAny) {
-      if (typeof showPopup1_alert !== 'undefined') {
-        showPopup1_alert("✅ Clock centered");
-      } else if (typeof tb_system === 'function') {
-        tb_system("Clock centered");
-      }
+    if (typeof showPopup1_alert !== 'undefined') {
+      showPopup1_alert("ℹ️ Feature discontinued");
+    } else if (typeof tb_system === 'function') {
+      tb_system("Feature discontinued");
     }
   });
 }
@@ -961,7 +906,8 @@ if (saved_finger_local == 0) {
 document.addEventListener("DOMContentLoaded", () => {
     // Restore Performance Monitor Setting
     const savedPerfMonitor = localStorage.getItem("perfMonitorEnabled");
-    if (savedPerfMonitor === "true" && typeof applyPerfMonitor === 'function') {
+    // If null or true, enable it (Restore request implies wanting it back)
+    if ((savedPerfMonitor === null || savedPerfMonitor === "true") && typeof applyPerfMonitor === 'function') {
         const perfToggle = document.getElementById("perfMonitorToggle");
         if (perfToggle) perfToggle.checked = true;
         applyPerfMonitor(true);
@@ -5104,7 +5050,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Clock Position Toggle Logic
+    // Clock Position Toggle Logic (Always forced to TOP, centering discontinued)
     const btnClockTop = document.getElementById("btn_clock_pos_top");
     const btnClockCenter = document.getElementById("btn_clock_pos_center");
     const clockMain = document.getElementById("lockclock");
@@ -5115,33 +5061,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function applyClockPosition(position) {
         if (!clockMain) return; // Should handle errors gracefully
         
-        if (position === "center") {
-            clockMain.classList.add("centered");
-            if (clockPreview) clockPreview.classList.add("centered");
-            if (dateMain) dateMain.classList.add("clock-centered");
-            if (datePreview) datePreview.classList.add("clock-centered");
-            
-            if (btnClockCenter) btnClockCenter.classList.add("active");
-            if (btnClockTop) btnClockTop.classList.remove("active");
-        } else {
-            clockMain.classList.remove("centered");
-            if (clockPreview) clockPreview.classList.remove("centered");
-            if (dateMain) dateMain.classList.remove("clock-centered");
-            if (datePreview) datePreview.classList.remove("clock-centered");
-            
-            if (btnClockTop) btnClockTop.classList.add("active");
-            if (btnClockCenter) btnClockCenter.classList.remove("active");
+        // Force 'top' since centering feature is removed
+        clockMain.classList.remove("centered");
+        if (clockPreview) clockPreview.classList.remove("centered");
+        if (dateMain) dateMain.classList.remove("clock-centered");
+        if (datePreview) datePreview.classList.remove("clock-centered");
+        
+        if (btnClockTop) btnClockTop.classList.add("active");
+        if (btnClockCenter) {
+            btnClockCenter.classList.remove("active");
+            btnClockCenter.style.display = "none"; // Hide button visually
         }
-        localStorage.setItem("lock_clock_position", position);
+        localStorage.setItem("lock_clock_position", "top");
     }
 
     if (btnClockTop && btnClockCenter) {
         btnClockTop.addEventListener("click", () => applyClockPosition("top"));
-        btnClockCenter.addEventListener("click", () => applyClockPosition("center"));
+        btnClockCenter.addEventListener("click", () => applyClockPosition("top"));
         
         // Initial load
-        const savedPos = localStorage.getItem("lock_clock_position") || "top";
-        applyClockPosition(savedPos);
+        applyClockPosition("top");
     }
     
     // Vertical Clock Position Slider

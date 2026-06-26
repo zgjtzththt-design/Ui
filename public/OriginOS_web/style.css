@@ -967,6 +967,12 @@ body.full-screen .app4app.open {
 .khayapp.lock {
   opacity: 0;
 }
+.lp.open ~ .khayapp,
+.lpControlCenterControlsCenter.open ~ .allApp .khayapp {
+  /* opacity: 0 !important; */
+  /* pointer-events: none !important; */
+  transition: opacity 0.3s ease !important;
+}
 
 #wallpaper_aod2 {
   position: absolute;
@@ -1032,12 +1038,12 @@ body.full-screen .app4app.open {
   font-size: 100px;
   line-height: 90px;
   font-weight: 600;
-  top: var(--lock-clock-top, 120px);
+  top: 0px;
   user-select: none;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
-  transform: scale(1) translateY(0px);
-  transition: all 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
+  transform: translate3d(0, var(--lock-clock-top, 120px), 0) scale(1);
+  transition: transform 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97), opacity 0.6s cubic-bezier(0.23, 0.55, 0.54, 0.97);
   display: flex;
   opacity: var(--bg--lock_clock_opacity, 1);
   flex-direction: column;
@@ -1075,7 +1081,7 @@ body.full-screen .app4app.open {
   transform: scaleY(1.1);
 }
 .lock-clock.tat {
-  transform: scale(0.95) translateY(160px);
+  transform: translate3d(0, 160px, 0) scale(0.95);
 }
 
 .lock-clock.image-style,
@@ -1094,13 +1100,13 @@ body.full-screen .app4app.open {
   border: none !important;
   background-color: transparent !important;
   left: 50% !important;
-  transform: translateX(-50%) !important;
+  transform: translate3d(-50%, var(--lock-clock-top, 120px), 0) !important;
 }
 
 .lock-clock.image-style.centered {
   top: 50% !important;
   left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  transform: translate3d(-50%, -50%, 0) !important;
 }
 
 .clock-display.image-style {
@@ -1764,7 +1770,7 @@ body.full-screen .app4app.open {
   width: 100%;
   height: 100%;
   background: #000;
-  z-index: 9999999;
+  z-index: 200000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3472,7 +3478,7 @@ input[type="color"] {
   padding: 12px 24px;
   border-radius: 20px;
   font-size: 14px;
-  z-index: 10012310;
+  z-index: 300000000;
   opacity: 0;
   pointer-events: none;
   font-family: "Noto sans", sans-serif;
@@ -6196,7 +6202,7 @@ canvas {
   display: flex;
   align-items: flex-end; /* Align to the bottom instead of center */
   justify-content: center;
-  z-index: 99999;
+  z-index: 250000000;
   transition: all 0.3s;
   pointer-events: none;
   padding-bottom: 20px; /* Slight bump up from the very bottom */
@@ -6285,7 +6291,7 @@ canvas {
   left: 0 !important;
   right: 0 !important;
   margin: auto !important;
-  transform: translateY(-50%) !important;
+  transform: translate3d(0, -50%, 0) !important;
   text-align: center !important;
   width: 100% !important;
 }
@@ -6637,4 +6643,147 @@ canvas {
 .yt-nav-item.plus i {
   font-size: 28px;
   color: #fff;
+}
+
+/* New Apps Styling - Page 2 */
+#box27 {
+  --bg--originos: url("https://img.icons8.com/color/256/google-maps-new.png");
+  background-color: #ffffff;
+  left: 10%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box28 {
+  --bg--originos: url("https://img.icons8.com/color/256/notes.png");
+  background-color: #f59e0b;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box29 {
+  --bg--originos: url("https://img.icons8.com/color/256/camera.png");
+  background-color: #374151;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+#box30 {
+  --bg--originos: url("https://img.icons8.com/color/256/gmail-new.png");
+  background-color: #ef4444;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 490px);
+}
+
+#box31 {
+  --bg--originos: url("https://img.icons8.com/color/256/google-play.png");
+  background-color: #ffffff;
+  left: 10%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box32 {
+  --bg--originos: url("https://img.icons8.com/color/256/folder-invoices--v1.png");
+  background-color: #0ea5e9;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box33 {
+  --bg--originos: url("https://img.icons8.com/color/256/controller.png");
+  background-color: #8b5cf6;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+#box34 {
+  --bg--originos: url("https://img.icons8.com/color/256/google-assistant.png");
+  background-color: #10b981;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 420px);
+}
+
+#box35 {
+  --bg--originos: url("https://img.icons8.com/color/256/google-docs.png");
+  background-color: #2563eb;
+  left: 10%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box36 {
+  --bg--originos: url("https://img.icons8.com/color/256/weather.png");
+  background-color: #38bdf8;
+  left: 30.5%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box37 {
+  --bg--originos: url("https://img.icons8.com/color/256/alarm-clock.png");
+  background-color: #475569;
+  left: 51%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+#box38 {
+  --bg--originos: url("https://img.icons8.com/color/256/heart-monitor.png");
+  background-color: #ec4899;
+  left: 71.5%;
+  top: calc(var(--bg--size_height_phone) - 350px);
+}
+
+/* Clicke targets - Page 2 overlay touch bounds */
+#clicke27 { bottom: 430px; left: 10%; }
+#clicke28 { bottom: 430px; left: 30.5%; }
+#clicke29 { bottom: 430px; left: 51%; }
+#clicke30 { bottom: 430px; left: 71.5%; }
+
+#clicke31 { bottom: 360px; left: 10%; }
+#clicke32 { bottom: 360px; left: 30.5%; }
+#clicke33 { bottom: 360px; left: 51%; }
+#clicke34 { bottom: 360px; left: 71.5%; }
+
+#clicke35 { bottom: 290px; left: 10%; }
+#clicke36 { bottom: 290px; left: 30.5%; }
+#clicke37 { bottom: 290px; left: 51%; }
+#clicke38 { bottom: 290px; left: 71.5%; }
+
+/* Ensure newly styled apps are responsive, animated and cover appropriately */
+#box27::before, #box28::before, #box29::before, #box30::before,
+#box31::before, #box32::before, #box33::before, #box34::before,
+#box35::before, #box36::before, #box37::before, #box38::before {
+  background-size: cover;
+}
+
+#box27.open::before, #box28.open::before, #box29.open::before, #box30.open::before,
+#box31.open::before, #box32.open::before, #box33.open::before, #box34.open::before,
+#box35.open::before, #box36.open::before, #box37.open::before, #box38.open::before {
+  background-size: cover;
+}
+
+#box27.open,
+#box28.open,
+#box29.open,
+#box30.open,
+#box31.open,
+#box32.open,
+#box33.open,
+#box34.open,
+#box35.open,
+#box36.open,
+#box37.open,
+#box38.open {
+  width: 100% !important;
+  aspect-ratio: var(--bg--ratio_phone) !important;
+  border-radius: calc(var(--bg--border_radius_phone) - 1px) !important;
+  transform: scale(1.1628) !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0% !important;
+  z-index: 200 !important;
+  transform-origin: center !important;
+  background-color: transparent !important;
+}
+
+/* Fix z-index issue during app opening/closing */
+.khayapp:has(.box.open), .khayapp:has(.box.closing) {
+  z-index: 99999 !important;
+}
+.home-page:has(.box.open), .home-page:has(.box.closing) {
+  z-index: 99999 !important;
+}
+.home-pages-slider:has(.box.open), .home-pages-slider:has(.box.closing) {
+  z-index: 99999 !important;
+}
+#allApp.app-opening .clicke {
+  pointer-events: none;
 }

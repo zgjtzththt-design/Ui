@@ -3,9 +3,9 @@
 const allAnimUnlock_GroupAnim = {
   anim1: [
     { ids: ["box25", "box26"] },
-    { ids: ["box17", "box18", "box19", "box20", "box21", "box22", "box23", "box24"] },
-    { ids: ["box13", "box14", "box15", "box16"] },
-    { ids: ["box9", "box10", "box11", "box12"] },
+    { ids: ["box17", "box18", "box19", "box20", "box21", "box22", "box23", "box24", "box27", "box28", "box29", "box30"] },
+    { ids: ["box13", "box14", "box15", "box16", "box31", "box32", "box33", "box34"] },
+    { ids: ["box9", "box10", "box11", "box12", "box35", "box36", "box37", "box38"] },
     { ids: ["box5", "box6", "box7", "box8"] },
     { ids: ["box1", "box2", "box3", "box4"] },
   ],
@@ -38,14 +38,26 @@ const allAnimUnlock_GroupAnim = {
         "box24",
         "box25",
         "box26",
+        "box27",
+        "box28",
+        "box29",
+        "box30",
+        "box31",
+        "box32",
+        "box33",
+        "box34",
+        "box35",
+        "box36",
+        "box37",
+        "box38",
       ],
     },
   ],
   anim3: [
     { ids: ["box25", "box26"] },
-    { ids: ["box17", "box18", "box19", "box20", "box21", "box22", "box23", "box24"] },
-    { ids: ["box13", "box14", "box15", "box16"] },
-    { ids: ["box9", "box10", "box11", "box12"] },
+    { ids: ["box17", "box18", "box19", "box20", "box21", "box22", "box23", "box24", "box27", "box28", "box29", "box30"] },
+    { ids: ["box13", "box14", "box15", "box16", "box31", "box32", "box33", "box34"] },
+    { ids: ["box9", "box10", "box11", "box12", "box35", "box36", "box37", "box38"] },
     { ids: ["box5", "box6", "box7", "box8"] },
     { ids: ["box1", "box2", "box3", "box4"] },
   ],
@@ -79,6 +91,18 @@ const allAnimUnlock = {
     box24: "translateX(100px) translateY(-60px) scale(2.3)",
     box25: "translateX(-100px) translateY(-100px) scale(2.3)",
     box26: "translateX(100px) translateY(-100px) scale(2.3)",
+    box27: "translateX(-100px) translateY(-145px) scale(2.3)",
+    box28: "translateX(-50px) translateY(-145px) scale(2.3)",
+    box29: "translateX(50px) translateY(-145px) scale(2.3)",
+    box30: "translateX(100px) translateY(-145px) scale(2.3)",
+    box31: "translateX(-100px) translateY(-190px) scale(2.3)",
+    box32: "translateX(-50px) translateY(-190px) scale(2.3)",
+    box33: "translateX(50px) translateY(-190px) scale(2.3)",
+    box34: "translateX(100px) translateY(-190px) scale(2.3)",
+    box35: "translateX(-100px) translateY(-235px) scale(2.3)",
+    box36: "translateX(-50px) translateY(-235px) scale(2.3)",
+    box37: "translateX(50px) translateY(-235px) scale(2.3)",
+    box38: "translateX(100px) translateY(-235px) scale(2.3)",
   },
   anim2: {
     box1: "translateX(0px) translateY(0px) scale(0.2)",
@@ -107,6 +131,18 @@ const allAnimUnlock = {
     box24: "translateX(0px) translateY(0px) scale(0.2)",
     box25: "translateX(0px) translateY(0px) scale(0.2)",
     box26: "translateX(0px) translateY(0px) scale(0.2)",
+    box27: "translateX(0px) translateY(0px) scale(0.2)",
+    box28: "translateX(0px) translateY(0px) scale(0.2)",
+    box29: "translateX(0px) translateY(0px) scale(0.2)",
+    box30: "translateX(0px) translateY(0px) scale(0.2)",
+    box31: "translateX(0px) translateY(0px) scale(0.2)",
+    box32: "translateX(0px) translateY(0px) scale(0.2)",
+    box33: "translateX(0px) translateY(0px) scale(0.2)",
+    box34: "translateX(0px) translateY(0px) scale(0.2)",
+    box35: "translateX(0px) translateY(0px) scale(0.2)",
+    box36: "translateX(0px) translateY(0px) scale(0.2)",
+    box37: "translateX(0px) translateY(0px) scale(0.2)",
+    box38: "translateX(0px) translateY(0px) scale(0.2)",
   },
   anim3: {
     box1: "translateX(62px) translateY(-165px) scale(0.38)",
@@ -135,6 +171,18 @@ const allAnimUnlock = {
     box24: "translateX(-42px) translateY(-65px) scale(0.38)",
     box25: "translateX(42px) translateY(-85px) scale(0.38)",
     box26: "translateX(-42px) translateY(-85px) scale(0.38)",
+    box27: "translateX(42px) translateY(-105px) scale(0.38)",
+    box28: "translateX(21px) translateY(-105px) scale(0.38)",
+    box29: "translateX(-21px) translateY(-105px) scale(0.38)",
+    box30: "translateX(-42px) translateY(-105px) scale(0.38)",
+    box31: "translateX(42px) translateY(-125px) scale(0.38)",
+    box32: "translateX(21px) translateY(-125px) scale(0.38)",
+    box33: "translateX(-21px) translateY(-125px) scale(0.38)",
+    box34: "translateX(-42px) translateY(-125px) scale(0.38)",
+    box35: "translateX(42px) translateY(-145px) scale(0.38)",
+    box36: "translateX(21px) translateY(-145px) scale(0.38)",
+    box37: "translateX(-21px) translateY(-145px) scale(0.38)",
+    box38: "translateX(-42px) translateY(-145px) scale(0.38)",
   },
   anim4: {
     box1: "scale(1)",
@@ -163,6 +211,18 @@ const allAnimUnlock = {
     box24: "scale(1)",
     box25: "scale(1)",
     box26: "scale(1)",
+    box27: "scale(1)",
+    box28: "scale(1)",
+    box29: "scale(1)",
+    box30: "scale(1)",
+    box31: "scale(1)",
+    box32: "scale(1)",
+    box33: "scale(1)",
+    box34: "scale(1)",
+    box35: "scale(1)",
+    box36: "scale(1)",
+    box37: "scale(1)",
+    box38: "scale(1)",
   },
   anim5: {
     box1: "translateY(100px)",
@@ -191,6 +251,18 @@ const allAnimUnlock = {
     box24: "translateY(100px)",
     box25: "translateY(100px)",
     box26: "translateY(100px)",
+    box27: "translateY(100px)",
+    box28: "translateY(100px)",
+    box29: "translateY(100px)",
+    box30: "translateY(100px)",
+    box31: "translateY(100px)",
+    box32: "translateY(100px)",
+    box33: "translateY(100px)",
+    box34: "translateY(100px)",
+    box35: "translateY(100px)",
+    box36: "translateY(100px)",
+    box37: "translateY(100px)",
+    box38: "translateY(100px)",
   },
 };
 
@@ -431,6 +503,7 @@ items_unlock_anim_btn.forEach((item) => {
 
     Object.entries(anim_unlock_pre).forEach(([id, transform]) => {
       const box_pre = document.getElementById(`preview_${id}`);
+      if (!box_pre) return;
       box_pre.style.transform = transform;
       box_pre.style.opacity = "0";
       box_pre.style.transition = "all 0s";
@@ -443,6 +516,7 @@ items_unlock_anim_btn.forEach((item) => {
         const delay = groupIndex * 0.1 * currentSpeed; // delay 0.1s
         group.ids.forEach((id) => {
           const box = document.getElementById(`preview_box${id}`);
+          if (!box) return;
 
           box.style.transition = `all ${timeUnlock}s cubic-bezier(0.34, 1.56, 0.64, 1), opacity ${currentSpeed3}s`;
           box.style.transitionDelay = `${delay}s`;
