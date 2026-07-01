@@ -906,8 +906,7 @@ if (saved_finger_local == 0) {
 document.addEventListener("DOMContentLoaded", () => {
     // Restore Performance Monitor Setting
     const savedPerfMonitor = localStorage.getItem("perfMonitorEnabled");
-    // If null or true, enable it (Restore request implies wanting it back)
-    if ((savedPerfMonitor === null || savedPerfMonitor === "true") && typeof applyPerfMonitor === 'function') {
+    if (savedPerfMonitor === "true" && typeof applyPerfMonitor === 'function') {
         const perfToggle = document.getElementById("perfMonitorToggle");
         if (perfToggle) perfToggle.checked = true;
         applyPerfMonitor(true);
@@ -1090,13 +1089,20 @@ function handleBlurAppToggle() {
   blurAppBtn.classList.toggle("active");
   blur_app = blurAppBtn.classList.contains("active") ? 1 : 0;
 
+  const wallpapers = [
+    document.getElementById("wallpaper"),
+    document.getElementById("wallpaper2")
+  ];
+
   if (blur_app) {
-    lp.style.display = "flex";
-    lp.style.filter = `blur(${blurCustomOpeing}px)`;
+    wallpapers.forEach(wp => {
+      if (wp) wp.style.filter = `blur(${blurCustomOpeing}px)`;
+    });
     localStorage.setItem("blur_App_saved", "1");
   } else {
-    lp.style.filter = "blur(0px)";
-    lp.style.display = "none";
+    wallpapers.forEach(wp => {
+      if (wp) wp.style.filter = "";
+    });
     localStorage.removeItem("blur_App_saved");
   }
 }

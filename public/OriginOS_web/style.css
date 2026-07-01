@@ -145,8 +145,9 @@ body.full-screen .phone,
 body.full-screen .wallpaper,
 body.full-screen .lp,
 body.full-screen .lp2,
-body.full-screen .box.open {
-  /* border-radius: 0 !important; */
+body.full-screen .box.open,
+body.full-screen .app4app {
+  border-radius: var(--bg--border_radius_phone) !important;
 }
 
 body.full-screen .phone {
@@ -353,7 +354,7 @@ body.full-screen .app4app.open {
 /* Base box */
 .box {
   position: absolute;
-  overflow: hidden;
+  overflow: visible;
   border-radius: calc(var(--bg-border_radius, 20px) * 0.9);
   width: 60px;
   aspect-ratio: 1 / 1;
@@ -367,7 +368,51 @@ body.full-screen .app4app.open {
   scale: 100%;
   --bg--sizeIcon: 100%;
   --bg--positionIcon: top;
+  will-change: transform, width, height, left, top, opacity;
+  backface-visibility: hidden;
 }
+
+.app-label {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  color: white;
+  width: 75px;
+  text-align: center;
+  pointer-events: none;
+  font-family: "MiSans", "Noto Sans", sans-serif;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.2px;
+  opacity: 0.9;
+  pointer-events: none;
+  backface-visibility: hidden;
+  transition: opacity 0.5s ease 0.1s; /* Slight delay when appearing back */
+}
+
+/* Hide labels when box is open (app interface) or closing, or when any app is opening */
+.box.open .app-label,
+.box.closing .app-label,
+.app-opening .app-label,
+.lp.open ~ .allApp .app-label,
+.lp2.open ~ .allApp .app-label,
+.lpControlCenterControlsCenter.open ~ .allApp .app-label {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: none !important;
+}
+
+.box.open,
+.box.closing {
+  overflow: hidden !important;
+  -webkit-mask-image: linear-gradient(white, white);
+  mask-image: linear-gradient(white, white);
+}
+
 /* Default icon background */
 .box::before {
   content: "";
@@ -429,179 +474,181 @@ body.full-screen .app4app.open {
 #box8.open::before,
 #box9.open::before,
 #box10.open::before {
-  background-size: var(--bg--sizeIcon);
-  background-position: var(--bg--positionIcon);
+  background-size: var(--bg--sizeIcon, cover);
+  background-position: var(--bg--positionIcon, center);
 }
 
 #box12.open::before {
-  background-size: cover;
+  background-size: var(--bg--sizeIcon, cover);
+  background-position: var(--bg--positionIcon, center);
 }
 
 /* Icon background images */
 #box1 {
   --bg--originos: url("https://yourimageshare.com/ib/jhcdkbaDfC.png");
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 95px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 81px);
   background-color: #3e4043;
 }
 #box2 {
   --bg--originos: url("https://yourimageshare.com/ib/rNiozTmpqK.png");
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 95px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 81px);
   background-color: rgb(255, 196, 0);
 }
 #box3 {
   --bg--originos: url("https://yourimageshare.com/ib/7l3Gk00BxW.png");
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 95px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 81px);
   background-color: rgba(235, 68, 96, 1);
 }
 #box4 {
   --bg--originos: url("https://yourimageshare.com/ib/lP6p1xwNKO.png");
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 95px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 81px);
   background-color: #eaeaea;
 }
 #box5 {
   --bg--originos: url("https://yourimageshare.com/ib/ucZd6pq45a.png");
-  left: 71.5%;
+  left: 75.3%;
   background-color: #fdfdfd;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
 #box6 {
   --bg--originos: url("https://yourimageshare.com/ib/BQMUAQLi1i.png");
-  left: 51%;
+  left: 52.3%;
   background-color: #bbdefc;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
 #box7 {
   --bg--originos: url("https://yourimageshare.com/ib/lcOGD7bWbw.png");
-  left: 30.5%;
+  left: 29.3%;
   background-color: #fefefe;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
 #box8 {
   --bg--originos: url("originos_data/system_dialer.png");
-  left: 10%;
+  left: 6.3%;
   background-color: #00cd88;
   top: calc(var(--bg--size_height_phone) - 210px);
 }
 #box9 {
   --bg--originos: url("https://yourimageshare.com/ib/bLfJRLuhMK.png");
-  left: 10%;
+  left: 6.3%;
   background-color: #fefdfc;
-  top: calc(var(--bg--size_height_phone) - 280px);
+  top: calc(var(--bg--size_height_phone) - 288px);
 }
 #box10 {
   --bg--originos: url("https://yourimageshare.com/ib/c123oPx7Nz.png");
-  left: 30.5%;
+  left: 29.3%;
   background-color: #fefdfd;
-  top: calc(var(--bg--size_height_phone) - 280px);
+  top: calc(var(--bg--size_height_phone) - 288px);
 }
 #box11 {
   background-color: #fdcfdf;
-  left: 51%;
+  left: 52.3%;
   --bg--originos: url("https://yourimageshare.com/ib/7cGQdxnoO3.png");
-  top: calc(var(--bg--size_height_phone) - 280px);
+  top: calc(var(--bg--size_height_phone) - 288px);
 }
 #box12 {
   --bg--originos: url("https://yourimageshare.com/ib/MmRdzUMY0f.png");
   background-color: rgba(255, 255, 255, 0.5);
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 280px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 288px);
 }
 #box13 {
   --bg--originos: url("https://www.hostpic.org/images/2605131954290084.png");
   background-color: #8c5ff2;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box14 {
   --bg--originos: url("https://img.icons8.com/color/256/console.png");
   background-color: #1a1a1a;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box15 {
   --bg--originos: url("https://www.hostpic.org/images/2605131558540092.png");
   background-color: #3b82f6;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box16 {
   --bg--originos: url("https://img.icons8.com/color/256/youtube-play--v1.png");
   background-color: #ff0000;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box17 {
   --bg--originos: url("https://yourimageshare.com/ib/OsPhnHfsFG.png");
   background-color: transparent;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box18 {
   --bg--originos: url("https://yourimageshare.com/ib/0pWb2eWwsz.png");
   background-color: transparent;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box19 {
   --bg--originos: url("https://yourimageshare.com/ib/67pckx4E52.png");
   background-color: transparent;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box20 {
   --bg--originos: url("https://yourimageshare.com/ib/UqBJTjjpCe.png");
   background-color: transparent;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box21 {
   --bg--originos: url("https://yourimageshare.com/ib/UqBJTjjpCe.png");
   background-color: transparent;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box22 {
   --bg--originos: url("https://www.hostpic.org/images/2605132000110097.png");
   background-color: #0ea5e9;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box23 {
   --bg--originos: url("https://i.ibb.co/FL3jd8S0/com-android-voicedialer.png");
   background-color: #84cc16;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box24 {
   --bg--originos: url("https://yourimageshare.com/ib/1DNRlKIoeD.png");
   background-color: #d946ef;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box25 {
   width: 128px;
   height: 128px;
   aspect-ratio: 1 / 1;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 640px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 662px);
   background-color: transparent;
 }
 #box26 {
   width: 128px;
   height: 128px;
   aspect-ratio: 1 / 1;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 640px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 662px);
   background-color: transparent;
 }
 
 /* Special icon background size */
 #box22::before,
 #box13::before,
+#box6::before,
 #box11::before,
 #box24::before,
 #box23::before,
@@ -613,23 +660,31 @@ body.full-screen .app4app.open {
 #box19::before,
 #box20::before,
 #box21::before {
-  background-size: cover;
+  background-size: var(--bg--sizeIcon, cover);
+  background-position: var(--bg--positionIcon, center);
 }
 
 #box22.open::before,
-#box13.open::before,
+#box6.open::before,
 #box11.open::before,
 #box24.open::before,
 #box23.open::before,
 #box15.open::before,
 #box2.open::before,
 #box12.open::before,
-#box17.open::before,
 #box18.open::before,
 #box19.open::before,
 #box20.open::before,
 #box21.open::before {
-  background-size: cover;
+  background-size: 100% 100% !important;
+  background-position: var(--bg--positionIcon, center);
+}
+
+#box13.open::before,
+#box17.open::before {
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 /* Open state (full screen) */
@@ -700,114 +755,114 @@ body.full-screen .app4app.open {
   -webkit-tap-highlight-color: transparent;
 }
 #clicke1 {
-  bottom: 35px;
-  left: 10%;
+  bottom: 21px;
+  left: 6.3%;
   height: 80px;
 }
 #clicke2 {
-  bottom: 35px;
-  left: 30.5%;
+  bottom: 21px;
+  left: 29.3%;
   height: 80px;
 }
 #clicke3 {
-  bottom: 35px;
-  left: 51%;
+  bottom: 21px;
+  left: 52.3%;
   height: 80px;
 }
 #clicke4 {
-  bottom: 35px;
-  left: 71.5%;
+  bottom: 21px;
+  left: 75.3%;
   height: 80px;
 }
 #clicke5 {
   bottom: 150px;
-  left: 71.5%;
+  left: 75.3%;
 }
 #clicke6 {
   bottom: 150px;
-  left: 51%;
+  left: 52.3%;
 }
 #clicke7 {
   bottom: 150px;
-  left: 30.5%;
+  left: 29.3%;
 }
 #clicke8 {
   bottom: 150px;
-  left: 10%;
+  left: 6.3%;
 }
 #clicke9 {
-  bottom: 220px;
-  left: 10%;
+  bottom: 228px;
+  left: 6.3%;
 }
 #clicke10 {
-  bottom: 220px;
-  left: 30.5%;
+  bottom: 228px;
+  left: 29.3%;
 }
 #clicke11 {
-  bottom: 220px;
-  left: 51%;
+  bottom: 228px;
+  left: 52.3%;
 }
 #clicke12 {
-  bottom: 220px;
-  left: 71.5%;
+  bottom: 228px;
+  left: 75.3%;
 }
 #clicke13 {
-  bottom: 290px;
-  left: 10%;
+  bottom: 307px;
+  left: 6.3%;
 }
 #clicke14 {
-  bottom: 290px;
-  left: 30.5%;
+  bottom: 307px;
+  left: 29.3%;
 }
 #clicke15 {
-  bottom: 290px;
-  left: 51%;
+  bottom: 307px;
+  left: 52.3%;
 }
 #clicke16 {
-  bottom: 290px;
-  left: 71.5%;
+  bottom: 307px;
+  left: 75.3%;
 }
 #clicke17 {
-  bottom: 360px;
-  left: 10%;
+  bottom: 385px;
+  left: 6.3%;
 }
 #clicke18 {
-  bottom: 360px;
-  left: 30.5%;
+  bottom: 385px;
+  left: 29.3%;
 }
 #clicke19 {
-  bottom: 360px;
-  left: 51%;
+  bottom: 385px;
+  left: 52.3%;
 }
 #clicke20 {
-  bottom: 360px;
-  left: 71.5%;
+  bottom: 385px;
+  left: 75.3%;
 }
 #clicke21 {
-  bottom: 430px;
-  left: 10%;
+  bottom: 464px;
+  left: 6.3%;
 }
 #clicke22 {
-  bottom: 430px;
-  left: 30.5%;
+  bottom: 464px;
+  left: 29.3%;
 }
 #clicke23 {
-  bottom: 430px;
-  left: 51%;
+  bottom: 464px;
+  left: 52.3%;
 }
 #clicke24 {
-  bottom: 430px;
-  left: 71.5%;
+  bottom: 464px;
+  left: 75.3%;
 }
 #clicke25 {
-  bottom: 512px;
-  left: 10%;
+  bottom: 564px;
+  left: 6.3%;
   width: 128px;
   height: 128px;
 }
 #clicke26 {
-  bottom: 512px;
-  left: 51%;
+  bottom: 564px;
+  left: 52.3%;
   width: 128px;
   height: 128px;
 }
@@ -935,8 +990,8 @@ body.full-screen .app4app.open {
   position: absolute;
   background-color: #ffffff65;
   border-radius: 30px;
-  width: 87%;
-  bottom: 25px;
+  width: 92%;
+  bottom: 11px;
   height: 80px;
   font-size: 24px;
   font-weight: bold;
@@ -1787,26 +1842,9 @@ body.full-screen .app4app.open {
   pointer-events: none;
 }
 
-@keyframes pulseBootGlow {
-  0% {
-    transform: scale(1);
-    filter: brightness(1) drop-shadow(0 0 0 rgba(255, 255, 255, 0));
-  }
-  50% {
-    transform: scale(1.02);
-    filter: brightness(1.15) drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
-  }
-  100% {
-    transform: scale(1);
-    filter: brightness(1) drop-shadow(0 0 0 rgba(255, 255, 255, 0));
-  }
-}
-
-#loading-screen img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Changed from cover to contain for better logo display */
-  animation: pulseBootGlow 4s infinite ease-in-out;
+@keyframes loadProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 .spinner {
   width: 40px;
@@ -3222,6 +3260,7 @@ input[type="color"] {
 }
 .lp.open {
   opacity: 1;
+  backdrop-filter: blur(20px) !important;
 }
 .calculator_calc {
   width: 320px;
@@ -5494,6 +5533,9 @@ input[type="color"] {
   color: #ccc;
   font-family: "Noto sans", sans-serif;
   font-size: 12px;
+  outline: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .wifiControlsCenter,
@@ -5519,16 +5561,15 @@ input[type="color"] {
   background: white !important;
 }
 .itemControlsCenter:active svg {
-  fill: #007aff !important;
-  stroke: #007aff !important;
+  fill: #333 !important;
+  stroke: #333 !important;
 }
 .itemControlsCenter.activeControlsCenter {
   background: white;
-  box-shadow: 0 0 15px rgba(0, 122, 255, 0.4);
 }
 .itemControlsCenter.activeControlsCenter svg {
-  fill: #007aff !important;
-  stroke: #007aff !important;
+  fill: #333 !important;
+  stroke: #333 !important;
 }
 
 .musicControlsCenter {
@@ -6649,93 +6690,93 @@ canvas {
 #box27 {
   --bg--originos: url("https://img.icons8.com/color/256/google-maps-new.png");
   background-color: #ffffff;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box28 {
   --bg--originos: url("https://img.icons8.com/color/256/notes.png");
   background-color: #f59e0b;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box29 {
   --bg--originos: url("https://img.icons8.com/color/256/camera.png");
   background-color: #374151;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 #box30 {
   --bg--originos: url("https://img.icons8.com/color/256/gmail-new.png");
   background-color: #ef4444;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 490px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 524px);
 }
 
 #box31 {
   --bg--originos: url("https://img.icons8.com/color/256/google-play.png");
   background-color: #ffffff;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box32 {
   --bg--originos: url("https://img.icons8.com/color/256/folder-invoices--v1.png");
   background-color: #0ea5e9;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box33 {
   --bg--originos: url("https://img.icons8.com/color/256/controller.png");
   background-color: #8b5cf6;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 #box34 {
   --bg--originos: url("https://img.icons8.com/color/256/google-assistant.png");
   background-color: #10b981;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 420px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 445px);
 }
 
 #box35 {
   --bg--originos: url("https://img.icons8.com/color/256/google-docs.png");
   background-color: #2563eb;
-  left: 10%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 6.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box36 {
   --bg--originos: url("https://img.icons8.com/color/256/weather.png");
   background-color: #38bdf8;
-  left: 30.5%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 29.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box37 {
   --bg--originos: url("https://img.icons8.com/color/256/alarm-clock.png");
   background-color: #475569;
-  left: 51%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 52.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 #box38 {
   --bg--originos: url("https://img.icons8.com/color/256/heart-monitor.png");
   background-color: #ec4899;
-  left: 71.5%;
-  top: calc(var(--bg--size_height_phone) - 350px);
+  left: 75.3%;
+  top: calc(var(--bg--size_height_phone) - 367px);
 }
 
 /* Clicke targets - Page 2 overlay touch bounds */
-#clicke27 { bottom: 430px; left: 10%; }
-#clicke28 { bottom: 430px; left: 30.5%; }
-#clicke29 { bottom: 430px; left: 51%; }
-#clicke30 { bottom: 430px; left: 71.5%; }
+#clicke27 { bottom: 464px; left: 6.3%; }
+#clicke28 { bottom: 464px; left: 29.3%; }
+#clicke29 { bottom: 464px; left: 52.3%; }
+#clicke30 { bottom: 464px; left: 75.3%; }
 
-#clicke31 { bottom: 360px; left: 10%; }
-#clicke32 { bottom: 360px; left: 30.5%; }
-#clicke33 { bottom: 360px; left: 51%; }
-#clicke34 { bottom: 360px; left: 71.5%; }
+#clicke31 { bottom: 385px; left: 6.3%; }
+#clicke32 { bottom: 385px; left: 29.3%; }
+#clicke33 { bottom: 385px; left: 52.3%; }
+#clicke34 { bottom: 385px; left: 75.3%; }
 
-#clicke35 { bottom: 290px; left: 10%; }
-#clicke36 { bottom: 290px; left: 30.5%; }
-#clicke37 { bottom: 290px; left: 51%; }
-#clicke38 { bottom: 290px; left: 71.5%; }
+#clicke35 { bottom: 307px; left: 6.3%; }
+#clicke36 { bottom: 307px; left: 29.3%; }
+#clicke37 { bottom: 307px; left: 52.3%; }
+#clicke38 { bottom: 307px; left: 75.3%; }
 
 /* Ensure newly styled apps are responsive, animated and cover appropriately */
 #box27::before, #box28::before, #box29::before, #box30::before,
@@ -6747,7 +6788,8 @@ canvas {
 #box27.open::before, #box28.open::before, #box29.open::before, #box30.open::before,
 #box31.open::before, #box32.open::before, #box33.open::before, #box34.open::before,
 #box35.open::before, #box36.open::before, #box37.open::before, #box38.open::before {
-  background-size: cover;
+  background-size: var(--bg--sizeIcon);
+  background-position: var(--bg--positionIcon);
 }
 
 #box27.open,
@@ -6762,16 +6804,16 @@ canvas {
 #box36.open,
 #box37.open,
 #box38.open {
-  width: 100% !important;
-  aspect-ratio: var(--bg--ratio_phone) !important;
-  border-radius: calc(var(--bg--border_radius_phone) - 1px) !important;
-  transform: scale(1.1628) !important;
-  left: 0 !important;
-  right: 0 !important;
-  top: 0% !important;
-  z-index: 200 !important;
-  transform-origin: center !important;
-  background-color: transparent !important;
+  width: 100%;
+  aspect-ratio: var(--bg--ratio_phone);
+  border-radius: calc(var(--bg--border_radius_phone) - 1px);
+  transform: scale(1.1628);
+  left: 0;
+  right: 0;
+  top: 0%;
+  z-index: 200;
+  transform-origin: center;
+  background-color: transparent;
 }
 
 /* Fix z-index issue during app opening/closing */
@@ -6787,3 +6829,155 @@ canvas {
 #allApp.app-opening .clicke {
   pointer-events: none;
 }
+
+/* Edit Mode & Drag Drop */
+@keyframes jiggle {
+  0% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
+}
+
+.box.jiggling {
+  animation: jiggle 0.35s infinite ease-in-out;
+  transform-origin: center center;
+  z-index: 50;
+}
+
+.box.dragging {
+  animation: none !important;
+  z-index: 99999 !important;
+  transform: scale(1.15) !important;
+  transition: none !important;
+  opacity: 0.9;
+}
+
+.box.jiggling .app-label {
+  animation: jiggle 0.35s infinite ease-in-out;
+}
+
+.clicke.dragging {
+  display: none !important;
+}
+
+.box[style*="left"] {
+  transition: left 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+}
+.box.dragging[style*="left"] {
+  transition: none !important;
+}
+
+.drag-placeholder {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: calc(var(--bg-border_radius, 20px) * 0.9);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px dashed rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.3s ease, height 0.3s ease;
+  z-index: 10;
+  pointer-events: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInMark {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.grid-mark {
+  position: absolute;
+  border-radius: calc(var(--bg-border_radius, 20px) * 0.9);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1.5px dashed rgba(255, 255, 255, 0.3);
+  z-index: 5;
+  pointer-events: none;
+  box-sizing: border-box;
+  animation: fadeInMark 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.recent-apps-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: scale(1.1);
+}
+
+.recent-apps-container.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.recent-apps-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 0 40px;
+  height: 60%;
+  align-items: center;
+}
+
+.recent-app-card {
+  width: calc(var(--bg--size_width_phone) * 0.6);
+  height: calc(var(--bg--size_height_phone) * 0.6);
+  background-color: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.recent-app-card:hover {
+  transform: scale(0.95);
+}
+
+.recent-app-icon {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.recent-app-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.recent-app-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  z-index: -1;
+}
+
