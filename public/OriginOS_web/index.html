@@ -439,10 +439,14 @@
           </div>
         </div>
       </div>
-      <div id="loading-screen" style="z-index: 9999999; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #000;">
-        <h1 style="color: white; font-family: sans-serif; font-size: 36px; font-weight: 500; margin-bottom: 40px; letter-spacing: 2px;">Hyper OS</h1>
-        <div style="width: 200px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; position: relative;">
-          <div style="position: absolute; left: 0; top: 0; height: 100%; background: white; animation: loadProgress 2.8s linear forwards;"></div>
+      <div id="loading-screen" style="z-index: 9999999">
+        <div class="glow-effect"></div>
+        <div class="image-container">
+          <img
+            id="bootAnimationImg"
+            src="https://www.image2url.com/r2/default/gifs/1778350174838-3e9d0c3e-9bdd-4c9f-abbf-0554d07d1c7a.gif"
+            alt="Boot Animation"
+          />
         </div>
         <p id="lolhaha" style="display: none">tiktok: @sungsamtech - @._naq.</p>
       </div>
@@ -2780,7 +2784,7 @@
                     margin: 20px auto;
                     position: relative;
                     top: auto;
-                    display: flex;
+                    display: none !important;
                     justify-content: space-between;
                     align-items: center;
                     background: var(--bg--background2);
@@ -6609,11 +6613,6 @@
       <div class="clicke" id="clicke37"></div>
       <div class="clicke" id="clicke38"></div>
 
-      <!-- Recent Apps -->
-      <div id="recent-apps" class="recent-apps-container">
-        <div class="recent-apps-wrapper" id="recent-apps-wrapper"></div>
-      </div>
-
       <!-- Màn hình khóa -->
       <div id="lottie" style="display: none"></div>
       <div class="lockscreen" id="lockscreen">
@@ -6739,7 +6738,6 @@
 
     <script src="phone_sysToast.js"></script>
     <script src="all.js"></script>
-    <!-- <script src="dragdrop.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="./controlsCenter/controlsCenterEvent_Animtion.js"></script>
 
@@ -6858,13 +6856,8 @@
           if (localStorage.getItem("blur_wallpaper_saved") == "1") {
             const el = document.getElementById("Blur-wallPaper");
             if (el) el.classList.add("active");
-            const wallpapers = [
-              document.getElementById("wallpaper"),
-              document.getElementById("wallpaper2"),
-            ];
-            wallpapers.forEach((wp) => {
-              if (wp) wp.classList.add("blurred");
-            });
+            const wp = document.getElementById("wallpaper");
+            if (wp) wp.classList.add("blurred");
           }
         };
         restoreBlur();

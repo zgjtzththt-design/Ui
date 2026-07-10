@@ -269,7 +269,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     if (localStorage.getItem("blur_App_saved")) {
-        [document.getElementById("wallpaper"), document.getElementById("wallpaper2")].forEach(wp => { if (wp) wp.style.filter = `blur(${blurCustomOpeing}px)`; });
+        const wp = document.getElementById("wallpaper");
+        if (wp) wp.style.filter = `blur(${blurCustomOpeing}px)`;
 
         document.getElementById("blurApp").classList.add("active");
     }

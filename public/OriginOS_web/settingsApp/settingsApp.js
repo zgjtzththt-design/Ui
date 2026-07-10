@@ -1089,20 +1089,13 @@ function handleBlurAppToggle() {
   blurAppBtn.classList.toggle("active");
   blur_app = blurAppBtn.classList.contains("active") ? 1 : 0;
 
-  const wallpapers = [
-    document.getElementById("wallpaper"),
-    document.getElementById("wallpaper2")
-  ];
+  const wp = document.getElementById("wallpaper");
 
   if (blur_app) {
-    wallpapers.forEach(wp => {
-      if (wp) wp.style.filter = `blur(${blurCustomOpeing}px)`;
-    });
+    if (wp) wp.style.filter = `blur(${blurCustomOpeing}px)`;
     localStorage.setItem("blur_App_saved", "1");
   } else {
-    wallpapers.forEach(wp => {
-      if (wp) wp.style.filter = "";
-    });
+    if (wp) wp.style.filter = "";
     localStorage.removeItem("blur_App_saved");
   }
 }
@@ -1510,16 +1503,14 @@ function handleToggleBlurWallpaper() {
 
   localStorage.setItem("blur_wallpaper_saved", isBlurred);
 
-  const wallpapers = [document.getElementById("wallpaper"), document.getElementById("wallpaper2")];
-  wallpapers.forEach(wp => {
-    if (wp) {
-      if (isBlurred) {
-        wp.classList.add("blurred");
-      } else {
-        wp.classList.remove("blurred");
-      }
+  const wp = document.getElementById("wallpaper");
+  if (wp) {
+    if (isBlurred) {
+      wp.classList.add("blurred");
+    } else {
+      wp.classList.remove("blurred");
     }
-  });
+  }
   
   if (typeof tb_system === 'function') {
       tb_system(isBlurred ? "Blur Enabled" : "Blur Disabled");

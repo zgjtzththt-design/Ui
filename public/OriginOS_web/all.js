@@ -109,70 +109,6 @@ if (phoneNameEl) {
   phoneNameEl.textContent = localStorage.getItem("phoneName") || "Xiaomi 17 Pro";
 }
 
-// Function to add app labels in English
-function addAppLabels() {
-    const appNames = {
-        'box5': 'Messages',
-        'box6': 'Gallery',
-        'box7': 'Calendar',
-        'box8': 'Phone',
-        'box9': 'Browser',
-        'box10': 'Weather',
-        'box11': 'Notes',
-        'box12': 'App Store',
-        'box13': 'Social',
-        'box14': 'Terminal',
-        'box15': 'Facebook',
-        'box16': 'YouTube',
-        'box17': 'Clock',
-        'box18': 'Compass',
-        'box19': 'Wallet',
-        'box20': 'Health',
-        'box21': 'Glass Tuner',
-        'box22': 'Maps',
-        'box23': 'Voice',
-        'box24': 'Email',
-        'box25': 'Social',
-        'box26': 'Entertainment',
-        'box27': 'Maps',
-        'box28': 'Notes',
-        'box29': 'Camera',
-        'box30': 'Gmail',
-        'box31': 'Photos',
-        'box32': 'Files',
-        'box33': 'Games',
-        'box34': 'Assistant',
-        'box35': 'Facebook',
-        'box36': 'Weather',
-        'box37': 'Clock',
-        'box38': 'Health'
-    };
-
-    Object.keys(boxes).forEach(id => {
-        // Skip dock icons (1-4) and widgets (25-26)
-        if (['box1', 'box2', 'box3', 'box4', 'box25', 'box26'].includes(id)) return;
-        
-        const box = boxes[id];
-        if (box && !box.querySelector('.app-label')) {
-            const name = appNames[id];
-            if (name) {
-                const label = document.createElement('div');
-                label.className = 'app-label';
-                label.textContent = name;
-                box.appendChild(label);
-            }
-        }
-    });
-}
-
-// Call addAppLabels when DOM is ready and after any potential dynamic icon rendering
-document.addEventListener("DOMContentLoaded", () => {
-    addAppLabels();
-    // Re-check after a short delay in case icons are rendered dynamically
-    setTimeout(addAppLabels, 500);
-    setTimeout(addAppLabels, 2000);
-});
-
 window.applyWallpapers = () => {
   const applyValue = (key, value, callback) => {
     if (!value) {
@@ -536,7 +472,6 @@ function hideAllClickables() {
 }
 
 function openPopupFromCurrentButton() {
-  addToRecentApps(currentOpeningBtn);
   showPopup_open_close(app);
   currentOpeningBtn.style.transition = `all ${time_opening_app}s ${cubic_all}, aspect-ratio ${time_aspect_ratio_app}s ${cubic_ratio}`;
 
@@ -674,6 +609,7 @@ if (target) target.innerText += "ok";
 
 nav.addEventListener("touchstart", (e) => {
   nav.style.bottom = "10px";
+  if (!currentOpeningBtn) return;
   startY = e.touches[0].clientY;
   startX = e.touches[0].clientX;
 
@@ -685,11 +621,10 @@ nav.addEventListener(
   "touchmove",
   (e) => {
     e.preventDefault();
+    if (!currentOpeningBtn) return;
     deltaY = startY - e.touches[0].clientY;
     deltaX = e.touches[0].clientX - startX;
-    if (currentOpeningBtn) {
-      updateTransform(deltaY, deltaX);
-    }
+    updateTransform(deltaY, deltaX);
   },
   {
     passive: false,
@@ -700,12 +635,8 @@ if (target) target.innerText += ": ";
 
 nav.addEventListener("touchend", () => {
   nav.style.bottom = "0px";
-  if (currentOpeningBtn) {
-    if (deltaY > 40) (actions.get(currentOpeningBtn) || closePopup)();
-    else resetpop();
-  } else {
-    if (deltaY > 40) showRecentApps();
-  }
+  if (deltaY > 40) (actions.get(currentOpeningBtn) || closePopup)();
+  else resetpop();
   deltaY = 0;
   deltaX = 0;
 });
@@ -717,32 +648,28 @@ nav.addEventListener("mousedown", (e) => {
   startX = 0;
   nav.style.bottom = "10px";
 
+  if (!currentOpeningBtn) return;
+  hideAllClickables();
   dragging = true;
   startY = e.clientY;
   startX = e.clientX;
-  if (currentOpeningBtn) hideAllClickables();
 });
 
 if (target) target.innerText += "@su";
 
 window.addEventListener("mousemove", (e) => {
-  if (!dragging) return;
+  if (!dragging || !currentOpeningBtn) return;
   deltaY = startY - e.clientY;
   deltaX = e.clientX - startX;
-  if (currentOpeningBtn) updateTransform(deltaY, deltaX);
+  updateTransform(deltaY, deltaX);
 });
 
 window.addEventListener("mouseup", () => {
   nav.style.bottom = "0px";
-  if (!dragging) return;
+  if (!dragging || !currentOpeningBtn) return;
   dragging = false;
-  
-  if (currentOpeningBtn) {
-    if (deltaY > 40) (actions.get(currentOpeningBtn) || closePopup)();
-    else resetpop();
-  } else {
-    if (deltaY > 40) showRecentApps();
-  }
+  if (deltaY > 40) (actions.get(currentOpeningBtn) || closePopup)();
+  else resetpop();
 });
 
 const handlers = {
@@ -1640,21 +1567,7 @@ let current_wallpaper_lock = 1;
 
 let lockscreen_style_opacity = 1;
 
-function setWallpaperBlur(shouldBlur) {
-  const wallpapers = [document.getElementById("wallpaper"), document.getElementById("wallpaper2")];
-  wallpapers.forEach(wp => {
-    if (wp) {
-      if (shouldBlur) {
-        wp.classList.add("blurred");
-      } else {
-        wp.classList.remove("blurred");
-      }
-    }
-  });
-}
-
 function lock() {
-  setWallpaperBlur(false);
   if (!islock) {
   if (typeof finger_print !== 'undefined' && finger_print) finger_print.stop();
   if (typeof finger_print !== 'undefined' && finger_print) finger_print.play();
@@ -1784,7 +1697,6 @@ function unlock() {
   updateDots_password();
   removeKeys_password();
   nav.classList.add("unlock");
-  setWallpaperBlur(true);
 
   Object.values(clickables).forEach((el) => {
     el.style.display = "flex";
@@ -3049,76 +2961,6 @@ function clearSpringAnimationByID(el) {
 }
 
 let oldApps = [];
-let recentAppsList = [];
-
-function addToRecentApps(boxEl) {
-  if (!boxEl) return;
-  recentAppsList = recentAppsList.filter(el => el !== boxEl);
-  recentAppsList.unshift(boxEl); // Add to the beginning (most recent)
-  if (recentAppsList.length > 10) {
-    recentAppsList.pop();
-  }
-}
-
-function renderRecentApps() {
-  const container = document.getElementById("recent-apps-wrapper");
-  if (!container) return;
-  container.innerHTML = "";
-  
-  if (recentAppsList.length === 0) {
-    const emptyMsg = document.createElement("div");
-    emptyMsg.style.color = "white";
-    emptyMsg.style.fontSize = "20px";
-    emptyMsg.style.margin = "auto";
-    emptyMsg.innerText = "No recent apps";
-    container.appendChild(emptyMsg);
-    return;
-  }
-
-  recentAppsList.forEach(boxEl => {
-    const appIdStr = boxEl.id; // e.g. "box9"
-    const bgImage = getComputedStyle(boxEl).getPropertyValue("--bg--originos");
-    const labelEl = document.querySelector(`#${appIdStr} .app-label`);
-    const appName = labelEl ? labelEl.innerText : "App";
-
-    const card = document.createElement("div");
-    card.className = "recent-app-card";
-    card.innerHTML = `
-      <div class="recent-app-card-bg" style="background-image: ${bgImage}; background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
-      <div class="recent-app-icon" style="background-image: ${bgImage}; background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
-      <div class="recent-app-name">${appName}</div>
-    `;
-
-    card.addEventListener("click", () => {
-      hideRecentApps();
-      const num = appIdStr.replace("box", "");
-      openApp(num);
-    });
-
-    container.appendChild(card);
-  });
-}
-
-function showRecentApps() {
-  const recentAppsContainer = document.getElementById("recent-apps");
-  if (recentAppsContainer) {
-    renderRecentApps();
-    recentAppsContainer.classList.add("show");
-  }
-}
-
-function hideRecentApps() {
-  const recentAppsContainer = document.getElementById("recent-apps");
-  if (recentAppsContainer) {
-    recentAppsContainer.classList.remove("show");
-  }
-}
-
-document.getElementById("recent-apps").addEventListener("click", (e) => {
-  if (e.target.id === "recent-apps" || e.target.id === "recent-apps-wrapper") {
-    hideRecentApps();
-  }
-});
 
 function closeAppToLeft() {
   const closingBox = currentOpeningBtn;
@@ -3207,7 +3049,6 @@ function closeAppToLeft() {
 
 let timeOutOpenAppFromRight = null;
 function openAppFromRight() {
-  addToRecentApps(currentOpeningBtn);
   showPopup_open_close(app);
   if (window.globalHighestZIndex) {
     currentOpeningBtn.style.zIndex = window.globalHighestZIndex++;
@@ -3247,7 +3088,6 @@ function openAppFromRight() {
 }
 
 function openAppFromCenter() {
-  addToRecentApps(currentOpeningBtn);
   showPopup_open_close(app);
   if (window.globalHighestZIndex) {
     currentOpeningBtn.style.zIndex = window.globalHighestZIndex++;
